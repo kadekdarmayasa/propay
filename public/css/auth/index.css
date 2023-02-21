@@ -1,0 +1,159 @@
+.login-container {
+	min-height: 100vh;
+	display: flex;
+}
+
+.left-panel {
+	flex: 0.8;
+	background-color: #ecf4ff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.left-panel img {
+	width: 80%;
+}
+
+.right-panel {
+	flex: 1.2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0 3em;
+}
+
+.meta {
+	text-align: center;
+}
+
+.meta-title {
+	color: var(--black-color);
+	font-weight: 700;
+	font-size: var(--heading-1);
+}
+
+.meta-title span {
+	color: var(--primary-color);
+}
+
+.meta-description {
+	color: var(--gray-color-200);
+	margin-top: 0.5em;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	margin-top: 5em;
+	width: 70%;
+}
+
+.form-group {
+	margin-bottom: 2.5em;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.form-group label {
+	font-weight: 500;
+	color: var(--black-color);
+	margin-bottom: 0.5em;
+}
+
+.form-group input {
+	font-family: 'Figtree';
+	font-size: 0.9rem;
+	border: none;
+	outline: 0;
+	color: var(--black-color);
+	border-bottom: 2px solid var(--gray-color-100);
+	padding: 0.8em 0;
+}
+
+.form-group input:focus {
+	border-bottom: 2px solid var(--primary-color);
+}
+
+.form-group input::placeholder {
+	font-family: 'Figtree';
+	font-size: 0.9rem;
+	color: var(--gray-color-200);
+}
+
+.form-group img {
+	width: 25px;
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+	cursor: pointer;
+}
+
+.submit-btn {
+	font-family: 'Figtree';
+	background-color: var(--primary-color);
+	border: none;
+	outline: none;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+	font-size: 1rem;
+	border-radius: 30px;
+	font-weight: 500;
+	transition: 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+	cursor: pointer;
+	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
+}
+
+.submit-btn img {
+	width: 30px;
+	margin-right: 0.8em;
+}
+
+.option-divider {
+	width: 70%;
+	margin: 4em 0 1.5em;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: var(--black-color);
+	font-weight: 500;
+}
+
+.option-divider hr {
+	background-color: var(--gray-color-100);
+	width: 45%;
+	height: 2px;
+	border: 1px;
+}
+
+#switcher-btn {
+	font-family: 'Figtree';
+	color: var(--primary-color);
+	width: 70%;
+	border: 1px solid var(--primary-color);
+	background-color: transparent;
+	outline: none;
+	font-weight: 300;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+	font-size: 1rem;
+	border-radius: 30px;
+	font-weight: 400;
+	transition: 0.3s ease-in-out;
+}
+
+#switcher-btn:hover {
+	cursor: pointer;
+	background-color: var(--primary-color);
+	color: white;
+}

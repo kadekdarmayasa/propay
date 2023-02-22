@@ -22,7 +22,7 @@ class Database
     try {
       $this->dbh = new PDO($dsn, $this->username, $this->password, $options);
     } catch (PDOException $e) {
-      $e->getMessage();
+      echo $e->getMessage();
       die;
     }
   }

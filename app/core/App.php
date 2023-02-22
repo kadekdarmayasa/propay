@@ -23,9 +23,9 @@ class App
         $this->method = $url[1];
       }
 
-      // if ($url[0] == 'auth' && $url[1] != 'logout' && $url[1] != 'signup') {
-      //   $this->method = 'login';
-      // }
+      if ($url[0] == 'auth' && $url[1] != 'logout' && $url[1] != 'signup') {
+        $this->method = 'login';
+      }
     }
 
     unset($url[0]);
@@ -36,7 +36,7 @@ class App
     call_user_func_array(array($this->controller, $this->method), $this->params);
   }
 
-  function parse_url()
+  private function parse_url()
   {
     if (isset($_GET['url'])) {
       $url = rtrim($_GET['url'], '/');

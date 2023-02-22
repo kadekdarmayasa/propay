@@ -22,6 +22,7 @@
 	--gray-color-200: rgb(203, 201, 201);
 	box-sizing: border-box;
 	--heading-1: 1.8rem;
+	--heading-1-sm: 1.568rem;
 }
 
 body {

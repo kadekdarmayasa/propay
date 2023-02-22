@@ -5,21 +5,22 @@ class Auth extends Controller
 
   public function login()
   {
-    if (isset($_POST['officer-login'])) {
+    if (isset($_POST['username'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];
 
       if ($user = $this->model('Staff_Model')->getStaffByUsername($username)) {
+        echo $username;
         if (password_verify($password, $user['password'])) {
           $_SESSION['user'] = $user;
           $_SESSION['user']['role'] = $user['staff_level'];
           $_SESSION['user']['name'] = $user['staff_name'];
-          header('Location: ' . BASEURL . 'home');
+          header('Location: ' . BASEURL . 'dashboard');
         }
       }
     }
 
-    if (isset($_POST['student-login'])) {
+    if (isset($_POST['sin'])) {
       $sin = $_POST['sin'];
       $password = $_POST['password'];
 
@@ -28,7 +29,7 @@ class Auth extends Controller
           $_SESSION['user'] = $user;
           $_SESSION['user']['role'] = 'student';
           $_SESSION['user']['name'] = $user['student_name'];
-          header('Location: ' . BASEURL . 'home');
+          header('Location: ' . BASEURL . 'dashboard');
         }
       }
     }

@@ -17,7 +17,7 @@
 
       <!-- Login Form -->
       <!-- Staff Form -->
-      <form action="" id="staff-form">
+      <form action="" method="post" id="staff-form">
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" name="username" id="username" placeholder="Enter username...">
@@ -34,7 +34,7 @@
       </form>
 
       <!-- Student Form -->
-      <form action="" id="student-form">
+      <form action="" method="post" id="student-form">
         <div class="form-group">
           <label for="sin">Student ID Number (SIN)</label>
           <input type="text" name="sin" id="sin" placeholder="example: 5327">

@@ -1,5 +1,5 @@
 <?php
-define('BASEURL', 'http://localhost/pweb-payment-system/');
+define('BASEURL', 'http://localhost/propay-payment-system/');
 
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'root');

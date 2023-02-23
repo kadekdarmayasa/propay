@@ -26,7 +26,11 @@
       <form action="" method="post" id="staff-form">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" name="username" id="username" placeholder="Enter username..." required>
+          <?php if (isset($_POST['username'])) : ?>
+            <input type="text" name="username" id="username" placeholder="Enter username..." value="<?= $_POST['username'] ?>" required>
+          <?php else : ?>
+            <input type="text" name="username" id="username" placeholder="Enter username..." required>
+          <?php endif; ?>
         </div>
         <div class="form-group">
           <label for="staff-password">Password</label>
@@ -43,7 +47,11 @@
       <form action="" method="post" id="student-form">
         <div class="form-group">
           <label for="sin">Student ID Number (SIN)</label>
-          <input type="text" name="sin" id="sin" placeholder="example: 5327" required>
+          <?php if (isset($_POST['sin'])) : ?>
+            <input type="text" name="sin" id="sin" value="<?= $_POST['sin'] ?>" placeholder="example: 5327" required>
+          <?php else : ?>
+            <input type="text" name="sin" id="sin" placeholder="example: 5327" required>
+          <?php endif; ?>
         </div>
         <div class="form-group">
           <label for="student-password">Password</label>

@@ -33,7 +33,11 @@ class Auth extends Controller
           $_SESSION['user']['role'] = 'student';
           $_SESSION['user']['name'] = $user['student_name'];
           header('Location: ' . BASEURL . 'dashboard');
+        } else {
+          Flasher::setFlash('warning', 'Your password is wrong');
         }
+      } else {
+        Flasher::setFlash('error', "Your login information doesn't match our records");
       }
     }
 

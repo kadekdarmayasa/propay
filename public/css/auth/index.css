@@ -41,12 +41,13 @@
 .meta-description {
 	color: var(--gray-color-200);
 	margin-top: 0.5em;
+	margin-bottom: 1rem;
 }
 
 form {
 	display: flex;
 	flex-direction: column;
-	margin-top: 5em;
+	margin-top: 3em;
 	width: 70%;
 }
 
@@ -119,7 +120,7 @@ form {
 
 .option-divider {
 	width: 70%;
-	margin: 4em 0 1.5em;
+	margin: 3em 0 1.5em;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -169,5 +170,9 @@ form {
 
 	button:is(.submit-btn, #switcher-btn) {
 		height: 50px;
+	}
+
+	.right-panel {
+		padding: 3em;
 	}
 }

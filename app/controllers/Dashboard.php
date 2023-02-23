@@ -7,5 +7,10 @@ class Dashboard extends Controller
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     }
+
+    $data['title'] = 'dashboard';
+    $this->view('templates/header', $data);
+    $this->view('dashboard/index', $data);
+    $this->view('templates/footer', $data);
   }
 }

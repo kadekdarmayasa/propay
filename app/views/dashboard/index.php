@@ -1,0 +1,1 @@
+<a href="<?= BASEURL . 'auth/logout' ?>">Logout</a>

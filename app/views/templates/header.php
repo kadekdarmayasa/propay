@@ -10,6 +10,7 @@
   <meta name="author" content="Darma Yasa">
   <title><?= $data['title']; ?></title>
   <link rel="stylesheet" href="<?= BASEURL . 'public/css/root.css' ?>">
+  <link rel="stylesheet" href="<?= BASEURL . 'public/css/flasher.css' ?>">
   <?php if ($activeTab == 'login') : ?>
     <link rel="stylesheet" href="<?= BASEURL . 'public/css/auth/index.css' ?>">
   <?php endif; ?>

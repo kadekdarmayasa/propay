@@ -15,16 +15,22 @@
       </div>
       <!-- End of Meta -->
 
+      <!-- Flasher -->
+      <?php if (isset($_SESSION['flasher'])) : ?>
+        <?php Flasher::flash(); ?>
+      <?php endif; ?>
+      <!-- End of Flasher -->
+
       <!-- Login Form -->
       <!-- Staff Form -->
       <form action="" method="post" id="staff-form">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" name="username" id="username" placeholder="Enter username...">
+          <input type="text" name="username" id="username" placeholder="Enter username..." required>
         </div>
         <div class="form-group">
           <label for="staff-password">Password</label>
-          <input type="password" name="password" id="staff-password" placeholder="Enter Password..." class="password">
+          <input type="password" name="password" id="staff-password" placeholder="Enter Password..." class="password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
         </div>
         <button type="submit" class="submit-btn">
@@ -37,11 +43,11 @@
       <form action="" method="post" id="student-form">
         <div class="form-group">
           <label for="sin">Student ID Number (SIN)</label>
-          <input type="text" name="sin" id="sin" placeholder="example: 5327">
+          <input type="text" name="sin" id="sin" placeholder="example: 5327" required>
         </div>
         <div class="form-group">
           <label for="student-password">Password</label>
-          <input type="password" name="password" id="student-password" placeholder="Enter Password..." class="password">
+          <input type="password" name="password" id="student-password" placeholder="Enter Password..." class="password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
         </div>
         <button type="submit" class="submit-btn">

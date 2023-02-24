@@ -4,6 +4,10 @@
   <script src="<?= BASEURL . 'public/js/auth/login.js' ?>" type="module"></script>
 <?php endif; ?>
 
+<?php if ($activeTab == 'dashboard') : ?>
+  <script src="<?= BASEURL . 'public/js/dashboard/index.js' ?>"></script>
+<?php endif; ?>
+
 </body>
 
 </html>

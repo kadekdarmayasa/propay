@@ -8,9 +8,9 @@ class Dashboard extends Controller
       exit;
     }
 
-    $data['title'] = 'dashboard';
-    $this->view('templates/header', $data);
-    $this->view('dashboard/index', $data);
-    $this->view('templates/footer', $data);
+    $data['title'] = 'Propay - Dashboard';
+    $this->view('templates/header', $data, 'dashboard');
+    $this->view('dashboard/index', $data, 'dashboard');
+    $this->view('templates/footer', $data, 'dashboard');
   }
 }

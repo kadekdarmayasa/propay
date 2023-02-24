@@ -13,23 +13,34 @@
 	list-style: none;
 }
 
+a {
+	text-decoration: none;
+}
+
 :root {
 	font-size: 18px;
 	--primary-color: rgb(82, 151, 255);
 	--primary-color-opacity: 82, 151, 255;
-	--black-color: #141414;
+	--black-color: #152a4a;
 	--gray-color-100: rgb(241, 241, 241);
 	--gray-color-200: rgb(203, 201, 201);
+	--gray-color-300: #989898;
 	box-sizing: border-box;
 	--heading-1: 1.8rem;
 	--heading-1-sm: 1.568rem;
+	--blue-color-100: #f7fbff;
 }
 
 body {
 	font-family: 'Figtree';
+	min-height: 100vh;
 }
 
 .container {
 	max-width: 2000px;
 	margin: auto;
+}
+
+::-webkit-scrollbar {
+	width: 0;
 }

@@ -2,7 +2,6 @@
 
 class Auth extends Controller
 {
-
   public function login()
   {
     if (isset($_POST['username'])) {

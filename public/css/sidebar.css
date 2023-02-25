@@ -80,8 +80,8 @@ hr {
 
 .menu-items li a .link-name {
 	font-size: 1rem;
-	font-weight: 400;
-	color: var(--gray-color-300);
+	font-weight: 500;
+	color: var(--gray-color-200);
 }
 
 .nav-links {
@@ -96,8 +96,8 @@ hr {
 svg rect,
 svg path,
 svg line {
-	stroke: var(--gray-color-300);
-	stroke-width: 1px;
+	stroke: var(--gray-color-200);
+	stroke-width: 2px;
 }
 
 .logout-mode hr {

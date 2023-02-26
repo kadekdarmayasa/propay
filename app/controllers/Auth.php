@@ -4,6 +4,11 @@ class Auth extends Controller
 {
   public function login()
   {
+    if (isset($_SESSION['user'])) {
+      header('Location:' . BASEURL . 'dashboard/index');
+      exit;
+    }
+
     if (isset($_POST['username'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];

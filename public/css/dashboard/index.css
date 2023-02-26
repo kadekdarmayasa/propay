@@ -1,0 +1,14 @@
+.dashboard {
+	background-color: var(--blue-color-100);
+	position: relative;
+	left: 300px;
+	right: 0;
+	min-height: 100vh;
+	width: calc(100% - 300px);
+	padding: 10px 14px;
+	transition: 0.3s all ease;
+}
+
+body.dark .dashboard {
+	background-color: var(--black-color);
+}

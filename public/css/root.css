@@ -19,13 +19,15 @@ a {
 
 :root {
 	font-size: 18px;
+	box-sizing: border-box;
 	--primary-color: rgb(82, 151, 255);
 	--primary-color-opacity: 82, 151, 255;
 	--black-color: #152a4a;
+	--sidebar-bg: #fff;
+	--white-color: #f1f1f1;
 	--gray-color-100: rgb(241, 241, 241);
 	--gray-color-200: rgb(203, 201, 201);
 	--gray-color-300: #989898;
-	box-sizing: border-box;
 	--heading-1: 1.8rem;
 	--heading-1-sm: 1.568rem;
 	--blue-color-100: #f7fbff;
@@ -36,9 +38,9 @@ body {
 	min-height: 100vh;
 }
 
-.container {
-	max-width: 2000px;
-	margin: auto;
+body.dark {
+	--black-color: #1b273d;
+	--sidebar-bg: rgb(24, 36, 56);
 }
 
 ::-webkit-scrollbar {

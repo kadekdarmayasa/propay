@@ -1,0 +1,54 @@
+.top-bar {
+	position: sticky;
+	top: 0;
+	left: 300px;
+	display: flex;
+	width: calc(100% - 300px);
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 14px;
+	transition: 0.3s all ease;
+	z-index: 10;
+	cursor: pointer;
+	background-color: var(--blue-color-100);
+}
+
+.sidebar-toggle {
+	height: 46px;
+	width: 46px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	background-color: white;
+	padding: 0.8em;
+	border-radius: 50%;
+	filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.08));
+}
+
+body.dark .sidebar-toggle {
+	background-color: var(--sidebar-bg);
+	filter: drop-shadow(0px 0px 0px rgba(255, 255, 255, 0.01));
+}
+
+.sidebar-toggle:hover {
+	filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.12));
+}
+
+.sidebar-toggle span {
+	height: 3px;
+	border-radius: 4px;
+	background-color: var(--black-color);
+}
+
+body.dark .sidebar-toggle span {
+	background-color: var(--gray-color-200);
+}
+
+body.dark .top-bar {
+	background-color: var(--black-color);
+}
+
+.sidebar.close ~ .top-bar {
+	left: 107px;
+	width: calc(100% - 107px);
+}

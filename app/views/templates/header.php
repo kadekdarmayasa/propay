@@ -9,12 +9,19 @@
   <meta name="keywords" content="EDC Payment">
   <meta name="author" content="Darma Yasa">
   <title><?= $data['title']; ?></title>
+
   <link rel="stylesheet" href="<?= BASEURL . 'public/css/root.css' ?>">
   <link rel="stylesheet" href="<?= BASEURL . 'public/css/flasher.css' ?>">
-  <link rel="stylesheet" href="<?= BASEURL . 'public/css/sidebar.css' ?>">
+
   <?php if ($activeTab == 'login') : ?>
     <link rel="stylesheet" href="<?= BASEURL . 'public/css/auth/index.css' ?>">
   <?php endif; ?>
+
+  <?php if ($activeTab != 'login') : ?>
+    <link rel="stylesheet" href="<?= BASEURL . 'public/css/sidebar.css' ?>">
+    <link rel="stylesheet" href="<?= BASEURL . 'public/css/top-bar.css' ?>">
+    <link rel="stylesheet" href="<?= BASEURL . 'public/css/dashboard/index.css' ?>">
+  <?php endif; ?>
 </head>
 
-<body>
+<body class="dark">

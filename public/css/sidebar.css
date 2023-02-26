@@ -1,41 +1,77 @@
+hr {
+	height: 1px;
+	border: 1px;
+	background-color: var(--gray-color-100);
+}
+
+body.dark hr {
+	background-color: var(--gray-color-300);
+}
+
+svg :is(rect, path, line) {
+	stroke: var(--gray-color-200);
+	stroke-width: 2px;
+}
+
+body.dark svg :is(rect, path, line) {
+	stroke: var(--gray-color-300);
+	stroke-width: 2px;
+}
+
 .sidebar {
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: 280px;
+	width: 300px;
 	padding: 20px 20px;
-	background-color: white;
+	background-color: var(--sidebar-bg);
 	transition: all 0.3s ease;
+	overflow: auto;
 }
 
 .sidebar.close {
-	width: 73px;
+	width: 107px;
 }
 
-.sidebar.close .brand-name,
-nav.close li a .link-name {
+.brand .title-logo {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.2em;
+	padding: 0 0.7em;
+}
+
+.brand img {
+	margin-right: 0.4em;
+}
+
+.brand .brand-name {
+	font-size: 1.6rem;
+	font-weight: 600;
+	color: var(--black-color);
+	display: block;
+}
+
+body.dark .brand .brand-name {
+	color: var(--gray-color-200);
+}
+
+.sidebar.close :is(.brand-name, li a .link-name) {
 	opacity: 0;
 	pointer-events: none;
 }
 
-.brand a {
-	font-size: 1.6rem;
-	font-weight: 600;
-	color: var(--black-color);
-	margin-bottom: 0.6em;
-	display: block;
+.sidebar.close ~ :is(.dashboard) {
+	left: 107px;
+	width: calc(100% - 107px);
 }
 
-nav.close ~ .dashboard {
-	left: 73px;
-	width: calc(100% - 73px);
+.nav-links li {
+	margin-top: 0.8em;
 }
 
-hr {
-	height: 2px;
-	border: 1px;
-	background-color: var(--gray-color-100);
+.nav-links li:first-child {
+	margin-top: 1.4em;
 }
 
 .menu-items {
@@ -45,18 +81,51 @@ hr {
 	justify-content: space-between;
 }
 
-.menu-items li {
+.menu-items li:not(.mode) {
 	cursor: pointer;
 }
 
-.menu-items li a:hover span {
-	color: var(--primary-color);
+.menu-items li a {
+	padding: 0 1em;
+	border-radius: 4px;
 }
 
-.menu-items li a:hover svg rect,
-.menu-items li a:hover svg path,
-.menu-items li a:hover svg line {
-	stroke: var(--primary-color);
+.menu-items :is(li a:hover, li.active a) {
+	background-color: var(--blue-color-100);
+}
+
+body.dark :is(li a:hover, li.active a) {
+	background-color: var(--black-color);
+}
+
+.menu-items :is(li a:hover span, li.active a span) {
+	color: var(--black-color);
+}
+
+.menu-items li a:hover svg :is(rect, path, line),
+.menu-items li.active svg :is(rect, path, line) {
+	stroke: var(--black-color);
+}
+
+.menu-items li.mode a:hover {
+	background-color: transparent;
+}
+
+.menu-items li.mode a:hover span {
+	color: var(--gray-color-200);
+}
+
+body.dark .menu-items li a:hover svg :is(rect, path, line),
+body.dark .menu-items li.active svg :is(rect, path, line) {
+	stroke: var(--white-color);
+}
+
+body.dark .menu-items :is(li a:hover span, li.active a span) {
+	color: var(--white-color);
+}
+
+.menu-items li.mode a:hover svg :is(rect, path, line) {
+	stroke: var(--gray-color-200);
 }
 
 .menu-items li a {
@@ -67,7 +136,7 @@ hr {
 	position: relative;
 }
 
-.menu-items li a svg {
+.menu-items li a svg:not(#sub-menu-toggler) {
 	width: 30px;
 	height: 100%;
 	display: flex;
@@ -78,26 +147,70 @@ hr {
 	overflow: visible;
 }
 
+.menu-items li a #sub-menu-toggler {
+	margin-left: auto;
+	height: 15px;
+	width: 15px;
+	transition: transform 0.3s ease;
+}
+
+#sub-menu-toggler path {
+	stroke-width: 4px;
+}
+
 .menu-items li a .link-name {
 	font-size: 1rem;
 	font-weight: 500;
 	color: var(--gray-color-200);
 }
 
-.nav-links {
-	margin-top: 1.4em;
-	margin-bottom: 2em;
+body.dark .menu-items li a .link-name {
+	color: var(--gray-color-300);
 }
 
-.nav-links li:not(:first-child) {
-	margin-top: 0.4em;
+.menu-items .sub-menu {
+	background-color: var(--blue-color-100);
+	margin-top: 0.8em;
+	border-radius: 4px;
+	padding: 0 1em;
+	height: 0;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	margin-bottom: 1.5em;
 }
 
-svg rect,
-svg path,
-svg line {
-	stroke: var(--gray-color-200);
-	stroke-width: 2px;
+.sidebar.close .menu-items .sub-menu {
+	display: none;
+}
+
+.menu-items li.active .sub-menu {
+	height: auto;
+	padding: 1em;
+}
+
+body.dark .sub-menu {
+	background-color: var(--black-color);
+}
+
+.menu-items .sub-menu li:first-child {
+	margin-top: 0;
+}
+
+.menu-items .sub-menu li a {
+	color: var(--gray-color-300);
+	font-weight: 500;
+}
+
+.menu-items .sub-menu :is(li.sub-menu-active .link-name, li .link-name:hover) {
+	color: var(--black-color);
+}
+
+body.dark .menu-items .sub-menu :is(li .link-name) {
+	color: var(--gray-color-300);
+}
+
+body.dark .menu-items .sub-menu :is(li .link-name:hover, li.sub-menu-active .link-name) {
+	color: white;
 }
 
 .logout-mode hr {
@@ -147,31 +260,14 @@ svg line {
 	transition: all 0.3s ease-in-out;
 }
 
-.dashboard {
-	background-color: var(--blue-color-100);
-	position: relative;
-	left: 280px;
-	min-height: 100vh;
-	width: calc(100% - 280px);
-	padding: 10px 14px;
-	transition: 0.3s all ease;
+body.dark .switch:before {
+	left: 20px;
 }
 
-.dashboard .top {
-	position: fixed;
-	top: 0;
-	left: 280px;
-	display: flex;
-	width: calc(100% - 280px);
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px 14px;
-	transition: 0.3s all ease;
-	z-index: 10;
-	cursor: pointer;
+body.dark .switch {
+	background-color: var(--primary-color);
 }
 
-nav.close ~ .dashboard .top {
-	left: 73px;
-	width: calc(100% - 73px);
+.sidebar.close .mode-toggle {
+	right: 34px;
 }

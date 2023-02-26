@@ -12,6 +12,10 @@
 	min-height: 100%;
 }
 
+body.dark .left-panel {
+	background-color: var(--sidebar-bg);
+}
+
 .left-panel img {
 	width: 80%;
 }
@@ -25,6 +29,10 @@
 	padding: 0 3em;
 }
 
+body.dark .right-panel {
+	background-color: var(--black-color);
+}
+
 .meta {
 	text-align: center;
 }
@@ -33,6 +41,10 @@
 	color: var(--black-color);
 	font-weight: 700;
 	font-size: var(--heading-1);
+}
+
+body.dark .meta-title {
+	color: var(--white-color);
 }
 
 .meta-title span {
@@ -65,19 +77,30 @@ form {
 	margin-bottom: 0.5em;
 }
 
+body.dark .form-group label {
+	color: var(--white-color);
+}
+
 .form-group input {
 	font-family: 'Figtree';
 	font-size: 0.9rem;
 	border: none;
 	outline: 0;
 	color: var(--black-color);
-	border-bottom: 2px solid var(--gray-color-100);
+	border-bottom: 1px solid var(--gray-color-100);
 	padding: 0.8em 0;
+	background-color: transparent;
+}
+
+body.dark .form-group input {
+	color: var(--white-color);
 }
 
 .form-group input:focus {
 	border-bottom: 2px solid var(--primary-color);
 }
+
+/* change autofill : https://css-tricks.com/snippets/css/change-autocomplete-styles-webkit-browsers/ */
 
 .form-group input::placeholder {
 	font-family: 'Figtree';
@@ -129,10 +152,14 @@ form {
 	font-weight: 500;
 }
 
+body.dark .option-divider {
+	color: var(--white-color);
+}
+
 .option-divider hr {
 	background-color: var(--gray-color-100);
 	width: 45%;
-	height: 2px;
+	height: 1px;
 	border: 1px;
 }
 

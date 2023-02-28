@@ -59,7 +59,7 @@ body.dark .top-bar {
 
 .notification-profile .icons {
 	display: flex;
-	width: 60px;
+	width: 80px;
 	align-items: center;
 	justify-content: space-between;
 }
@@ -105,6 +105,24 @@ body.dark .top-bar {
 	border-top: 1px solid var(--black-color);
 }
 
+body.dark .notification-profile hr {
+	background-color: var(--white-color);
+	border-top: 1px solid var(--white-color);
+}
+
+.notification-profile .icons svg:hover :is(path) {
+	stroke: var(--primary-color);
+}
+
+.notification-profile svg :is(path) {
+	stroke: var(--black-color);
+	stroke-width: 1.5px;
+}
+
+body.dark .notification-profile svg :is(path) {
+	stroke: var(--white-color);
+}
+
 .notification-profile .profile {
 	background-color: white;
 	position: absolute;
@@ -115,11 +133,29 @@ body.dark .top-bar {
 	border-radius: 8px;
 	bottom: -160px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+	transition: all 0.3s ease-in-out;
+	scale: 0;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.profile.show {
+	scale: 1;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+body.dark .notification-profile .profile {
+	background-color: var(--sidebar-bg);
 }
 
 .profile .name {
 	color: var(--black-color);
 	font-weight: 500;
+}
+
+body.dark .profile .name {
+	color: var(--white-color);
 }
 
 .profile .role {
@@ -151,23 +187,9 @@ body.dark .top-bar {
 }
 
 .profile a:hover {
-	color: var(--black-color);
+	color: var(--primary-color);
 }
 
 .profile a:hover svg :is(path, line, rect) {
-	stroke: var(--black-color);
-}
-
-body.dark .notification-profile hr {
-	background-color: var(--white-color);
-	border-top: 1px solid var(--white-color);
-}
-
-.notification-profile svg :is(path) {
-	stroke: var(--black-color);
-	stroke-width: 1px;
-}
-
-body.dark .notification-profile svg :is(path) {
-	stroke: var(--white-color);
+	stroke: var(--primary-color);
 }

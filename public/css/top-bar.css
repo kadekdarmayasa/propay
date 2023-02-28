@@ -174,22 +174,34 @@ body.dark .profile .name {
 
 .profile a {
 	display: flex;
-	color: var(--gray-color-300);
+	color: var(--black-color);
+	font-size: 0.9rem;
 	align-items: center;
+}
+
+body.dark .profile a {
+	color: var(--white-color);
 }
 
 .profile a svg {
 	margin-right: 0.4em;
+	height: 24px;
+	width: auto;
 }
 
-.profile a svg :is(path, line, rect) {
-	stroke: var(--gray-color-300);
+.profile a svg path {
+	stroke: var(--black-color);
+	stroke-width: 2px;
+}
+
+body.dark .profile a svg path {
+	stroke: var(--white-color);
 }
 
 .profile a:hover {
-	color: var(--primary-color);
+	color: var(--primary-color) !important;
 }
 
 .profile a:hover svg :is(path, line, rect) {
-	stroke: var(--primary-color);
+	stroke: var(--primary-color) !important;
 }

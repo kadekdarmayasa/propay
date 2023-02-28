@@ -18,9 +18,13 @@
   <?php endif; ?>
 
   <?php if ($activeTab != 'login') : ?>
-    <link rel="stylesheet" href="<?= BASEURL . 'public/css/sidebar.css' ?>">
+    <link rel="stylesheet" href="<?= BASEURL . 'public/css/index.css' ?>">
     <link rel="stylesheet" href="<?= BASEURL . 'public/css/top-bar.css' ?>">
-    <link rel="stylesheet" href="<?= BASEURL . 'public/css/dashboard/index.css' ?>">
+
+    <?php if ($activeTab == 'dashboard') : ?>
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/dashboard/index.css' ?>">
+    <?php endif; ?>
+    <?php  ?>
   <?php endif; ?>
 </head>
 

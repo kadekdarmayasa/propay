@@ -61,7 +61,7 @@ body.dark .brand .brand-name {
 	pointer-events: none;
 }
 
-.sidebar.close ~ :is(.dashboard) {
+.sidebar.close ~ :is(.main-content) {
 	left: 107px;
 	width: calc(100% - 107px);
 }
@@ -270,4 +270,19 @@ body.dark .switch {
 
 .sidebar.close .mode-toggle {
 	right: 34px;
+}
+
+.main-content {
+	background-color: var(--blue-color-100);
+	position: relative;
+	left: 300px;
+	right: 0;
+	min-height: 100vh;
+	width: calc(100% - 300px);
+	padding: 10px 1.5em;
+	transition: 0.3s all ease;
+}
+
+body.dark .main-content {
+	background-color: var(--black-color);
 }

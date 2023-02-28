@@ -6,6 +6,7 @@
 <?php endif; ?>
 
 <?php if ($activeTab !== 'login') : ?>
+  <script src="<?= BASEURL . 'public/js/dashboard/top-bar.js' ?>"></script>
   <script src="<?= BASEURL . 'public/js/dashboard/index.js' ?>"></script>
 <?php endif ?>
 

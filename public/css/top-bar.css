@@ -9,7 +9,6 @@
 	padding: 10px 1.5em;
 	transition: 0.3s all ease;
 	z-index: 10;
-	cursor: pointer;
 	background-color: var(--blue-color-100);
 }
 
@@ -22,6 +21,7 @@
 	background-color: white;
 	padding: 0.8em;
 	border-radius: 50%;
+	cursor: pointer;
 	filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.05));
 }
 
@@ -31,7 +31,7 @@ body.dark .sidebar-toggle {
 }
 
 .sidebar-toggle:hover {
-	filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.12));
+	filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.08));
 }
 
 .sidebar-toggle span {
@@ -54,6 +54,10 @@ body.dark .top-bar {
 }
 
 .notification-profile {
+	position: relative;
+}
+
+.notification-profile .icons {
 	display: flex;
 	width: 60px;
 	align-items: center;
@@ -62,6 +66,10 @@ body.dark .top-bar {
 
 .notification {
 	position: relative;
+}
+
+.notification-profile :is(.profile-toggle, .notification) {
+	cursor: pointer;
 }
 
 .notification-profile svg {
@@ -77,11 +85,11 @@ body.dark .top-bar {
 	position: absolute;
 	top: -2px;
 	right: 0;
-	display: flex;
-	height: 16px;
+	display: none;
+	height: 18px;
 	justify-content: center;
 	align-items: center;
-	width: 16px;
+	width: 18px;
 	color: var(--white-color);
 	font-size: 0.5rem;
 	font-weight: 500;
@@ -91,10 +99,63 @@ body.dark .top-bar {
 
 .notification-profile hr {
 	height: 1px;
-	width: 15px;
+	width: 20px;
 	background-color: var(--black-color);
 	transform: rotate(90deg);
 	border-top: 1px solid var(--black-color);
+}
+
+.notification-profile .profile {
+	background-color: white;
+	position: absolute;
+	width: 300px;
+	height: 140px;
+	padding: 1em;
+	left: -240px;
+	border-radius: 8px;
+	bottom: -160px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.profile .name {
+	color: var(--black-color);
+	font-weight: 500;
+}
+
+.profile .role {
+	color: var(--gray-color-300);
+	margin-top: 0.2em;
+}
+
+.profile hr {
+	margin: 0.8em 0;
+	height: 1px;
+	width: 100%;
+	transform: rotate(180deg);
+	background-color: var(--gray-color-100);
+	border-top: 1px solid var(--gray-color-100);
+}
+
+.profile a {
+	display: flex;
+	color: var(--gray-color-300);
+	align-items: center;
+}
+
+.profile a svg {
+	margin-right: 0.4em;
+}
+
+.profile a svg :is(path, line, rect) {
+	stroke: var(--gray-color-300);
+}
+
+.profile a:hover {
+	color: var(--black-color);
+}
+
+.profile a:hover svg :is(path, line, rect) {
+	stroke: var(--black-color);
 }
 
 body.dark .notification-profile hr {

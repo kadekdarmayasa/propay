@@ -40,7 +40,7 @@ body {
 
 body.dark {
 	--black-color: #1b273d;
-	--sidebar-bg: rgb(24, 36, 56);
+	--sidebar-bg: rgb(43, 57, 82);
 }
 
 ::-webkit-scrollbar {

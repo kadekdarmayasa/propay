@@ -39,6 +39,11 @@ body.dark .welcome-message p {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	transition: all 0.3s ease-in-out;
+}
+
+.overview :is(.student, .staff, .classes, .time):hover {
+	transform: scale(1.04);
 }
 
 body.dark .overview :is(.student, .staff, .classes, .time) {
@@ -116,3 +121,170 @@ body.dark .overview .hour-minute {
 	color: var(--gray-color-100);
 	font-size: 0.9rem;
 }
+
+.newest-content {
+	max-width: 1020px;
+	margin-top: 1.4em;
+	display: flex;
+}
+
+/* Newest Payment */
+.newest-payment {
+	width: 900px;
+	border-radius: 10px;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+	background-color: #fff;
+	padding: 1.6em 1.6em;
+}
+
+body.dark .newest-payment {
+	background-color: var(--sidebar-bg);
+}
+
+.payment-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.payment-header .title {
+	font-size: var(--heading-3);
+	color: var(--black-color);
+	font-weight: 600;
+}
+
+body.dark .payment-header .title {
+	color: var(--white-color);
+}
+
+.payment-header .indicator {
+	display: flex;
+}
+
+.payment-header .indicator > * {
+	display: flex;
+	align-items: center;
+	margin-left: 0.8em;
+}
+
+.indicator .circle {
+	height: 8px;
+	width: 8px;
+	margin-right: 0.4em;
+	border-radius: 50%;
+	background-color: black;
+}
+
+.indicator .paid-half .circle {
+	background-color: var(--red-color);
+}
+
+.indicator .paid-with-change .circle {
+	background-color: var(--green-color);
+}
+
+.indicator .paid-off .circle {
+	background-color: var(--primary-color);
+}
+
+.indicator span {
+	color: var(--gray-color-300);
+	font-size: 0.8rem;
+}
+
+body.dark .indicator span {
+	color: var(--gray-color-200);
+}
+
+.payment-content {
+	margin-top: 2.5em;
+}
+
+.columns {
+	display: flex;
+	justify-content: space-between;
+}
+
+.columns .column-staff-name {
+	width: 200px;
+}
+
+.column-staff-name p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.columns small {
+	font-weight: 400;
+	margin-bottom: 0.4em;
+	display: block;
+	color: var(--gray-color-300);
+}
+
+body.dark .columns small {
+	color: var(--gray-color-200);
+}
+
+.columns p {
+	font-weight: 500;
+	color: var(--black-color);
+	margin-top: 1.4em;
+}
+
+body.dark .columns p {
+	color: var(--white-color);
+}
+
+.column-payment-amount p.half-paid {
+	color: var(--red-color) !important;
+}
+
+.column-payment-amount p.paid-with-change {
+	color: var(--green-color) !important;
+}
+
+.column-payment-amount p.paid {
+	color: var(--primary-color) !important;
+}
+
+.see-more-btn {
+	display: flex;
+	align-items: center;
+	color: var(--black-color);
+	font-weight: 600;
+	margin-top: 1.8em;
+}
+
+body.dark .see-more-btn {
+	color: var(--white-color);
+}
+
+.see-more-btn:hover {
+	color: var(--primary-color) !important;
+}
+
+.see-more-btn:hover svg path {
+	stroke: var(--primary-color) !important;
+}
+
+.see-more-btn svg {
+	height: 12px;
+	width: 12px;
+	position: relative;
+	top: 1px;
+	left: 8px;
+}
+
+.see-more-btn svg path {
+	stroke: var(--black-color);
+}
+
+body.dark .see-more-btn svg path {
+	stroke: var(--white-color);
+}
+/* End of Newest Payment */
+
+/* Newest Staff */
+
+/* End of Newest Staff */

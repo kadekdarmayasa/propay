@@ -1,0 +1,358 @@
+.class-container {
+	background-color: white;
+	padding: 2em;
+	max-width: 800px;
+	margin-top: 3em;
+	border-radius: 10px;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+body.dark .class-container {
+	background-color: var(--sidebar-bg);
+}
+
+.class-container .header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.left-header h2 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin-bottom: 1.5em;
+	color: var(--black-color);
+}
+
+body.dark .left-header h2 {
+	color: var(--white-color);
+}
+
+.left-header form {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #f4f4f4;
+	height: 50px;
+	width: 330px;
+	padding: 0.6em 1.2em;
+	border-radius: 6px;
+}
+
+body.dark .left-header form {
+	background-color: var(--black-color);
+}
+
+.left-header form input {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	width: 90%;
+	font-size: 0.9rem;
+	font-family: 'Figtree';
+	color: var(--black-color);
+}
+
+body.dark .left-header form input {
+	color: var(--white-color);
+}
+
+input::placeholder {
+	font-family: 'Figtree';
+	color: #989898;
+}
+
+.left-header form button {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	display: flex;
+	align-items: center;
+}
+
+.left-header form svg {
+	height: 18px;
+	width: 18px;
+	position: relative;
+	top: 1px;
+}
+
+.right-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: end;
+}
+
+.right-header .row-per-page {
+	display: flex;
+	align-items: center;
+	color: var(--black-color);
+}
+
+body.dark .right-header .row-per-page {
+	color: var(--white-color);
+}
+
+.row-per-page .page-selected {
+	background-color: #f4f4f4;
+	height: 40px;
+	width: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	border-radius: 5px;
+	color: var(--black-color);
+	margin-left: 0.5em;
+	position: relative;
+	cursor: pointer;
+}
+
+body.dark .row-per-page .page-selected {
+	background-color: var(--black-color);
+	color: var(--white-color);
+}
+
+.page-selected svg {
+	height: 10px;
+	width: 10px;
+}
+
+.page-selected svg :is(path, line, circle) {
+	stroke: var(--black-color);
+	stroke-width: 1px;
+}
+
+body.dark .page-selected svg :is(path, line, circle) {
+	stroke: var(--white-color);
+}
+
+.right-header .add-class-btn {
+	background-color: var(--primary-color);
+	height: 50px;
+	width: 140px;
+	border-radius: 6px;
+	display: flex;
+	font-size: 0.9rem;
+	align-items: center;
+	justify-content: center;
+	color: var(--white-color);
+	font-weight: 500;
+}
+
+.add-class-btn:hover {
+	box-shadow: 0 5px 10px rgba(var(--primary-color-opacity), 0.2);
+}
+
+.add-class-btn svg {
+	height: 24px;
+	margin-right: 0.6em;
+	width: 24px;
+}
+
+.add-class-btn svg :is(path, line, rect) {
+	stroke: var(--white-color) !important;
+}
+
+.list-of-page {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0.4em 0.2em;
+	z-index: 2;
+	width: 60px;
+	position: absolute;
+	top: 50px;
+	border-radius: 8px;
+	opacity: 0;
+	transform: scale(0);
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+	transition: all 0.3s ease;
+	user-select: none;
+}
+
+body.dark .list-of-page {
+	background-color: var(--black-color);
+}
+
+.list-of-page.show {
+	opacity: 1;
+	transform: scale(1);
+	user-select: auto;
+}
+
+.list-of-page li {
+	padding: 0.5em 0.8em;
+	cursor: pointer;
+	border-radius: 5px;
+	width: 80%;
+	height: 80%;
+}
+
+.list-of-page a {
+	color: var(--black-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	background-color: transparent;
+}
+
+body.dark .list-of-page a {
+	color: var(--white-color);
+}
+
+.list-of-page li:hover {
+	background-color: var(--primary-color);
+}
+
+.list-of-page li:hover a {
+	color: var(--white-color);
+}
+
+.list-of-page a:hover {
+	background-color: transparent !important;
+}
+
+.data {
+	margin-top: 3em;
+}
+
+.data table {
+	width: 100%;
+}
+
+.data table th {
+	text-align: left;
+}
+
+.data table {
+	border-collapse: collapse;
+}
+
+.data table th {
+	font-weight: 400;
+	color: var(--gray-color-300);
+	font-size: 0.8rem;
+}
+
+.data table td {
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--black-color);
+}
+
+body.dark .data table td {
+	color: var(--white-color);
+}
+
+.data table :is(tr, td, th) {
+	padding: 0.6em;
+}
+
+.update-btn,
+.delete-btn {
+	display: inline-block;
+	height: 26px;
+	width: 26px;
+}
+
+.update-btn svg,
+.delete-btn svg {
+	height: 100%;
+	width: 100%;
+}
+
+.update-btn svg :is(path, rect, line),
+.delete-btn svg :is(path, rect, line) {
+	stroke-width: 1px;
+	stroke: var(--black-color);
+}
+
+body.dark .update-btn svg :is(path, rect, line),
+body.dark .delete-btn svg :is(path, rect, line) {
+	stroke: var(--white-color);
+}
+
+.cls-footer {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 4em;
+}
+
+.footer-left {
+	color: var(--black-color);
+	font-weight: 600;
+	font-size: 0.9rem;
+}
+
+body.dark .footer-left {
+	color: var(--white-color);
+}
+
+.footer-right .pagination {
+	display: flex;
+	height: 40px;
+	gap: 5px;
+	font-size: 0.9em;
+}
+
+.pagination :is(.prev-btn, .next-btn) {
+	background-color: var(--primary-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80px;
+	padding: 0.5em;
+}
+
+.prev-btn {
+	border-radius: 20px 0 0 20px;
+}
+
+.next-btn {
+	border-radius: 0 20px 20px 0;
+}
+
+.prev-btn a,
+.next-btn a {
+	color: var(--white-color);
+}
+
+.page-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	border-radius: 5px;
+	border: 2px solid var(--primary-color);
+	transition: all 0.3s ease;
+}
+
+.page-item.active a,
+.page-item:hover:not(.dots) a {
+	background-color: var(--primary-color) !important;
+}
+
+.page-item.active a,
+.page-item:hover:not(.dots) a {
+	color: var(--white-color);
+}
+
+.page-item a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	font-weight: 500;
+	color: var(--primary-color);
+}
+
+.page-item.dots {
+	width: 20px;
+	align-self: end;
+	border: 2px solid transparent;
+	color: var(--primary-color);
+}

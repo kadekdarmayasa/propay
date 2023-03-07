@@ -24,7 +24,10 @@
     <?php if ($activeTab == 'dashboard') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/dashboard/index.css' ?>">
     <?php endif; ?>
-    <?php  ?>
+
+    <?php if ($activeTab == 'class') : ?>
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/index.css' ?>">
+    <?php endif; ?>
   <?php endif; ?>
 </head>
 

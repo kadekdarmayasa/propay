@@ -38,7 +38,9 @@
             </svg>
             <span class="link-name">Student</span>
           </a></li>
-        <li><a href="#">
+
+        <li>
+          <a href="#">
             <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.3773 9.73697C9.76417 4.83221 13.5886 0.5 18.5315 0.5C22.8639 0.5 26.4522 3.86348 26.732 8.18686L26.75 8.46445V9.35345C26.75 13.9033 23.0668 17.593 18.5194 17.6034L18.2403 17.5814L18.201 18.0799L18.2403 17.5814C14.1934 17.2625 10.928 14.143 10.4245 10.1149L10.3773 9.73697Z" stroke="#989898" />
               <path d="M10.3773 9.73697C9.76417 4.83221 13.5886 0.5 18.5315 0.5C22.8639 0.5 26.4522 3.86348 26.732 8.18686L26.75 8.46445V9.35345C26.75 13.9033 23.0668 17.593 18.5194 17.6034L18.2403 17.5814L18.201 18.0799L18.2403 17.5814C14.1934 17.2625 10.928 14.143 10.4245 10.1149L10.3773 9.73697Z" stroke="#989898" stroke-opacity="0.2" />
@@ -47,8 +49,15 @@
               <path d="M25.0625 30.1724V26.5517H29.4375V30.1724L27.25 31.9827L25.0625 30.1724Z" stroke="#989898" />
             </svg>
             <span class="link-name">Staff</span>
-          </a></li>
-        <li><a href="#">
+          </a>
+        </li>
+
+        <?php if ($activeTab == 'class') : ?>
+          <li class="active">
+          <?php else :  ?>
+          <li>
+          <?php endif; ?>
+          <a href="<?= BASEURL . 'classes' ?>">
             <svg width="34" height="39" viewBox="0 0 34 39" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15.1566 23.7391L17 20.9837L18.8434 23.7391" stroke="black" stroke-linecap="round" />
               <path d="M10.9699 25.0109C10.9699 27.0922 9.34372 28.75 7.37349 28.75C5.40327 28.75 3.77711 27.0922 3.77711 25.0109C3.77711 22.9295 5.40327 21.2717 7.37349 21.2717C9.34372 21.2717 10.9699 22.9295 10.9699 25.0109Z" stroke="black" />
@@ -62,34 +71,59 @@
             </svg>
 
             <span class="link-name">Class</span>
-          </a></li>
-        <li>
-          <a>
-            <svg width="39" height="30" viewBox="0 0 39 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1.02637 5L34.8948 5" stroke="#989898" stroke-linecap="round" />
-              <path d="M1.02637 10L34.8948 10" stroke="#989898" stroke-linecap="round" />
-              <path d="M8.73687 21C8.73687 22.3685 7.59456 23.5 6.15793 23.5C4.72129 23.5 3.57898 22.3685 3.57898 21C3.57898 19.6315 4.72129 18.5 6.15793 18.5C7.59456 18.5 8.73687 19.6315 8.73687 21Z" stroke="#989898" />
-              <path d="M12.8421 21C12.8421 22.3685 11.6998 23.5 10.2632 23.5C8.82652 23.5 7.6842 22.3685 7.6842 21C7.6842 19.6315 8.82652 18.5 10.2632 18.5C11.6998 18.5 12.8421 19.6315 12.8421 21Z" fill="fffffff" stroke="#989898" />
-              <rect x="0.5" y="0.5" width="34.9211" height="26" rx="0.5" stroke="#989898" />
-            </svg>
-            <span class="link-name">EDC</span>
-            <svg id="sub-menu-toggler" width="19" height="31" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1.5 1.5L17 15.2791L1.5 30" stroke="black" stroke-width="2" stroke-linecap="round" />
-            </svg>
-
           </a>
-          <ul class="sub-menu">
-            <li class="sub-menu-active">
-              <a href="" class="link-name">List</a>
-            </li>
+          </li>
+
+          <?php
+          $activeTab = explode('/', $activeTab);
+          if (
+            $activeTab[0] == 'edc'
+          ) : ?>
+            <li class="edc active">
+            <?php else : ?>
             <li>
-              <a href="" class="link-name">Payment</a>
+            <?php endif; ?>
+            <a href="<?= BASEURL . 'edc' ?>">
+              <svg width="39" height="30" viewBox="0 0 39 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.02637 5L34.8948 5" stroke="#989898" stroke-linecap="round" />
+                <path d="M1.02637 10L34.8948 10" stroke="#989898" stroke-linecap="round" />
+                <path d="M8.73687 21C8.73687 22.3685 7.59456 23.5 6.15793 23.5C4.72129 23.5 3.57898 22.3685 3.57898 21C3.57898 19.6315 4.72129 18.5 6.15793 18.5C7.59456 18.5 8.73687 19.6315 8.73687 21Z" stroke="#989898" />
+                <path d="M12.8421 21C12.8421 22.3685 11.6998 23.5 10.2632 23.5C8.82652 23.5 7.6842 22.3685 7.6842 21C7.6842 19.6315 8.82652 18.5 10.2632 18.5C11.6998 18.5 12.8421 19.6315 12.8421 21Z" fill="fffffff" stroke="#989898" />
+                <rect x="0.5" y="0.5" width="34.9211" height="26" rx="0.5" stroke="#989898" />
+              </svg>
+              <span class="link-name">EDC</span>
+              <svg id="sub-menu-toggler" width="19" height="31" viewBox="0 0 19 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.5 1.5L17 15.2791L1.5 30" stroke="black" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </a>
+
+            <ul class="sub-menu">
+              <?php
+              if (isset($activeTab[1]) && $activeTab[1] == 'list') : ?>
+                <li class="sub-menu-active">
+                <?php else : ?>
+                <li>
+                <?php endif; ?>
+                <a href="<?= BASEURL . 'edc' ?>" class="link-name">List</a>
+                </li>
+
+                <?php if (isset($activeTab[1]) && $activeTab[1] == 'payment') : ?>
+                  <li class="sub-menu-active">
+                  <?php else : ?>
+                  <li>
+                  <?php endif; ?>
+                  <a href="<?= BASEURL . 'edc/payment' ?>" class="link-name">Payment</a>
+                  </li>
+
+                  <?php if (isset($activeTab[1]) && $activeTab[1] == 'payment_history') : ?>
+                    <li class="sub-menu-active">
+                    <?php else : ?>
+                    <li>
+                    <?php endif; ?>
+                    <a href="<?= BASEURL . 'edc/payment_history' ?>" class="link-name">Payment History</a>
+                    </li>
+            </ul>
             </li>
-            <li>
-              <a href="" class="link-name">Payment History</a>
-            </li>
-          </ul>
-        </li>
     </ul>
 
     <!-- Logout and Mode -->

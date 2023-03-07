@@ -11,6 +11,10 @@
   <?php if ($activeTab == 'dashboard') : ?>
     <script src="<?= BASEURL . 'public/js/dashboard/index.js' ?>" type="module"></script>
   <?php endif; ?>
+
+  <?php if ($activeTab == 'class') : ?>
+    <script src="<?= BASEURL . 'public/js/class/index.js' ?>" type="module"></script>
+  <?php endif; ?>
 <?php endif ?>
 
 </body>

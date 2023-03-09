@@ -19,7 +19,7 @@
       <h3 class="amount">50</h3>
       <p class="desc">Total Staffs</p>
     </a>
-    <a href="" class="classes">
+    <a href="<?= BASEURL . 'classes' ?>" class="classes">
       <div class="thumb">
         <img src="<?= BASEURL . 'public/images/classroom-icon.svg' ?>" alt="ClassRoom Icon">
       </div>

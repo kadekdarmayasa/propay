@@ -270,6 +270,14 @@ body.dark .data table td {
 	stroke: var(--black-color);
 }
 
+.update-btn:hover svg :is(path, rect, line) {
+	stroke: var(--primary-color) !important;
+}
+
+.delete-btn:hover svg :is(path, rect, line) {
+	stroke: var(--red-color) !important;
+}
+
 body.dark .update-btn svg :is(path, rect, line),
 body.dark .delete-btn svg :is(path, rect, line) {
 	stroke: var(--white-color);
@@ -366,7 +374,7 @@ body.dark .footer-left {
 
 .add-class-container .meta {
 	text-align: center;
-	margin: 2em auto 2em;
+	margin: 2em auto 1.5em;
 }
 
 .meta-title {
@@ -377,6 +385,10 @@ body.dark .footer-left {
 
 .meta-description {
 	color: var(--gray-color-300);
+}
+
+body.dark :is(.meta-title) {
+	color: var(--white-color);
 }
 
 .add-class-container form {
@@ -399,6 +411,10 @@ body.dark .footer-left {
 	margin-bottom: 0.4em;
 }
 
+.input-group label {
+	color: var(--gray-color-300);
+}
+
 .input-group :is(input, select) {
 	height: 50px;
 	border-radius: 10px;
@@ -408,10 +424,20 @@ body.dark .footer-left {
 	font-family: 'Figtree';
 	font-size: 0.9rem;
 	outline: 0;
+	color: var(--black-color);
+}
+
+body.dark .input-group :is(input, select) {
+	background-color: var(--sidebar-bg);
+	color: var(--white-color);
 }
 
 .input-group :is(input, select):focus {
 	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.02));
+}
+
+.input-group:last-child button {
+	margin-top: 0em;
 }
 
 .input-group button {
@@ -450,3 +476,17 @@ body.dark .footer-left {
 .flasher-container > * {
 	width: 100%;
 }
+
+.class-container .flasher-container > * {
+	margin-bottom: 1.4em;
+}
+
+.empty-message {
+	color: var(--gray-color-300);
+	font-size: 0.9rem;
+	text-align: center;
+}
+
+/* body.dark .empty-message {
+	color: var(--white-color);
+} */

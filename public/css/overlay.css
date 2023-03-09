@@ -1,0 +1,132 @@
+/* Overlay Styling */
+
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: auto;
+	width: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(4px);
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.overlay .container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 2.2em 1em;
+	height: auto;
+	width: 480px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 10px;
+	transform: scale(0);
+	transition: all 0.3s ease;
+}
+
+body.dark .overlay .container {
+	background-color: rgba(27, 39, 61, 0.8);
+}
+
+.overlay.show {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.overlay.show .container {
+	transform: scale(1);
+}
+
+.overlay .container .icon {
+	height: 110px;
+	width: 110px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.overlay .icon svg {
+	width: 100px;
+	height: 100px;
+}
+
+.overlay .icon svg :is(path, rect) {
+	stroke-width: 1px;
+	stroke: var(--black-color);
+}
+
+body.dark .overlay .icon svg :is(path, rect) {
+	stroke: var(--white-color);
+}
+
+.overlay .icon svg circle {
+	fill: var(--black-color);
+}
+
+body.dark .overlay .icon svg circle {
+	fill: var(--white-color);
+}
+
+.overlay .meta .title {
+	font-weight: 600;
+	font-size: 1.6rem;
+	color: var(--black-color);
+	margin: 0.2em 0;
+}
+
+body.dark .overlay .meta .title {
+	color: var(--white-color);
+}
+
+.overlay .meta .description {
+	color: var(--gray-color-300);
+}
+
+.overlay .action-button {
+	margin-top: 0.8em;
+	display: flex;
+}
+
+.action-button .cancel-class-btn,
+.action-button .delete-class-btn {
+	padding: 0.5em;
+	display: flex;
+	border-radius: 6px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 150px;
+	height: 50px;
+	margin: 0.4em;
+	transition: background-color 0.2s ease;
+}
+
+.action-button .cancel-class-btn {
+	border: 1px solid var(--primary-color);
+	color: var(--primary-color);
+}
+
+.action-button .delete-class-btn {
+	border: 1px solid var(--red-color);
+	color: var(--red-color);
+}
+
+.action-button .delete-class-btn:hover {
+	background-color: var(--red-color);
+	color: var(--white-color);
+}
+
+.action-button .cancel-class-btn:hover {
+	background-color: var(--primary-color);
+	color: var(--white-color);
+}

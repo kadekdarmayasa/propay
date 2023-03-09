@@ -41,4 +41,15 @@ class Class_Model
 
     return $this->db->rowCount();
   }
+
+  public function deleteClass($class_id)
+  {
+    $query = "DELETE FROM " . $this->table . " WHERE class_id=:class_id";
+
+    $this->db->query($query);
+    $this->db->bind('class_id', $class_id);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
 }

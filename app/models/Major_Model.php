@@ -18,4 +18,15 @@ class Major_Model
 
     return $this->db->resultSet();
   }
+
+  public function getMajorById($major_id)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE major_id=:major_id";
+
+    $this->db->query($query);
+    $this->db->bind('major_id', $major_id);
+    $this->db->execute();
+
+    return $this->db->single();
+  }
 }

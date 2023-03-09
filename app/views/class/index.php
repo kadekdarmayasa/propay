@@ -1,5 +1,10 @@
 <div class="main-content">
+
   <div class="class-container">
+    <div class="flasher-container">
+      <?php Flasher::flash(); ?>
+    </div>
+
     <!-- Classlist Header -->
     <div class="header">
       <div class="left-header">
@@ -43,80 +48,56 @@
 
     <!-- Classlist Data -->
     <div class="data">
-      <table>
-        <tr>
-          <th>No</th>
-          <th>Class Name</th>
-          <th>Major</th>
-          <th>Total Student</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>XII SE 1</td>
-          <td>Software Engineering</td>
-          <td>38 People</td>
-          <td>
-            <a href="" class="update-btn">
-              <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
-                <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
-                <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
-              </svg>
-            </a>
-            <a href="" class="delete-btn">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
-                <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
-              </svg>
 
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>XII CNE 2</td>
-          <td>Computer Network Engineering</td>
-          <td>38 People</td>
-          <td>
-            <a href="" class="update-btn">
-              <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
-                <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
-                <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
-              </svg>
-            </a>
-            <a href="" class="delete-btn">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
-                <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
-              </svg>
+      <?php if (count($data['class']) == 0) : ?>
+        <p class="empty-message">There is no class found</p>
+      <?php else : ?>
+        <table>
+          <tr>
+            <th>No</th>
+            <th>Class Name</th>
+            <th>Major</th>
+            <th>Total Student</th>
+            <th>Actions</th>
+          </tr>
+          <?php
+          $number = 1;
+          for ($i = 0; $i < count($data['class']); $i++) :
+          ?>
+            <tr>
+              <td><?= $number++ ?></td>
+              <td><?= $data['class'][$i]['class_name']; ?></td>
+              <td><?= $data['class'][$i]['major_name']; ?></td>
+              <td>
+                <?php if ($data['class'][$i]['total_students'] == 0) : ?>
+                  -
+                <?php elseif ($data['class'][$i]['total_students'] < 2) : ?>
+                  <?= $data['class'][$i]['total_students']; ?> person
+                <?php else : ?>
+                  <?= $data['class'][$i]['total_students']; ?> people
+                <?php endif; ?>
+              </td>
+              <td>
+                <a href="" class="update-btn">
+                  <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
+                    <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
+                    <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
+                  </svg>
+                </a>
+                <a href="" class="delete-btn" data-class-id="<?= $data['class'][$i]['class_id'] ?>">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
+                    <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
+                  </svg>
 
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>XII AN 2</td>
-          <td>Animation</td>
-          <td>38 People</td>
-          <td>
-            <a href="" class="update-btn">
-              <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
-                <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
-                <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
-              </svg>
-            </a>
-            <a href="" class="delete-btn">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
-                <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
-              </svg>
-            </a>
-          </td>
-        </tr>
-      </table>
+                </a>
+              </td>
+            </tr>
+          <?php endfor; ?>
+        </table>
+      <?php endif; ?>
+
     </div>
     <!-- End of Classlist Data -->
 

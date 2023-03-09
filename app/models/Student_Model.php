@@ -20,11 +20,23 @@ class Student_Model
     return $this->db->single();
   }
 
+
   public function getAllStudents()
   {
     $sql = 'SELECT * FROM ' . $this->table;
 
     $this->db->query($sql);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
+
+  public function getStudentsByClassId($class_id)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE class_id=:class_id";
+
+    $this->db->query($query);
+    $this->db->bind('class_id', $class_id);
     $this->db->execute();
 
     return $this->db->resultSet();

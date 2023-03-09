@@ -27,6 +27,7 @@
 
     <?php if ($activeTab == 'class') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/index.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
     <?php endif; ?>
   <?php endif; ?>
 </head>

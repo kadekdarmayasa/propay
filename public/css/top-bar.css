@@ -6,7 +6,7 @@
 	width: calc(100% - 300px);
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px 1.5em;
+	padding: 1em 2em;
 	transition: 0.3s all ease;
 	z-index: 10;
 	background-color: var(--blue-color-100);

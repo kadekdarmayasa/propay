@@ -12,9 +12,6 @@ class Classes extends Controller
     $data['class'] = $this->model("Class_Model")->getAllClasses();
 
     for ($i = 0; $i < count($data['class']); $i++) {
-      $major = $this->model("Major_Model")->getMajorById($data['class'][$i]['major_id']);
-      $data['class'][$i]['major_name'] = $major['major_name'];
-
       $students = $this->model('Student_Model')->getStudentsByClassId($data['class'][$i]['class_id']);
       $data['class'][$i]['total_students'] = count($students);
     }
@@ -38,12 +35,12 @@ class Classes extends Controller
 
     if (isset($_POST['add-class'])) {
       $class_name = $_POST['class-name'];
-      $major_id = $_POST['major'];
+      $major_name = $_POST['major_name'];
 
       if ($this->model("Class_Model")->getClassByName($class_name)) {
         Flasher::setFlash('error', 'The class is already exist!');
       } else {
-        $class_row_count = $this->model("Class_Model")->addClass($class_name, $major_id);
+        $class_row_count = $this->model("Class_Model")->addClass($class_name, $major_name);
 
         if ($class_row_count) {
           Flasher::setFlash('success', 'Congratulations! The class has been successfully added!');
@@ -51,7 +48,6 @@ class Classes extends Controller
       }
     }
 
-    $data['major_list'] = $this->model('Major_Model')->getAllMajor();
     $data['title'] = 'Propay - Class';
     $data['breadcrumb'] = 'Classes/Add';
     $this->view('templates/header', $data, 'class');

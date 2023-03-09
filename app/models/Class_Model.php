@@ -30,13 +30,13 @@ class Class_Model
     return $this->db->single();
   }
 
-  public function addClass($class_name, $major_id)
+  public function addClass($class_name, $major_name)
   {
-    $query = "INSERT INTO " . $this->table . " VALUES (null, :class_name, :major_id)";
+    $query = "INSERT INTO " . $this->table . " VALUES (null, :class_name, :major_name)";
 
     $this->db->query($query);
     $this->db->bind('class_name', $class_name);
-    $this->db->bind('major_id', $major_id);
+    $this->db->bind('major_name', $major_name);
     $this->db->execute();
 
     return $this->db->rowCount();

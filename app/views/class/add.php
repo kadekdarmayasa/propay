@@ -16,12 +16,13 @@
       </div>
 
       <div class="input-group">
-        <label for="major">Major</label>
-        <select name="major" id="major" required>
+        <label for="major">Major Name</label>
+        <select name="major_name" id="major" _name required>
           <option value="">-- Select Major --</option>
-          <?php foreach ($data['major_list'] as $major) : ?>
-            <option value="<?= $major['major_id'] ?>"><?= $major['major_name']; ?></option>
-          <?php endforeach; ?>
+          <option value="Software Engineering">Software Engineering</option>
+          <option value="Computer Network Engineering">Computer Network Engineering</option>
+          <option value="Animation">Animation</option>
+          <option value="Visual Communication Design">Visual Communication Design</option>
         </select>
       </div>
 

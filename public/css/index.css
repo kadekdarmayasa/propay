@@ -53,7 +53,7 @@ body.dark svg :is(rect, path, line) {
 }
 
 body.dark .brand .brand-name {
-	color: var(--gray-color-200);
+	color: var(--white-color);
 }
 
 .sidebar.close :is(.brand-name, li a .link-name) {

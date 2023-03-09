@@ -12,20 +12,23 @@
       <h3 class="amount">400</h3>
       <p class="desc">Total Student</p>
     </a>
-    <a href="" class="staff">
+
+    <a href="<?= BASEURL . 'staff' ?>" class="staff">
       <div class="thumb">
         <img src="<?= BASEURL . 'public/images/staff-icon.svg' ?>" alt="Staff Icon">
       </div>
-      <h3 class="amount">50</h3>
+      <h3 class="amount"><?= $data['total_staff']; ?></h3>
       <p class="desc">Total Staffs</p>
     </a>
+
     <a href="<?= BASEURL . 'classes' ?>" class="classes">
       <div class="thumb">
         <img src="<?= BASEURL . 'public/images/classroom-icon.svg' ?>" alt="ClassRoom Icon">
       </div>
-      <h3 class="amount">14</h3>
+      <h3 class="amount"><?= $data['total_class']; ?></h3>
       <p class="desc">Total Classes</p>
     </a>
+
     <div class="time" id="time">
       <h2 class="hour-minute">
         <span id="hour">00</span> : <span id="minute">00</span>

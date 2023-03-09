@@ -7,9 +7,11 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 1em 2em;
+	height: 80px;
 	transition: 0.3s all ease;
 	z-index: 10;
-	background-color: var(--blue-color-100);
+	background-color: rgba(var(--blue-color-opacity), 0.8);
+	backdrop-filter: blur(4px);
 }
 
 .left-bar {
@@ -77,7 +79,7 @@ body.dark .sidebar-toggle span {
 }
 
 body.dark .top-bar {
-	background-color: var(--black-color);
+	background-color: rgba(var(--black-opacity), 0.8);
 }
 
 .sidebar.close ~ .top-bar {

@@ -1,4 +1,4 @@
-.class-container {
+.staff-container {
 	background-color: white;
 	padding: 2em;
 	max-width: 900px;
@@ -7,11 +7,11 @@
 	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-body.dark .class-container {
+body.dark .staff-container {
 	background-color: var(--sidebar-bg);
 }
 
-.class-container .header {
+.staff-container .header {
 	display: flex;
 	justify-content: space-between;
 }
@@ -126,7 +126,7 @@ body.dark .page-selected svg :is(path, line, circle) {
 	stroke: var(--white-color);
 }
 
-.right-header .add-class-btn {
+.right-header .add-staff-btn {
 	background-color: var(--primary-color);
 	height: 50px;
 	width: 140px;
@@ -139,17 +139,17 @@ body.dark .page-selected svg :is(path, line, circle) {
 	font-weight: 500;
 }
 
-.add-class-btn:hover {
+.add-staff-btn:hover {
 	box-shadow: 0 5px 10px rgba(var(--primary-color-opacity), 0.2);
 }
 
-.add-class-btn svg {
+.add-staff-btn svg {
 	height: 24px;
 	margin-right: 0.6em;
 	width: 24px;
 }
 
-.add-class-btn svg :is(path, line, rect) {
+.add-staff-btn svg :is(path, line, rect) {
 	stroke: var(--white-color) !important;
 }
 
@@ -367,13 +367,13 @@ body.dark .footer-left {
 }
 
 /* View Add Styling */
-.add-class-container {
+.add-staff-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.add-class-container .meta {
+.add-staff-container .meta {
 	text-align: center;
 	margin: 2em auto 1.5em;
 }
@@ -392,7 +392,7 @@ body.dark :is(.meta-title) {
 	color: var(--white-color);
 }
 
-.add-class-container form {
+.add-staff-container form {
 	display: flex;
 	flex-direction: column;
 	margin-top: 2em;
@@ -470,7 +470,7 @@ body.dark .input-group :is(input, select) {
 	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
 }
 
-.add-class-container .flasher-container {
+.add-staff-container .flasher-container {
 	width: 650px;
 }
 
@@ -478,7 +478,7 @@ body.dark .input-group :is(input, select) {
 	width: 100%;
 }
 
-.class-container .flasher-container > * {
+.staff-container .flasher-container > * {
 	margin-bottom: 1.4em;
 }
 

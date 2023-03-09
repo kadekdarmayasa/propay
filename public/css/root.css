@@ -35,6 +35,7 @@ a {
 	--gray-color-200: rgb(203, 201, 201);
 	--gray-color-300: #989898;
 	--blue-color-100: #f7fbff;
+	--blue-color-opacity: 247, 251, 255;
 	--green-color: #3eff74;
 	--orange-color: #ff833d;
 	--red-color: #ff3f3f;
@@ -52,11 +53,15 @@ a {
 body {
 	font-family: 'Figtree';
 	min-height: 100vh;
+	background-color: var(--blue-color-100);
 }
 
 body.dark {
 	--black-color: #1b273d;
+	--black-opacity: 27, 39, 61;
 	--sidebar-bg: rgb(43, 57, 82);
+
+	background-color: var(--black-color);
 }
 
 ::-webkit-scrollbar {

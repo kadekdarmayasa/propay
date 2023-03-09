@@ -9,6 +9,8 @@ class Dashboard extends Controller
     }
 
     $data['title'] = 'Propay - Dashboard';
+    $data['breadcrumb'] = 'Dashboard';
+
     $this->view('templates/header', $data, 'dashboard');
     $this->view('templates/sidebar', $data, 'dashboard');
     $this->view('templates/top-bar', $data, 'dashboard');

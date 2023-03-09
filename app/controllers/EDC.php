@@ -10,6 +10,7 @@ class EDC extends Controller
     }
 
     $data['title'] = 'Propay - EDC';
+    $data['breadcrumb'] = 'EDC/List';
     $this->view('templates/header', $data, 'edc');
     $this->view('templates/sidebar', $data, 'edc/list');
     $this->view('templates/top-bar', $data, 'edc');

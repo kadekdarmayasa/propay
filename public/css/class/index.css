@@ -356,3 +356,97 @@ body.dark .footer-left {
 	border: 2px solid transparent;
 	color: var(--primary-color);
 }
+
+/* View Add Styling */
+.add-class-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.add-class-container .meta {
+	text-align: center;
+	margin: 2em auto 2em;
+}
+
+.meta-title {
+	color: var(--black-color);
+	font-weight: 700;
+	margin-bottom: 0.2em;
+}
+
+.meta-description {
+	color: var(--gray-color-300);
+}
+
+.add-class-container form {
+	display: flex;
+	flex-direction: column;
+	margin-top: 2em;
+}
+
+.input-group {
+	display: flex;
+	width: 650px;
+	flex-direction: column;
+	margin-bottom: 2em;
+}
+
+.input-group label {
+	color: var(--black-color);
+	font-weight: 500;
+	font-size: 0.9rem;
+	margin-bottom: 0.4em;
+}
+
+.input-group :is(input, select) {
+	height: 50px;
+	border-radius: 10px;
+	border: 0;
+	background-color: #fff;
+	padding: 0.4em 1.2em;
+	font-family: 'Figtree';
+	font-size: 0.9rem;
+	outline: 0;
+}
+
+.input-group :is(input, select):focus {
+	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.02));
+}
+
+.input-group button {
+	background-color: var(--primary-color);
+	border: 0;
+	outline: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-weight: 500;
+	font-size: 0.9rem;
+	height: 50px;
+	color: white;
+	border-radius: 10px;
+}
+
+.input-group button svg {
+	height: 24px;
+	width: 24px;
+	margin-right: 0.5em;
+}
+
+.input-group button svg :is(path, rect) {
+	stroke: white;
+}
+
+.input-group button:hover {
+	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
+}
+
+.add-class-container .flasher-container {
+	width: 650px;
+}
+
+.flasher-container > * {
+	width: 100%;
+}

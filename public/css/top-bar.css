@@ -12,6 +12,38 @@
 	background-color: var(--blue-color-100);
 }
 
+.left-bar {
+	display: flex;
+	align-items: center;
+}
+
+.left-bar .bread-crumb {
+	margin-left: 1em;
+	display: flex;
+}
+
+.bread-crumb li span {
+	display: inline-block;
+	margin-right: 0.4em;
+	color: var(--gray-color-300);
+}
+
+.bread-crumb li.active a {
+	color: var(--black-color);
+}
+
+.bread-crumb li a.link:hover {
+	color: var(--primary-color);
+}
+
+.bread-crumb li a {
+	color: var(--gray-color-300);
+}
+
+body.dark .bread-crumb li a {
+	color: var(--white-color);
+}
+
 .sidebar-toggle {
 	height: 46px;
 	width: 46px;

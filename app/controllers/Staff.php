@@ -8,6 +8,14 @@ class Staff extends Controller
       exit;
     }
 
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $staff_name = $_SESSION['user']['staff_name'];
+      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
+      $data['greeting_name'] = $secondAndThirdOfStaffName;
+      $data['name'] = $staff_name;
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
     $data['title'] = 'Propay - Staff';
     $data['breadcrumb'] = 'Staff';
     $data['staff'] = $this->model('Staff_Model')->getAllStaff();

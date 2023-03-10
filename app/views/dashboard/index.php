@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="welcome-message">
-    <h1 class="heading-1">Good Morning, Arta Wijaya!</h1>
-    <p>Nice to see you again</p>
+    <h1 class="heading-1">Welcome Back, <?= $data['greeting_name'] ?></h1>
+    <p>We hope you're having a great day.</p>
   </div>
 
   <div class="overview">

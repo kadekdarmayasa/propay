@@ -82,6 +82,13 @@
                   <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
                 </svg>
               </a>
+              <a href="" class="detail-btn">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="1" y="1" width="38" height="38" rx="4" stroke="black" stroke-width="2" />
+                  <path d="M20 30V16C20 15.4477 19.5523 15 19 15H17M20 30H17M20 30H23" stroke="black" stroke-width="2" stroke-linecap="round" />
+                  <rect x="18" y="8" width="3" height="3" rx="1.5" fill="black" />
+                </svg>
+              </a>
             </td>
           </tr>
         <?php endfor; ?>

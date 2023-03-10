@@ -9,6 +9,14 @@ class Classes extends Controller
       exit;
     }
 
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $staff_name = $_SESSION['user']['staff_name'];
+      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
+      $data['greeting_name'] = $secondAndThirdOfStaffName;
+      $data['name'] = $staff_name;
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
     $data['class'] = $this->model("Class_Model")->getAllClasses();
 
     for ($i = 0; $i < count($data['class']); $i++) {
@@ -31,6 +39,14 @@ class Classes extends Controller
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
       exit;
+    }
+
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $staff_name = $_SESSION['user']['staff_name'];
+      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
+      $data['greeting_name'] = $secondAndThirdOfStaffName;
+      $data['name'] = $staff_name;
+      $data['role'] = $_SESSION['user']['staff_level'];
     }
 
     if (isset($_POST['add-class'])) {
@@ -63,6 +79,14 @@ class Classes extends Controller
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
       exit;
+    }
+
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $staff_name = $_SESSION['user']['staff_name'];
+      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
+      $data['greeting_name'] = $secondAndThirdOfStaffName;
+      $data['name'] = $staff_name;
+      $data['role'] = $_SESSION['user']['staff_level'];
     }
 
     $class_row_count = $this->model("Class_Model")->deleteClass($class_id);

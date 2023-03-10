@@ -1,3 +1,23 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	-webkit-text-fill-color: var(--black-color);
+	-webkit-box-shadow: 0 0 0px 1000px transparent inset;
+	transition: background-color 5000s ease-in-out 0s;
+}
+
+body.dark input:-webkit-autofill,
+body.dark input:-webkit-autofill:hover,
+body.dark input:-webkit-autofill:focus,
+body.dark select:-webkit-autofill,
+body.dark select:-webkit-autofill:hover,
+body.dark select:-webkit-autofill:focus {
+	-webkit-text-fill-color: var(--white-color);
+}
+
 .staff-container {
 	background-color: white;
 	padding: 2em;
@@ -388,7 +408,7 @@ body.dark .footer-left {
 
 .add-staff-container .meta {
 	text-align: center;
-	margin: 2em auto 1.5em;
+	margin: 0.5em auto 1em;
 }
 
 .meta-title {
@@ -416,6 +436,7 @@ body.dark :is(.meta-title) {
 	width: 650px;
 	flex-direction: column;
 	margin-bottom: 2em;
+	position: relative;
 }
 
 .input-group label {
@@ -439,6 +460,39 @@ body.dark :is(.meta-title) {
 	font-size: 0.9rem;
 	outline: 0;
 	color: var(--black-color);
+}
+
+.input-group:not(:last-child) :is(img, svg) {
+	width: 24px;
+	position: absolute;
+	right: 12px;
+	bottom: 14px;
+	cursor: pointer;
+}
+
+.input-group :is(img).error-icon {
+	display: none;
+}
+
+.input-group #message {
+	position: absolute;
+	bottom: -22px;
+	left: 0;
+	font-size: 0.8rem;
+	color: var(--red-color);
+	display: none;
+}
+
+.input-group .username.error {
+	border: 2px solid var(--red-color);
+}
+
+.input-group .username.error ~ :is(img).error-icon {
+	display: inline-block;
+}
+
+.input-group .username.error ~ #message {
+	display: block;
 }
 
 body.dark .input-group :is(input, select) {

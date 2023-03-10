@@ -50,8 +50,8 @@
         </svg>
       </div>
       <div class="profile">
-        <h4 class="name">I Komang Arta Wijaya</h4>
-        <p class="role">Admin</p>
+        <h4 class="name"><?= $data['name'] ?></h4>
+        <p class="role"><?= $data['role'] ?></p>
         <hr>
         <a href="<?= BASEURL . 'auth/logout' ?>">
           <svg width="44" height="39" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">

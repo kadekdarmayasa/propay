@@ -8,6 +8,14 @@ class Dashboard extends Controller
       exit;
     }
 
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $staff_name = $_SESSION['user']['staff_name'];
+      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
+      $data['greeting_name'] = $secondAndThirdOfStaffName;
+      $data['name'] = $staff_name;
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
     $data['title'] = 'Propay - Dashboard';
     $data['breadcrumb'] = 'Dashboard';
     $data['total_class'] = count($this->model('Class_model')->getAllClasses());

@@ -252,22 +252,32 @@ body.dark .data table td {
 }
 
 .update-btn,
-.delete-btn {
+.delete-btn,
+.detail-btn {
 	display: inline-block;
-	height: 26px;
-	width: 26px;
+	height: 24px;
+	width: 24px;
 }
 
 .update-btn svg,
-.delete-btn svg {
+.delete-btn svg,
+.detail-btn svg {
 	height: 100%;
 	width: 100%;
 }
 
-.update-btn svg :is(path, rect, line),
-.delete-btn svg :is(path, rect, line) {
-	stroke-width: 1px;
+.detail-btn svg {
+	height: 100%;
+	width: 100%;
+}
+
+:is(.update-btn, .delete-btn, .detail-btn) svg :is(path, rect, line, circle) {
+	stroke-width: 2px !important;
 	stroke: var(--black-color);
+}
+
+.detail-btn svg :is(path, rect) {
+	stroke-width: 4px !important;
 }
 
 .update-btn:hover svg :is(path, rect, line) {
@@ -278,8 +288,11 @@ body.dark .data table td {
 	stroke: var(--red-color) !important;
 }
 
-body.dark .update-btn svg :is(path, rect, line),
-body.dark .delete-btn svg :is(path, rect, line) {
+.detail-btn:hover svg :is(path, rect, line) {
+	stroke: var(--green-color) !important;
+}
+
+body.dark :is(.update-btn, .delete-btn, .detail-btn) svg :is(path, rect, line) {
 	stroke: var(--white-color);
 }
 

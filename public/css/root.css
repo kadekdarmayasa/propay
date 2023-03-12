@@ -7,6 +7,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'Figtree';
 }
 
 :is(ul, ol) {
@@ -51,7 +52,6 @@ a {
 }
 
 body {
-	font-family: 'Figtree';
 	min-height: 100vh;
 	background-color: var(--blue-color-100);
 }

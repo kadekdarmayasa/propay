@@ -1,35 +1,15 @@
-const allInputs = document.querySelectorAll('input');
+const firstForm = document.querySelector('.form.first');
 const username = document.querySelector('.username');
 const nextBtn = document.querySelector('.next-btn');
-const form = document.querySelector('form');
-nextBtn.style.display = 'none';
-let isFieldError = false;
+const prevBtn = document.querySelector('.prev-btn');
 
-for (const input of allInputs) {
-	input.addEventListener('keypress', function () {
-		if (input.value == '' || isFieldError) {
-			nextBtn.style.display = 'none';
-			return;
-		} else {
-			nextBtn.style.display = 'flex';
-		}
-	});
-}
+nextBtn.addEventListener('click', () => {
+	firstForm.classList.add('hide');
+});
 
-// form.addEventListener('keypress', function () {
-// 	if (isFieldError) {
-// 		nextBtn.style.display = 'none';
-// 	} else {
-// 		for (const input of allInputs) {
-// 			if (input.value == '') {
-// 				nextBtn.style.display = 'none';
-// 				break;
-// 			} else {
-// 				nextBtn.style.display = 'flex';
-// 			}
-// 		}
-// 	}
-// });
+prevBtn.addEventListener('click', () => {
+	firstForm.classList.remove('hide');
+});
 
 function checkAvailability(str) {
 	const data = { username: str };
@@ -44,14 +24,10 @@ function checkAvailability(str) {
 				document.querySelector('.next-btn').disabled = true;
 				document.querySelector('.username').classList.add('error');
 				document.getElementById('message').innerText = data.message;
-				isFieldError = true;
-				// nextBtn.style.display = 'none';
 			} else {
 				document.querySelector('.next-btn').disabled = false;
 				document.querySelector('.username').classList.remove('error');
 				document.getElementById('message').innerText = '';
-				isFieldError = false;
-				// nextBtn.style.display = 'flex';
 			}
 		}
 	};
@@ -59,13 +35,3 @@ function checkAvailability(str) {
 	xHttp.setRequestHeader('Content-type', 'application/json');
 	xHttp.send(JSON.stringify(data));
 }
-
-/**	
-	Pseudocode of filling the first until third form :
-
-	1. User fill the username
-	2. If the user name is can be used, then remove disabled attribute from the next input 
-	3. User fill the password
-	4. User fill the password confirmation
-	5. If the password and password confirmation is match, then show the next button
- */

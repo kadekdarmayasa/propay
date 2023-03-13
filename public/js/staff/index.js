@@ -11,6 +11,24 @@ prevBtn.addEventListener('click', () => {
 	firstForm.classList.remove('hide');
 });
 
+username.addEventListener('keyup', function () {
+	let isValid = validateUsername(this.value);
+
+	if (!isValid) {
+		document.querySelector('.next-btn').disabled = true;
+		document.querySelector('.username').classList.add('error');
+		document.getElementById('message').innerText = 'Please enter a valid username';
+	} else {
+		checkAvailability(this.value);
+	}
+});
+
+function validateUsername(username) {
+	var nameRegex = /^([a-z0-9-_]+)$/i;
+	var isValid = username.match(nameRegex);
+	return isValid;
+}
+
 function checkAvailability(str) {
 	const data = { username: str };
 

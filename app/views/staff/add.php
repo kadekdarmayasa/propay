@@ -14,8 +14,8 @@
       <div class="form first">
         <div class="input-group">
           <label for="username">Username</label>
-          <input type="text" class="username" name="username" id="username" placeholder="Enter username..." autocomplete="off" onkeyup="checkAvailability(this.value)" required>
-          <img src="<?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
+          <input type="text" class="username" name="username" id="username" placeholder="Enter username..." autocomplete="off" required>
+          <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
           <small id="message"></small>
         </div>
 
@@ -71,8 +71,6 @@
           </svg>
         </div>
 
-
-
         <div class="input-group">
           <label for="religion">Religion</label>
           <select name="religion" id="religion" required>
@@ -89,7 +87,6 @@
           <label for="address">Address</label>
           <textarea name="address" id="address" cols="30" rows="3" placeholder="Enter full address..."></textarea>
         </div>
-
 
         <div class="input-group prev-submit-btn">
           <button type="submit" name="prev-btn" class="prev-btn">

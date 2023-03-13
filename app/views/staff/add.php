@@ -14,21 +14,23 @@
       <div class="form first">
         <div class="input-group">
           <label for="username">Username</label>
-          <input type="text" class="username" name="username" id="username" placeholder="Enter username..." autocomplete="off" required>
+          <input type="text" class="input username" name="username" id="username" placeholder="Enter username..." autocomplete="off" required>
           <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
-          <small id="message"></small>
+          <small class="message username-message"></small>
         </div>
 
         <div class="input-group">
           <label for="staff-password">Password</label>
-          <input type="password" name="password" id="staff-password" placeholder="Enter Password..." class="password" required>
+          <input type="password" name="password" id="staff-password" placeholder="Enter Password..." class="input password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
+          <small class="message password-message"></small>
         </div>
 
         <div class="input-group">
           <label for="staff-password">Confirm Password</label>
-          <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." class="password confirm-password" required>
+          <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." class="input password confirm-password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
+          <small class="message cf-password-message"></small>
         </div>
 
         <div class="input-group">

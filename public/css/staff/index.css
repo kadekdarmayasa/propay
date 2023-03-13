@@ -499,7 +499,7 @@ body.dark .input-group input[type='date'] ~ svg :is(rect, path) {
 	display: none;
 }
 
-.input-group #message {
+.input-group .message {
 	position: absolute;
 	bottom: -22px;
 	left: 0;
@@ -508,15 +508,15 @@ body.dark .input-group input[type='date'] ~ svg :is(rect, path) {
 	display: none;
 }
 
-.input-group .username.error {
+.input-group .input.error {
 	border-bottom: 2px solid var(--red-color);
 }
 
-.input-group .username.error ~ :is(img).error-icon {
+.input-group .input.error ~ :is(img).error-icon {
 	display: inline-block;
 }
 
-.input-group .username.error ~ #message {
+.input-group .input.error ~ .message {
 	display: block;
 }
 

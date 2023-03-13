@@ -35,7 +35,19 @@ firstForm.addEventListener('keyup', (e) => {
 		} else {
 			document.querySelector('.next-btn').disabled = false;
 			e.target.classList.remove('error');
-			showErrorMessage('password-message', '');
+		}
+	}
+
+	if (e.target.classList.contains('confirm-password')) {
+		let password = document.querySelector('.password');
+
+		if (e.target.value !== password.value) {
+			document.querySelector('.next-btn').disabled = true;
+			e.target.classList.add('error');
+			showErrorMessage('confirm-password-message', `Password doesn't match`);
+		} else {
+			document.querySelector('.next-btn').disabled = false;
+			e.target.classList.remove('error');
 		}
 	}
 });
@@ -78,7 +90,6 @@ function checkAvailability(str) {
 			} else {
 				document.querySelector('.next-btn').disabled = false;
 				document.querySelector('.username').classList.remove('error');
-				showErrorMessage('username-message', '');
 			}
 		}
 	};

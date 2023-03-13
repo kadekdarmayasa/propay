@@ -495,6 +495,11 @@ body.dark .input-group input[type='date'] ~ svg :is(rect, path) {
 	cursor: pointer;
 }
 
+.input-group:not(:last-child) :is(.password, .confirm-password) ~ :is(img).error-icon {
+	right: 28px;
+	bottom: 12px;
+}
+
 .input-group :is(img).error-icon {
 	display: none;
 }

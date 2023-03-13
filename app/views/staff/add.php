@@ -23,6 +23,7 @@
           <label for="staff-password">Password</label>
           <input type="password" name="password" id="staff-password" placeholder="Enter Password..." class="input password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
+          <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
           <small class="message password-message"></small>
         </div>
 
@@ -30,7 +31,8 @@
           <label for="staff-password">Confirm Password</label>
           <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." class="input password confirm-password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
-          <small class="message cf-password-message"></small>
+          <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
+          <small class="message confirm-password-message"></small>
         </div>
 
         <div class="input-group">

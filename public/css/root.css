@@ -49,6 +49,11 @@ a {
 	--heading-5: 1rem;
 	--heading-6: 0.8rem;
 	--heading-1-sm: 1.568rem;
+
+	/* Body Variables */
+	--body-1: 1.1rem;
+	--body-2: 1rem;
+	--body-3: 0.8rem;
 }
 
 body {

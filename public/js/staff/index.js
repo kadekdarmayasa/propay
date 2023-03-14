@@ -1,11 +1,30 @@
+import '../components/completed-illustration.js';
+
 const firstForm = document.querySelector('.form.first');
-const username = document.querySelector('.username');
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
+const submitBtn = document.querySelector('.submit-btn');
 const messages = document.querySelectorAll('.message');
+const completedIllustration = document.querySelector('completed-illustration');
 
-nextBtn.addEventListener('click', () => {
+submitBtn.addEventListener('click', async (e) => {
+	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select'), document.querySelector('textarea')];
+	const isEmpty = inputs.filter((input) => input.value === '');
+
+	if (!isEmpty.length) e.preventDefault();
+
+	const data = {};
+	inputs.forEach((input) => {
+		data[input.id] = input.value;
+	});
+
+	const response = await insertStaffToDatabase(data);
+	console.log(response);
+});
+
+nextBtn.addEventListener('click', (e) => {
 	firstForm.classList.add('hide');
+	e.preventDefault();
 });
 
 prevBtn.addEventListener('click', () => {
@@ -97,3 +116,26 @@ function checkAvailability(str) {
 	xHttp.setRequestHeader('Content-type', 'application/json');
 	xHttp.send(JSON.stringify(data));
 }
+
+async function insertStaffToDatabase(staff_data) {
+	const data = staff_data;
+	const url = 'http://localhost/propay-payment-system/staff/add_staff';
+
+	/* A fetch request to the server. */
+	const response = await fetch(url, {
+		method: 'POST',
+		mode: 'no-cors',
+		credentials: 'same-origin',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	});
+
+	return response.json();
+}
+
+// Flow add staff data
+// 1. User click add staff button to the server
+// 2. Server send the result to the client
+// 3. Client show the result to the browser depending on the serve response status

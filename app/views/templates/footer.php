@@ -19,7 +19,7 @@
 
   <?php if ($activeTab == 'staff') : ?>
     <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
-    <script src="<?= BASEURL . 'public/js/staff/index.js' ?>"></script>
+    <script src="<?= BASEURL . 'public/js/staff/index.js' ?>" type="module"></script>
   <?php endif; ?>
 <?php endif ?>
 

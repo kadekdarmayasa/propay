@@ -69,4 +69,19 @@ class Staff extends Controller
       file_put_contents('php://output', json_encode($result));
     }
   }
+
+  public function add_staff()
+  {
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+
+    $row_count = $this->model("Staff_Model")->addStaff($data);
+    if ($row_count > 0) {
+      $result = [
+        'status' => 'error',
+        'message' => 'Username is already used'
+      ];
+      file_put_contents('php://output', json_encode($result));
+    }
+  }
 }

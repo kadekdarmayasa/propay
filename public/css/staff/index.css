@@ -251,6 +251,26 @@ body.dark .data table td {
 	padding: 0.6em;
 }
 
+.staff-level {
+	display: flex;
+	align-items: center;
+}
+
+.staff-level .indicator {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	margin-right: 4px;
+}
+
+.indicator.admin {
+	background-color: var(--primary-color);
+}
+
+.indicator.staff {
+	background-color: var(--orange-color);
+}
+
 .update-btn,
 .delete-btn,
 .detail-btn {
@@ -291,6 +311,10 @@ body.dark .data table td {
 .view-profile-btn {
 	font-size: 0.9rem;
 	color: var(--primary-color);
+}
+
+.view-profile-btn:hover {
+	text-decoration: underline;
 }
 
 .update-btn svg,

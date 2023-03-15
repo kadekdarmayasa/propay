@@ -60,7 +60,14 @@
           <tr>
             <td><?= $data['staff'][$i]['staff_id']; ?></td>
             <td><?= $data['staff'][$i]['username']; ?></td>
-            <td><?= $data['staff'][$i]['staff_level']; ?></td>
+            <td class="staff-level">
+              <?php if ($data['staff'][$i]['staff_level'] == 'admin') : ?>
+                <div class="indicator admin"></div>
+              <?php elseif ($data['staff'][$i]['staff_level'] == 'staff') : ?>
+                <div class="indicator staff"></div>
+              <?php endif; ?>
+              <?= $data['staff'][$i]['staff_level']; ?>
+            </td>
             <td><?= $data['staff'][$i]['staff_name']; ?></td>
             <?php if ($_SESSION['user']['username'] != $data['staff'][$i]['username']) : ?>
               <td>

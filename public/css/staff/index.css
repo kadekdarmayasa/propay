@@ -239,7 +239,7 @@ body.dark .list-of-page a {
 
 .data table td {
 	font-size: 1rem;
-	font-weight: 500;
+	font-weight: 400;
 	color: var(--black-color);
 }
 
@@ -272,12 +272,12 @@ body.dark .data table td {
 }
 
 :is(.update-btn, .delete-btn, .detail-btn) svg :is(path, rect, line, circle) {
-	stroke-width: 2px !important;
+	stroke-width: 1px !important;
 	stroke: var(--black-color);
 }
 
 .detail-btn svg :is(path, rect) {
-	stroke-width: 4px !important;
+	stroke-width: 2px !important;
 }
 
 .update-btn:hover svg :is(path, rect, line) {
@@ -389,7 +389,6 @@ body.dark .footer-left {
 .add-staff-container .meta {
 	text-align: center;
 	margin: 0.5em auto 1em;
-	/* display: none; */
 	display: block;
 }
 
@@ -408,7 +407,6 @@ body.dark :is(.meta-title) {
 }
 
 .add-staff-container form {
-	/* display: none; */
 	display: flex;
 	flex-direction: column;
 	margin-top: 2em;

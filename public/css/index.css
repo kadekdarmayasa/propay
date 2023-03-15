@@ -87,15 +87,12 @@ body.dark .brand .brand-name {
 
 .menu-items li a {
 	padding: 0 1em;
-	border-radius: 4px;
+	/* border-radius: 4px; */
 }
 
 .menu-items :is(li a:hover, li.active a) {
-	background-color: var(--blue-color-100);
-}
-
-body.dark :is(li a:hover, li.active a) {
-	background-color: var(--black-color);
+	border-right: 2px solid var(--primary-color);
+	background-color: rgba(var(--black-opacity), 0.3);
 }
 
 .menu-items :is(li a:hover span, li.active a span) {
@@ -109,6 +106,7 @@ body.dark :is(li a:hover, li.active a) {
 
 .menu-items li.mode a:hover {
 	background-color: transparent;
+	border: none;
 }
 
 .menu-items li.mode a:hover span {
@@ -117,11 +115,11 @@ body.dark :is(li a:hover, li.active a) {
 
 body.dark .menu-items li a:hover svg :is(rect, path, line),
 body.dark .menu-items li.active svg :is(rect, path, line) {
-	stroke: var(--white-color);
+	stroke: var(--primary-color);
 }
 
 body.dark .menu-items :is(li a:hover span, li.active a span) {
-	color: var(--white-color);
+	color: var(--primary-color);
 }
 
 .menu-items li.mode a:hover svg :is(rect, path, line) {
@@ -197,20 +195,18 @@ body.dark .sub-menu {
 }
 
 .menu-items .sub-menu li a {
-	color: var(--gray-color-300);
+	color: var(--primary-color);
 	font-weight: 500;
 }
 
-.menu-items .sub-menu :is(li.sub-menu-active .link-name, li .link-name:hover) {
-	color: var(--black-color);
-}
-
-body.dark .menu-items .sub-menu :is(li .link-name) {
+.menu-items .sub-menu :is(li .link-name) {
 	color: var(--gray-color-300);
+	border-right: none;
 }
 
-body.dark .menu-items .sub-menu :is(li .link-name:hover, li.sub-menu-active .link-name) {
-	color: white;
+.menu-items .sub-menu :is(li.sub-menu-active .link-name, li .link-name:hover) {
+	color: var(--primary-color);
+	border-right: none;
 }
 
 .logout-mode hr {

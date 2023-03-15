@@ -33,7 +33,7 @@ class Staff_Model
   public function addStaff($data)
   {
     $username = htmlspecialchars($data['username']);
-    $password = password_hash($data['password'], PASSWORD_BCRYPT);
+    $password = password_hash($data['staff-password'], PASSWORD_BCRYPT);
     $staff_level = htmlspecialchars($data['staff-level']);
     $staff_name = htmlspecialchars($data['staff-name']);
     $date_of_birth = htmlspecialchars($data['date-of-birth']);
@@ -50,8 +50,11 @@ class Staff_Model
     $this->db->bind(':date_of_birth', $date_of_birth);
     $this->db->bind(':religion', $religion);
     $this->db->bind(':address', $address);
-
     $this->db->execute();
-    return $this->db->rowCount();
+
+    return [
+      'row_count' => $this->db->rowCount(),
+      'last_id' => $this->db->lastInsertedId()
+    ];
   }
 }

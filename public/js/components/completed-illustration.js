@@ -3,29 +3,20 @@ class CompletedIllustration extends HTMLElement {
 		super();
 	}
 
-	get src() {
-		return this.getAttribute('src');
-	}
-
-	set src(value) {
-		this.setAttribute('src', value);
-	}
-
 	get successMessage() {
 		return this.getAttribute('success-message');
 	}
 
+	get src() {
+		return this.getAttribute('src');
+	}
+
 	set successMessage(value) {
-		value = value == null ? '' : value;
 		this.setAttribute('success-message', value);
 	}
 
 	get description() {
-		if (this.getAttribute('description') != null) {
-			return this.getAttribute('description');
-		} else {
-			return '';
-		}
+		return this.getAttribute('description');
 	}
 
 	set description(value) {
@@ -33,11 +24,7 @@ class CompletedIllustration extends HTMLElement {
 	}
 
 	get url() {
-		if (this.getAttribute('url') != null) {
-			return this.getAttribute('url');
-		} else {
-			return '';
-		}
+		return this.getAttribute('url');
 	}
 
 	set url(value) {
@@ -45,24 +32,20 @@ class CompletedIllustration extends HTMLElement {
 	}
 
 	get view() {
-		if (this.getAttribute('view') != null) {
-			return this.getAttribute('view');
-		} else {
-			return '';
-		}
+		return this.getAttribute('view');
 	}
 
 	set view(value) {
 		this.setAttribute('view', value);
 	}
 
-	attributeChangeCallback(prop) {
-		if (prop != '') this.render();
+	attributeChangedCallback(prop, _, newVal) {
+		this[prop] = newVal;
+		this.render();
 	}
 
 	static get observedAttributes() {
-		const attributes = ['src', 'success-message', 'description', 'view', 'url'];
-		return attributes;
+		return ['success-message', 'description', 'view', 'url'];
 	}
 	connectedCallback() {
 		this.render();

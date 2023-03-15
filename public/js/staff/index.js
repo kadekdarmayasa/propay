@@ -11,15 +11,35 @@ submitBtn.addEventListener('click', async (e) => {
 	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select'), document.querySelector('textarea')];
 	const isEmpty = inputs.filter((input) => input.value === '');
 
-	if (!isEmpty.length) e.preventDefault();
+	if (!isEmpty.length) {
+		e.preventDefault();
 
-	const data = {};
-	inputs.forEach((input) => {
-		data[input.id] = input.value;
-	});
+		const data = {};
+		inputs.forEach((input) => {
+			data[input.id] = input.value;
+		});
 
-	const response = await insertStaffToDatabase(data);
-	console.log(response);
+		const response = await insertStaffToDatabase(data);
+		if (response.status == 'success') {
+			document.querySelector('form').reset();
+			document.querySelector('.first-content').style.display = 'none';
+
+			const message = response.message;
+			const description = `
+			You just add new staff with id ${response.id_staff},<br>lets see the list of staff by clicking the button below
+		`;
+			const view = 'staff';
+			const listOfStaffUrl = response.url;
+
+			completedIllustration.setAttribute('success-message', message);
+			completedIllustration.setAttribute('description', description);
+			completedIllustration.setAttribute('view', view);
+			completedIllustration.setAttribute('url', listOfStaffUrl);
+
+			completedIllustration.firstElementChild.style.opacity = '1';
+			completedIllustration.firstElementChild.style.display = 'flex';
+		}
+	}
 });
 
 nextBtn.addEventListener('click', (e) => {
@@ -45,12 +65,12 @@ firstForm.addEventListener('keyup', (e) => {
 	}
 
 	if (e.target.classList.contains('password')) {
-		let isValid = validatePassword(e.target.value);
+		let result = validatePassword(e.target.value);
 
-		if (!isValid) {
+		if (!result['isValid']) {
 			document.querySelector('.next-btn').disabled = true;
 			e.target.classList.add('error');
-			showErrorMessage('password-message', 'The password must start with alphabet and followed by (7-14) characters except space');
+			showErrorMessage('password-message', result['errorMessage']);
 		} else {
 			document.querySelector('.next-btn').disabled = false;
 			e.target.classList.remove('error');
@@ -80,17 +100,15 @@ function showErrorMessage(classNm, errorMessage) {
 }
 
 function validateUsername(username) {
-	var nameRegex = /^([a-z0-9-_]+)$/i;
-	var isValid = username.match(nameRegex);
+	let nameRegex = /^([a-z0-9-_]+)$/i;
+	let isValid = username.match(nameRegex);
 	return isValid;
 }
 
 function validatePassword(password) {
-	// This regex will check valid password
-	// which is start from alphabet and followed by 7 to 14 characters
-	var passwordRegex = /^[A-Za-z]\w{7,14}$/;
-	var isValid = password.match(passwordRegex);
-	return isValid;
+	let passwordRegex = /^[A-Za-z]\w{7,20}$/;
+	let isValid = password.match(passwordRegex);
+	return { isValid, errorMessage: 'The password must start with alphabet and followed by (7-20) characters' };
 }
 
 function checkAvailability(str) {
@@ -121,7 +139,6 @@ async function insertStaffToDatabase(staff_data) {
 	const data = staff_data;
 	const url = 'http://localhost/propay-payment-system/staff/add_staff';
 
-	/* A fetch request to the server. */
 	const response = await fetch(url, {
 		method: 'POST',
 		mode: 'no-cors',
@@ -134,8 +151,3 @@ async function insertStaffToDatabase(staff_data) {
 
 	return response.json();
 }
-
-// Flow add staff data
-// 1. User click add staff button to the server
-// 2. Server send the result to the client
-// 3. Client show the result to the browser depending on the serve response status

@@ -74,14 +74,22 @@ class Staff extends Controller
   {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
+    $result = $this->model("Staff_Model")->addStaff($data);
 
-    $row_count = $this->model("Staff_Model")->addStaff($data);
-    if ($row_count > 0) {
-      $result = [
-        'status' => 'error',
-        'message' => 'Username is already used'
+    if ($result['row_count'] > 0) {
+      $response = [
+        'status' => 'success',
+        'message' => 'Staff has been added successfully',
+        'id_staff' =>  $result['last_id'],
+        'url' => BASEURL . 'staff/index'
       ];
-      file_put_contents('php://output', json_encode($result));
+      file_put_contents('php://output', json_encode($response));
+    } else {
+      $response = [
+        'status' => 'error',
+        'message' => 'Failed to add staff'
+      ];
+      file_put_contents('php://output', json_encode($response));
     }
   }
 }

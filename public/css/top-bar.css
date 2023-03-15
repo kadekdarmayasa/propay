@@ -1,9 +1,9 @@
 .top-bar {
 	position: sticky;
 	top: 0;
-	left: 300px;
+	left: 280px;
 	display: flex;
-	width: calc(100% - 300px);
+	width: calc(100% - 280px);
 	justify-content: space-between;
 	align-items: center;
 	padding: 1em 2em;

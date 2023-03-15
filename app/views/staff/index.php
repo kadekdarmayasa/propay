@@ -54,9 +54,6 @@
           <th>Username</th>
           <th>Level</th>
           <th>Staff Name</th>
-          <!-- <th>Date of Birth</th>
-          <th>Religion</th>
-          <th>Address</th> -->
           <th>Actions</th>
         </tr>
         <?php for ($i = 0; $i < count($data['staff']); $i++) : ?>
@@ -65,31 +62,37 @@
             <td><?= $data['staff'][$i]['username']; ?></td>
             <td><?= $data['staff'][$i]['staff_level']; ?></td>
             <td><?= $data['staff'][$i]['staff_name']; ?></td>
-            <!-- <td>20 January 1994</td>
-          <td>Hindu</td>
-          <td>Mekar Sari, Denpasar</td> -->
-            <td>
-              <a href="" class="update-btn">
-                <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
-                  <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
-                  <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
-                </svg>
-              </a>
-              <a href="" class="delete-btn">
-                <svg width=" 20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
-                  <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
-                </svg>
-              </a>
-              <a href="" class="detail-btn">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="1" y="1" width="38" height="38" rx="4" stroke="black" stroke-width="2" />
-                  <path d="M20 30V16C20 15.4477 19.5523 15 19 15H17M20 30H17M20 30H23" stroke="black" stroke-width="2" stroke-linecap="round" />
-                  <rect x="18" y="8" width="3" height="3" rx="1.5" fill="black" />
-                </svg>
-              </a>
-            </td>
+            <?php if ($_SESSION['user']['username'] != $data['staff'][$i]['username']) : ?>
+              <td>
+                <a href="" class="update-btn">
+                  <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
+                    <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
+                    <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
+                  </svg>
+                  <span class="tooltip">Update Staff</span>
+                </a>
+                <a href="" class="delete-btn">
+                  <svg width=" 20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
+                    <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
+                  </svg>
+                  <span class="tooltip">Delete Staff</span>
+                </a>
+                <a href="" class="detail-btn">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="38" height="38" rx="4" stroke="black" stroke-width="2" />
+                    <path d="M20 30V16C20 15.4477 19.5523 15 19 15H17M20 30H17M20 30H23" stroke="black" stroke-width="2" stroke-linecap="round" />
+                    <rect x="18" y="8" width="3" height="3" rx="1.5" fill="black" />
+                  </svg>
+                  <span class="tooltip">Detail Staff</span>
+                </a>
+              </td>
+            <?php else : ?>
+              <td>
+                <a href="" class="view-profile-btn">View Profile</a>
+              </td>
+            <?php endif; ?>
           </tr>
         <?php endfor; ?>
       </table>

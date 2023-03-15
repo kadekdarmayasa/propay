@@ -23,7 +23,7 @@ body.dark svg :is(rect, path, line) {
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: 300px;
+	width: 280px;
 	padding: 20px 20px;
 	background-color: var(--sidebar-bg);
 	transition: all 0.3s ease;
@@ -275,10 +275,10 @@ body.dark .switch {
 .main-content {
 	background-color: var(--blue-color-100);
 	position: relative;
-	left: 300px;
+	left: 280px;
 	right: 0;
 	min-height: 100vh;
-	width: calc(100% - 300px);
+	width: calc(100% - 280px);
 	padding: 2em 1.5em 1.2em;
 	transition: 0.3s all ease;
 }

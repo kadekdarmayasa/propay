@@ -26,12 +26,11 @@ class Classes extends Controller
 
     $data['title'] = 'Propay - Class';
     $data['breadcrumb'] = 'Classes';
-    $this->view('templates/header', $data, 'class');
-    $this->view('templates/sidebar', $data, 'class');
-    $this->view('templates/top-bar', $data, 'class');
-    $this->view('class/index', $data, 'class');
-    // $this->view('templates/overlay', $data, 'class');
-    $this->view('templates/footer', $data, 'class');
+    $this->view('templates/header', $data, 'class/index');
+    $this->view('templates/sidebar', $data, 'class/index');
+    $this->view('templates/top-bar', $data, 'class/index');
+    $this->view('class/index', $data, 'class/index');
+    $this->view('templates/footer', $data, 'class/index');
   }
 
   public function add()
@@ -49,28 +48,31 @@ class Classes extends Controller
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
-    if (isset($_POST['add-class'])) {
-      $class_name = $_POST['class-name'];
-      $major_name = $_POST['major_name'];
-
-      if ($this->model("Class_Model")->getClassByName($class_name)) {
-        Flasher::setFlash('error', 'The class is already exist!');
-      } else {
-        $class_row_count = $this->model("Class_Model")->addClass($class_name, $major_name);
-
-        if ($class_row_count) {
-          Flasher::setFlash('success', 'Congratulations! The class has been successfully added!');
-        }
-      }
-    }
-
     $data['title'] = 'Propay - Class';
     $data['breadcrumb'] = 'Classes/Add';
-    $this->view('templates/header', $data, 'class');
-    $this->view('templates/sidebar', $data, 'class');
-    $this->view('templates/top-bar', $data, 'class');
-    $this->view('class/add', $data, 'class');
-    $this->view('templates/footer', $data, 'class');
+    $this->view('templates/header', $data, 'class/add');
+    $this->view('templates/sidebar', $data, 'class/add');
+    $this->view('templates/top-bar', $data, 'class/add');
+    $this->view('class/add', $data, 'class/add');
+    $this->view('templates/footer', $data, 'class/add');
+  }
+
+  public function add_class()
+  {
+    $json  = file_get_contents('php://input');
+    $data = json_decode($json, true);
+    $class_row_count = $this->model("Class_Model")->addClass($data['className'], $data['major']);
+
+    if ($class_row_count) {
+      $response = [
+        'status' => 'success',
+        'message' => 'Class has been successfully added',
+        'class_name' => $data['className'],
+        'url' => BASEURL . 'classes'
+      ];
+
+      file_put_contents('php://output', json_encode($response));
+    }
   }
 
   public function delete($class_id)

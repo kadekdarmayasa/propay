@@ -57,4 +57,15 @@ class Staff_Model
       'last_id' => $this->db->lastInsertedId()
     ];
   }
+
+  public function deleteStaff($staff_id)
+  {
+    $query = "DELETE FROM " . $this->table . " WHERE staff_id=:staff_id";
+
+    $this->db->query($query);
+    $this->db->bind('staff_id', $staff_id);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
 }

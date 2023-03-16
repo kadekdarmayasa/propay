@@ -273,3 +273,81 @@ body.dark .switch {
 body.dark .main-content {
 	background-color: var(--black-color);
 }
+
+.staff-container .flasher-container > * {
+	margin-bottom: 1.4em;
+}
+
+.empty-message {
+	color: var(--gray-color-300);
+	font-size: 0.9rem;
+	text-align: center;
+}
+
+.completed-illustration {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	opacity: 0;
+	transition: all 0.3s ease;
+}
+
+.completed-illustration .illustration-header {
+	text-align: center;
+	margin-bottom: 4em;
+}
+
+.illustration-header h1 {
+	font-size: var(--heading-1);
+	font-weight: 800;
+	color: var(--black-color);
+	line-height: 1.6;
+}
+
+body.dark .illustration-header h1 {
+	color: var(--white-color);
+}
+
+.illustration-header p {
+	font-size: var(--body-1);
+	color: var(--gray-color-300);
+}
+
+.illustration-image {
+	width: 80%;
+}
+
+.illustration-footer {
+	margin-top: 4em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.illustration-footer p {
+	font-size: var(--body-2);
+	color: var(--gray-color-300);
+	text-align: center;
+	line-height: 1.5;
+}
+
+.illustration-footer a {
+	background-color: var(--primary-color);
+	border: none;
+	outline: none;
+	color: white;
+	margin: 1.6em 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+	width: 190px;
+	font-size: var(--body-2);
+	border-radius: 30px;
+	transition: 0.3s ease-in-out;
+}
+
+.illustration-footer a:hover {
+	cursor: pointer;
+	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
+}

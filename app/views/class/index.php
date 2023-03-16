@@ -151,3 +151,5 @@
     <!-- End of Classlist Footer -->
   </div>
 </div>
+
+<over-lay href="<?= BASEURL . 'classes/delete' ?>"></over-lay>

@@ -92,16 +92,20 @@ body.dark .brand .brand-name {
 
 .menu-items :is(li a:hover, li.active a) {
 	border-right: 2px solid var(--primary-color);
+	background-color: var(--blue-color-100);
+}
+
+body.dark .menu-items :is(li:not(.mode) a:hover, li:not(.mode).active a) {
 	background-color: rgba(var(--black-opacity), 0.3);
 }
 
 .menu-items :is(li a:hover span, li.active a span) {
-	color: var(--black-color);
+	color: var(--primary-color);
 }
 
-.menu-items li a:hover svg :is(rect, path, line),
-.menu-items li.active svg :is(rect, path, line) {
-	stroke: var(--black-color);
+.menu-items li:not(.mode) a:hover svg :is(rect, path, line),
+.menu-items li:not(.mode).active svg :is(rect, path, line) {
+	stroke: var(--primary-color);
 }
 
 .menu-items li.mode a:hover {
@@ -111,19 +115,6 @@ body.dark .brand .brand-name {
 
 .menu-items li.mode a:hover span {
 	color: var(--gray-color-200);
-}
-
-body.dark .menu-items li a:hover svg :is(rect, path, line),
-body.dark .menu-items li.active svg :is(rect, path, line) {
-	stroke: var(--primary-color);
-}
-
-body.dark .menu-items :is(li a:hover span, li.active a span) {
-	color: var(--primary-color);
-}
-
-.menu-items li.mode a:hover svg :is(rect, path, line) {
-	stroke: var(--gray-color-200);
 }
 
 .menu-items li a {
@@ -269,7 +260,7 @@ body.dark .switch {
 }
 
 .main-content {
-	background-color: var(--blue-color-100);
+	background-color: rgb(248, 248, 248);
 	position: relative;
 	left: 280px;
 	right: 0;

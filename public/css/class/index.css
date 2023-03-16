@@ -254,8 +254,8 @@ body.dark .data table td {
 .update-btn,
 .delete-btn {
 	display: inline-block;
-	height: 26px;
-	width: 26px;
+	height: 24px;
+	width: 24px;
 }
 
 .update-btn svg,
@@ -266,7 +266,7 @@ body.dark .data table td {
 
 .update-btn svg :is(path, rect, line),
 .delete-btn svg :is(path, rect, line) {
-	stroke-width: 1px;
+	stroke-width: 1px !important;
 	stroke: var(--black-color);
 }
 
@@ -412,25 +412,32 @@ body.dark :is(.meta-title) {
 	margin-bottom: 0.4em;
 }
 
+body.dark .input-group label {
+	color: var(--white-color);
+}
+
 .input-group label {
 	color: var(--gray-color-300);
 }
 
 .input-group :is(input, select) {
-	height: 50px;
-	border-radius: 10px;
-	border: 0;
-	background-color: #fff;
-	padding: 0.4em 1.2em;
-	font-family: 'Figtree';
 	font-size: 0.9rem;
+	border: none;
 	outline: 0;
 	color: var(--black-color);
+	border-bottom: 1px solid var(--gray-color-100);
+	padding: 0.8em 0;
+	background-color: transparent;
 }
 
-body.dark .input-group :is(input, select) {
-	background-color: var(--sidebar-bg);
+body.dark .input-group :is(input, select, textarea) {
 	color: var(--white-color);
+	background-color: transparent;
+}
+
+body.dark .input-group select option {
+	color: var(--white-color);
+	background-color: var(--sidebar-bg);
 }
 
 .input-group :is(input, select):focus {
@@ -452,13 +459,15 @@ body.dark .input-group :is(input, select) {
 	font-weight: 500;
 	font-size: 0.9rem;
 	height: 50px;
+	width: 200px;
 	color: white;
 	border-radius: 10px;
+	margin-top: 2em;
 }
 
 .input-group button svg {
-	height: 24px;
-	width: 24px;
+	height: 20px;
+	width: 20px;
 	margin-right: 0.5em;
 }
 

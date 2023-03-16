@@ -12,7 +12,7 @@
     <form action="" method="post">
       <div class="input-group">
         <label for="class-name">Class Name</label>
-        <input type="text" name="class-name" id="class-name" placeholder="Enter Class Name" required>
+        <input type="text" name="class-name" id="class-name" placeholder="Enter Class Name" required autocomplete="off">
       </div>
 
       <div class="input-group">

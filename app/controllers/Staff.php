@@ -79,7 +79,7 @@ class Staff extends Controller
     if ($result['row_count'] > 0) {
       $response = [
         'status' => 'success',
-        'message' => 'Staff has been added successfully',
+        'message' => 'Staff has been successfully added',
         'id_staff' =>  $result['last_id'],
         'url' => BASEURL . 'staff/index'
       ];

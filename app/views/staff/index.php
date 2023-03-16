@@ -79,7 +79,7 @@
                   </svg>
                   <span class="tooltip">Update Staff</span>
                 </a>
-                <a href="" class="delete-btn">
+                <a href="" class="delete-btn" data-staff-id="<?= $data['staff'][$i]['staff_id'] ?>">
                   <svg width=" 20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
                     <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
@@ -156,3 +156,5 @@
     <!-- End of Staff Footer -->
   </div>
 </div>
+
+<over-lay href="<?= BASEURL . 'staff/delete_staff' ?>"></over-lay>

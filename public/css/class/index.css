@@ -395,14 +395,14 @@ body.dark :is(.meta-title) {
 .add-class-container form {
 	display: flex;
 	flex-direction: column;
-	margin-top: 2em;
+	margin-top: 2.7em;
 }
 
 .input-group {
 	display: flex;
 	width: 650px;
 	flex-direction: column;
-	margin-bottom: 2em;
+	margin-bottom: 2.5em;
 }
 
 .input-group label {

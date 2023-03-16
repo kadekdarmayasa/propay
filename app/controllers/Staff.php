@@ -17,11 +17,11 @@ class Staff extends Controller
     $data['title'] = 'Propay - Staff';
     $data['breadcrumb'] = 'Staff';
     $data['staff'] = $this->model('Staff_Model')->getAllStaff();
-    $this->view('templates/header', $data, 'staff');
-    $this->view('templates/sidebar', $data, 'staff');
-    $this->view('templates/top-bar', $data, 'staff');
-    $this->view('staff/index', $data, 'staff');
-    $this->view('templates/footer', $data, 'staff');
+    $this->view('templates/header', $data, 'staff/index');
+    $this->view('templates/sidebar', $data, 'staff/index');
+    $this->view('templates/top-bar', $data, 'staff/index');
+    $this->view('staff/index', $data, 'staff/index');
+    $this->view('templates/footer', $data, 'staff/index');
   }
 
   public function add()
@@ -39,11 +39,11 @@ class Staff extends Controller
 
     $data['title'] = 'Propay - Staff';
     $data['breadcrumb'] = 'Staff/Add';
-    $this->view('templates/header', $data, 'staff');
-    $this->view('templates/sidebar', $data, 'staff');
-    $this->view('templates/top-bar', $data, 'staff');
-    $this->view('staff/add', $data, 'staff');
-    $this->view('templates/footer', $data, 'staff');
+    $this->view('templates/header', $data, 'staff/add');
+    $this->view('templates/sidebar', $data, 'staff/add');
+    $this->view('templates/top-bar', $data, 'staff/add');
+    $this->view('staff/add', $data, 'staff/add');
+    $this->view('templates/footer', $data, 'staff/add');
   }
 
   public function check_staff()
@@ -90,6 +90,20 @@ class Staff extends Controller
         'message' => 'Failed to add staff'
       ];
       file_put_contents('php://output', json_encode($response));
+    }
+  }
+
+  public function delete_staff($staff_id)
+  {
+    file_get_contents('php://input');
+    $staff_row_count = $this->model("Staff_Model")->deleteStaff($staff_id);
+
+    if ($staff_row_count) {
+      file_put_contents('php://output', json_encode([
+        'status_message' => 'success',
+        'status_code' => 200,
+        'staff_id' => $staff_id
+      ]));
     }
   }
 }

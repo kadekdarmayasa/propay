@@ -30,7 +30,7 @@ class Classes extends Controller
     $this->view('templates/sidebar', $data, 'class');
     $this->view('templates/top-bar', $data, 'class');
     $this->view('class/index', $data, 'class');
-    $this->view('templates/overlay', $data, 'class');
+    // $this->view('templates/overlay', $data, 'class');
     $this->view('templates/footer', $data, 'class');
   }
 
@@ -70,32 +70,21 @@ class Classes extends Controller
     $this->view('templates/sidebar', $data, 'class');
     $this->view('templates/top-bar', $data, 'class');
     $this->view('class/add', $data, 'class');
-    $this->view('templates/overlay', $data, 'class');
     $this->view('templates/footer', $data, 'class');
   }
 
   public function delete($class_id)
   {
-    if (!isset($_SESSION['user'])) {
-      header('Location: ' . BASEURL . 'auth/login');
-      exit;
-    }
-
-    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
-      $data['greeting_name'] = $secondAndThirdOfStaffName;
-      $data['name'] = $staff_name;
-      $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
+    file_get_contents('php://input');
+    $class  = $this->model("Class_Model")->getClassById($class_id);
     $class_row_count = $this->model("Class_Model")->deleteClass($class_id);
 
     if ($class_row_count) {
-      Flasher::setFlash('success', 'Congratulations! The class has been successfully deleted!');
+      file_put_contents('php://output', json_encode([
+        'status_message' => 'success',
+        'status_code' => 200,
+        'class_name' => $class['class_name']
+      ]));
     }
-
-    header('Location: ' . BASEURL . 'classes');
-    exit;
   }
 }

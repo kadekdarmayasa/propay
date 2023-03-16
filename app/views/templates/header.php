@@ -30,7 +30,10 @@
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
     <?php endif; ?>
 
-    <?php if ($activeTab == 'staff') : ?>
+    <?php
+    $tabs = explode('/', $activeTab);
+    if ($tabs[0] == 'staff') :
+    ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/index.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
     <?php endif; ?>

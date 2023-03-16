@@ -19,6 +19,17 @@ class Class_Model
     return $this->db->resultSet();
   }
 
+  public function getClassById($class_id)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE class_id=:class_id";
+
+    $this->db->query($query);
+    $this->db->bind('class_id', $class_id);
+    $this->db->execute();
+
+    return $this->db->single();
+  }
+
   public function getClassByName($class_name)
   {
     $query = "SELECT * FROM " . $this->table . " WHERE class_name=:class_name";

@@ -13,8 +13,14 @@
     <script src="<?= BASEURL . 'public/js/dashboard/index.js' ?>" type="module"></script>
   <?php endif; ?>
 
-  <?php if ($activeTab == 'class') : ?>
-    <script src="<?= BASEURL . 'public/js/class/index.js' ?>" type="module"></script>
+  <?php
+  $tabs = explode('/', $activeTab);
+  if ($tabs[0] == 'class') : ?>
+    <?php if ($tabs[1] == 'index') : ?>
+      <script src="<?= BASEURL . 'public/js/class/index.js' ?>" type="module"></script>
+    <?php else : ?>
+      <script src="<?= BASEURL . 'public/js/class/add.js' ?>" type="module"></script>
+    <?php endif; ?>
   <?php endif; ?>
 
 

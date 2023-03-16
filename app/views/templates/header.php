@@ -25,7 +25,9 @@
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/dashboard/index.css' ?>">
     <?php endif; ?>
 
-    <?php if ($activeTab == 'class') : ?>
+    <?php
+    $tabs = explode('/', $activeTab);
+    if ($tabs[0] == 'class') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/index.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
     <?php endif; ?>

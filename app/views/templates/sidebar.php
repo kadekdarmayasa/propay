@@ -59,7 +59,9 @@
           </a>
           </li>
 
-          <?php if ($activeTab == 'class') : ?>
+          <?php
+          $tabs = explode('/', $activeTab);
+          if ($tabs[0] == 'class') : ?>
             <li class="active">
             <?php else :  ?>
             <li>

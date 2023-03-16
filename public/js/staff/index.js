@@ -1,153 +1,74 @@
-import '../components/completed-illustration.js';
+import '../components/overlay.js';
 
-const firstForm = document.querySelector('.form.first');
-const nextBtn = document.querySelector('.next-btn');
-const prevBtn = document.querySelector('.prev-btn');
-const submitBtn = document.querySelector('.submit-btn');
-const messages = document.querySelectorAll('.message');
-const completedIllustration = document.querySelector('completed-illustration');
+const deleteButtons = document.querySelectorAll('.delete-btn');
+const overlay = document.querySelector('.overlay');
+const overlayCancelBtn = document.getElementById('overlay-cancel-btn');
+const overlayDeleteBtn = document.getElementById('overlay-delete-btn');
+const icon = document.querySelector('.icon');
+const overlayMetaTitle = document.querySelector('.overlay .title');
+const overlayMetaDescription = document.querySelector('.overlay .description');
+const pageSelectedContainer = document.querySelector('.page-selected');
 
-submitBtn.addEventListener('click', async (e) => {
-	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select'), document.querySelector('textarea')];
-	const isEmpty = inputs.filter((input) => input.value === '');
+pageSelectedContainer.addEventListener('click', () => {
+	document.querySelector('.list-of-page').classList.toggle('show');
+});
 
-	if (!isEmpty.length) {
+overlay.addEventListener('click', function () {
+	overlay.classList.remove('show');
+});
+
+deleteButtons.forEach((button) => {
+	button.addEventListener('click', function (e) {
+		icon.innerHTML = /* html */ `
+			<svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="16" cy="23.5" r="1" fill="black" />
+				<path d="M12 13V13C12 10.7909 13.7909 9 16 9H17V9C19.4853 9 21.5 11.0147 21.5 13.5V13.5C21.5 15.9853 19.4853 18 17 18H16V21.5" stroke="black" />
+				<rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black" />
+			</svg>`;
+
+		overlay.classList.add('show');
+
+		let urlDelete = overlayDeleteBtn.getAttribute('href');
+		let baseUrl = urlDelete.split('delete_staff')[0];
+		overlayDeleteBtn.removeAttribute('href');
+		overlayDeleteBtn.setAttribute('href', baseUrl + 'delete_staff/' + this.dataset.staffId);
+
 		e.preventDefault();
-
-		const data = {};
-		inputs.forEach((input) => {
-			data[input.id] = input.value;
-		});
-
-		const response = await insertStaffToDatabase(data);
-		if (response.status == 'success') {
-			document.querySelector('form').reset();
-			document.querySelector('.first-content').style.display = 'none';
-
-			const message = response.message;
-			const description = `
-			You just add new staff with id ${response.id_staff},<br>lets see the list of staff by clicking the button below
-		`;
-			const view = 'staff';
-			const listOfStaffUrl = response.url;
-
-			completedIllustration.setAttribute('success-message', message);
-			completedIllustration.setAttribute('description', description);
-			completedIllustration.setAttribute('view', view);
-			completedIllustration.setAttribute('url', listOfStaffUrl);
-
-			completedIllustration.firstElementChild.style.opacity = '1';
-			completedIllustration.firstElementChild.style.display = 'flex';
-		}
-	}
-});
-
-nextBtn.addEventListener('click', (e) => {
-	firstForm.classList.add('hide');
-	e.preventDefault();
-});
-
-prevBtn.addEventListener('click', () => {
-	firstForm.classList.remove('hide');
-});
-
-firstForm.addEventListener('keyup', (e) => {
-	if (e.target.classList.contains('username')) {
-		let isValid = validateUsername(e.target.value);
-
-		if (!isValid) {
-			document.querySelector('.next-btn').disabled = true;
-			e.target.classList.add('error');
-			showErrorMessage('username-message', 'Please enter a valid username');
-		} else {
-			checkAvailability(e.target.value);
-		}
-	}
-
-	if (e.target.classList.contains('password')) {
-		let result = validatePassword(e.target.value);
-
-		if (!result['isValid']) {
-			document.querySelector('.next-btn').disabled = true;
-			e.target.classList.add('error');
-			showErrorMessage('password-message', result['errorMessage']);
-		} else {
-			document.querySelector('.next-btn').disabled = false;
-			e.target.classList.remove('error');
-		}
-	}
-
-	if (e.target.classList.contains('confirm-password')) {
-		let password = document.querySelector('.password');
-
-		if (e.target.value !== password.value) {
-			document.querySelector('.next-btn').disabled = true;
-			e.target.classList.add('error');
-			showErrorMessage('confirm-password-message', `Password doesn't match`);
-		} else {
-			document.querySelector('.next-btn').disabled = false;
-			e.target.classList.remove('error');
-		}
-	}
-});
-
-function showErrorMessage(classNm, errorMessage) {
-	messages.forEach((message) => {
-		if (message.classList.contains(classNm)) {
-			message.innerText = errorMessage;
-		}
 	});
-}
+});
 
-function validateUsername(username) {
-	let nameRegex = /^([a-z0-9-_]+)$/i;
-	let isValid = username.match(nameRegex);
-	return isValid;
-}
+overlayDeleteBtn.addEventListener('click', function (e) {
+	e.preventDefault();
 
-function validatePassword(password) {
-	let passwordRegex = /^[A-Za-z]\w{7,20}$/;
-	let isValid = password.match(passwordRegex);
-	return { isValid, errorMessage: 'The password must start with alphabet and followed by (7-20) characters' };
-}
-
-function checkAvailability(str) {
-	const data = { username: str };
-
-	const xHttp = new XMLHttpRequest();
-	xHttp.open('POST', 'http://localhost/propay-payment-system/staff/check_staff', true);
-
-	xHttp.onreadystatechange = function () {
-		if (this.readyState == 4 && this.status == 200) {
-			const data = JSON.parse(this.responseText);
-			if (data.status == 'error') {
-				document.querySelector('.next-btn').disabled = true;
-				document.querySelector('.username').classList.add('error');
-				showErrorMessage('username-message', data.message);
-			} else {
-				document.querySelector('.next-btn').disabled = false;
-				document.querySelector('.username').classList.remove('error');
-			}
-		}
-	};
-
-	xHttp.setRequestHeader('Content-type', 'application/json');
-	xHttp.send(JSON.stringify(data));
-}
-
-async function insertStaffToDatabase(staff_data) {
-	const data = staff_data;
-	const url = 'http://localhost/propay-payment-system/staff/add_staff';
-
-	const response = await fetch(url, {
-		method: 'POST',
+	const url = this.getAttribute('href');
+	fetch(url, {
 		mode: 'no-cors',
 		credentials: 'same-origin',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(data),
-	});
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			icon.innerHTML = /* html */ `
+				<svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black"/>
+					<path d="M9.5 15L15.5 22.5L24 10.5" stroke="black" stroke-linecap="round"/>
+				</svg>
+`;
+			overlayMetaTitle.textContent = 'Congratulations';
+			overlayMetaDescription.innerHTML = `Staff with id ${data.staff_id} has been successfully deleted`;
+			overlay.classList.add('show');
+			overlayDeleteBtn.style.display = 'none';
+			overlayCancelBtn.textContent = 'Close';
+			overlayCancelBtn.addEventListener('click', () => {
+				location.reload();
+			});
+		});
+	e.preventDefault();
+});
 
-	return response.json();
-}
+overlayCancelBtn.addEventListener('click', (e) => {
+	overlay.classList.remove('show');
+	e.preventDefault();
+});

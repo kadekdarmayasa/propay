@@ -40,7 +40,9 @@
           </a></li>
 
 
-        <?php if ($activeTab == 'staff') : ?>
+        <?php
+        $tabs = explode('/', $activeTab);
+        if ($tabs[0] == 'staff') : ?>
           <li class="active">
           <?php else : ?>
           <li>

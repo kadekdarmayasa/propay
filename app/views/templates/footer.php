@@ -17,9 +17,19 @@
     <script src="<?= BASEURL . 'public/js/class/index.js' ?>" type="module"></script>
   <?php endif; ?>
 
-  <?php if ($activeTab == 'staff') : ?>
-    <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
-    <script src="<?= BASEURL . 'public/js/staff/index.js' ?>" type="module"></script>
+
+  <?php
+  $tabs = explode('/', $activeTab);
+  if ($tabs[0] == 'staff') :
+  ?>
+    <?php if ($tabs[1] == 'index') : ?>
+      <script src="<?= BASEURL . 'public/js/staff/index.js' ?>" type="module"></script>
+    <?php endif; ?>
+
+    <?php if ($tabs[1] == 'add') : ?>
+      <script src="<?= BASEURL . 'public/js/staff/add.js' ?>" type="module"></script>
+      <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
+    <?php endif; ?>
   <?php endif; ?>
 <?php endif ?>
 

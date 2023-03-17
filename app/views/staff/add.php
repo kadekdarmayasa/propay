@@ -60,12 +60,12 @@
 
           <div class="input-group">
             <label for="staff-name">Staff Name</label>
-            <input type="text" name="staff-name" class="input" id="staff-name" placeholder="Enter staff name..." required autofocus="off">
+            <input type="text" name="staff-name" class="input" id="staff-name" placeholder="Enter staff name..." required autofocus="off" autocomplete="off">
           </div>
 
           <div class="input-group">
             <label for="date-of-birth">Date of Birth</label>
-            <input type="date" class="input" name="date-of-birth" id="date-of-birth" placeholder="Enter birth date..." required autofocus="off">
+            <input type="date" class="input" name="date-of-birth" id="date-of-birth" placeholder="Enter birth date..." required autofocus="off" autocomplete="off">
             <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="2" y="4" width="23" height="20" rx="2" stroke="white" stroke-width="2" />
               <rect x="6" y="14" width="5" height="5" rx="1" stroke="white" stroke-width="2" />
@@ -90,7 +90,7 @@
 
           <div class="input-group">
             <label for="address">Address</label>
-            <textarea name="address" class="input textarea" id="address" cols="30" rows="3" placeholder="Enter full address..." required autofocus="off"></textarea>
+            <textarea name="address" class="input textarea" id="address" cols="30" rows="3" placeholder="Enter full address..." required autofocus="off" autocomplete="off"></textarea>
           </div>
 
           <div class="input-group prev-submit-btn">

@@ -1,0 +1,63 @@
+.detail-staff-container {
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.detail-staff-container :is(.left-content, .right-content) {
+	background-color: rgba(255, 255, 255, 0.6);
+	width: 400px;
+	padding: 3em 2.8em;
+	border-radius: 10px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+	transition: all 0.3s ease;
+	backdrop-filter: blur(4px);
+	height: 100%;
+}
+
+body.dark .detail-staff-container :is(.left-content, .right-content) {
+	background-color: var(--sidebar-bg);
+}
+
+:is(.left-content, .right-content) .header {
+	color: var(--black-color);
+	font-size: var(--heading-4);
+	font-weight: 700;
+	margin-bottom: 1.5em;
+}
+
+:is(.left-content, .right-content) .header {
+	color: var(--white-color);
+}
+
+:is(.left-content, .right-content) .field {
+	margin-top: 1.6em;
+}
+
+:is(.left-content, .right-content) .field .name {
+	color: var(--gray-color-300);
+	font-weight: 400;
+	display: block;
+	margin-bottom: 0.4em;
+}
+
+body.dark :is(.left-content, .right-content) .field .name {
+	color: var(--gray-color-200);
+}
+
+:is(.left-content, .right-content) .field .value {
+	color: var(--black-color);
+	font-weight: 500;
+}
+
+body.dark :is(.left-content, .right-content) .field .value {
+	color: var(--white-color);
+}
+
+.right-content .field .value.password {
+	color: var(--black-color);
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

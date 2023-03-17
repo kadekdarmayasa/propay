@@ -153,4 +153,27 @@ class Staff extends Controller
       file_put_contents('php://output', json_encode($response));
     }
   }
+
+  public function detail($staff_id)
+  {
+    if (!isset($_SESSION['user'])) {
+      header('Location: ' . BASEURL . 'auth/login');
+      exit;
+    }
+
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $staff_name = $_SESSION['user']['staff_name'];
+      $data['name'] = $staff_name;
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
+    $data['title'] = 'Propay - Staff';
+    $data['breadcrumb'] = 'Staff/Detail';
+    $data['staff'] =  $this->model("Staff_Model")->getStaffById($staff_id);
+    $this->view('templates/header', $data, 'staff/detail');
+    $this->view('templates/sidebar', $data, 'staff/detail');
+    $this->view('templates/top-bar', $data, 'staff/detail');
+    $this->view('staff/detail', $data, 'staff/detail');
+    $this->view('templates/footer', $data, 'staff/detail');
+  }
 }

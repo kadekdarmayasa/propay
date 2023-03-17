@@ -1,0 +1,206 @@
+/* View Add Styling */
+.add-staff-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.add-staff-container .meta {
+	text-align: center;
+	margin: 0.5em auto 1em;
+	display: block;
+}
+
+.meta-title {
+	color: var(--black-color);
+	font-weight: 700;
+	margin-bottom: 0.2em;
+}
+
+.meta-description {
+	color: var(--gray-color-300);
+}
+
+body.dark :is(.meta-title) {
+	color: var(--white-color);
+}
+
+.add-staff-container form {
+	display: flex;
+	flex-direction: column;
+	margin-top: 2em;
+}
+
+.form.second {
+	display: none;
+	pointer-events: none;
+}
+
+.form.first.hide {
+	display: none;
+	pointer-events: none;
+}
+
+.form.first.hide ~ .form.second {
+	display: block;
+	pointer-events: all;
+}
+
+.input-group {
+	display: flex;
+	width: 650px;
+	flex-direction: column;
+	margin-bottom: 2.5em;
+	position: relative;
+}
+
+.input-group.prev-submit-btn {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.input-group label {
+	color: var(--black-color);
+	font-weight: 500;
+	font-size: 0.9rem;
+	margin-bottom: 0.4em;
+}
+
+body.dark .input-group label {
+	color: var(--white-color);
+}
+
+.input-group :is(input, select, textarea) {
+	font-size: 0.9rem;
+	border: none;
+	outline: 0;
+	color: var(--black-color);
+	border-bottom: 1px solid var(--gray-color-100);
+	padding: 0.8em 0;
+	background-color: transparent;
+}
+
+.input-group input[type='date']::-webkit-calendar-picker-indicator {
+	position: absolute;
+	right: -5px;
+	opacity: 0;
+	z-index: 10;
+	height: 26px;
+	width: 26px;
+	cursor: pointer;
+}
+
+.input-group input[type='date'] ~ svg {
+	pointer-events: none;
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	right: 0;
+}
+
+.input-group input[type='date'] ~ svg :is(rect, path) {
+	stroke: var(--black-color);
+}
+
+body.dark .input-group input[type='date'] ~ svg :is(rect, path) {
+	stroke: var(--white-color);
+}
+
+.input-group:not(:last-child) :is(img, svg) {
+	width: 20px;
+	position: absolute;
+	right: 0;
+	bottom: 14px;
+	cursor: pointer;
+}
+
+.input-group:not(:last-child) :is(.password, .confirm-password) ~ :is(img).error-icon {
+	right: 28px;
+	bottom: 12px;
+}
+
+.input-group :is(img).error-icon {
+	display: none;
+}
+
+.input-group .message {
+	position: absolute;
+	bottom: -22px;
+	left: 0;
+	font-size: 0.8rem;
+	color: var(--red-color);
+	display: none;
+}
+
+.input-group .input.error {
+	border-bottom: 2px solid var(--red-color);
+}
+
+.input-group .input.error ~ :is(img).error-icon {
+	display: inline-block;
+}
+
+.input-group .input.error ~ .message {
+	display: block;
+}
+
+body.dark .input-group :is(input, select, textarea) {
+	color: var(--white-color);
+	background-color: transparent;
+}
+
+body.dark .input-group select option {
+	color: var(--white-color);
+	background-color: var(--sidebar-bg);
+}
+
+.input-group :is(input, select):focus {
+	border-bottom: 2px solid var(--primary-color);
+}
+
+.input-group button {
+	background-color: var(--primary-color);
+	border: 0;
+	outline: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	height: 50px;
+	width: 200px;
+	border-radius: 6px;
+}
+
+.input-group button span {
+	margin-right: 0.8em;
+	color: var(--white-color);
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+.input-group button svg {
+	height: 20px;
+	width: 20px;
+}
+
+.prev-btn svg {
+	transform: rotate(180deg);
+	margin-right: 0.9em;
+}
+
+.input-group button svg :is(path, rect) {
+	stroke: var(--white-color);
+}
+
+.input-group button:hover {
+	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
+}
+
+.add-staff-container .flasher-container {
+	width: 650px;
+}
+
+.flasher-container > * {
+	width: 100%;
+}

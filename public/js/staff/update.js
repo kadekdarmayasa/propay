@@ -20,7 +20,6 @@ submitBtn.addEventListener('click', async (e) => {
 		});
 
 		const response = await updateStaff(data);
-		console.log(response);
 		if (response.status == 'success') {
 			document.querySelector('form').reset();
 			document.querySelector('.first-content').style.display = 'none';
@@ -39,6 +38,8 @@ submitBtn.addEventListener('click', async (e) => {
 
 			completedIllustration.firstElementChild.style.opacity = '1';
 			completedIllustration.firstElementChild.style.display = 'flex';
+		} else {
+			location.href = response.url;
 		}
 	}
 });

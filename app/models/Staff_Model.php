@@ -84,7 +84,7 @@ class Staff_Model
   {
     $staff_id = $data['staff_id'];
     $username = htmlspecialchars($data['username']);
-    if (count(explode('\'\'', $data['staff-password'])) < 40) {
+    if (count(str_split($data['staff-password'], 1)) < 40) {
       $password = password_hash($data['staff-password'], PASSWORD_BCRYPT);
     } else {
       $password = $data['staff-password'];

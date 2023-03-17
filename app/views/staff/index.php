@@ -86,7 +86,7 @@
                   </svg>
                   <span class="tooltip">Delete Staff</span>
                 </a>
-                <a href="" class="detail-btn">
+                <a href="<?= BASEURL . 'staff/detail/' . $data['staff'][$i]['staff_id'] ?>" class="detail-btn">
                   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="1" y="1" width="38" height="38" rx="4" stroke="black" stroke-width="2" />
                     <path d="M20 30V16C20 15.4477 19.5523 15 19 15H17M20 30H17M20 30H23" stroke="black" stroke-width="2" stroke-linecap="round" />

@@ -148,7 +148,8 @@ class Staff extends Controller
     } else {
       $response = [
         'status' => 'error',
-        'message' => 'Failed to update staff'
+        'message' => 'Failed to update staff',
+        'url' => BASEURL . 'staff'
       ];
       file_put_contents('php://output', json_encode($response));
     }

@@ -36,6 +36,11 @@
       <script src="<?= BASEURL . 'public/js/staff/add.js' ?>" type="module"></script>
       <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
     <?php endif; ?>
+
+    <?php if ($tabs[1] == 'update') : ?>
+      <script src="<?= BASEURL . 'public/js/staff/update.js' ?>" type="module"></script>
+      <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
+    <?php endif; ?>
   <?php endif; ?>
 <?php endif ?>
 

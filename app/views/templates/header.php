@@ -38,6 +38,18 @@
     ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/index.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
+
+      <?php if ($tabs[1] == 'add') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/add.css' ?>">
+      <?php endif; ?>
+
+      <?php if ($tabs[1] == 'update') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/update.css' ?>">
+      <?php endif; ?>
+
+      <?php if ($tabs[1] == 'detail') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/detail.css' ?>">
+      <?php endif; ?>
     <?php endif; ?>
   <?php endif; ?>
 </head>

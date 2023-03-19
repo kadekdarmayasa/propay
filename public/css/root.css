@@ -31,11 +31,11 @@ a {
 	--primary-color-opacity: 82, 151, 255;
 	--black-color: #09121f;
 	--sidebar-bg: #fff;
-	--white-color: #f1f1f1;
+	--white-color: rgb(241, 241, 241);
 	--gray-color-100: #cacaca;
 	--gray-color-200: rgb(203, 201, 201);
 	--gray-color-300: #989898;
-	--blue-color-100: #f7fbff;
+	--blue-color-100: rgb(247, 251, 255);
 	--blue-color-opacity: 247, 251, 255;
 	--green-color: #3eff74;
 	--orange-color: #ff833d;

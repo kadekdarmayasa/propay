@@ -1,7 +1,7 @@
-import '../components/completed-illustration.js';
+import '../components/illustration.js';
 
 const submitBtn = document.getElementById('submit-btn');
-const completedIllustration = document.querySelector('completed-illustration');
+const illustrationComponent = document.querySelector('illustration-component');
 
 submitBtn.addEventListener('click', async (e) => {
 	const className = document.getElementById('class-name');
@@ -27,13 +27,13 @@ submitBtn.addEventListener('click', async (e) => {
 			const view = 'class';
 			const listOfClassUrl = response.url;
 
-			completedIllustration.setAttribute('success-message', message);
-			completedIllustration.setAttribute('description', description);
-			completedIllustration.setAttribute('view', view);
-			completedIllustration.setAttribute('url', listOfClassUrl);
+			illustrationComponent.setAttribute('success-message', message);
+			illustrationComponent.setAttribute('description', description);
+			illustrationComponent.setAttribute('view', view);
+			illustrationComponent.setAttribute('url', listOfClassUrl);
 
-			completedIllustration.firstElementChild.style.opacity = '1';
-			completedIllustration.firstElementChild.style.display = 'flex';
+			illustrationComponent.firstElementChild.style.opacity = '1';
+			illustrationComponent.firstElementChild.style.display = 'flex';
 		}
 	}
 });

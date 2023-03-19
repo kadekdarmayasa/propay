@@ -118,6 +118,6 @@
       </form>
     </div>
 
-    <completed-illustration src="<?= BASEURL . 'public/images/completed.svg' ?>"></completed-illustration>
+    <illustration-element></illustration-element>
   </div>
 </div>

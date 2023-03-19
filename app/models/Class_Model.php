@@ -1,7 +1,7 @@
 <?php
 class Class_Model
 {
-  private $table = "tb_class";
+  private $table = "class";
   private $db;
 
   public function __construct()

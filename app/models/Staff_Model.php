@@ -1,7 +1,7 @@
 <?php
 class Staff_Model
 {
-  private $table = "tb_staff";
+  private $table = "staff";
   private $db;
 
   public function __construct()
@@ -51,7 +51,7 @@ class Staff_Model
     $religion = htmlspecialchars($data['religion']);
     $address = htmlspecialchars($data['address']);
 
-    $query = "INSERT INTO tb_staff VALUES(null, :username, :password, :staff_level, :staff_name, :date_of_birth, :religion, :address)";
+    $query = "INSERT INTO " . $this->table . " VALUES(null, :username, :password, :staff_level, :staff_name, :date_of_birth, :religion, :address)";
 
     $this->db->query($query);
     $this->db->bind('username', $username);

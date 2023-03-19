@@ -1,11 +1,13 @@
-import '../components/completed-illustration.js';
+import '../components/illustration.js';
 
 const firstForm = document.querySelector('.form.first');
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const messages = document.querySelectorAll('.message');
-const completedIllustration = document.querySelector('completed-illustration');
+const illustrationComponent = document.querySelector('illustration-element');
+const illustrationImage = document.querySelector('.illustration-image');
+const url = location.href.split('staff', 1).toString();
 
 submitBtn.addEventListener('click', async (e) => {
 	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select'), document.querySelector('textarea')];
@@ -24,22 +26,47 @@ submitBtn.addEventListener('click', async (e) => {
 			document.querySelector('form').reset();
 			document.querySelector('.first-content').style.display = 'none';
 
+			const title = 'Congratulations';
 			const message = response.message;
 			const description = `
 			Staff with id ${response.id_staff} has successfully updated,<br>lets see the list of staff by clicking the button below
 		`;
 			const view = 'staff';
 			const listOfStaffUrl = response.url;
+			const src = `${url}public/images/completed.svg`;
 
-			completedIllustration.setAttribute('success-message', message);
-			completedIllustration.setAttribute('description', description);
-			completedIllustration.setAttribute('view', view);
-			completedIllustration.setAttribute('url', listOfStaffUrl);
+			illustrationComponent.setAttribute('title', title);
+			illustrationComponent.setAttribute('message', message);
+			illustrationComponent.setAttribute('description', description);
+			illustrationComponent.setAttribute('view', view);
+			illustrationComponent.setAttribute('url', listOfStaffUrl);
+			illustrationComponent.setAttribute('src', src);
 
-			completedIllustration.firstElementChild.style.opacity = '1';
-			completedIllustration.firstElementChild.style.display = 'flex';
-		} else {
-			location.href = response.url;
+			illustrationComponent.firstElementChild.style.opacity = '1';
+			illustrationComponent.firstElementChild.style.display = 'flex';
+		} else if (response.status == 'nothing-update') {
+			document.querySelector('form').reset();
+			document.querySelector('.first-content').style.display = 'none';
+
+			const title = 'No Data Change';
+			const message = response.message;
+			const description = `
+			There is no staff data change with id ${response.id_staff},<br>lets see the list of staff by clicking the button below
+		`;
+			const view = 'staff';
+			const listOfStaffUrl = response.url;
+			const src = `${url}public/images/no-data-update-illustration.svg`;
+
+			illustrationComponent.setAttribute('title', title);
+			illustrationComponent.setAttribute('message', message);
+			illustrationComponent.setAttribute('description', description);
+			illustrationComponent.setAttribute('view', view);
+			illustrationComponent.setAttribute('url', listOfStaffUrl);
+			illustrationComponent.setAttribute('src', src);
+
+			illustrationComponent.firstElementChild.style.opacity = '1';
+			illustrationComponent.firstElementChild.style.display = 'flex';
+			illustrationImage.style.width = '40%';
 		}
 	}
 });

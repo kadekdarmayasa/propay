@@ -31,21 +31,6 @@ body.dark :is(.meta-title) {
 	margin-top: 2em;
 }
 
-.form.second {
-	display: none;
-	pointer-events: none;
-}
-
-.form.first.hide {
-	display: none;
-	pointer-events: none;
-}
-
-.form.first.hide ~ .form.second {
-	display: block;
-	pointer-events: all;
-}
-
 .input-group {
 	display: flex;
 	width: 650px;
@@ -193,8 +178,13 @@ body.dark .input-group select option {
 	stroke: var(--white-color);
 }
 
-.input-group button:hover {
-	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
+.input-group button:is(:hover, :focus) {
+	border: 2px solid rgb(245, 245, 245);
+	outline: 3px solid rgba(var(--primary-color-opacity), 0.8);
+}
+
+body.dark .input-group button:is(:hover, :focus) {
+	border: 2px solid var(--black-color);
 }
 
 .update-staff-container .flasher-container {

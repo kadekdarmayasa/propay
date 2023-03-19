@@ -27,7 +27,7 @@ body.dark .detail-staff-container :is(.left-content, .right-content) {
 	margin-bottom: 1.5em;
 }
 
-:is(.left-content, .right-content) .header {
+body.dark :is(.left-content, .right-content) .header {
 	color: var(--white-color);
 }
 

@@ -168,7 +168,7 @@ body.dark .input-group select option {
 	justify-content: center;
 	cursor: pointer;
 	height: 50px;
-	width: 200px;
+	width: 100%;
 	border-radius: 6px;
 }
 
@@ -193,8 +193,13 @@ body.dark .input-group select option {
 	stroke: var(--white-color);
 }
 
-.input-group button:hover {
-	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
+.input-group button:is(:hover, :focus) {
+	border: 2px solid rgb(245, 245, 245);
+	outline: 3px solid rgba(var(--primary-color-opacity), 0.8);
+}
+
+.input-group button:is(:hover, :focus) {
+	border: 2px solid var(--black-color);
 }
 
 .add-staff-container .flasher-container {

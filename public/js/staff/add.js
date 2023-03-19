@@ -1,11 +1,12 @@
-import '../components/completed-illustration.js';
+import '../components/illustration.js';
 
 const firstForm = document.querySelector('.form.first');
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const messages = document.querySelectorAll('.message');
-const completedIllustration = document.querySelector('completed-illustration');
+const illustrationComponent = document.querySelector('illustration-element');
+const url = location.href.split('staff', 1).toString();
 
 submitBtn.addEventListener('click', async (e) => {
 	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select'), document.querySelector('textarea')];
@@ -24,20 +25,24 @@ submitBtn.addEventListener('click', async (e) => {
 			document.querySelector('form').reset();
 			document.querySelector('.first-content').style.display = 'none';
 
+			const title = 'Congratulations';
 			const message = response.message;
+			console.log(message);
 			const description = `
 			You just add new staff with id ${response.id_staff},<br>lets see the list of staff by clicking the button below
 		`;
 			const view = 'staff';
 			const listOfStaffUrl = response.url;
+			const imgSource = `${url}public/images/completed.svg`;
 
-			completedIllustration.setAttribute('success-message', message);
-			completedIllustration.setAttribute('description', description);
-			completedIllustration.setAttribute('view', view);
-			completedIllustration.setAttribute('url', listOfStaffUrl);
-
-			completedIllustration.firstElementChild.style.opacity = '1';
-			completedIllustration.firstElementChild.style.display = 'flex';
+			illustrationComponent.setAttribute('title', title);
+			illustrationComponent.setAttribute('success-message', message);
+			illustrationComponent.setAttribute('src', imgSource);
+			illustrationComponent.setAttribute('description', description);
+			illustrationComponent.setAttribute('view', view);
+			illustrationComponent.setAttribute('url', listOfStaffUrl);
+			illustrationComponent.firstElementChild.style.opacity = '1';
+			illustrationComponent.firstElementChild.style.display = 'flex';
 		}
 	}
 });

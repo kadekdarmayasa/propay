@@ -145,6 +145,14 @@ class Staff extends Controller
         'url' => BASEURL . 'staff/index'
       ];
       file_put_contents('php://output', json_encode($response));
+    } else if ($result['row_count'] == 0) {
+      $response = [
+        'status' => 'nothing-update',
+        'message' => 'No staff data update',
+        'id_staff' =>  $result['last_id'],
+        'url' => BASEURL . 'staff/index'
+      ];
+      file_put_contents('php://output', json_encode($response));
     } else {
       $response = [
         'status' => 'error',

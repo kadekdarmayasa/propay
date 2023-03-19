@@ -2,55 +2,19 @@
   <div class="update-staff-container">
     <div class="first-content">
       <div class="meta">
-        <h2 class="meta-title">Add New Staff</h2>
+        <h2 class="meta-title">Update Staff</h2>
         <p class="meta-description">Please kindly fill the fields below</p>
       </div>
 
       <form action="" method="post">
         <input type="hidden" class="input staff_id" name="staff_id" id="staff_id" value="<?= $data['staff']['staff_id'] ?>">
 
-        <!-- First Form -->
-        <div class="form first">
-          <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" class="input username" name="username" id="username" placeholder="Enter username..." autocomplete="off" value="<?= $data['staff']['username'] ?>" required>
-            <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
-            <small class="message username-message"></small>
-          </div>
-
-          <div class="input-group">
-            <label for="staff-password">Password</label>
-            <input type="password" name="password" id="staff-password" placeholder="Enter Password..." class="input password" value="<?= $data['staff']['password'] ?>" required>
-            <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
-            <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
-            <small class="message password-message"></small>
-          </div>
-
-          <div class="input-group">
-            <label for="staff-password">Confirm Password</label>
-            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." class="input password confirm-password" value="<?= $data['staff']['password'] ?>" required>
-            <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
-            <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
-            <small class="message confirm-password-message"></small>
-          </div>
-
-          <div class="input-group">
-            <button type="button" name="next-btn" class="next-btn">
-              <span>Next</span>
-              <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M34.5 16L2.8551 31.3704C1.93495 31.8173 1.01674 30.7579 1.58991 29.9106L11 16M34.5 16L17 8L2.92694 1.5666C1.99415 1.14018 1.10057 2.22688 1.69917 3.05972L11 16M34.5 16H22.75H11" stroke="black" />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <!-- End of First Form -->
-
         <!-- Second Form -->
         <div class="form second">
           <div class="input-group">
             <label for="staff-level">Staff Level</label>
             <select name="staff-level" id="staff-level" class="input" required autofocus="off">
-              <option value="">-- Select Level Staff ---</option>
+              <option value="">-- Select Level Staff --</option>
               <?php if ($data['staff']['staff_level'] == 'admin') : ?>
                 <option value="admin" selected>Admin</option>
                 <option value="staff">Staff</option>
@@ -98,12 +62,6 @@
           </div>
 
           <div class="input-group prev-submit-btn">
-            <button type="button" name="prev-btn" class="prev-btn">
-              <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M34.5 16L2.8551 31.3704C1.93495 31.8173 1.01674 30.7579 1.58991 29.9106L11 16M34.5 16L17 8L2.92694 1.5666C1.99415 1.14018 1.10057 2.22688 1.69917 3.05972L11 16M34.5 16H22.75H11" stroke="black" />
-              </svg>
-              <span>Previous</span>
-            </button>
             <button type="submit" name="submit-btn" class="submit-btn">
               <span>Update Staff</span>
               <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">

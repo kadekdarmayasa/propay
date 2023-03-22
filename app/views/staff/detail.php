@@ -25,6 +25,10 @@
     <div class="right-content">
       <h2 class="header">Authentication Information</h2>
       <div class="field">
+        <small class="name">Staff ID</small>
+        <p class="value"><?= $data['staff']['staff_id']; ?></p>
+      </div>
+      <div class="field">
         <small class="name">Username</small>
         <p class="value"><?= $data['staff']['username']; ?></p>
       </div>

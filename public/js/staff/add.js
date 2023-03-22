@@ -1,10 +1,13 @@
 import '../components/illustration.js';
+import { validatePassword } from '../helpers/password_validation.js';
+import { errorMessage } from '../helpers/error_message.js';
+import { validateUsername } from '../helpers/username_validation.js';
+import { checkAvailability } from '../helpers/check_availability.js';
 
 const firstForm = document.querySelector('.form.first');
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
 const submitBtn = document.querySelector('.submit-btn');
-const messages = document.querySelectorAll('.message');
 const illustrationComponent = document.querySelector('illustration-element');
 const url = location.href.split('staff', 1).toString();
 
@@ -27,7 +30,6 @@ submitBtn.addEventListener('click', async (e) => {
 
 			const title = 'Congratulations';
 			const message = response.message;
-			console.log(message);
 			const description = `
 			You just add new staff with id ${response.id_staff},<br>lets see the list of staff by clicking the button below
 		`;
@@ -36,7 +38,7 @@ submitBtn.addEventListener('click', async (e) => {
 			const imgSource = `${url}public/images/completed.svg`;
 
 			illustrationComponent.setAttribute('title', title);
-			illustrationComponent.setAttribute('success-message', message);
+			illustrationComponent.setAttribute('message', message);
 			illustrationComponent.setAttribute('src', imgSource);
 			illustrationComponent.setAttribute('description', description);
 			illustrationComponent.setAttribute('view', view);
@@ -63,9 +65,9 @@ firstForm.addEventListener('keyup', (e) => {
 		if (!isValid) {
 			document.querySelector('.next-btn').disabled = true;
 			e.target.classList.add('error');
-			showErrorMessage('username-message', 'Please enter a valid username');
+			errorMessage('username-message', 'Please enter a valid username');
 		} else {
-			checkAvailability(e.target.value);
+			checkAvailability('username', e.target.value, 'http://localhost/propay-payment-system/staff/check_staff');
 		}
 	}
 
@@ -75,7 +77,7 @@ firstForm.addEventListener('keyup', (e) => {
 		if (!result['isValid']) {
 			document.querySelector('.next-btn').disabled = true;
 			e.target.classList.add('error');
-			showErrorMessage('password-message', result['errorMessage']);
+			errorMessage('password-message', result['errorMessage']);
 		} else {
 			document.querySelector('.next-btn').disabled = false;
 			e.target.classList.remove('error');
@@ -88,57 +90,13 @@ firstForm.addEventListener('keyup', (e) => {
 		if (e.target.value !== password.value) {
 			document.querySelector('.next-btn').disabled = true;
 			e.target.classList.add('error');
-			showErrorMessage('confirm-password-message', `Password doesn't match`);
+			errorMessage('confirm-password-message', `Password doesn't match`);
 		} else {
 			document.querySelector('.next-btn').disabled = false;
 			e.target.classList.remove('error');
 		}
 	}
 });
-
-function showErrorMessage(classNm, errorMessage) {
-	messages.forEach((message) => {
-		if (message.classList.contains(classNm)) {
-			message.innerText = errorMessage;
-		}
-	});
-}
-
-function validateUsername(username) {
-	let nameRegex = /^([a-z0-9-_]+)$/i;
-	let isValid = username.match(nameRegex);
-	return isValid;
-}
-
-function validatePassword(password) {
-	let passwordRegex = /^[A-Za-z]\w{7,20}$/;
-	let isValid = password.match(passwordRegex);
-	return { isValid, errorMessage: 'The password must start with alphabet and followed by (7-20) characters' };
-}
-
-function checkAvailability(str) {
-	const data = { username: str };
-
-	const xHttp = new XMLHttpRequest();
-	xHttp.open('POST', 'http://localhost/propay-payment-system/staff/check_staff', true);
-
-	xHttp.onreadystatechange = function () {
-		if (this.readyState == 4 && this.status == 200) {
-			const data = JSON.parse(this.responseText);
-			if (data.status == 'error') {
-				document.querySelector('.next-btn').disabled = true;
-				document.querySelector('.username').classList.add('error');
-				showErrorMessage('username-message', data.message);
-			} else {
-				document.querySelector('.next-btn').disabled = false;
-				document.querySelector('.username').classList.remove('error');
-			}
-		}
-	};
-
-	xHttp.setRequestHeader('Content-type', 'application/json');
-	xHttp.send(JSON.stringify(data));
-}
 
 async function insertStaffToDatabase(staff_data) {
 	const data = staff_data;

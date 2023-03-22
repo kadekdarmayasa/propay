@@ -1,26 +1,27 @@
   <div class="top-bar">
     <div class="left-bar">
+      <!-- Hamburger Menu -->
       <div class="sidebar-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
+      <!-- End of Hamburger Menu -->
+
+      <!-- Breadcrumb -->
       <nav class="bread-crumb">
         <?php
         $url = strtolower($data['breadcrumb']) . '/';
         $breadcrumbs = explode('/', $data['breadcrumb']);
-        if (count($breadcrumbs) > 1) :
         ?>
-          <?php
-          for ($i = 0; $i < count($breadcrumbs); $i++) :
-          ?>
+
+        <?php if (count($breadcrumbs) > 1) : ?>
+          <?php for ($i = 0; $i < count($breadcrumbs); $i++) : ?>
             <li>
               <?php if ($breadcrumbs[$i] == $breadcrumbs[count($breadcrumbs) - 1]) : ?>
-                <a>
-                  <?= $breadcrumbs[$i]; ?>
-                </a>
+                <a><?= $breadcrumbs[$i]; ?></a>
               <?php else : ?>
-                <a href="<?= BASEURL . strtolower($breadcrumbs[$i])  ?>" class="link">
+                <a href="<?= BASEURL . strtolower($breadcrumbs[$i]) . '/page/' . $data['page']  ?>" class="link">
                   <?= $breadcrumbs[$i]; ?>
                 </a>
                 <span>/</span>
@@ -35,7 +36,10 @@
           </li>
         <?php endif; ?>
       </nav>
+      <!-- End of Breadcrumb -->
     </div>
+
+
     <div class="notification-profile">
       <div class="icons">
         <div class="notification">

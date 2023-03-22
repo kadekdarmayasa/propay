@@ -1,4 +1,5 @@
 import '../components/overlay.js';
+import '../utils/row-selected.js';
 
 const deleteButtons = document.querySelectorAll('.delete-btn');
 const overlay = document.querySelector('.overlay');
@@ -7,11 +8,6 @@ const overlayDeleteBtn = document.getElementById('overlay-delete-btn');
 const icon = document.querySelector('.icon');
 const overlayMetaTitle = document.querySelector('.overlay .title');
 const overlayMetaDescription = document.querySelector('.overlay .description');
-const pageSelectedContainer = document.querySelector('.page-selected');
-
-pageSelectedContainer.addEventListener('click', () => {
-	document.querySelector('.list-of-page').classList.toggle('show');
-});
 
 overlay.addEventListener('click', function () {
 	overlay.classList.remove('show');

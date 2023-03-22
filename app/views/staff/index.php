@@ -115,7 +115,6 @@
             </tr>
           <?php
           endfor;
-          $_SESSION['end_number'] = $number - 1;
           ?>
         </table>
       <?php endif; ?>

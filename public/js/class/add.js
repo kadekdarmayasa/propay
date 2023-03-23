@@ -1,36 +1,49 @@
 import '../components/illustration.js';
+import { checkAvailability } from '../helpers/check_availability.js';
 
 const submitBtn = document.getElementById('submit-btn');
-const illustrationComponent = document.querySelector('illustration-component');
+const illustrationComponent = document.querySelector('illustration-element');
+const url = location.href.split('classes', 1).toString();
+const form = document.querySelector('form');
+
+form.addEventListener('keyup', function (e) {
+	if (e.target.id == 'class_name') {
+		checkAvailability('class-name', e.target.value, 'http://localhost/propay/classes/check_class');
+	}
+});
 
 submitBtn.addEventListener('click', async (e) => {
-	const className = document.getElementById('class-name');
-	const major = document.getElementById('major');
+	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select')];
+	const isEmpty = inputs.filter((input) => input.value === '');
 
-	if (className.value != '' || major.value != '') {
+	if (!isEmpty.length) {
 		e.preventDefault();
 
-		const data = {
-			className: className.value,
-			major: major.value,
-		};
+		const data = {};
+		inputs.forEach((input) => {
+			data[input.id] = input.value;
+		});
 
 		const response = await insertClassToDatabase(data);
 		if (response.status == 'success') {
-			document.querySelector('form').reset();
+			form.reset();
 			document.querySelector('.first-content').style.display = 'none';
 
+			const title = 'Congratulations';
 			const message = response.message;
 			const description = `
-			You just add new class with name ${response.class_name},<br>lets see the list of class by clicking the button below
+			Class ${response.class_name} has been successfully added,<br>lets see the list of class by clicking the button below
 		`;
 			const view = 'class';
-			const listOfClassUrl = response.url;
+			const listOfStaffUrl = response.url;
+			const src = `${url}public/images/completed.svg`;
 
-			illustrationComponent.setAttribute('success-message', message);
+			illustrationComponent.setAttribute('title', title);
+			illustrationComponent.setAttribute('message', message);
 			illustrationComponent.setAttribute('description', description);
 			illustrationComponent.setAttribute('view', view);
-			illustrationComponent.setAttribute('url', listOfClassUrl);
+			illustrationComponent.setAttribute('url', listOfStaffUrl);
+			illustrationComponent.setAttribute('src', src);
 
 			illustrationComponent.firstElementChild.style.opacity = '1';
 			illustrationComponent.firstElementChild.style.display = 'flex';
@@ -40,7 +53,7 @@ submitBtn.addEventListener('click', async (e) => {
 
 async function insertClassToDatabase(class_data) {
 	const data = class_data;
-	const url = 'http://localhost/propay-payment-system/classes/add_class';
+	const url = 'http://localhost/propay/classes/add_class';
 
 	const response = await fetch(url, {
 		method: 'POST',

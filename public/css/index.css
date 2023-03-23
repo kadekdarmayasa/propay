@@ -350,3 +350,31 @@ body.dark .illustration-header h1 {
 	cursor: pointer;
 	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
 }
+
+.tooltip {
+	visibility: hidden;
+	width: 120px;
+	height: 40px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+	font-size: 0.8rem;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+:is(.update-btn, .delete-btn, .update-btn):hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+}

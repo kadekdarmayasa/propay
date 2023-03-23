@@ -6,10 +6,6 @@
         <p class="meta-description">Please kindly fill the fields below</p>
       </div>
 
-      <div class="flasher-container">
-        <?php Flasher::flash(); ?>
-      </div>
-
       <form action="" method="post">
         <div class="input-group">
           <label for="class_name">Class Name</label>

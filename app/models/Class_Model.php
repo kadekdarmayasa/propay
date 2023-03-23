@@ -24,7 +24,7 @@ class Class_Model
     $query = "SELECT * FROM " . $this->table . " WHERE class_id=:class_id";
 
     $this->db->query($query);
-    $this->db->bind('class_id', $class_id);
+    $this->db->bind(':class_id', $class_id);
     $this->db->execute();
 
     return $this->db->single();
@@ -35,19 +35,22 @@ class Class_Model
     $query = "SELECT * FROM " . $this->table . " WHERE class_name=:class_name";
 
     $this->db->query($query);
-    $this->db->bind('class_name', $class_name);
+    $this->db->bind(':class_name', $class_name);
     $this->db->execute();
 
     return $this->db->single();
   }
 
-  public function addClass($class_name, $major_name)
+  public function addClass($data)
   {
+    $class_name = htmlspecialchars($data['class_name']);
+    $major_name =  htmlspecialchars($data['major_name']);
+
     $query = "INSERT INTO " . $this->table . " VALUES (null, :class_name, :major_name)";
 
     $this->db->query($query);
-    $this->db->bind('class_name', $class_name);
-    $this->db->bind('major_name', $major_name);
+    $this->db->bind(':class_name', $class_name);
+    $this->db->bind(':major_name', $major_name);
     $this->db->execute();
 
     return $this->db->rowCount();
@@ -58,9 +61,29 @@ class Class_Model
     $query = "DELETE FROM " . $this->table . " WHERE class_id=:class_id";
 
     $this->db->query($query);
-    $this->db->bind('class_id', $class_id);
+    $this->db->bind(':class_id', $class_id);
     $this->db->execute();
 
     return $this->db->rowCount();
+  }
+
+  public function updateClass($data)
+  {
+    $class_id = $data['class_id'];
+    $class_name = htmlspecialchars($data['class_name']);
+    $major_name = htmlspecialchars($data['major_name']);
+
+    $query = "UPDATE " . $this->table . " SET class_name=:class_name, major_name=:major_name WHERE class_id=:class_id";
+
+    $this->db->query($query);
+    $this->db->bind(':class_id', $class_id);
+    $this->db->bind(':class_name', $class_name);
+    $this->db->bind(':major_name', $major_name);
+    $this->db->execute();
+
+    return [
+      'row_count' => $this->db->rowCount(),
+      'class_id' => $class_id
+    ];
   }
 }

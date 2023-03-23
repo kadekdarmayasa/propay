@@ -256,6 +256,7 @@ body.dark .data table td {
 	display: inline-block;
 	height: 24px;
 	width: 24px;
+	position: relative;
 }
 
 .update-btn svg,
@@ -366,137 +367,35 @@ body.dark .footer-left {
 	color: var(--primary-color);
 }
 
-/* View Add Styling */
-.add-class-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.add-class-container .meta {
-	text-align: center;
-	margin: 2em auto 1.5em;
-}
-
-.meta-title {
-	color: var(--black-color);
-	font-weight: 700;
-	margin-bottom: 0.2em;
-}
-
-.meta-description {
-	color: var(--gray-color-300);
-}
-
-body.dark :is(.meta-title) {
-	color: var(--white-color);
-}
-
-.add-class-container form {
-	display: flex;
-	flex-direction: column;
-	margin-top: 2.7em;
-}
-
-.input-group {
-	display: flex;
-	width: 650px;
-	flex-direction: column;
-	margin-bottom: 2.5em;
-}
-
-.input-group label {
-	color: var(--black-color);
-	font-weight: 500;
-	font-size: 0.9rem;
-	margin-bottom: 0.4em;
-}
-
-body.dark .input-group label {
-	color: var(--white-color);
-}
-
-.input-group label {
-	color: var(--gray-color-300);
-}
-
-.input-group :is(input, select) {
-	font-size: 0.9rem;
-	border: none;
-	outline: 0;
-	color: var(--black-color);
-	border-bottom: 1px solid var(--gray-color-100);
-	padding: 0.8em 0;
-	background-color: transparent;
-}
-
-body.dark .input-group :is(input, select, textarea) {
-	color: var(--white-color);
-	background-color: transparent;
-}
-
-body.dark .input-group select option {
-	color: var(--white-color);
-	background-color: var(--sidebar-bg);
-}
-
-.input-group :is(input, select):focus {
-	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.02));
-}
-
-.input-group:last-child button {
-	margin-top: 0em;
-}
-
-.input-group button {
-	background-color: var(--primary-color);
-	border: 0;
-	outline: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	font-weight: 500;
-	font-size: 0.9rem;
-	height: 50px;
-	width: 200px;
-	color: white;
-	border-radius: 10px;
-	margin-top: 2em;
-}
-
-.input-group button svg {
-	height: 20px;
+.input-group:not(:last-child) :is(img, svg) {
 	width: 20px;
-	margin-right: 0.5em;
+	position: absolute;
+	right: 0;
+	bottom: 14px;
+	cursor: pointer;
 }
 
-.input-group button svg :is(path, rect) {
-	stroke: white;
+.input-group .message {
+	position: absolute;
+	bottom: -22px;
+	left: 0;
+	font-size: 0.8rem;
+	color: var(--red-color);
+	display: none;
 }
 
-.input-group button:hover {
-	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
+.input-group .input.error ~ .message {
+	display: block;
 }
 
-.add-class-container .flasher-container {
-	width: 650px;
+.input-group .input.error {
+	border-bottom: 2px solid var(--red-color);
 }
 
-.flasher-container > * {
-	width: 100%;
+.input-group .input.error ~ :is(img).error-icon {
+	display: inline-block;
 }
 
-.class-container .flasher-container > * {
-	margin-bottom: 1.4em;
+.input-group :is(img).error-icon {
+	display: none;
 }
-
-.empty-message {
-	color: var(--gray-color-300);
-	font-size: 0.9rem;
-	text-align: center;
-}
-
-/* body.dark .empty-message {
-	color: var(--white-color);
-} */

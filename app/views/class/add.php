@@ -12,23 +12,24 @@
 
       <form action="" method="post">
         <div class="input-group">
-          <label for="class-name">Class Name</label>
-          <input type="text" name="class-name" id="class-name" placeholder="Enter Class Name" required autocomplete="off">
+          <label for="class_name">Class Name</label>
+          <input type="text" name="class_name" id="class_name" class="input class-name" placeholder="Enter Class Name" required autocomplete="off">
+          <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
+          <small class="message class-name-message"></small>
         </div>
 
         <div class="input-group">
-          <label for="major">Major Name</label>
-          <select name="major_name" id="major" _name required>
+          <label for="major_name">Major Name</label>
+          <select name="major_name" id="major_name" required>
             <option value="">-- Select Major --</option>
-            <option value="Software Engineering">Software Engineering</option>
-            <option value="Computer Network Engineering">Computer Network Engineering</option>
-            <option value="Animation">Animation</option>
-            <option value="Visual Communication Design">Visual Communication Design</option>
+            <?php foreach ($data['majors'] as $major) : ?>
+              <option value="<?= $major ?>"><?= $major ?></option>
+            <?php endforeach; ?>
           </select>
         </div>
 
         <div class="input-group">
-          <button type="submit" name="add-class" id="submit-btn">
+          <button type="submit" name="add-class" id="submit-btn" class="submit-btn">
             <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black" />
               <path d="M16.3333 8V25" stroke="black" stroke-linecap="round" />

@@ -10,10 +10,7 @@ class Classes extends Controller
     }
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
-      $data['greeting_name'] = $secondAndThirdOfStaffName;
-      $data['name'] = $staff_name;
+      $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
@@ -41,10 +38,7 @@ class Classes extends Controller
     }
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
-      $data['greeting_name'] = $secondAndThirdOfStaffName;
-      $data['name'] = $staff_name;
+      $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
@@ -100,10 +94,7 @@ class Classes extends Controller
     }
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];
-      $data['greeting_name'] = $secondAndThirdOfStaffName;
-      $data['name'] = $staff_name;
+      $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 

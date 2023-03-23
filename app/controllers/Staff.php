@@ -20,8 +20,7 @@ class Staff extends Controller
     }
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $data['name'] = $staff_name;
+      $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
@@ -104,8 +103,7 @@ class Staff extends Controller
     }
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $data['name'] = $staff_name;
+      $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
@@ -161,8 +159,7 @@ class Staff extends Controller
     }
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $data['name'] = $staff_name;
+      $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
@@ -185,8 +182,7 @@ class Staff extends Controller
     }
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $staff_name = $_SESSION['user']['staff_name'];
-      $data['name'] = $staff_name;
+      $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 

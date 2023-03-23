@@ -87,7 +87,6 @@ body.dark .brand .brand-name {
 
 .menu-items li a {
 	padding: 0 1em;
-	/* border-radius: 4px; */
 }
 
 .menu-items :is(li a:hover, li.active a) {

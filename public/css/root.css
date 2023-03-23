@@ -62,9 +62,9 @@ body {
 }
 
 body.dark {
-	--black-color: #1b273d;
-	--black-opacity: 27, 39, 61;
-	--sidebar-bg: rgb(43, 57, 82);
+	--black-color: rgb(18, 27, 45);
+	--black-opacity: 18, 27, 45;
+	--sidebar-bg: rgb(26, 39, 60);
 
 	background-color: var(--black-color);
 }

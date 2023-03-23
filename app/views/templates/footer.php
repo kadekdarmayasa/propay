@@ -18,6 +18,8 @@
   if ($tabs[0] == 'class') : ?>
     <?php if ($tabs[1] == 'index') : ?>
       <script src="<?= BASEURL . 'public/js/class/index.js' ?>" type="module"></script>
+    <?php elseif ($tabs[1] == 'update') : ?>
+      <script src="<?= BASEURL . 'public/js/class/update.js' ?>" type="module"></script>
     <?php else : ?>
       <script src="<?= BASEURL . 'public/js/class/add.js' ?>" type="module"></script>
     <?php endif; ?>

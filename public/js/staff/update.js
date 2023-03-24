@@ -69,7 +69,7 @@ submitBtn.addEventListener('click', async (e) => {
 
 async function updateStaff(staff_data) {
 	const data = staff_data;
-	const url = 'http://localhost/propay-payment-system/staff/update_staff';
+	const url = 'http://localhost/propay/staff/update_action';
 
 	const response = await fetch(url, {
 		method: 'POST',

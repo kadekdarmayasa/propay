@@ -31,7 +31,7 @@
               <path d="M16.3333 8V25" stroke="black" stroke-linecap="round" />
               <path d="M7 16.5H26" stroke="black" stroke-linecap="round" />
             </svg>
-            Add Class
+            <span>Add Class</span>
           </button>
         </div>
       </form>

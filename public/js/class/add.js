@@ -8,7 +8,7 @@ const form = document.querySelector('form');
 
 form.addEventListener('keyup', function (e) {
 	if (e.target.id == 'class_name') {
-		checkAvailability('class-name', e.target.value, 'http://localhost/propay/classes/check_class');
+		checkAvailability('class-name', e.target.value, 'http://localhost/propay/classes/check_action');
 	}
 });
 
@@ -53,7 +53,7 @@ submitBtn.addEventListener('click', async (e) => {
 
 async function insertClassToDatabase(class_data) {
 	const data = class_data;
-	const url = 'http://localhost/propay/classes/add_class';
+	const url = 'http://localhost/propay/classes/insert_action';
 
 	const response = await fetch(url, {
 		method: 'POST',

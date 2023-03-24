@@ -1,33 +1,17 @@
 <?php
 
-class Classes extends Controller
+class Classes extends Controller implements Actions
 {
   public function index()
   {
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
-      exit;
+    } else {
+      unset($_SESSION['search_staff_keyword']);
+      header('Location: ' . BASEURL . 'classes/page/1');
     }
 
-    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $data['name'] = $_SESSION['user']['staff_name'];
-      $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
-    $data['class'] = $this->model("Class_Model")->getAllClasses();
-
-    for ($i = 0; $i < count($data['class']); $i++) {
-      $students = $this->model('Student_Model')->getStudentsByClassId($data['class'][$i]['class_id']);
-      $data['class'][$i]['total_students'] = count($students);
-    }
-
-    $data['title'] = 'Propay - Class';
-    $data['breadcrumb'] = 'Classes';
-    $this->view('templates/header', $data, 'class/index');
-    $this->view('templates/sidebar', $data, 'class/index');
-    $this->view('templates/top-bar', $data, 'class/index');
-    $this->view('class/index', $data, 'class/index');
-    $this->view('templates/footer', $data, 'class/index');
+    exit;
   }
 
   public function add()
@@ -36,6 +20,9 @@ class Classes extends Controller
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     }
+
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_class_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -53,45 +40,15 @@ class Classes extends Controller
     $this->view('templates/footer', $data, 'class/add');
   }
 
-  public function add_class()
-  {
-    $json  = file_get_contents('php://input');
-    $data = json_decode($json, true);
-    $class_row_count = $this->model("Class_Model")->addClass($data);
-
-    if ($class_row_count) {
-      $response = [
-        'status' => 'success',
-        'message' => 'Class has been successfully added',
-        'class_name' => $data['class_name'],
-        'url' => BASEURL . 'classes'
-      ];
-
-      file_put_contents('php://output', json_encode($response));
-    }
-  }
-
-  public function delete($class_id)
-  {
-    file_get_contents('php://input');
-    $class  = $this->model("Class_Model")->getClassById($class_id);
-    $class_row_count = $this->model("Class_Model")->deleteClass($class_id);
-
-    if ($class_row_count) {
-      file_put_contents('php://output', json_encode([
-        'status_message' => 'success',
-        'status_code' => 200,
-        'class_name' => $class['class_name']
-      ]));
-    }
-  }
-
   public function update($class_id)
   {
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     }
+
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_class_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -101,7 +58,7 @@ class Classes extends Controller
     $data['class'] = $this->model("Class_Model")->getClassById($class_id);
     $data['majors'] = ["Software Engineering", "Computer Network Engineering", "Animation", "Visual Communication Design", "Multimedia"];
     $data['title'] = 'Propay - Class';
-    $data['breadcrumb'] = 'Class/Update';
+    $data['breadcrumb'] = 'Classes/Update';
     $data['page'] = 1;
     $this->view('templates/header', $data, 'class/update');
     $this->view('templates/sidebar', $data, 'class/update');
@@ -110,7 +67,119 @@ class Classes extends Controller
     $this->view('templates/footer', $data, 'class/update');
   }
 
-  public function update_class()
+  public function page($page)
+  {
+    if (!isset($_SESSION['user'])) {
+      header('Location: ' . BASEURL . 'auth/login');
+      exit;
+    }
+
+    if ($page < 1) {
+      header('Location: ' . BASEURL . 'classes/page/1');
+      exit;
+    }
+
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $data['name'] = $_SESSION['user']['staff_name'];
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
+    // Pagination
+    if (isset($_SESSION['search_class_keyword']) && $_SESSION['search_class_keyword'] != '') {
+      $total_data = count($this->model('Class_Model')->getClassByAny($_SESSION['search_class_keyword']));
+    } else {
+      $total_data = count($this->model('Class_Model')->getAllClasses());
+    }
+    $data['class_amount'] = $total_data;
+
+
+    if (isset($_POST['search-class'])) {
+      $class = $this->model('Class_Model')->getClassByAny($_POST['class-field']);
+      $total_data = count($class);
+      $data['class_amount'] = $total_data;
+      $_SESSION['search_class_keyword'] = $_POST['class-field'];
+
+      if ($total_data < 6) {
+        header('location: ' . BASEURL . 'classes/index');
+        exit;
+      }
+    }
+
+    if (isset($_POST['row_per_page'])) {
+      $total_data_per_page = $_POST['row_per_page'];
+      $_SESSION['row_per_page'] = $_POST['row_per_page'];
+    } else {
+      $total_data_per_page = isset($_SESSION['row_per_page']) ? $_SESSION['row_per_page'] : 5;
+    }
+
+    $total_page = ceil($total_data / $total_data_per_page);
+
+    if ($total_page <= 1 && $page != 1) {
+      header('Location: ' . BASEURL . 'classes/index');
+      exit;
+    }
+
+    if ($page > $total_page && $total_page > 1) {
+      header('Location: ' .  BASEURL . 'classes/page/' . $total_page);
+      exit;
+    }
+
+    $current_page = $page;
+    $start_data = ($total_data_per_page * $current_page) - $total_data_per_page;
+    $end_data = $start_data + $total_data_per_page;
+    $total_link = 2;
+
+    if ($current_page > $total_link) {
+      $start_number = $current_page - $total_link;
+    } else {
+      $start_number = 1;
+    }
+
+    if ($current_page < ($total_page - $total_link)) {
+      $end_number = $current_page + $total_link;
+    } else {
+      $end_number = $total_page;
+    }
+
+    if ($end_number != $total_page) {
+      $start_number = $current_page - $total_link + 1;
+      if ($start_number < 1) {
+        $start_number = 1;
+      }
+    }
+
+    // How many data will displayed on each page
+    if (isset($_SESSION['search_class_keyword'])) {
+      $data['class'] = $this->model('Class_Model')->getClassWithLimit($start_data, $total_data_per_page, $_SESSION['search_class_keyword']);
+    } else {
+      $data['class'] = $this->model('Class_Model')->getClassWithLimit($start_data, $total_data_per_page);
+    }
+
+    for ($i = 0; $i < count($data['class']); $i++) {
+      $students = $this->model('Student_Model')->getStudentsByClassId($data['class'][$i]['class_id']);
+      $data['class'][$i]['total_students'] = count($students);
+    }
+
+    $data['pagination'] = [
+      'total_page' => $total_page,
+      'current_page' => $current_page,
+      'start_number' => $start_number,
+      'end_number' => $end_number,
+      'total_link' => $total_link,
+      'start_data' => $start_data,
+      'end_data' => $end_data,
+    ];
+    $data['title'] = 'Propay - Class';
+    $data['breadcrumb'] = 'Classes';
+    $data['keyword'] = $_SESSION['search_class_keyword'] ?? '';
+    $this->view('templates/header', $data, 'class/index');
+    $this->view('templates/sidebar', $data, 'class/index');
+    $this->view('templates/top-bar', $data, 'class' . $page . '/index');
+    $this->view('class/index', $data, 'class/index');
+    $this->view('templates/footer', $data, 'class/index');
+  }
+
+  public function update_action()
   {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -142,7 +211,7 @@ class Classes extends Controller
     }
   }
 
-  public function check_class()
+  public function check_action()
   {
     $json = file_get_contents('php://input');
 
@@ -163,6 +232,39 @@ class Classes extends Controller
       ];
 
       file_put_contents('php://output', json_encode($result));
+    }
+  }
+
+  public function delete_action($class_id)
+  {
+    file_get_contents('php://input');
+    $class  = $this->model("Class_Model")->getClassById($class_id);
+    $class_row_count = $this->model("Class_Model")->deleteClass($class_id);
+
+    if ($class_row_count) {
+      file_put_contents('php://output', json_encode([
+        'status_message' => 'success',
+        'status_code' => 200,
+        'class_name' => $class['class_name']
+      ]));
+    }
+  }
+
+  public function insert_action()
+  {
+    $json  = file_get_contents('php://input');
+    $data = json_decode($json, true);
+    $class_row_count = $this->model("Class_Model")->addClass($data);
+
+    if ($class_row_count) {
+      $response = [
+        'status' => 'success',
+        'message' => 'Class has been successfully added',
+        'class_name' => $data['class_name'],
+        'url' => BASEURL . 'classes'
+      ];
+
+      file_put_contents('php://output', json_encode($response));
     }
   }
 }

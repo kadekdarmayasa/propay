@@ -20,28 +20,32 @@
   <?php if ($activeTab != 'login') : ?>
     <link rel="stylesheet" href="<?= BASEURL . 'public/css/index.css' ?>">
     <link rel="stylesheet" href="<?= BASEURL . 'public/css/top-bar.css' ?>">
+    <link rel="stylesheet" href="<?= BASEURL . 'public/css/sidebar.css' ?>">
 
     <?php if ($activeTab == 'dashboard') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/dashboard/index.css' ?>">
     <?php endif; ?>
 
-    <?php
-    $tabs = explode('/', $activeTab);
-    if ($tabs[0] == 'class') : ?>
+
+    <?php $tabs = explode('/', $activeTab); ?>
+
+    <?php if ($tabs[0] == 'class') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/index.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/illustration.css' ?>">
+
 
       <?php if ($tabs[1] == 'add') : ?>
         <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/add.css' ?>">
       <?php endif; ?>
     <?php endif; ?>
 
-    <?php
-    $tabs = explode('/', $activeTab);
-    if ($tabs[0] == 'staff') :
-    ?>
+    <?php if ($tabs[0] == 'staff') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/index.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/illustration.css' ?>">
 
       <?php if ($tabs[1] == 'add') : ?>
         <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/add.css' ?>">

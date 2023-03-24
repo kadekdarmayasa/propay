@@ -86,4 +86,36 @@ class Class_Model
       'class_id' => $class_id
     ];
   }
+
+  public function getClassByAny($keyword)
+  {
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE class_name LIKE :keyword OR major_name LIKE :keyword';
+
+    $this->db->query($query);
+    $this->db->bind(':keyword', "%$keyword%");
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
+
+  public function getClassWithLimit($start_data, $total_data_per_page, $keyword = null)
+  {
+    if ($keyword != null) {
+      $query = "SELECT * FROM " . $this->table . " WHERE class_name LIKE :keyword OR major_name LIKE :keyword LIMIT :start_data, :total_data_per_page";
+
+      $this->db->query($query);
+      $this->db->bind(':keyword', "%$keyword%", PDO::PARAM_STR);
+      $this->db->bind(':start_data', $start_data, PDO::PARAM_INT);
+      $this->db->bind(':total_data_per_page', $total_data_per_page, PDO::PARAM_INT);
+    } else {
+      $query = "SELECT * FROM " . $this->table . " LIMIT :start_data, :total_data_per_page";
+
+      $this->db->query($query);
+      $this->db->bind(':start_data', $start_data, PDO::PARAM_INT);
+      $this->db->bind(':total_data_per_page', $total_data_per_page, PDO::PARAM_INT);
+    }
+
+    $this->db->execute();
+    return $this->db->resultSet();
+  }
 }

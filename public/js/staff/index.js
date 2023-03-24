@@ -27,7 +27,7 @@ deleteButtons.forEach((button) => {
 		let urlDelete = overlayDeleteBtn.getAttribute('href');
 		let baseUrl = urlDelete.split('delete_staff')[0];
 		overlayDeleteBtn.removeAttribute('href');
-		overlayDeleteBtn.setAttribute('href', baseUrl + 'delete_staff/' + this.dataset.staffId);
+		overlayDeleteBtn.setAttribute('href', baseUrl + 'delete_action/' + this.dataset.staffId);
 
 		e.preventDefault();
 	});

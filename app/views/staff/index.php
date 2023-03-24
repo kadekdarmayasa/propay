@@ -120,104 +120,106 @@
     <!-- End of Staff Data -->
 
 
-    <!-- Staff Footer -->
-    <div class="cls-footer">
-      <div class="footer-left">
-        <?= $data['pagination']['start_data'] + 1 ?>
-        <?php if ($data['pagination']['start_data'] + 1 != $data['staff_amount']) : ?>
-          -
-          <?php if ($data['staff_amount'] < $data['pagination']['end_data']) : ?>
-            <?= $data['staff_amount'] ?>
-          <?php else : ?>
-            <?= $data['pagination']['end_data'] ?>
+    <?php if ($data['staff_amount'] > 0) : ?>
+      <!-- Staff Footer -->
+      <div class="cls-footer">
+        <div class="footer-left">
+          <?= $data['pagination']['start_data'] + 1 ?>
+          <?php if ($data['pagination']['start_data'] + 1 != $data['staff_amount']) : ?>
+            -
+            <?php if ($data['staff_amount'] < $data['pagination']['end_data']) : ?>
+              <?= $data['staff_amount'] ?>
+            <?php else : ?>
+              <?= $data['pagination']['end_data'] ?>
+            <?php endif; ?>
           <?php endif; ?>
-        <?php endif; ?>
-        of
-        <?= $data['staff_amount']; ?>
-        <?php if ($data['staff_amount'] < 2) : ?>
-          Item
-        <?php else : ?>
-          Items
-        <?php endif; ?>
-      </div>
+          of
+          <?= $data['staff_amount']; ?>
+          <?php if ($data['staff_amount'] < 2) : ?>
+            Item
+          <?php else : ?>
+            Items
+          <?php endif; ?>
+        </div>
 
-      <?php if ($data['pagination']['total_page'] > 1) : ?>
-        <div class="footer-right">
-          <nav class="pagination">
-            <?php if ($data['pagination']['total_page'] >= 2) : ?>
-              <!-- Prev Btn -->
-              <?php if ($data['pagination']['current_page'] != 1) : ?>
-                <li class="prev-btn">
-                  <a class="page-link" href="<?= BASEURL . 'staff/page/' . $data['pagination']['current_page'] - 1 ?>" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span> Prev
-                  </a>
-                </li>
-              <?php endif; ?>
-              <!-- End of Prev Btn -->
-
-              <!-- Pagination Page -->
-              <?php if ($data['pagination']['total_page'] > 5) : ?>
-                <?php
-                $end_page_number = $data['pagination']['end_number'];
-                $total_page = $data['pagination']['total_page'];
-
-                if ($end_page_number >= $total_page) :
-                ?>
-                  <li class="page-item">
-                    <a class="page-link" href="<?= BASEURL . 'staff/page/' . 1 ?>">1</a>
+        <?php if ($data['pagination']['total_page'] > 1) : ?>
+          <div class="footer-right">
+            <nav class="pagination">
+              <?php if ($data['pagination']['total_page'] >= 2) : ?>
+                <!-- Prev Btn -->
+                <?php if ($data['pagination']['current_page'] != 1) : ?>
+                  <li class="prev-btn">
+                    <a class="page-link" href="<?= BASEURL . 'staff/page/' . $data['pagination']['current_page'] - 1 ?>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span> Prev
+                    </a>
                   </li>
+                <?php endif; ?>
+                <!-- End of Prev Btn -->
+
+                <!-- Pagination Page -->
+                <?php if ($data['pagination']['total_page'] > 5) : ?>
+                  <?php
+                  $end_page_number = $data['pagination']['end_number'];
+                  $total_page = $data['pagination']['total_page'];
+
+                  if ($end_page_number >= $total_page) :
+                  ?>
+                    <li class="page-item">
+                      <a class="page-link" href="<?= BASEURL . 'staff/page/' . 1 ?>">1</a>
+                    </li>
+                    <li class="page-item dots">
+                      <a class="page-link">...</a>
+                    </li>
+                  <?php endif; ?>
+                <?php endif; ?>
+
+                <?php for ($page_number = $data['pagination']['start_number']; $page_number <= $data['pagination']['end_number']; $page_number++) : ?>
+                  <?php if ($page_number == $data['pagination']['current_page']) : ?>
+                    <li class="page-item active">
+                      <a class="page-link" href="<?= BASEURL . 'staff/page/' . $page_number ?>">
+                        <?= $page_number; ?>
+                      </a>
+                    </li>
+                  <?php else : ?>
+                    <li class="page-item">
+                      <a class="page-link" href="<?= BASEURL . 'staff/page/' . $page_number  ?>">
+                        <?= $page_number; ?>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                <?php endfor; ?>
+
+
+                <?php
+                if ($data['pagination']['end_number'] != $data['pagination']['total_page']) :
+                ?>
                   <li class="page-item dots">
                     <a class="page-link">...</a>
                   </li>
-                <?php endif; ?>
-              <?php endif; ?>
-
-              <?php for ($page_number = $data['pagination']['start_number']; $page_number <= $data['pagination']['end_number']; $page_number++) : ?>
-                <?php if ($page_number == $data['pagination']['current_page']) : ?>
-                  <li class="page-item active">
-                    <a class="page-link" href="<?= BASEURL . 'staff/page/' . $page_number ?>">
-                      <?= $page_number; ?>
-                    </a>
-                  </li>
-                <?php else : ?>
                   <li class="page-item">
-                    <a class="page-link" href="<?= BASEURL . 'staff/page/' . $page_number  ?>">
-                      <?= $page_number; ?>
+                    <a class="page-link" href="<?= BASEURL . 'staff/page/' . $data['pagination']['total_page'] ?>">
+                      <?= $data['pagination']['total_page']; ?>
+                    </a>
+                  </li>
+                <?php endif ?>
+                <!-- End of Pagination Page -->
+
+                <!-- Next Btn -->
+                <?php if ($data['pagination']['current_page'] != $data['pagination']['total_page']) : ?>
+                  <li class="next-btn">
+                    <a class="page-link" href="<?= BASEURL . 'staff/page/' . $data['pagination']['current_page'] + 1 ?>" aria-label="Next">
+                      Next <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
                 <?php endif; ?>
-              <?php endfor; ?>
-
-
-              <?php
-              if ($data['pagination']['end_number'] != $data['pagination']['total_page']) :
-              ?>
-                <li class="page-item dots">
-                  <a class="page-link">...</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="<?= BASEURL . 'staff/page/' . $data['pagination']['total_page'] ?>">
-                    <?= $data['pagination']['total_page']; ?>
-                  </a>
-                </li>
-              <?php endif ?>
-              <!-- End of Pagination Page -->
-
-              <!-- Next Btn -->
-              <?php if ($data['pagination']['current_page'] != $data['pagination']['total_page']) : ?>
-                <li class="next-btn">
-                  <a class="page-link" href="<?= BASEURL . 'staff/page/' . $data['pagination']['current_page'] + 1 ?>" aria-label="Next">
-                    Next <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
+                <!-- End of Next Btn -->
               <?php endif; ?>
-              <!-- End of Next Btn -->
-            <?php endif; ?>
-          </nav>
-        </div>
-      <?php endif; ?>
-    </div>
-    <!-- End of Staff Footer -->
+            </nav>
+          </div>
+        <?php endif; ?>
+      </div>
+      <!-- End of Staff Footer -->
+    <?php endif; ?>
   </div>
 </div>
 

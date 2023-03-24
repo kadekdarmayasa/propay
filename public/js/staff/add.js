@@ -67,7 +67,7 @@ firstForm.addEventListener('keyup', (e) => {
 			e.target.classList.add('error');
 			errorMessage('username-message', 'Please enter a valid username');
 		} else {
-			checkAvailability('username', e.target.value, 'http://localhost/propay-payment-system/staff/check_staff');
+			checkAvailability('username', e.target.value, 'http://localhost/propay/staff/check_action');
 		}
 	}
 
@@ -100,7 +100,7 @@ firstForm.addEventListener('keyup', (e) => {
 
 async function insertStaffToDatabase(staff_data) {
 	const data = staff_data;
-	const url = 'http://localhost/propay-payment-system/staff/add_staff';
+	const url = 'http://localhost/propay/staff/insert_action';
 
 	const response = await fetch(url, {
 		method: 'POST',

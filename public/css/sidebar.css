@@ -1,0 +1,239 @@
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 280px;
+	padding: 20px 20px;
+	background-color: var(--sidebar-bg);
+	transition: all 0.3s ease;
+	overflow: auto;
+}
+
+.sidebar.close {
+	width: 107px;
+}
+
+.brand .title-logo {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.2em;
+	padding: 0 0.7em;
+}
+
+.brand img {
+	margin-right: 0.4em;
+}
+
+.brand .brand-name {
+	font-size: 1.6rem;
+	font-weight: 600;
+	color: var(--black-color);
+	display: block;
+}
+
+body.dark .brand .brand-name {
+	color: var(--white-color);
+}
+
+.sidebar.close :is(.brand-name, li a .link-name) {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.sidebar.close ~ :is(.main-content) {
+	left: 107px;
+	width: calc(100% - 107px);
+}
+
+.nav-links li {
+	margin-top: 0.8em;
+}
+
+.nav-links li:first-child {
+	margin-top: 1.4em;
+}
+
+.menu-items {
+	display: flex;
+	height: calc(100% - 60px);
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.menu-items li:not(.mode) {
+	cursor: pointer;
+}
+
+.menu-items li a {
+	padding: 0 1em;
+}
+
+.menu-items :is(li a:hover, li.active a) {
+	border-right: 2px solid var(--primary-color);
+	background-color: var(--blue-color-100);
+}
+
+body.dark .menu-items :is(li:not(.mode) a:hover, li:not(.mode).active a) {
+	background-color: rgba(var(--black-opacity), 0.3);
+}
+
+.menu-items :is(li a:hover span, li.active a span) {
+	color: var(--primary-color);
+}
+
+.menu-items li:not(.mode) a:hover svg :is(rect, path, line),
+.menu-items li:not(.mode).active svg :is(rect, path, line) {
+	stroke: var(--primary-color);
+}
+
+.menu-items li.mode a:hover {
+	background-color: transparent;
+	border: none;
+}
+
+.menu-items li.mode a:hover span {
+	color: var(--gray-color-200);
+}
+
+.menu-items li a {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	text-decoration: none;
+	position: relative;
+}
+
+.menu-items li a svg:not(#sub-menu-toggler) {
+	width: 30px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--gray-color-300);
+	margin-right: 0.8em;
+	overflow: visible;
+}
+
+.menu-items li a #sub-menu-toggler {
+	margin-left: auto;
+	height: 15px;
+	width: 15px;
+	transition: transform 0.3s ease;
+}
+
+#sub-menu-toggler path {
+	stroke-width: 4px;
+}
+
+.menu-items li a .link-name {
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--gray-color-200);
+}
+
+body.dark .menu-items li a .link-name {
+	color: var(--gray-color-300);
+}
+
+.menu-items .sub-menu {
+	background-color: var(--blue-color-100);
+	margin-top: 0.8em;
+	border-radius: 4px;
+	padding: 0 1em;
+	height: 0;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	margin-bottom: 1.5em;
+}
+
+.sidebar.close .menu-items .sub-menu {
+	display: none;
+}
+
+.menu-items li.active .sub-menu {
+	height: auto;
+	padding: 1em;
+}
+
+body.dark .sub-menu {
+	background-color: var(--black-color);
+}
+
+.menu-items .sub-menu li:first-child {
+	margin-top: 0;
+}
+
+.menu-items .sub-menu li a {
+	color: var(--primary-color);
+	font-weight: 500;
+}
+
+.menu-items .sub-menu :is(li .link-name) {
+	color: var(--gray-color-300);
+	border-right: none;
+}
+
+.menu-items .sub-menu :is(li.sub-menu-active .link-name, li .link-name:hover) {
+	color: var(--primary-color);
+	border-right: none;
+}
+
+.logout-mode hr {
+	margin-bottom: 0.8em;
+}
+
+.sidebar.close .logout-mode .mode a svg {
+	opacity: 0;
+}
+
+.mode {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+}
+
+.mode-toggle {
+	position: absolute;
+	right: 14px;
+	height: 50px;
+	min-width: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.mode-toggle .switch {
+	position: relative;
+	display: inline-block;
+	height: 22px;
+	width: 40px;
+	border-radius: 25px;
+	background-color: var(--gray-color-100);
+}
+
+.switch::before {
+	content: '';
+	position: absolute;
+	left: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 15px;
+	width: 15px;
+	background-color: #fff;
+	border-radius: 50%;
+	transition: all 0.3s ease-in-out;
+}
+
+body.dark .switch:before {
+	left: 20px;
+}
+
+body.dark .switch {
+	background-color: var(--primary-color);
+}
+
+.sidebar.close .mode-toggle {
+	right: 34px;
+}

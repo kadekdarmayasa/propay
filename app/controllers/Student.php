@@ -42,6 +42,36 @@ class Student extends Controller implements Actions
     $this->view('templates/footer', $data, 'student/add');
   }
 
+  public function update($sin)
+  {
+    if (!isset($_SESSION['user'])) {
+      header('Location: ' . BASEURL . 'auth/login');
+      exit;
+    }
+
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
+
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $data['name'] = $_SESSION['user']['staff_name'];
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
+    $data['page'] = 1;
+    $data['title'] = 'Propay - Student';
+    $data['breadcrumb'] = 'Student/Update';
+    $data['student'] = $this->model("Student_Model")->getStudentBySIN($sin);
+    $data['class'] = $this->model('Class_Model')->getAllClasses();
+    $data['religions'] = ['Hindu', 'Islam', 'Christian', 'Buddha', 'Kong Hu Cu'];
+    $data['payment'] = $this->model('Payment_Model')->getPaymentsBySIN($sin);
+    $this->view('templates/header', $data, 'student/update');
+    $this->view('templates/sidebar', $data, 'student/update');
+    $this->view('templates/top-bar', $data, 'student/update');
+    $this->view('student/update', $data, 'student/update');
+    $this->view('templates/footer', $data, 'student/update');
+  }
+
   public function page($page)
   {
     if (!isset($_SESSION['user'])) {
@@ -162,13 +192,10 @@ class Student extends Controller implements Actions
     if (isset($data['sin'])) {
       $key = 'SIN';
       $student = $this->model("Student_Model")->getStudentBySIN($data['sin']);
-    }
-
-    if (isset($data['nsn'])) {
+    } else if (isset($data['nsn'])) {
       $key = 'NSN';
       $student = $this->model("Student_Model")->getStudentByNSN($data['nsn']);
     }
-
 
     if ($student) {
       $result = [
@@ -189,6 +216,34 @@ class Student extends Controller implements Actions
 
   public function update_action()
   {
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+    $result = $this->model("Student_Model")->updateStudent($data);
+
+    if ($result['row_count']  > 0) {
+      $response = [
+        'status' => 'success',
+        'message' => 'Student has been successfully updated',
+        'sin' =>  $result['sin'],
+        'url' => BASEURL . 'student/index',
+      ];
+      file_put_contents('php://output', json_encode($response));
+    } else if ($result['row_count'] == 0) {
+      $response = [
+        'status' => 'nothing-update',
+        'message' => 'No student data update',
+        'sin' =>  $result['sin'],
+        'url' => BASEURL . 'student/index',
+      ];
+      file_put_contents('php://output', json_encode($response));
+    } else {
+      $response = [
+        'status' => 'error',
+        'message' => 'Failed to update student',
+        'url' => BASEURL . 'student/index',
+      ];
+      file_put_contents('php://output', json_encode($response));
+    }
   }
 
   public function delete_action($sin)

@@ -183,6 +183,34 @@ class Student extends Controller implements Actions
     $this->view('templates/footer', $data, 'student/index');
   }
 
+  public function detail($sin)
+  {
+    if (!isset($_SESSION['user'])) {
+      header('Location: ' . BASEURL . 'auth/login');
+      exit;
+    }
+
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+
+
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $data['name'] = $_SESSION['user']['staff_name'];
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
+    $data['title'] = 'Propay - Student';
+    $data['breadcrumb'] = 'Student/Detail';
+    $data['page'] = 1;
+    $data['student'] = $this->model('Student_Model')->getStudentBySIN($sin);
+    $data['class'] = $this->model('Class_Model')->getClassById($data['student']['class_id']);
+    $this->view('templates/header', $data, 'student/detail');
+    $this->view('templates/sidebar', $data, 'student/detail');
+    $this->view('templates/top-bar', $data, 'student/detail');
+    $this->view('student/detail', $data, 'student/detail');
+    $this->view('templates/footer', $data, 'student/detail');
+  }
+
 
   public function check_action()
   {

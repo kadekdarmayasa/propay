@@ -19,7 +19,7 @@ body.dark .main-content {
 	text-align: center;
 }
 
-:is(.staff-container, .class-container, .student-container) {
+.table-container {
 	background-color: white;
 	padding: 2em;
 	max-width: 900px;
@@ -28,11 +28,11 @@ body.dark .main-content {
 	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-body.dark :is(.staff-container, .class-container, .student-container) {
+body.dark .table-container {
 	background-color: var(--sidebar-bg);
 }
 
-:is(.staff-container, .class-container, .student-container) .header {
+.table-container .header {
 	display: flex;
 	justify-content: space-between;
 }
@@ -393,16 +393,21 @@ body.dark .footer-left {
 	color: var(--primary-color);
 }
 
-:is(.update-class-container, .update-staff-container, .add-class-container, .add-staff-container) {
+.main-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-:is(.add-staff-container, .update-class-container, .add-class-container, .update-staff-container) .meta {
+.main-container .meta {
 	text-align: center;
 	margin: 0.5em auto 1em;
 	display: block;
+}
+
+.main-container form {
+	display: flex;
+	flex-direction: column;
 }
 
 .meta-title {
@@ -417,9 +422,4 @@ body.dark .footer-left {
 
 body.dark :is(.meta-title) {
 	color: var(--white-color);
-}
-
-:is(.update-class-container, .update-staff-container, .add-class-container, .add-staff-container) form {
-	display: flex;
-	flex-direction: column;
 }

@@ -129,7 +129,7 @@ class Student_Model
 
   public function getStudentByAny($keyword)
   {
-    $query = 'SELECT * FROM ' . $this->table . ' WHERE SIN LIKE :keyword OR student_name LIKE :keyword OR term LIKE :keyword OR enrollment_date LIKE :keyword OR class_id LIKE :keyword';
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE sin LIKE :keyword OR student_name LIKE :keyword OR term LIKE :keyword OR enrollment_date LIKE :keyword OR class_id LIKE :keyword';
 
     $this->db->query($query);
     $this->db->bind(':keyword', "%$keyword%");
@@ -141,7 +141,7 @@ class Student_Model
   public function getStudentWithLimit($start_data, $total_data_per_page, $keyword = null)
   {
     if ($keyword != null) {
-      $query = "SELECT * FROM " . $this->table . "WHERE SIN LIKE :keyword OR student_name LIKE :keyword OR term LIKE :keyword OR enrollment_date LIKE :keyword OR class_id LIKE :keyword LIMIT :start_data, :total_data_per_page";
+      $query = "SELECT * FROM " . $this->table . " WHERE sin LIKE :keyword OR student_name LIKE :keyword OR term LIKE :keyword OR enrollment_date LIKE :keyword OR class_id LIKE :keyword LIMIT :start_data, :total_data_per_page";
 
       $this->db->query($query);
       $this->db->bind(':keyword', "%$keyword%", PDO::PARAM_STR);

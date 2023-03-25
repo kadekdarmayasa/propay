@@ -1,0 +1,79 @@
+.detail-student-container {
+	margin: auto;
+	display: grid;
+	max-width: 1020px;
+	grid-template-columns: repeat(12, 1fr);
+	grid-auto-flow: dense;
+	grid-auto-rows: auto;
+	gap: 20px;
+}
+
+.personal.information {
+	grid-row-end: span 1;
+	grid-column-end: span 6;
+}
+
+.school.information {
+	height: 80%;
+	grid-row-end: span 2;
+	grid-column-end: span 6;
+}
+.auth.information {
+	grid-column-end: span 6;
+}
+
+.detail-student-container .information {
+	background-color: rgba(255, 255, 255, 0.6);
+	padding: 3em 2.8em;
+	border-radius: 10px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+	transition: all 0.3s ease;
+	backdrop-filter: blur(4px);
+}
+
+body.dark .detail-student-container .information {
+	background-color: var(--sidebar-bg);
+}
+
+.information .header {
+	color: var(--black-color);
+	font-size: var(--heading-4);
+	font-weight: 700;
+	margin-bottom: 2.6em;
+	text-align: center;
+}
+
+body.dark .information .header {
+	color: var(--white-color);
+}
+
+.information .field {
+	margin-top: 1.6em;
+}
+
+.information .field .name {
+	color: var(--gray-color-300);
+	font-weight: 400;
+	display: block;
+	margin-bottom: 0.4em;
+}
+
+body.dark .information .field .name {
+	color: var(--gray-color-200);
+}
+
+.information .field .value {
+	color: var(--black-color);
+	font-weight: 500;
+}
+
+body.dark .information .field .value {
+	color: var(--white-color);
+}
+
+.information .field .value.password {
+	color: var(--black-color);
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

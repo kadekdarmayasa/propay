@@ -13,9 +13,9 @@
     <script src="<?= BASEURL . 'public/js/dashboard/index.js' ?>" type="module"></script>
   <?php endif; ?>
 
-  <?php
-  $tabs = explode('/', $activeTab);
-  if ($tabs[0] == 'class') : ?>
+  <?php $tabs = explode('/', $activeTab); ?>
+
+  <?php if ($tabs[0] == 'class') : ?>
     <?php if ($tabs[1] == 'index') : ?>
       <script src="<?= BASEURL . 'public/js/class/index.js' ?>" type="module"></script>
     <?php elseif ($tabs[1] == 'update') : ?>
@@ -26,10 +26,7 @@
   <?php endif; ?>
 
 
-  <?php
-  $tabs = explode('/', $activeTab);
-  if ($tabs[0] == 'staff') :
-  ?>
+  <?php if ($tabs[0] == 'staff') : ?>
     <?php if ($tabs[1] == 'index') : ?>
       <script src="<?= BASEURL . 'public/js/staff/index.js' ?>" type="module"></script>
     <?php endif; ?>
@@ -41,9 +38,23 @@
 
     <?php if ($tabs[1] == 'update') : ?>
       <script src="<?= BASEURL . 'public/js/staff/update.js' ?>" type="module"></script>
-      <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
     <?php endif; ?>
   <?php endif; ?>
+
+  <?php if ($tabs[0] == 'student') : ?>
+    <?php if ($tabs[1] == 'index') : ?>
+      <script src="<?= BASEURL . 'public/js/student/index.js' ?>" type="module"></script>
+    <?php endif; ?>
+
+    <?php if ($tabs[1] == 'add') : ?>
+      <script src="<?= BASEURL . 'public/js/student/add.js' ?>" type="module"></script>
+      <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
+    <?php endif; ?>
+
+    <?php if ($tabs[1] == 'update') : ?>
+      <script src="<?= BASEURL . 'public/js/student/update.js' ?>" type="module"></script>
+    <?php endif; ?>
+  <?php endif ?>
 <?php endif ?>
 
 </body>

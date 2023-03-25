@@ -19,7 +19,7 @@ body.dark .main-content {
 	text-align: center;
 }
 
-:is(.staff-container, .class-container) {
+:is(.staff-container, .class-container, .student-container) {
 	background-color: white;
 	padding: 2em;
 	max-width: 900px;
@@ -28,11 +28,11 @@ body.dark .main-content {
 	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-body.dark :is(.staff-container, .class-container) {
+body.dark :is(.staff-container, .class-container, .student-container) {
 	background-color: var(--sidebar-bg);
 }
 
-:is(.staff-container, .class-container) .header {
+:is(.staff-container, .class-container, .student-container) .header {
 	display: flex;
 	justify-content: space-between;
 }
@@ -146,7 +146,7 @@ body.dark .row-selected svg :is(path, line, circle) {
 	stroke: var(--white-color);
 }
 
-.right-header :is(.add-class-btn, .add-staff-btn) {
+.right-header :is(.add-class-btn, .add-staff-btn, .add-student-btn) {
 	background-color: var(--primary-color);
 	height: 50px;
 	width: 140px;
@@ -159,17 +159,17 @@ body.dark .row-selected svg :is(path, line, circle) {
 	font-weight: 500;
 }
 
-:is(.add-class-btn, .add-staff-btn):hover {
+:is(.add-class-btn, .add-staff-btn, .add-student-btn):hover {
 	box-shadow: 0 5px 10px rgba(var(--primary-color-opacity), 0.2);
 }
 
-:is(.add-class-btn, .add-staff-btn) svg {
+:is(.add-class-btn, .add-staff-btn, .add-student-btn) svg {
 	height: 24px;
 	margin-right: 0.6em;
 	width: 24px;
 }
 
-:is(.add-class-btn, .add-staff-btn) svg :is(path, line, rect) {
+:is(.add-class-btn, .add-staff-btn, .add-student-btn) svg :is(path, line, rect) {
 	stroke: var(--white-color) !important;
 }
 
@@ -291,11 +291,6 @@ body.dark .data table td {
 :is(.update-btn, .delete-btn, .detail-btn) svg :is(path, rect, line, circle) {
 	stroke-width: 1px !important;
 	stroke: var(--black-color);
-}
-
-:is(.update-btn, .delete-btn, .detail-btn):hover .tooltip {
-	visibility: visible;
-	opacity: 1;
 }
 
 .detail-btn svg :is(path, rect, line, circle) {

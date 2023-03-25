@@ -45,7 +45,7 @@ submitBtn.addEventListener('click', async (e) => {
       You just updated student with sin ${response.sin},<br>lets see the list of student by clicking the button below
     `;
 		const view = 'student';
-		const listOfStaffUrl = response.url;
+		const lisOfStudentUrl = response.url;
 		const imgSource = `${url}public/images/completed.svg`;
 
 		illustrationComponent.setAttribute('title', title);
@@ -53,9 +53,32 @@ submitBtn.addEventListener('click', async (e) => {
 		illustrationComponent.setAttribute('src', imgSource);
 		illustrationComponent.setAttribute('description', description);
 		illustrationComponent.setAttribute('view', view);
-		illustrationComponent.setAttribute('url', listOfStaffUrl);
+		illustrationComponent.setAttribute('url', lisOfStudentUrl);
 		illustrationComponent.firstElementChild.style.opacity = '1';
 		illustrationComponent.firstElementChild.style.display = 'flex';
+	} else if (response.status == 'nothing-update') {
+		document.querySelector('form').reset();
+		document.querySelector('.first-content').style.display = 'none';
+
+		const title = 'No Data Change';
+		const message = response.message;
+		const description = `
+			There is no student data change with sin ${response.sin},<br>lets see the list of student by clicking the button below
+		`;
+		const view = 'student';
+		const listOfStudentUrl = response.url;
+		const src = `${url}public/images/no-data-update-illustration.svg`;
+
+		illustrationComponent.setAttribute('title', title);
+		illustrationComponent.setAttribute('message', message);
+		illustrationComponent.setAttribute('description', description);
+		illustrationComponent.setAttribute('view', view);
+		illustrationComponent.setAttribute('url', listOfStudentUrl);
+		illustrationComponent.setAttribute('src', src);
+
+		illustrationComponent.firstElementChild.style.opacity = '1';
+		illustrationComponent.firstElementChild.style.display = 'flex';
+		illustrationImage.style.width = '40%';
 	}
 });
 

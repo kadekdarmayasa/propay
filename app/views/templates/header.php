@@ -34,6 +34,10 @@
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/illustration.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/student/index.css' ?>">
+
+      <?php if ($tabs[1] == 'detail') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/student/detail.css' ?>">
+      <?php endif; ?>
     <?php endif; ?>
 
 

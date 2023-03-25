@@ -87,6 +87,32 @@ class Student_Model
     ];
   }
 
+  public function updateStudent($data)
+  {
+    $sin = htmlspecialchars($data['sin']);
+    $student_name = htmlspecialchars($data['student-name']);
+    $date_of_birth = htmlspecialchars($data['date-of-birth']);
+    $religion = htmlspecialchars($data['religion']);
+    $address = htmlspecialchars($data['address']);
+    $class_id = htmlspecialchars($data['class_id']);
+
+    $query = 'UPDATE ' . $this->table . ' SET student_name = :student_name, date_of_birth = :date_of_birth, religion = :religion, address = :address, class_id = :class_id WHERE sin = :sin';
+
+    $this->db->query($query);
+    $this->db->bind(':sin', $sin);
+    $this->db->bind(':student_name', $student_name);
+    $this->db->bind(':date_of_birth', $date_of_birth);
+    $this->db->bind(':religion', $religion);
+    $this->db->bind(':address', $address);
+    $this->db->bind(':class_id', $class_id);
+    $this->db->execute();
+
+    return [
+      'row_count' => $this->db->rowCount(),
+      'sin' => $sin,
+    ];
+  }
+
   public function getStudentByAny($keyword)
   {
     $query = 'SELECT * FROM ' . $this->table . ' WHERE SIN LIKE :keyword OR student_name LIKE :keyword OR term LIKE :keyword OR enrollment_date LIKE :keyword OR class_id LIKE :keyword';

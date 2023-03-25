@@ -1,0 +1,16 @@
+.right-header .add-student-btn {
+	width: 160px;
+}
+
+.student-name {
+	overflow-x: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis !important;
+	max-width: 180px !important;
+	margin-top: 0.2em;
+	position: relative;
+}
+
+tr:hover .student-name {
+	white-space: normal;
+}

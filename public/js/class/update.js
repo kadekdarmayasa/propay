@@ -1,77 +1,72 @@
-import '../components/illustration.js';
 import { checkAvailability } from '../helpers/check_availability.js';
+import { prepIllustrationComp, showIllustrationComp } from '../helpers/illustration.js';
 
 const submitBtn = document.getElementById('submit-btn');
-const illustrationComponent = document.querySelector('illustration-element');
-const illustrationImage = document.querySelector('.illustration-image');
 const url = location.href.split('classes', 1).toString();
 const form = document.querySelector('form');
 
 form.addEventListener('keyup', function (e) {
-	if (e.target.id == 'class_name') {
+	const prevClassName = document.getElementById('prev_class_name');
+
+	if (e.target.id == 'class_name' && prevClassName.value != e.target.value) {
 		checkAvailability('class-name', e.target.value, 'http://localhost/propay/classes/check_action');
 	}
+
+	const allInputs = Array.from(document.querySelectorAll('.input'));
+	const isContainError = allInputs.some((input) => input.classList.contains('error') || input.value == '');
+
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+});
+
+form.addEventListener('change', function () {
+	const select = document.getElementById('major_name');
+	submitBtn.style.visibility = select.value == '' ? 'hidden' : 'visible';
 });
 
 submitBtn.addEventListener('click', async (e) => {
+	e.preventDefault();
+
 	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select')];
-	const isEmpty = inputs.filter((input) => input.value === '');
 
-	if (!isEmpty.length) {
-		e.preventDefault();
+	const data = {};
+	inputs.forEach((input) => {
+		data[input.id] = input.value;
+	});
 
-		const data = {};
-		inputs.forEach((input) => {
-			data[input.id] = input.value;
-		});
+	const response = await updateClass(data);
 
-		const response = await updateClass(data);
-		if (response.status == 'success') {
-			form.reset();
-			document.querySelector('.first-content').style.display = 'none';
+	if (response.status == 'success') {
+		form.reset();
+		document.querySelector('.first-content').style.display = 'none';
 
-			const title = 'Congratulations';
-			const message = response.message;
-			const description = `
+		const illustrationProps = {
+			title: 'Congratulations',
+			message: response.message,
+			description: `
 			Class with id ${response.class_id} has been successfully updated,<br>lets see the list of class by clicking the button below
-		`;
-			const view = 'class';
-			const listOfStaffUrl = response.url;
-			const src = `${url}public/images/completed.svg`;
+		`,
+			view: 'class',
+			redirectUrl: response.url,
+			illustrationImage: `${url}public/images/completed.svg`,
+		};
 
-			illustrationComponent.setAttribute('title', title);
-			illustrationComponent.setAttribute('message', message);
-			illustrationComponent.setAttribute('description', description);
-			illustrationComponent.setAttribute('view', view);
-			illustrationComponent.setAttribute('url', listOfStaffUrl);
-			illustrationComponent.setAttribute('src', src);
+		showIllustrationComp(prepIllustrationComp(illustrationProps));
+	} else if (response.status == 'nothing-update') {
+		document.querySelector('form').reset();
+		document.querySelector('.first-content').style.display = 'none';
 
-			illustrationComponent.firstElementChild.style.opacity = '1';
-			illustrationComponent.firstElementChild.style.display = 'flex';
-		} else if (response.status == 'nothing-update') {
-			document.querySelector('form').reset();
-			document.querySelector('.first-content').style.display = 'none';
+		const illustrationProps = {
+			title: 'No Data Change',
+			message: response.message,
+			description: `
+			There is no data class change with id ${response.class_id},<br>lets see the list of class by clicking the button below
+		`,
+			view: 'class',
+			redirectUrl: response.url,
+			illustrationImage: `${url}public/images/no-data-update-illustration.svg`,
+		};
 
-			const title = 'No Data Change';
-			const message = response.message;
-			const description = `
-			There is no data change in class ${response.class_name},<br>lets see the list of class by clicking the button below
-		`;
-			const view = 'class';
-			const listOfStaffUrl = response.url;
-			const src = `${url}public/images/no-data-update-illustration.svg`;
-
-			illustrationComponent.setAttribute('title', title);
-			illustrationComponent.setAttribute('message', message);
-			illustrationComponent.setAttribute('description', description);
-			illustrationComponent.setAttribute('view', view);
-			illustrationComponent.setAttribute('url', listOfStaffUrl);
-			illustrationComponent.setAttribute('src', src);
-
-			illustrationComponent.firstElementChild.style.opacity = '1';
-			illustrationComponent.firstElementChild.style.display = 'flex';
-			illustrationImage.style.width = '40%';
-		}
+		showIllustrationComp(prepIllustrationComp(illustrationProps));
 	}
 });
 

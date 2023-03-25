@@ -54,9 +54,12 @@ overlayDeleteBtn.addEventListener('click', function (e) {
 `;
 			overlayMetaTitle.textContent = 'Congratulations';
 			overlayMetaDescription.textContent = ` Class ${data.class_name} has been successfully deleted`;
+
 			overlay.classList.add('show');
+
 			overlayDeleteBtn.style.display = 'none';
 			overlayCancelBtn.textContent = 'Close';
+
 			overlayCancelBtn.addEventListener('click', () => {
 				location.reload();
 			});

@@ -80,7 +80,7 @@ class Student extends Controller implements Actions
     }
 
     if ($page < 1) {
-      header('Location: ' . BASEURL . 'staff/index');
+      header('Location: ' . BASEURL . 'student/index');
       exit;
     }
 
@@ -109,7 +109,7 @@ class Student extends Controller implements Actions
       $_SESSION['search_student_keyword'] = $_POST['student-field'];
 
       if ($total_data < 6) {
-        header('location: ' . BASEURL . 'staff/index');
+        header('location: ' . BASEURL . 'student/index');
         exit;
       }
     }

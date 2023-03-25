@@ -248,6 +248,17 @@ class Student extends Controller implements Actions
 
   public function delete_action($sin)
   {
+    file_get_contents('php://input');
+    $this->model('Payment_Model')->deletePayment($sin);
+    $student['row_count'] = $this->model("Student_Model")->deleteStudent($sin);
+
+    if ($student['row_count']) {
+      file_put_contents('php://output', json_encode([
+        'status_message' => 'success',
+        'status_code' => 200,
+        'sin' => $student['sin']
+      ]));
+    }
   }
 
   public function insert_action()

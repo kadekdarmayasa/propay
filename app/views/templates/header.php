@@ -29,6 +29,18 @@
 
     <?php $tabs = explode('/', $activeTab); ?>
 
+    <?php if ($tabs[0] == 'student') : ?>
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/student/index.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/illustration.css' ?>">
+
+      <?php if ($tabs[1] == 'add') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/student/add.css' ?>">
+      <?php endif; ?>
+    <?php endif; ?>
+
+
     <?php if ($tabs[0] == 'class') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/index.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">

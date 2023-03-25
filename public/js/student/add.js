@@ -10,7 +10,6 @@ const prevBtn = document.querySelector('.prev-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const illustrationComponent = document.querySelector('illustration-element');
 const url = location.href.split('student', 1).toString();
-waves;
 nextBtn.style.visibility = 'hidden';
 submitBtn.style.visibility = 'hidden';
 

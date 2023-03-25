@@ -23,4 +23,26 @@ class Payment_Model
 
     return $this->db->rowCount();
   }
+
+  public function deletePayment($sin)
+  {
+    $query = "DELETE FROM " . $this->table . " WHERE sin = :sin";
+
+    $this->db->query($query);
+    $this->db->bind(':sin', $sin);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
+
+  public function getPaymentsBySIN($sin)
+  {
+    $query = "SELECT * FROM " . $this->table  .  " WHERE sin = :sin";
+
+    $this->db->query($query);
+    $this->db->bind(':sin', $sin);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
 }

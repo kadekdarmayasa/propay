@@ -5,11 +5,11 @@
   </div>
 
   <div class="overview">
-    <a href="" class="student">
+    <a href="<?= BASEURL . 'student' ?>" class="student">
       <div class="thumb">
         <img src="<?= BASEURL . 'public/images/student-icon.svg' ?>" alt="Student Icon">
       </div>
-      <h3 class="amount">400</h3>
+      <h3 class="amount"><?= $data['total_student']; ?></h3>
       <p class="desc">Total Student</p>
     </a>
 

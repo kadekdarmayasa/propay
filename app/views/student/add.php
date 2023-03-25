@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div class="add-class-container">
+  <div class="main-container">
     <div class="first-content">
       <div class="meta">
         <h2 class="meta-title">Add New Student</h2>
@@ -142,7 +142,7 @@
               <span>Previous</span>
             </button>
             <button type="submit" name="submit-btn" class="submit-btn">
-              <span>Add Staff</span>
+              <span>Add Student</span>
               <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black" />
                 <path d="M16.3333 8V25" stroke="black" stroke-linecap="round" />

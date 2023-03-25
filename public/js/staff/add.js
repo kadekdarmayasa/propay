@@ -1,7 +1,7 @@
 import '../components/illustration.js';
-import { validatePassword } from '../helpers/password_validation.js';
+import { validatePassword } from '../helpers/validator/password_validation.js';
 import { errorMessage } from '../helpers/error_message.js';
-import { validateUsername } from '../helpers/username_validation.js';
+import { validateUsername } from '../helpers/validator/username_validation.js';
 import { checkAvailability } from '../helpers/check_availability.js';
 
 const firstForm = document.querySelector('.form.first');

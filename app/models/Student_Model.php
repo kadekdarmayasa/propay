@@ -127,6 +127,17 @@ class Student_Model
     ];
   }
 
+  public function getStudentByTerm($term)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE term = :term";
+
+    $this->db->query($query);
+    $this->db->bind(':term', $term);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
+
   public function getStudentByAny($keyword)
   {
     $query = 'SELECT * FROM ' . $this->table . ' WHERE sin LIKE :keyword OR student_name LIKE :keyword OR term LIKE :keyword OR enrollment_date LIKE :keyword OR class_id LIKE :keyword';

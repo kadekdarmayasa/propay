@@ -1,4 +1,4 @@
-import { checkAvailability } from '../helpers/check_availability.js';
+import validateInputs from '../helpers/validator/index.js';
 import { prepIllustrationComp, showIllustrationComp } from '../helpers/illustration.js';
 
 const submitBtn = document.getElementById('submit-btn');
@@ -6,21 +6,18 @@ const url = location.href.split('classes', 1).toString();
 const form = document.querySelector('form');
 
 form.addEventListener('keyup', function (e) {
-	const prevClassName = document.getElementById('prev_class_name');
-
-	if (e.target.id == 'class_name' && prevClassName.value != e.target.value) {
-		checkAvailability('class-name', e.target.value, 'http://localhost/propay/classes/check_action');
-	}
-
-	const allInputs = Array.from(document.querySelectorAll('.input'));
-	const isContainError = allInputs.some((input) => input.classList.contains('error') || input.value == '');
-
+	let isContainError = validateInputs(e.target, 'update-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
-form.addEventListener('change', function () {
-	const select = document.getElementById('major_name');
-	submitBtn.style.visibility = select.value == '' ? 'hidden' : 'visible';
+form.addEventListener('input', function (e) {
+	let isContainError = validateInputs(e.target, 'update-class');
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+});
+
+form.addEventListener('change', function (e) {
+	let isContainError = validateInputs(e.target, 'update-class');
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 submitBtn.addEventListener('click', async (e) => {
@@ -66,7 +63,7 @@ submitBtn.addEventListener('click', async (e) => {
 			illustrationImage: `${url}public/images/no-data-update-illustration.svg`,
 		};
 
-		showIllustrationComp(prepIllustrationComp(illustrationProps));
+		showIllustrationComp(prepIllustrationComp(illustrationProps), 'nothing-update');
 	}
 });
 

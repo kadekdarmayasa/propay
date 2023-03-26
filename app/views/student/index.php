@@ -1,5 +1,30 @@
 <div class="main-content">
   <div class="table-container">
+    <!-- Major Indicator -->
+    <div class="indicators">
+      <div class="indicator se">
+        <div class="circle"></div>
+        <p>SE</p>
+      </div>
+      <div class="indicator cne">
+        <div class="circle"></div>
+        <p>CNE</p>
+      </div>
+      <div class="indicator vcd">
+        <div class="circle"></div>
+        <p>VCD</p>
+      </div>
+      <div class="indicator mm">
+        <div class="circle"></div>
+        <p>MM</p>
+      </div>
+      <div class="indicator an">
+        <div class="circle"></div>
+        <p>AN</p>
+      </div>
+    </div>
+    <!-- Major Indicator -->
+
     <!-- Student Header -->
     <div class="header">
       <div class="left-header">
@@ -18,6 +43,7 @@
         </form>
       </div>
       <div class="right-header">
+
         <div class="row-per-page">
           <p>Rows per page</p>
           <form action="" method="post" style="visibility: hidden; user-select: none; cursor: none; position: absolute;">
@@ -70,7 +96,33 @@
             <tr>
               <td><?= $number++ ?></td>
               <td><?= $data['student'][$i]['sin']; ?></td>
-              <td><?= $data['student'][$i]['class_id']; ?></td>
+              <td>
+                <?php $class =  explode(' ', $data['student'][$i]['class']['class_name']); ?>
+
+                <?php if (in_array('SE', $class)) : ?>
+                  <div class="indicator se">
+                  <?php endif; ?>
+
+                  <?php if (in_array('CNE', $class)) : ?>
+                    <div class="indicator cne">
+                    <?php endif; ?>
+
+                    <?php if (in_array('MM', $class)) : ?>
+                      <div class="indicator mm">
+                      <?php endif; ?>
+
+                      <?php if (in_array('VCD', $class)) : ?>
+                        <div class="indicator vcd">
+                        <?php endif; ?>
+
+                        <?php if (in_array('AN', $class)) : ?>
+                          <div class="indicator an">
+                          <?php endif; ?>
+
+                          <div class="circle"></div>
+                          <?= $data['student'][$i]['class_id']; ?>
+                          </div>
+              </td>
               <td class="student-name"><?= $data['student'][$i]['student_name']; ?></td>
               <td><?= $data['student'][$i]['term']; ?></td>
               <td><?= date('d F Y', strtotime($data['student'][$i]['enrollment_date'])); ?></td>

@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div class="add-class-container">
+  <div class="main-container">
     <div class="first-content">
       <div class="meta">
         <h2 class="meta-title">Add New Class</h2>
@@ -16,7 +16,7 @@
 
         <div class="input-group">
           <label for="major_name">Major Name</label>
-          <select name="major_name" id="major_name" required>
+          <select name="major_name" id="major_name" class="input" required>
             <option value="">-- Select Major --</option>
             <?php foreach ($data['majors'] as $major) : ?>
               <option value="<?= $major ?>"><?= $major ?></option>

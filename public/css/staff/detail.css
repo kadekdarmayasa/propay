@@ -24,7 +24,8 @@ body.dark .detail-staff-container :is(.left-content, .right-content) {
 	color: var(--black-color);
 	font-size: var(--heading-4);
 	font-weight: 700;
-	margin-bottom: 1.5em;
+	margin-bottom: 2.6em;
+	text-align: center;
 }
 
 body.dark :is(.left-content, .right-content) .header {

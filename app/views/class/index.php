@@ -205,7 +205,6 @@
       <!-- End of Classlist Footer -->
     <?php endif; ?>
   </div>
-
 </div>
 
 <over-lay href="<?= BASEURL . 'classes/delete' ?>"></over-lay>

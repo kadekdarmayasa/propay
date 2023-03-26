@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div class="update-staff-container">
+  <div class="main-container">
     <div class="first-content">
       <div class="meta">
         <h2 class="meta-title">Update Staff</h2>
@@ -9,8 +9,7 @@
       <form action="" method="post">
         <input type="hidden" class="input staff_id" name="staff_id" id="staff_id" value="<?= $data['staff']['staff_id'] ?>">
 
-        <!-- Second Form -->
-        <div class="form second">
+        <div class="form">
           <div class="input-group">
             <label for="staff-level">Staff Level</label>
             <select name="staff-level" id="staff-level" class="input" required autofocus="off">
@@ -72,7 +71,6 @@
             </button>
           </div>
         </div>
-        <!-- End of Second Form -->
       </form>
     </div>
 

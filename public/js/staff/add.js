@@ -58,6 +58,7 @@ submitBtn.addEventListener('click', async (e) => {
 	});
 
 	const response = await insertStaffToDatabase(data);
+
 	if (response.status == 'success') {
 		document.querySelector('form').reset();
 		document.querySelector('.first-content').style.display = 'none';
@@ -68,7 +69,7 @@ submitBtn.addEventListener('click', async (e) => {
 			description: `You just add new staff with id ${response.id_staff},<br>lets see the list of staff by clicking the button below`,
 			view: 'staff',
 			redirectUrl: response.url,
-			imgSource: `${url}public/images/completed.svg`,
+			illustrationImage: `${url}public/images/completed.svg`,
 		};
 
 		showIllustrationComp(prepIllustrationComp(illustrationProps), 'success');

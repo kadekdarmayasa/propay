@@ -176,6 +176,9 @@ class Student extends Controller implements Actions
     $data['title'] = 'Propay - Student';
     $data['breadcrumb'] = 'Student';
     $data['keyword'] = $_SESSION['search_student_keyword'] ?? '';
+    for ($i = 0; $i < count($data['student']); $i++) {
+      $data['student'][$i]['class'] = $this->model('Class_Model')->getClassById($data['student'][$i]['class_id']);
+    }
     $this->view('templates/header', $data, 'student/index');
     $this->view('templates/sidebar', $data, 'student/index');
     $this->view('templates/top-bar', $data, 'student' . $page . '/index');

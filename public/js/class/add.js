@@ -1,5 +1,5 @@
 import '../components/illustration.js';
-import { checkAvailability } from '../helpers/check_availability.js';
+import validateInputs from '../helpers/validator/index.js';
 import { prepIllustrationComp, showIllustrationComp } from '../helpers/illustration.js';
 
 const submitBtn = document.getElementById('submit-btn');
@@ -8,30 +8,19 @@ const form = document.querySelector('form');
 submitBtn.style.visibility = 'hidden';
 
 form.addEventListener('keyup', function (e) {
-	let isContainError = validateInputs(e);
+	let isContainError = validateInputs(e.target, 'add-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 form.addEventListener('input', function (e) {
-	let isContainError = validateInputs(e);
+	let isContainError = validateInputs(e.target, 'add-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 form.addEventListener('change', function (e) {
-	let isContainError = validateInputs(e);
+	let isContainError = validateInputs(e.target, 'add-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
-
-function validateInputs(e) {
-	const allInputs = Array.from(document.querySelectorAll('.input'));
-
-	if (e.target.id == 'class_name') {
-		checkAvailability('class-name', e.target.value, 'http://localhost/propay/classes/check_action');
-	}
-
-	const isContainError = allInputs.some((input) => input.classList.contains('error') || input.value == '');
-	return isContainError;
-}
 
 submitBtn.addEventListener('click', async (e) => {
 	e.preventDefault();

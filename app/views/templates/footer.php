@@ -55,6 +55,16 @@
       <script src="<?= BASEURL . 'public/js/student/update.js' ?>" type="module"></script>
     <?php endif; ?>
   <?php endif ?>
+
+  <?php if ($tabs[0] == 'edc') : ?>
+    <?php if ($tabs[1] == 'list') : ?>
+      <script src="<?= BASEURL . 'public/js/edc/list.js' ?>" type="module"></script>
+    <?php endif; ?>
+
+    <?php if ($tabs[1] == 'add_edc_list') : ?>
+      <script src="<?= BASEURL . 'public/js/edc/add_edc_list.js' ?>" type="module"></script>
+    <?php endif; ?>
+  <?php endif; ?>
 <?php endif ?>
 
 </body>

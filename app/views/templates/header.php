@@ -67,6 +67,13 @@
         <link rel="stylesheet" href="<?= BASEURL . 'public/css/staff/detail.css' ?>">
       <?php endif; ?>
     <?php endif; ?>
+
+    <?php if ($tabs[0] == 'edc') : ?>
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/index.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/illustration.css' ?>">
+    <?php endif; ?>
   <?php endif; ?>
 </head>
 

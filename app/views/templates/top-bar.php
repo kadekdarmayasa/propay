@@ -21,11 +21,15 @@
               <?php if ($breadcrumbs[$i] == $breadcrumbs[count($breadcrumbs) - 1]) : ?>
                 <a><?= $breadcrumbs[$i]; ?></a>
               <?php else : ?>
-                <a href="<?= BASEURL . strtolower($breadcrumbs[$i]) . '/page/' . $data['page']  ?>" class="link">
-                  <?= $breadcrumbs[$i]; ?>
-                </a>
-                <span>/</span>
-              <?php endif; ?>
+                <?php if ($breadcrumbs[$i] == 'EDC List') : ?>
+                  <a href="<?= BASEURL . 'edc_list' . '/page/' . $data['page']  ?>" class="link">
+                  <?php else : ?>
+                    <a href="<?= BASEURL . strtolower($breadcrumbs[$i]) . '/page/' . $data['page']  ?>" class="link">
+                    <?php endif; ?>
+                    <?= $breadcrumbs[$i]; ?>
+                    </a>
+                    <span>/</span>
+                  <?php endif; ?>
             </li>
           <?php endfor; ?>
         <?php else : ?>

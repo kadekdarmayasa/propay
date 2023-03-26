@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div class="update-class-container">
+  <div class="main-container">
     <div class="first-content">
       <div class="meta">
         <h2 class="meta-title">Update Class</h2>
@@ -8,6 +8,7 @@
 
       <form action="" method="post">
         <input type="hidden" class="input class_id" name="class_id" id="class_id" value="<?= $data['class']['class_id'] ?>">
+        <input type="hidden" class="input prev_class_name" name="prev_class_name" id="prev_class_name" value="<?= $data['class']['class_name'] ?>">
 
         <div class="input-group">
           <label for="class_name">Class Name</label>
@@ -18,7 +19,8 @@
 
         <div class="input-group">
           <label for="major_name">Major Name</label>
-          <select name="major_name" id="major_name" required>
+          <select name="major_name" id="major_name" required class="input">
+            <option value="">-- Select Major --</option>
             <?php foreach ($data['majors'] as $major) : ?>
               <?php if ($data['class']['major_name'] == $major) : ?>
                 <option value="<?= $major ?>" selected><?= $major ?></option>

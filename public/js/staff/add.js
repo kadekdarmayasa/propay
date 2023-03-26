@@ -24,27 +24,32 @@ prevBtn.addEventListener('click', () => {
 
 firstForm.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
-	submitBtn.style.visibility = isContainError ? 'hidden' : 'hidden';
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 firstForm.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
-	submitBtn.style.visibility = isContainError ? 'hidden' : 'hidden';
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+});
+
+firstForm.addEventListener('change', function (e) {
+	const isContainError = validateInputs(e.target, 'add-staff', this);
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 secondForm.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
-	submitBtn.style.visibility = isContainError ? 'hidden' : 'hidden';
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 secondForm.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
-	submitBtn.style.visibility = isContainError ? 'hidden' : 'hidden';
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 secondForm.addEventListener('change', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
-	submitBtn.style.visibility = isContainError ? 'hidden' : 'hidden';
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 submitBtn.addEventListener('click', async (e) => {

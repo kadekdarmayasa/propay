@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div class="add-staff-container">
+  <div class="main-container">
     <div class="first-content">
       <div class="meta">
         <h2 class="meta-title">Add New Staff</h2>

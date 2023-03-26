@@ -278,7 +278,7 @@ class Student extends Controller implements Actions
   {
     file_get_contents('php://input');
     $this->model('Payment_Model')->deletePayment($sin);
-    $student['row_count'] = $this->model("Student_Model")->deleteStudent($sin);
+    $student = $this->model("Student_Model")->deleteStudent($sin);
 
     if ($student['row_count']) {
       file_put_contents('php://output', json_encode([
@@ -293,7 +293,7 @@ class Student extends Controller implements Actions
   {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
-    $start_tempo = date($data['due_date']);
+    $start_tempo = date('Y-m-d', strtotime(explode('/', $data['term'])[0] . '-07-10'));
     $result = $this->model("Student_Model")->addStudent($data);
 
     if ($result['row_count'] > 0) {
@@ -302,12 +302,19 @@ class Student extends Controller implements Actions
       $term = $student['term'];
       $edc = $this->model('EDC_Model')->getEDCByTerm($term);
       $edc_id = $edc['edc_id'];
+      $initial_id = 1;
 
       for ($i = 0; $i < 36; $i++) {
         $due_date = date("Y-m-d", strtotime("+$i month", strtotime($start_tempo)));
         $month = date('F', strtotime($due_date));
         $year = date('Y', strtotime($due_date));
-        $row_count = $this->model('Payment_Model')->addPayment($edc_id, $data['sin'], $year, $month, $due_date);
+
+        $payment = $this->model('Payment_Model')->getAllPayments();
+        if (count($payment) < 1) {
+          $row_count = $this->model('Payment_Model')->addPayment($edc_id, $data['sin'], $year, $month, $due_date, $initial_id);
+        } else {
+          $row_count = $this->model('Payment_Model')->addPayment($edc_id, $data['sin'], $year, $month, $due_date, $payment[count($payment) - 1]['payment_id'] + 1);
+        }
 
         if ($i == 35) $row_count_payment = $row_count;
       }

@@ -9,11 +9,12 @@ class Payment_Model
     $this->db = new Database();
   }
 
-  public function addPayment($edc_id, $sin, $year, $month, $due_date)
+  public function addPayment($edc_id, $sin, $year, $month, $due_date, $payment_id)
   {
-    $query = "INSERT INTO " . $this->table . " (month, year, due_date, sin, edc_id) VALUES (:month, :year, :due_date, :sin, :edc_id)";
+    $query = "INSERT INTO " . $this->table . " (payment_id, month, year, due_date, sin, edc_id) VALUES (:payment_id, :month, :year, :due_date, :sin, :edc_id)";
 
     $this->db->query($query);
+    $this->db->bind(':payment_id', $payment_id);
     $this->db->bind(':month', $month);
     $this->db->bind(':year', $year);
     $this->db->bind(':due_date', $due_date);
@@ -41,6 +42,16 @@ class Payment_Model
 
     $this->db->query($query);
     $this->db->bind(':sin', $sin);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
+
+  public function getAllPayments()
+  {
+    $query = "SELECT * FROM " . $this->table;
+
+    $this->db->query($query);
     $this->db->execute();
 
     return $this->db->resultSet();

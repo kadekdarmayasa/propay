@@ -4,6 +4,8 @@ import { validateSin } from './sin-validation.js';
 import { validateUsername } from './username_validation.js';
 import { checkAvailability } from '../check_availability.js';
 import { errorMessage } from '../error_message.js';
+import { validateTerm } from './term_validation.js';
+import { validateNominal } from './nominal_validation.js';
 
 function validateInputs(targetElement, view, currentElement) {
 	if (view == 'update-class') {
@@ -136,6 +138,36 @@ function validateInputs(targetElement, view, currentElement) {
 
 	if (view == 'update-student') {
 		const inputs = Array.from(currentElement.querySelectorAll('.input'));
+
+		const isContainError = inputs.some((input) => input.classList.contains('error') || input.value == '');
+		return isContainError;
+	}
+
+	if (view == 'add-edc') {
+		const inputs = Array.from(currentElement.querySelectorAll('.input'));
+
+		if (targetElement.id == 'term') {
+			let result = validateTerm(targetElement.value);
+
+			if (!result['isValid']) {
+				targetElement.classList.add('error');
+				errorMessage('term-message', result['errorMessage']);
+			} else {
+				checkAvailability('term', targetElement.value, 'http://localhost/propay/edc_list/check_action');
+			}
+		}
+
+		if (targetElement.id == 'nominal') {
+			let result = validateNominal(targetElement.value);
+
+			if (!result['isValid']) {
+				targetElement.classList.add('error');
+				errorMessage('nominal-message', result['errorMessage']);
+			} else {
+				targetElement.classList.remove('error');
+			}
+		}
+
 		const isContainError = inputs.some((input) => input.classList.contains('error') || input.value == '');
 
 		return isContainError;

@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div class="staff-container">
+  <div class="table-container">
     <!-- Staff Header -->
     <div class="header">
       <div class="left-header">

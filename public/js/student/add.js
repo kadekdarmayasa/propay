@@ -1,7 +1,6 @@
 import '../components/illustration.js';
-import { validateNsn, validateSin, validatePassword } from '../helpers/validator/index.js';
-import { errorMessage } from '../helpers/error_message.js';
-import { checkAvailability } from '../helpers/check_availability.js';
+import validateInputs from '../helpers/validator/index.js';
+import { showIllustrationComp, prepIllustrationComp } from '../helpers/illustration.js';
 
 const firstForm = document.querySelector('.form.first');
 const secondForm = document.querySelector('.form.second');
@@ -14,100 +13,38 @@ nextBtn.style.visibility = 'hidden';
 submitBtn.style.visibility = 'hidden';
 
 secondForm.addEventListener('keyup', function (e) {
-	const inputs = Array.from(this.querySelectorAll('.input'));
+	const isContainError = validateInputs(e.target, 'add-student', this);
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+});
 
-	if (e.target.id == 'nsn') {
-		let result = validateNsn(e.target.value);
-
-		if (!result['isValid']) {
-			e.target.classList.add('error');
-			errorMessage('nsn-message', result['errorMessage']);
-		} else {
-			checkAvailability('nsn', e.target.value, 'http://localhost/propay/student/check_action');
-		}
-	}
-
-	const isContainError = inputs.some((input) => input.classList.contains('error') || input.value == '');
-
-	if (!isContainError) {
-		submitBtn.style.visibility = 'visible';
-	} else {
-		submitBtn.style.visibility = 'hidden';
-	}
+secondForm.addEventListener('input', function (e) {
+	const isContainError = validateInputs(e.target, 'add-student', this);
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 secondForm.addEventListener('change', function (e) {
-	const inputs = Array.from(this.querySelectorAll('.input'));
-	const isInputEmpty = inputs.some((input) => input.value == '');
-
-	if (e.target.id == 'term') {
-		const term = e.target.value.split('/')[0];
-		document.getElementById('enrollment_date').value = `${term}-07-01`;
-		document.getElementById('due_date').value = `${term}-07-10`;
-	}
-
-	if (e.target.id == 'enrollment_date') {
-		const enrollment_date = e.target.value;
-		console.log(enrollment_date);
-	}
-
-	if (!isInputEmpty) {
-		submitBtn.style.visibility = 'visible';
-	} else {
-		submitBtn.style.visibility = 'hidden';
-	}
+	const isContainError = validateInputs(e.target, 'add-student', this);
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
-firstForm.addEventListener('keyup', async (e) => {
-	const inputs = [document.getElementById('student-password'), document.querySelector('input.sin'), document.querySelector('input.confirm-password')];
+firstForm.addEventListener('keyup', function (e) {
+	const isContainError = validateInputs(e.target, 'add-student', this);
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+});
 
-	if (e.target.classList.contains('sin')) {
-		let isValid = validateSin(e.target.value);
-
-		if (!isValid) {
-			e.target.classList.add('error');
-			errorMessage('sin-message', 'Please enter a valid sin');
-		} else {
-			checkAvailability('sin', e.target.value, 'http://localhost/propay/student/check_action');
-		}
-	}
-
-	if (e.target.id == 'student-password') {
-		let result = validatePassword(e.target.value);
-
-		if (!result['isValid']) {
-			e.target.classList.add('error');
-			errorMessage('password-message', result['errorMessage']);
-		} else {
-			e.target.classList.remove('error');
-		}
-	}
-
-	if (e.target.classList.contains('confirm-password')) {
-		let password = document.getElementById('student-password');
-
-		if (e.target.value !== password.value) {
-			e.target.classList.add('error');
-			errorMessage('confirm-password-message', `Password doesn't match`);
-		} else {
-			e.target.classList.remove('error');
-		}
-	}
-
-	const isContainErrors = inputs.some((input) => input.classList.contains('error') || input.value == '');
-
-	if (!isContainErrors) {
-		nextBtn.style.visibility = 'visible';
-	} else {
-		nextBtn.style.visibility = 'hidden';
-	}
+firstForm.addEventListener('input', function (e) {
+	const isContainError = validateInputs(e.target, 'add-student', this);
+	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
 prevBtn.addEventListener('click', () => {
 	firstForm.classList.remove('hide');
 });
 
-nextBtn.addEventListener('click', function () {
+nextBtn.addEventListener('click', () => {
 	firstForm.classList.add('hide');
 });
 
@@ -122,27 +59,23 @@ submitBtn.addEventListener('click', async (e) => {
 	});
 
 	const response = await insertStudentToDatabase(data);
+
 	if (response.status == 'success') {
 		document.querySelector('form').reset();
 		document.querySelector('.first-content').style.display = 'none';
 
-		const title = 'Congratulations';
-		const message = response.message;
-		const description = `
-      You just add new student with sin ${response.sin},<br>lets see the list of student by clicking the button below
-    `;
-		const view = 'student';
-		const listOfStaffUrl = response.url;
-		const imgSource = `${url}public/images/completed.svg`;
+		const illustrationProps = {
+			title: 'Congratulations',
+			message: response.message,
+			description: `
+				You just add new student with sin ${response.sin},<br>lets see the list of student by clicking the button below
+			`,
+			view: 'student',
+			redirectUrl: response.url,
+			illustrationImage: `${url}public/images/completed.svg`,
+		};
 
-		illustrationComponent.setAttribute('title', title);
-		illustrationComponent.setAttribute('message', message);
-		illustrationComponent.setAttribute('src', imgSource);
-		illustrationComponent.setAttribute('description', description);
-		illustrationComponent.setAttribute('view', view);
-		illustrationComponent.setAttribute('url', listOfStaffUrl);
-		illustrationComponent.firstElementChild.style.opacity = '1';
-		illustrationComponent.firstElementChild.style.display = 'flex';
+		showIllustrationComp(prepIllustrationComp(illustrationProps), 'success');
 	}
 });
 

@@ -1,7 +1,10 @@
 function validateSin(sin) {
 	const sinRegex = /^[1-9][0-9]{3,4}$/i;
-	let isValid = sin.match(sinRegex);
-	return isValid;
+	let isValid = sinRegex.test(sin);
+	if (isValid == false) {
+		return { isValid, errorMessage: 'Please enter a valid SIN' };
+	}
+	return { isValid: true, errorMessage: '' };
 }
 
 export { validateSin };

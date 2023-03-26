@@ -107,15 +107,15 @@
 
                 <ul class="sub-menu">
                   <?php
-                  if (isset($activeTab[1]) && $activeTab[1] == 'list') : ?>
+                  if (isset($tabs[1]) && $tabs[1] == 'list') : ?>
                     <li class="sub-menu-active">
                     <?php else : ?>
                     <li>
                     <?php endif; ?>
-                    <a href="<?= BASEURL . 'edc' ?>" class="link-name">List</a>
+                    <a href="<?= BASEURL . 'edc/' ?>" class="link-name">List</a>
                     </li>
 
-                    <?php if (isset($activeTab[1]) && $activeTab[1] == 'payment') : ?>
+                    <?php if (isset($tabs[1]) && $tabs[1] == 'payment') : ?>
                       <li class="sub-menu-active">
                       <?php else : ?>
                       <li>
@@ -123,13 +123,21 @@
                       <a href="<?= BASEURL . 'edc/payment' ?>" class="link-name">Payment</a>
                       </li>
 
-                      <?php if (isset($activeTab[1]) && $activeTab[1] == 'payment_history') : ?>
+                      <?php if (isset($tabs[1]) && $tabs[1] == 'payment_history') : ?>
                         <li class="sub-menu-active">
                         <?php else : ?>
                         <li>
                         <?php endif; ?>
                         <a href="<?= BASEURL . 'edc/payment_history' ?>" class="link-name">Payment History</a>
                         </li>
+
+                        <?php if (isset($tabs[1]) && $tabs[1] == 'report') : ?>
+                          <li class="sub-menu-active">
+                          <?php else : ?>
+                          <li>
+                          <?php endif; ?>
+                          <a href="<?= BASEURL . 'edc/report' ?>" class="link-name">Report</a>
+                          </li>
                 </ul>
                 </li>
     </ul>

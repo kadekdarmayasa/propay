@@ -7,7 +7,9 @@ class Classes extends Controller implements Actions
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
     } else {
+      unset($_SESSION['search_edc_keyword']);
       unset($_SESSION['search_staff_keyword']);
+      unset($_SESSION['search_student_keyword']);
       header('Location: ' . BASEURL . 'classes/page/1');
     }
 
@@ -21,8 +23,10 @@ class Classes extends Controller implements Actions
       exit;
     }
 
-    unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -47,8 +51,10 @@ class Classes extends Controller implements Actions
       exit;
     }
 
-    unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];

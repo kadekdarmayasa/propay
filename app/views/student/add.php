@@ -11,7 +11,7 @@
         <div class="form first">
           <div class="input-group">
             <label for="sin">Student ID Number</label>
-            <input type="text" class="input sin" maxlength="5" name="sin" id="sin" placeholder="5327" autocomplete="off" required>
+            <input type="number" class="input sin" name="sin" id="sin" placeholder="5327" autocomplete="off" required>
             <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
             <small class="message sin-message"></small>
           </div>
@@ -48,7 +48,7 @@
         <div class="form second">
           <div class="input-group">
             <label for="nsn">National Student Number</label>
-            <input type="text" maxlength="11" class="input nsn" id="nsn" name="nsn" placeholder="0051196592" required autocomplete="off">
+            <input type="number" class="input nsn" id="nsn" name="nsn" placeholder="0051196592" required autocomplete="off">
             <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
             <small class="message nsn-message"></small>
           </div>

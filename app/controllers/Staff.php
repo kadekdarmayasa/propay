@@ -8,6 +8,8 @@ class Staff extends Controller implements Actions
       header('Location: ' . BASEURL . 'auth/login');
     } else {
       unset($_SESSION['search_class_keyword']);
+      unset($_SESSION['search_edc_keyword']);
+      unset($_SESSION['search_student_keyword']);
       header('Location: ' . BASEURL . 'staff/page/1');
     }
 
@@ -22,7 +24,9 @@ class Staff extends Controller implements Actions
     }
 
     unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -47,7 +51,9 @@ class Staff extends Controller implements Actions
     }
 
     unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -73,6 +79,11 @@ class Staff extends Controller implements Actions
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     }
+
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -171,6 +182,7 @@ class Staff extends Controller implements Actions
       }
     }
 
+    // How Many Data Will Display on Each Page
     if (isset($_SESSION['search_staff_keyword'])) {
       $data['staff'] = $this->model('Staff_Model')->getStaffWithLimit($start_data, $total_data_per_page, $_SESSION['search_staff_keyword']);
     } else {

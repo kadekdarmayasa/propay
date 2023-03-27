@@ -179,6 +179,11 @@ body.dark .sub-menu {
 	border-right: none;
 }
 
+.logout-mode {
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+}
+
 .logout-mode hr {
 	margin-bottom: 0.8em;
 }

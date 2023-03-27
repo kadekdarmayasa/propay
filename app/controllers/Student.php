@@ -7,6 +7,8 @@ class Student extends Controller implements Actions
       header('Location: ' . BASEURL . 'auth/login');
     } else {
       unset($_SESSION['search_class_keyword']);
+      unset($_SESSION['search_edc_keyword']);
+      unset($_SESSION['search_staff_keyword']);
       header('Location: ' . BASEURL . 'student/page/1');
     }
 
@@ -21,6 +23,7 @@ class Student extends Controller implements Actions
     }
 
     unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
 
@@ -28,7 +31,6 @@ class Student extends Controller implements Actions
       $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
     }
-
 
     $data['page'] = 1;
     $data['title'] = 'Propay - Student';
@@ -50,6 +52,7 @@ class Student extends Controller implements Actions
     }
 
     unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
 
@@ -83,9 +86,6 @@ class Student extends Controller implements Actions
       header('Location: ' . BASEURL . 'student/index');
       exit;
     }
-
-    unset($_SESSION['search_class_keyword']);
-    unset($_SESSION['search_staff_keyword']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -156,6 +156,7 @@ class Student extends Controller implements Actions
       }
     }
 
+    // How Many Data Will Display on Each Page
     if (isset($_SESSION['search_student_keyword'])) {
       $data['student'] = $this->model('Student_Model')->getStudentWithLimit($start_data, $total_data_per_page, $_SESSION['search_student_keyword']);
     } else {
@@ -194,7 +195,9 @@ class Student extends Controller implements Actions
     }
 
     unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
 
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {

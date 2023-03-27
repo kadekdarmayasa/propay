@@ -6,14 +6,14 @@ class Classes extends Controller implements Actions
   {
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
+      exit;
     } else {
       unset($_SESSION['search_edc_keyword']);
       unset($_SESSION['search_staff_keyword']);
       unset($_SESSION['search_student_keyword']);
       header('Location: ' . BASEURL . 'classes/page/1');
+      exit;
     }
-
-    exit;
   }
 
   public function add()

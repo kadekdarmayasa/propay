@@ -47,11 +47,20 @@ function validateInputs(targetElement, view, currentElement) {
 
 		if (targetElement.classList.contains('password')) {
 			let result = validatePassword(targetElement.value);
+			const confirmPassword = document.getElementById('confirm-password');
 
 			if (!result['isValid']) {
 				targetElement.classList.add('error');
 				errorMessage('password-message', result['errorMessage']);
 			} else {
+				if (confirmPassword.value != '') {
+					if (confirmPassword.value != targetElement.value) {
+						confirmPassword.classList.add('error');
+						errorMessage('confirm-password-message', 'Password does not match');
+					} else {
+						confirmPassword.classList.remove('error');
+					}
+				}
 				targetElement.classList.remove('error');
 			}
 		}
@@ -95,11 +104,20 @@ function validateInputs(targetElement, view, currentElement) {
 
 		if (targetElement.id == 'student-password') {
 			let result = validatePassword(targetElement.value);
+			const confirmPassword = document.getElementById('confirm-password');
 
 			if (!result['isValid']) {
 				targetElement.classList.add('error');
 				errorMessage('password-message', result['errorMessage']);
 			} else {
+				if (confirmPassword.value != '') {
+					if (confirmPassword.value != targetElement.value) {
+						confirmPassword.classList.add('error');
+						errorMessage('confirm-password-message', 'Password does not match');
+					} else {
+						confirmPassword.classList.remove('error');
+					}
+				}
 				targetElement.classList.remove('error');
 			}
 		}
@@ -109,7 +127,7 @@ function validateInputs(targetElement, view, currentElement) {
 
 			if (targetElement.value !== password.value) {
 				targetElement.classList.add('error');
-				errorMessage('confirm-password-message', `Password doesn't match`);
+				errorMessage('confirm-password-message', `Password does not match`);
 			} else {
 				targetElement.classList.remove('error');
 			}
@@ -163,6 +181,36 @@ function validateInputs(targetElement, view, currentElement) {
 			if (!result['isValid']) {
 				targetElement.classList.add('error');
 				errorMessage('nominal-message', result['errorMessage']);
+			} else {
+				targetElement.classList.remove('error');
+			}
+		}
+
+		const isContainError = inputs.some((input) => input.classList.contains('error') || input.value == '');
+
+		return isContainError;
+	}
+
+	if (view == 'update-edc') {
+		const inputs = Array.from(currentElement.querySelectorAll('.input'));
+
+		if (targetElement.id == 'nominal') {
+			let result = validateNominal(targetElement.value);
+
+			if (!result['isValid']) {
+				targetElement.classList.add('error');
+				errorMessage('nominal-message', result['errorMessage']);
+			} else {
+				targetElement.classList.remove('error');
+			}
+		}
+
+		if (targetElement.id == 'start_date') {
+			const prevStartDate = document.getElementById('prev_start_date');
+
+			if (targetElement.value < prevStartDate.value) {
+				targetElement.classList.add('error');
+				errorMessage('start-date-message', 'Start date cannot be less than previous start date');
 			} else {
 				targetElement.classList.remove('error');
 			}

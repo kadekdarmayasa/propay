@@ -107,7 +107,7 @@
 
                 <ul class="sub-menu">
                   <?php
-                  if (isset($tabs[1]) && $tabs[1] == 'list' || $tabs[1] == 'add_edc_list') : ?>
+                  if (isset($tabs[1]) && $tabs[1] == 'list' || $tabs[1] == 'add_edc_list' || $tabs['1'] == 'update_edc_list') : ?>
                     <li class="sub-menu-active">
                     <?php else : ?>
                     <li>

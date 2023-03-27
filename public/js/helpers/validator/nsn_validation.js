@@ -1,5 +1,5 @@
 function validateNsn(nsn) {
-	const nsnRegex = /^[0-9]{10,11}$/i;
+	const nsnRegex = /^[0-9]{10}$/i;
 	let isValid = nsnRegex.test(nsn);
 	if (isValid == false) {
 		return { isValid, errorMessage: 'Please enter a valid NSN' };

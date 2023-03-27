@@ -62,9 +62,14 @@ body.dark .input-group select option {
 	cursor: pointer;
 }
 
-.input-group:not(:last-child) :is(.password, .confirm-password) ~ :is(img).error-icon {
+.input-group:not(:last-child) :is(.password, .confirm-password, .start-date) ~ :is(img).error-icon {
 	right: 28px;
 	bottom: 12px;
+}
+
+.input-group:not(:last-child) :is(.start-date) ~ :is(img).error-icon {
+	right: 28px;
+	bottom: 13px;
 }
 
 .input-group :is(img).error-icon {

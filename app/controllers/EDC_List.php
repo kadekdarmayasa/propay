@@ -8,9 +8,40 @@ class EDC_List extends Controller implements Actions
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     } else {
+      unset($_SESSION['search_class_keyword']);
+      unset($_SESSION['search_student_keyword']);
+      unset($_SESSION['search_staff_keyword']);
       header('Location: ' . BASEURL . 'edc_list/page/1');
       exit;
     }
+  }
+
+  public function update($edc_id)
+  {
+    if (!isset($_SESSION['user'])) {
+      header('Location: ' . BASEURL . 'auth/login');
+      exit;
+    }
+
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
+
+    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
+      $data['name'] = $_SESSION['user']['staff_name'];
+      $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
+    $data['title'] = 'Propay - EDC List';
+    $data['breadcrumb'] = 'EDC List/Update';
+    $data['page'] = 1;
+    $data['edc'] = $this->model('EDC_Model')->getEDCById($edc_id);
+    $this->view('templates/header', $data, 'edc/list/update');
+    $this->view('templates/sidebar', $data, 'edc/list/update');
+    $this->view('templates/top-bar', $data, 'edc/list/update');
+    $this->view('edc/list/update', $data, 'edc/list/update');
+    $this->view('templates/footer', $data, 'edc/list/update');
   }
 
   public function add()
@@ -20,6 +51,11 @@ class EDC_List extends Controller implements Actions
       exit;
     }
 
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
+
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
       $data['role'] = $_SESSION['user']['staff_level'];
@@ -28,11 +64,11 @@ class EDC_List extends Controller implements Actions
     $data['title'] = 'Propay - EDC List';
     $data['breadcrumb'] = 'EDC List/Add';
     $data['page'] = 1;
-    $this->view('templates/header', $data, 'edc/add_edc_list');
-    $this->view('templates/sidebar', $data, 'edc/add_edc_list');
-    $this->view('templates/top-bar', $data, 'edc/add_edc_list');
-    $this->view('edc/add_edc_list', $data, 'edc/add_edc_list');
-    $this->view('templates/footer', $data, 'edc/add_edc_list');
+    $this->view('templates/header', $data, 'edc/list/add');
+    $this->view('templates/sidebar', $data, 'edc/list/add');
+    $this->view('templates/top-bar', $data, 'edc/list/add');
+    $this->view('edc/list/add', $data, 'edc/list/add');
+    $this->view('templates/footer', $data, 'edc/list/add');
   }
 
   public function page($page)
@@ -146,11 +182,11 @@ class EDC_List extends Controller implements Actions
     $data['title'] = 'Propay - EDC List';
     $data['breadcrumb'] = 'EDC List';
     $data['keyword'] = $_SESSION['search_edc_keyword'] ?? '';
-    $this->view('templates/header', $data, 'edc/list');
-    $this->view('templates/sidebar', $data, 'edc/list');
-    $this->view('templates/top-bar', $data, 'edc/list');
-    $this->view('edc/list', $data, 'edc/list');
-    $this->view('templates/footer', $data, 'edc/list');
+    $this->view('templates/header', $data, 'edc/list/index');
+    $this->view('templates/sidebar', $data, 'edc/list/index');
+    $this->view('templates/top-bar', $data, 'edc/list/index');
+    $this->view('edc/list/index', $data, 'edc/list/index');
+    $this->view('templates/footer', $data, 'edc/list/index');
   }
 
   public function delete_action($edc_id)
@@ -188,6 +224,32 @@ class EDC_List extends Controller implements Actions
 
   public function update_action()
   {
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+    $result = $this->model("EDC_Model")->updateEDC($data);
+
+    if ($result['row_count'] > 0) {
+      $response = [
+        'status' => 'success',
+        'message' => 'EDC has been successfully update',
+        'url' => BASEURL . 'edc_list/index'
+      ];
+      file_put_contents('php://output', json_encode($response));
+    } else if ($result['row_count'] == 0) {
+      $response = [
+        'status' => 'nothing-update',
+        'message' => 'No edc data update',
+        'url' => BASEURL . 'edc_list/index'
+      ];
+      file_put_contents('php://output', json_encode($response));
+    } else {
+      $response = [
+        'status' => 'error',
+        'message' => 'Failed to update edc',
+        'url' => BASEURL . 'edc_list/index'
+      ];
+      file_put_contents('php://output', json_encode($response));
+    }
   }
 
   public function check_action()

@@ -14,7 +14,7 @@ class Staff_Model
     $query = 'SELECT * FROM ' . $this->table . ' WHERE username = :username';
 
     $this->db->query($query);
-    $this->db->bind(':username', $username);
+    $this->db->bind(':username', $username, PDO::PARAM_STR);
     $this->db->execute();
 
     return $this->db->single();
@@ -25,7 +25,7 @@ class Staff_Model
     $query = 'SELECT * FROM ' . $this->table . ' WHERE staff_id = :staff_id';
 
     $this->db->query($query);
-    $this->db->bind(':staff_id', $staff_id);
+    $this->db->bind(':staff_id', $staff_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return $this->db->single();
@@ -54,13 +54,13 @@ class Staff_Model
     $query = "INSERT INTO " . $this->table . " VALUES(null, :username, :password, :staff_level, :staff_name, :date_of_birth, :religion, :address)";
 
     $this->db->query($query);
-    $this->db->bind(':username', $username);
-    $this->db->bind(':password', $password);
-    $this->db->bind(':staff_level', $staff_level);
-    $this->db->bind(':staff_name', $staff_name);
-    $this->db->bind(':date_of_birth', $date_of_birth);
-    $this->db->bind(':religion', $religion);
-    $this->db->bind(':address', $address);
+    $this->db->bind(':username', $username, PDO::PARAM_STR);
+    $this->db->bind(':password', $password, PDO::PARAM_STR);
+    $this->db->bind(':staff_level', $staff_level, PDO::PARAM_STR);
+    $this->db->bind(':staff_name', $staff_name, PDO::PARAM_STR);
+    $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);
+    $this->db->bind(':religion', $religion, PDO::PARAM_STR);
+    $this->db->bind(':address', $address, PDO::PARAM_STR);
     $this->db->execute();
 
     return [
@@ -74,7 +74,7 @@ class Staff_Model
     $query = "DELETE FROM " . $this->table . " WHERE staff_id=:staff_id";
 
     $this->db->query($query);
-    $this->db->bind(':staff_id', $staff_id);
+    $this->db->bind(':staff_id', $staff_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return $this->db->rowCount();
@@ -82,7 +82,7 @@ class Staff_Model
 
   public function updateStaff($data)
   {
-    $staff_id = $data['staff_id'];
+    $staff_id = htmlspecialchars($data['staff_id']);
     $staff_level = htmlspecialchars($data['staff-level']);
     $staff_name = htmlspecialchars($data['staff-name']);
     $date_of_birth = htmlspecialchars($data['date-of-birth']);
@@ -93,12 +93,12 @@ class Staff_Model
     staff_id=:staff_id";
 
     $this->db->query($query);
-    $this->db->bind(':staff_id', $staff_id);
-    $this->db->bind(':staff_level', $staff_level);
-    $this->db->bind(':staff_name', $staff_name);
-    $this->db->bind(':date_of_birth', $date_of_birth);
-    $this->db->bind(':religion', $religion);
-    $this->db->bind(':address', $address);
+    $this->db->bind(':staff_id', $staff_id, PDO::PARAM_INT);
+    $this->db->bind(':staff_level', $staff_level, PDO::PARAM_STR);
+    $this->db->bind(':staff_name', $staff_name, PDO::PARAM_STR);
+    $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);
+    $this->db->bind(':religion', $religion, PDO::PARAM_STR);
+    $this->db->bind(':address', $address, PDO::PARAM_STR);
     $this->db->execute();
 
     return [

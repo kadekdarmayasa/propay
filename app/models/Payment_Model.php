@@ -11,12 +11,12 @@ class Payment_Model
 
   public function addPayment($edc_id, $sin, $year, $month, $due_date, $payment_id)
   {
-    $query = "INSERT INTO " . $this->table . " VALUES (:payment_id, :month, :year, :due_date, 'Unpaid', :sin, :edc_id)";
+    $query = "INSERT INTO " . $this->table . " (payment_id, month, year, due_date, payment_status, sin, edc_id) VALUES (:payment_id, :month, :year, :due_date, 'Unpaid', :sin, :edc_id)";
 
     $this->db->query($query);
     $this->db->bind(':payment_id', $payment_id, PDO::PARAM_INT);
     $this->db->bind(':month', $month, PDO::PARAM_STR);
-    $this->db->bind(':year', $year, PDO::PARAM_STR);
+    $this->db->bind(':year', $year, PDO::PARAM_INT);
     $this->db->bind(':due_date', $due_date, PDO::PARAM_STR);
     $this->db->bind(':sin', $sin, PDO::PARAM_INT);
     $this->db->bind(':edc_id', $edc_id, PDO::PARAM_INT);

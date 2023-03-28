@@ -14,7 +14,7 @@ class Student_Model
     $query = 'SELECT * FROM ' . $this->table . ' WHERE sin = :sin';
 
     $this->db->query($query);
-    $this->db->bind(':sin', $sin);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
     $this->db->execute();
 
     return $this->db->single();
@@ -25,7 +25,7 @@ class Student_Model
     $query = 'SELECT * FROM ' . $this->table . ' WHERE nsn = :nsn';
 
     $this->db->query($query);
-    $this->db->bind(':nsn', $nsn);
+    $this->db->bind(':nsn', $nsn, PDO::PARAM_STR);
     $this->db->execute();
 
     return $this->db->single();
@@ -47,7 +47,7 @@ class Student_Model
     $query = "SELECT * FROM " . $this->table . " WHERE class_id = :class_id";
 
     $this->db->query($query);
-    $this->db->bind(':class_id', $class_id);
+    $this->db->bind(':class_id', $class_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return $this->db->resultSet();
@@ -69,16 +69,16 @@ class Student_Model
     $query = "INSERT INTO " . $this->table . " VALUES(:sin, :nsn, :password, :student_name, :enrollment_date, :term, :date_of_birth, :religion, :address, :class_id)";
 
     $this->db->query($query);
-    $this->db->bind(':sin', $sin);
-    $this->db->bind(':nsn', $nsn);
-    $this->db->bind(':password', $password);
-    $this->db->bind(':student_name', $student_name);
-    $this->db->bind(':enrollment_date', $enrollment_date);
-    $this->db->bind(':term', $term);
-    $this->db->bind(':date_of_birth', $date_of_birth);
-    $this->db->bind(':religion', $religion);
-    $this->db->bind(':address', $address);
-    $this->db->bind(':class_id', $class_id);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
+    $this->db->bind(':nsn', $nsn, PDO::PARAM_STR);
+    $this->db->bind(':password', $password, PDO::PARAM_STR);
+    $this->db->bind(':student_name', $student_name, PDO::PARAM_STR);
+    $this->db->bind(':enrollment_date', $enrollment_date, PDO::PARAM_STR);
+    $this->db->bind(':term', $term, PDO::PARAM_STR);
+    $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);
+    $this->db->bind(':religion', $religion, PDO::PARAM_STR);
+    $this->db->bind(':address', $address, PDO::PARAM_STR);
+    $this->db->bind(':class_id', $class_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return [
@@ -99,12 +99,12 @@ class Student_Model
     $query = 'UPDATE ' . $this->table . ' SET student_name = :student_name, date_of_birth = :date_of_birth, religion = :religion, address = :address, class_id = :class_id WHERE sin = :sin';
 
     $this->db->query($query);
-    $this->db->bind(':sin', $sin);
-    $this->db->bind(':student_name', $student_name);
-    $this->db->bind(':date_of_birth', $date_of_birth);
-    $this->db->bind(':religion', $religion);
-    $this->db->bind(':address', $address);
-    $this->db->bind(':class_id', $class_id);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
+    $this->db->bind(':student_name', $student_name, PDO::PARAM_STR);
+    $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);
+    $this->db->bind(':religion', $religion, PDO::PARAM_STR);
+    $this->db->bind(':address', $address, PDO::PARAM_STR);
+    $this->db->bind(':class_id', $class_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return [
@@ -118,7 +118,7 @@ class Student_Model
     $query = "DELETE FROM " . $this->table . " WHERE sin = :sin";
 
     $this->db->query($query);
-    $this->db->bind(':sin', $sin);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
     $this->db->execute();
 
     return [
@@ -132,7 +132,7 @@ class Student_Model
     $query = "SELECT * FROM " . $this->table . " WHERE term = :term";
 
     $this->db->query($query);
-    $this->db->bind(':term', $term);
+    $this->db->bind(':term', $term, PDO::PARAM_STR);
     $this->db->execute();
 
     return $this->db->resultSet();

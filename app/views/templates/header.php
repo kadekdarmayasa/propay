@@ -69,10 +69,13 @@
     <?php endif; ?>
 
     <?php if ($tabs[0] == 'edc') : ?>
-      <link rel="stylesheet" href="<?= BASEURL . 'public/css/class/index.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/illustration.css' ?>">
+
+      <?php if ($tabs[1] == 'payment') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/payment/index.css' ?>">
+      <?php endif; ?>
     <?php endif; ?>
   <?php endif; ?>
 </head>

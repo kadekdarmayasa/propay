@@ -57,16 +57,24 @@
   <?php endif ?>
 
   <?php if ($tabs[0] == 'edc') : ?>
-    <?php if ($tabs[2] == 'index') : ?>
-      <script src="<?= BASEURL . 'public/js/edc/list/index.js' ?>" type="module"></script>
+    <?php if ($tabs[1] == 'list') : ?>
+      <?php if ($tabs[2] == 'index') : ?>
+        <script src="<?= BASEURL . 'public/js/edc/list/index.js' ?>" type="module"></script>
+      <?php endif; ?>
+
+      <?php if ($tabs[2] == 'add') : ?>
+        <script src="<?= BASEURL . 'public/js/edc/list/add.js' ?>" type="module"></script>
+      <?php endif; ?>
+
+      <?php if ($tabs[2] == 'update') : ?>
+        <script src="<?= BASEURL . 'public/js/edc/list/update.js' ?>" type="module"></script>
+      <?php endif; ?>
     <?php endif; ?>
 
-    <?php if ($tabs[2] == 'add') : ?>
-      <script src="<?= BASEURL . 'public/js/edc/list/add.js' ?>" type="module"></script>
-    <?php endif; ?>
-
-    <?php if ($tabs[2] == 'update') : ?>
-      <script src="<?= BASEURL . 'public/js/edc/list/update.js' ?>" type="module"></script>
+    <?php if ($tabs[1] == 'payment') : ?>
+      <?php if ($tabs[2] == 'index') : ?>
+        <script src="<?= BASEURL . 'public/js/payment/index.js' ?>" type="module"></script>
+      <?php endif; ?>
     <?php endif; ?>
   <?php endif; ?>
 <?php endif ?>

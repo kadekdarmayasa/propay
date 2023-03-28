@@ -1,14 +1,26 @@
 import '../components/illustration.js';
-const illustrationComponent = document.querySelector('illustration-element');
+let illustrationComponent = document.querySelector('illustration-element');
 const illustrationImage = document.querySelector('.illustration-image');
 
-function prepIllustrationComp({ title, message, description, view, redirectUrl, illustrationImage }) {
-	illustrationComponent.setAttribute('title', title);
-	illustrationComponent.setAttribute('message', message);
-	illustrationComponent.setAttribute('description', description);
-	illustrationComponent.setAttribute('view', view);
-	illustrationComponent.setAttribute('url', redirectUrl);
-	illustrationComponent.setAttribute('src', illustrationImage);
+function prepIllustrationComp({ title = '', message = '', description = '', view = '', redirectUrl = '', illustrationImage = '' }) {
+	if (view == 'waiting-for-search-payment') {
+		illustrationComponent = document.querySelector('#waiting-for-search-illustration');
+		illustrationComponent.setAttribute('description', description);
+		illustrationComponent.setAttribute('src', illustrationImage);
+		illustrationComponent.setAttribute('view', view);
+	} else if (view == 'not-found-payment') {
+		illustrationComponent = document.querySelector('#not-found-illustration');
+		illustrationComponent.setAttribute('description', description);
+		illustrationComponent.setAttribute('src', illustrationImage);
+		illustrationComponent.setAttribute('view', view);
+	} else {
+		illustrationComponent.setAttribute('title', title);
+		illustrationComponent.setAttribute('message', message);
+		illustrationComponent.setAttribute('description', description);
+		illustrationComponent.setAttribute('view', view);
+		illustrationComponent.setAttribute('url', redirectUrl);
+		illustrationComponent.setAttribute('src', illustrationImage);
+	}
 
 	return illustrationComponent;
 }

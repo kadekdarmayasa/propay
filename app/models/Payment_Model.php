@@ -25,6 +25,18 @@ class Payment_Model
     return $this->db->rowCount();
   }
 
+  public function getPaymentWithLimit($start_data, $total_data_per_page)
+  {
+    $query = "SELECT * FROM " . $this->table . " LIMIT :start_data, :total_data_per_page";
+
+    $this->db->query($query);
+    $this->db->bind(':start_data', $start_data, PDO::PARAM_INT);
+    $this->db->bind(':total_data_per_page', $total_data_per_page, PDO::PARAM_INT);
+
+    $this->db->execute();
+    return $this->db->resultSet();
+  }
+
   public function deletePayment($sin)
   {
     $query = "DELETE FROM " . $this->table . " WHERE sin = :sin";

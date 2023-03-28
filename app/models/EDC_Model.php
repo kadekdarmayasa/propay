@@ -24,7 +24,7 @@ class EDC_Model
     $query = "SELECT * FROM " . $this->table . " WHERE edc_id = :edc_id";
 
     $this->db->query($query);
-    $this->db->bind(":edc_id", $edc_id);
+    $this->db->bind(":edc_id", $edc_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return $this->db->single();
@@ -35,7 +35,7 @@ class EDC_Model
     $query = "SELECT * FROM " . $this->table . " WHERE term = :term";
 
     $this->db->query($query);
-    $this->db->bind(":term", $term);
+    $this->db->bind(":term", $term, PDO::PARAM_STR);
     $this->db->execute();
 
     return $this->db->single();
@@ -78,7 +78,7 @@ class EDC_Model
     $query = "DELETE FROM " . $this->table . " WHERE edc_id = :edc_id";
 
     $this->db->query($query);
-    $this->db->bind(":edc_id", $edc_id);
+    $this->db->bind(":edc_id", $edc_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return [
@@ -95,9 +95,9 @@ class EDC_Model
     $query = "INSERT INTO " . $this->table . " VALUES (null, :term, :nominal, :start_date)";
 
     $this->db->query($query);
-    $this->db->bind(':term', $term);
-    $this->db->bind(':nominal', $nominal);
-    $this->db->bind(':start_date', $start_date);
+    $this->db->bind(':term', $term, PDO::PARAM_STR);
+    $this->db->bind(':nominal', $nominal, PDO::PARAM_INT);
+    $this->db->bind(':start_date', $start_date, PDO::PARAM_STR);
     $this->db->execute();
 
     return $this->db->rowCount();
@@ -105,16 +105,16 @@ class EDC_Model
 
   public function updateEDC($data)
   {
-    $edc_id = $data['edc_id'];
+    $edc_id = htmlspecialchars($data['edc_id']);
     $nominal = htmlspecialchars($data['nominal']);
     $start_date = htmlspecialchars($data['start_date']);
 
     $query = "UPDATE " . $this->table . " SET nominal = :nominal, start_date = :start_date WHERE edc_id = :edc_id";
 
     $this->db->query($query);
-    $this->db->bind(':nominal', $nominal);
-    $this->db->bind(':start_date', $start_date);
-    $this->db->bind(':edc_id', $edc_id);
+    $this->db->bind(':nominal', $nominal, PDO::PARAM_INT);
+    $this->db->bind(':start_date', $start_date, PDO::PARAM_STR);
+    $this->db->bind(':edc_id', $edc_id, PDO::PARAM_INT);
     $this->db->execute();
 
     return [

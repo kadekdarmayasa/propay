@@ -8,6 +8,7 @@ class Illustration extends HTMLElement {
 		this._view = this.getAttribute('view') || '';
 		this._url = this.getAttribute('url') || '';
 		this._src = this.getAttribute('src') || '';
+		this._id = this.getAttribute('id') || '';
 	}
 
 	get title() {
@@ -58,6 +59,14 @@ class Illustration extends HTMLElement {
 		this._src = value;
 	}
 
+	get id() {
+		return this._id;
+	}
+
+	set id(value) {
+		this._id = value;
+	}
+
 	connectedCallback() {
 		this.render();
 	}
@@ -70,11 +79,32 @@ class Illustration extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ['title', 'message', 'description', 'view', 'url', 'src'];
+		return ['title', 'message', 'description', 'view', 'url', 'src', 'id'];
 	}
 
 	render() {
-		this.innerHTML = /*html*/ `
+		if (this.view == 'waiting-for-search-payment') {
+			this.innerHTML = /*html*/ `
+			<div class="illustration" id="${this.id}">
+				<img src="${this.src}" alt="Illustration" class="illustration-image" style="width: 350px; margin-bottom: -6em" />
+
+				<div class="illustration-footer">
+					<p>${this.description}</p>
+				</div>
+			</div>
+		`;
+		} else if (this.view == 'not-found-payment') {
+			this.innerHTML = /*html*/ `
+			<div class="illustration" id="${this.id}">
+				<img src="${this.src}" alt="Illustration" class="illustration-image" style="width: 300px; margin-bottom: -5em" />
+
+				<div class="illustration-footer">
+					<p>${this.description}</p>
+				</div>
+			</div>
+		`;
+		} else {
+			this.innerHTML = /*html*/ `
 			<div class="illustration">
 				<div class="illustration-header">
 					<h1>${this.title}</h1>
@@ -89,6 +119,7 @@ class Illustration extends HTMLElement {
 				</div>
 			</div>
 		`;
+		}
 	}
 }
 

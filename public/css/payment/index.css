@@ -1,0 +1,163 @@
+.payment-header {
+	text-align: center;
+}
+
+.payment-title h2 {
+	font-size: var(--heading-2);
+	font-weight: 700;
+	color: var(--black-color);
+}
+
+.payment-title p {
+	font-size: var(--body-1);
+	font-weight: 400;
+	color: var(--gray-color-300);
+	margin: 0.4em 0 2em;
+}
+
+body.dark :is(.payment-title h2, .payment-title p) {
+	color: var(--white-color);
+}
+
+.payment-search {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.payment-search form {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--sidebar-bg);
+	filter: drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.05));
+	height: 50px;
+	width: 700px;
+	padding: 0.6em 1.2em;
+	border-radius: 6px;
+}
+
+.payment-search form input {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	width: 90%;
+	font-size: 0.9rem;
+	color: var(--black-color);
+}
+
+body.dark .payment-header form input {
+	color: var(--white-color);
+}
+
+.payment-header form button {
+	background-color: transparent;
+	outline: 0;
+	border: 0;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.payment-header svg {
+	height: 18px;
+	width: 18px;
+}
+
+.student-bio-header h3 {
+	font-size: var(--heading-3);
+	text-align: center;
+	font-weight: 700;
+	color: var(--black-color);
+	margin-bottom: 1.2em;
+}
+
+body.dark .student-bio-header h3 {
+	color: var(--white-color);
+}
+
+.student-bio {
+	width: 700px;
+	margin: 2em auto;
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+	backdrop-filter: blur(4px);
+	padding: 4em 2.8em;
+	border-radius: 10px;
+}
+
+body.dark .student-bio {
+	background-color: var(--sidebar-bg);
+}
+
+.student-bio-body {
+	display: flex;
+	justify-content: space-between;
+	gap: 3em;
+}
+
+.left-body,
+.right-body {
+	flex: 1;
+}
+
+.student-bio-item {
+	margin-top: 1em;
+}
+
+.student-bio-item small {
+	color: var(--gray-color-300);
+	font-weight: 300;
+	display: block;
+	margin-bottom: 0.4em;
+}
+
+.student-bio-item p {
+	color: var(--black-color);
+	font-weight: 500;
+}
+
+body.dark .student-bio-item p {
+	color: var(--white-color);
+}
+
+.student-bills.table-container {
+	width: 840px !important;
+}
+
+.student-bills.table-container .data {
+	margin-top: 10px;
+}
+
+table td {
+	font-size: 0.9rem !important;
+}
+
+.unpaid,
+.paid,
+.paid-half {
+	display: flex;
+	align-items: center;
+}
+
+.unpaid .indicator,
+.paid .indicator,
+.paid-half .indicator {
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 50%;
+	margin-right: 0.4em;
+}
+
+.paid .indicator {
+	background-color: var(--primary-color);
+}
+
+.unpaid .indicator {
+	background-color: var(--red-color);
+}
+
+.paid-half .indicator {
+	background-color: var(--green-color);
+}

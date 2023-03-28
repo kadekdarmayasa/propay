@@ -42,20 +42,6 @@
       <!-- Payment Header -->
       <div class="payment-header">
         <h2 class="title">Newest Payments</h2>
-        <div class="indicator">
-          <div class="paid-half">
-            <div class="circle"></div>
-            <span>Paid Half</span>
-          </div>
-          <div class="paid-with-change">
-            <div class="circle"></div>
-            <span>Paid With Change</span>
-          </div>
-          <div class="paid-off">
-            <div class="circle"></div>
-            <span>Paid Off</span>
-          </div>
-        </div>
       </div>
 
       <!-- Payment Content -->
@@ -84,10 +70,10 @@
           </div>
           <div class="column-payment-amount">
             <small>Payment Amount</small>
-            <p class="half-paid">Rp. 240.000</p>
-            <p class="paid">Rp. 600.000</p>
-            <p class="paid-with-change">Rp. 750.000</p>
-            <p class="paid">Rp. 600.000</p>
+            <p>Rp. 240.000</p>
+            <p>Rp. 600.000</p>
+            <p>Rp. 750.000</p>
+            <p>Rp. 600.000</p>
           </div>
           <div class="column-refund">
             <small>Refund</small>

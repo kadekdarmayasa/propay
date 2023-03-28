@@ -38,13 +38,9 @@ body.dark :is(.left-content, .right-content) .header {
 
 :is(.left-content, .right-content) .field .name {
 	color: var(--gray-color-300);
-	font-weight: 400;
+	font-weight: 300;
 	display: block;
 	margin-bottom: 0.4em;
-}
-
-body.dark :is(.left-content, .right-content) .field .name {
-	color: var(--gray-color-200);
 }
 
 :is(.left-content, .right-content) .field .value {

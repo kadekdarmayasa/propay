@@ -53,13 +53,9 @@ body.dark .information .header {
 
 .information .field .name {
 	color: var(--gray-color-300);
-	font-weight: 400;
+	font-weight: 300;
 	display: block;
 	margin-bottom: 0.4em;
-}
-
-body.dark .information .field .name {
-	color: var(--gray-color-200);
 }
 
 .information .field .value {

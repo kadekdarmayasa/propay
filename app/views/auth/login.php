@@ -36,8 +36,9 @@
           <label for="staff-password">Password</label>
           <input type="password" name="password" id="staff-password" placeholder="Enter Password..." class="password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
+          <small class="reset-password-message">Forgot Your Password? <a href="<?= BASEURL . 'auth/reset_password' ?>">Reset Here!</a></small>
         </div>
-        <button type="submit" class="submit-btn">
+        <button type="submit" class="primary-btn">
           <img src="<?= BASEURL . 'public/images/arrow-round-icon.svg' ?>" alt="Arrow Round Icon">
           Sign Me In
         </button>
@@ -57,8 +58,9 @@
           <label for="student-password">Password</label>
           <input type="password" name="password" id="student-password" placeholder="Enter Password..." class="password" required>
           <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
+          <small class="reset-password-message">Forgot Your Password? <a href="<?= BASEURL . 'auth/reset_password' ?>">Reset Here!</a></small>
         </div>
-        <button type="submit" class="submit-btn">
+        <button type="submit" class="primary-btn">
           <img src="<?= BASEURL . 'public/images/arrow-round-icon.svg' ?>" alt="Arrow Round Icon">
           Sign Me In
         </button>

@@ -25,13 +25,13 @@ class Payment_Model
     return $this->db->rowCount();
   }
 
-  public function getPaymentWithLimit($start_data, $total_data_per_page, $keyword = null, $sin = 0)
+  public function getPaymentWithLimit($start_data, $total_data_per_page, $sin, $keyword = null)
   {
     if ($keyword != null) {
-      $query = "SELECT * FROM " . $this->table . " WHERE year LIKE :keyword OR month LIKE :keyword OR payment_status LIKE :keyword AND sin = :sin LIMIT :start_data, :total_data_per_page";
+      $query = "SELECT * FROM " . $this->table . " WHERE sin = :sin AND (year LIKE :keyword OR month LIKE :keyword OR payment_status LIKE :keyword) LIMIT :start_data, :total_data_per_page";
 
       $this->db->query($query);
-      $this->db->bind(':keyword', '%' . $keyword . '%');
+      $this->db->bind(':keyword', $keyword . '%');
       $this->db->bind(':sin', $sin, PDO::PARAM_INT);
       $this->db->bind(':start_data', $start_data, PDO::PARAM_INT);
       $this->db->bind(':total_data_per_page', $total_data_per_page, PDO::PARAM_INT);
@@ -80,15 +80,39 @@ class Payment_Model
     return $this->db->resultSet();
   }
 
-  public function getPaymentByAny($keyword, $sin = 0)
+  public function getPaymentByAny($sin, $keyword = null)
   {
-    $query = "SELECT * FROM " . $this->table . " WHERE year LIKE :keyword OR month LIKE :keyword OR payment_status LIKE :keyword AND sin = :sin";
+    $query = "SELECT * FROM " . $this->table . " WHERE sin = :sin AND (month LIKE :keyword OR year LIKE :keyword OR payment_status LIKE :keyword)";
 
     $this->db->query($query);
-    $this->db->bind(':keyword', '%' . $keyword . '%');
+    $this->db->bind(':keyword', $keyword . '%');
     $this->db->bind(':sin', $sin, PDO::PARAM_INT);
 
     $this->db->execute();
     return $this->db->resultSet();
+  }
+
+  public function getPaymentById($payment_id)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE payment_id = :payment_id";
+
+    $this->db->query($query);
+    $this->db->bind(':payment_id', $payment_id, PDO::PARAM_INT);
+    $this->db->execute();
+
+    return $this->db->single();
+  }
+
+  public function updatePayment($payment_id, $payment_amount, $payment_status)
+  {
+    $query = "UPDATE " . $this->table . " SET payment_amount = :payment_amount, payment_status = :payment_status WHERE payment_id = :payment_id";
+
+    $this->db->query($query);
+    $this->db->bind(':payment_id', $payment_id, PDO::PARAM_INT);
+    $this->db->bind(':payment_amount', $payment_amount, PDO::PARAM_INT);
+    $this->db->bind(':payment_status', $payment_status, PDO::PARAM_STR);
+
+    $this->db->execute();
+    return $this->db->rowCount();
   }
 }

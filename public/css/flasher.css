@@ -7,6 +7,11 @@
 	border-radius: 8px;
 }
 
+.alert a {
+	color: var(--primary-color);
+	text-decoration: underline;
+}
+
 .alert-error {
 	background-color: rgb(255, 214, 214);
 }
@@ -55,6 +60,10 @@ body.dark .alert-warning {
 	border: 0;
 	outline: 0;
 	cursor: pointer;
+}
+
+.alert .message {
+	line-height: 1.5;
 }
 
 #close-btn img {

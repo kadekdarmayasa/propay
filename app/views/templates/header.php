@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="<?= BASEURL . 'public/css/flasher.css' ?>">
 
   <?php if ($activeTab == 'login') : ?>
+    <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
     <link rel="stylesheet" href="<?= BASEURL . 'public/css/auth/index.css' ?>">
   <?php endif; ?>
 

@@ -138,4 +138,18 @@ class Staff_Model
     $this->db->execute();
     return $this->db->resultSet();
   }
+
+  public function updatePassword($staff_id, $password)
+  {
+    $password = password_hash($password, PASSWORD_BCRYPT);
+
+    $query = "UPDATE " . $this->table . " SET password=:password WHERE staff_id=:staff_id";
+
+    $this->db->query($query);
+    $this->db->bind(':staff_id', $staff_id, PDO::PARAM_INT);
+    $this->db->bind(':password', $password, PDO::PARAM_STR);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
 }

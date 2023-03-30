@@ -6,6 +6,11 @@
   <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
 <?php endif; ?>
 
+<?php if ($activeTab == 'auth/reset-password') : ?>
+  <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
+  <script src="<?= BASEURL . 'public/js/auth/reset-password.js' ?>" type="module"></script>
+<?php endif; ?>
+
 <?php if ($activeTab !== 'login') : ?>
   <script src="<?= BASEURL . 'public/js/core/index.js' ?>" type="module"></script>
 

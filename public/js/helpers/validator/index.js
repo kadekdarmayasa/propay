@@ -220,6 +220,45 @@ function validateInputs(targetElement, view, currentElement) {
 
 		return isContainError;
 	}
+
+	if (view == 'reset-password') {
+		const inputs = Array.from(currentElement.querySelectorAll('.input'));
+
+		if (targetElement.id == 'password') {
+			let result = validatePassword(targetElement.value);
+			const confirmPassword = document.getElementById('confirm-password');
+
+			if (!result['isValid']) {
+				targetElement.classList.add('error');
+				errorMessage('new-password-message', result['errorMessage']);
+			} else {
+				if (confirmPassword.value != '') {
+					if (confirmPassword.value != targetElement.value) {
+						confirmPassword.classList.add('error');
+						errorMessage('confirm-password-message', 'Password does not match');
+					} else {
+						confirmPassword.classList.remove('error');
+					}
+				}
+				targetElement.classList.remove('error');
+			}
+		}
+
+		if (targetElement.classList.contains('confirm-password')) {
+			let password = document.getElementById('password');
+
+			if (targetElement.value !== password.value) {
+				targetElement.classList.add('error');
+				errorMessage('confirm-password-message', `Password does not match`);
+			} else {
+				targetElement.classList.remove('error');
+			}
+		}
+
+		const isContainError = inputs.some((input) => input.classList.contains('error') || input.value == '');
+
+		return isContainError;
+	}
 }
 
 export default validateInputs;

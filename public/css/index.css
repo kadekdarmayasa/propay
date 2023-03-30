@@ -261,6 +261,7 @@ body.dark .list-of-row a {
 .data table td {
 	font-size: 1rem;
 	font-weight: 400;
+	margin-top: 0.5em;
 	color: var(--black-color);
 }
 
@@ -274,16 +275,25 @@ body.dark .data table td {
 
 .update-btn,
 .delete-btn,
-.detail-btn {
+.detail-btn,
+.pay-btn,
+.no-action-btn {
 	display: inline-block;
 	height: 24px;
 	width: 24px;
 	position: relative;
 }
 
+.pay-btn {
+	height: 30px;
+	width: 30px;
+}
+
 .update-btn svg,
 .delete-btn svg,
-.detail-btn svg {
+.detail-btn svg,
+.pay-btn svg,
+.no-action-btn svg {
 	height: 100%;
 	width: 100%;
 }
@@ -291,6 +301,18 @@ body.dark .data table td {
 :is(.update-btn, .delete-btn, .detail-btn) svg :is(path, rect, line, circle) {
 	stroke-width: 1px !important;
 	stroke: var(--black-color);
+}
+
+.pay-btn svg :is(path, rect, line, circle) {
+	stroke-width: 2px !important;
+	stroke: var(--black-color);
+	fill: var(--sidebar-bg);
+}
+
+.no-action-btn svg :is(path, rect, line, circle) {
+	stroke-width: 2px !important;
+	stroke: var(--black-color);
+	fill: var(--green-color);
 }
 
 .detail-btn svg :is(path, rect, line, circle) {
@@ -305,12 +327,21 @@ body.dark .data table td {
 	stroke: var(--red-color) !important;
 }
 
+.pay-btn:hover svg :is(path, rect, line) {
+	stroke: var(--primary-color) !important;
+}
+
 .detail-btn:hover svg :is(path, rect, line) {
 	stroke: var(--green-color) !important;
 }
 
 body.dark :is(.update-btn, .delete-btn, .detail-btn) svg :is(path, rect, line) {
 	stroke: var(--white-color);
+}
+
+body.dark .pay-btn svg :is(path, rect, line) {
+	stroke: var(--white-color);
+	fill: var(--sidebar-bg);
 }
 
 .cls-footer {

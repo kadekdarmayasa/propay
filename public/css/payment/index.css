@@ -151,7 +151,7 @@ table td {
 }
 
 .paid .indicator {
-	background-color: var(--primary-color);
+	background-color: var(--green-color);
 }
 
 .unpaid .indicator {
@@ -159,5 +159,80 @@ table td {
 }
 
 .paid-half .indicator {
-	background-color: var(--green-color);
+	background-color: var(--primary-color);
+}
+
+.cls-footer {
+	margin-top: 2em;
+}
+
+.header {
+	margin-bottom: 1.8em;
+}
+
+.left-header h2 {
+	margin-bottom: 1.2em;
+}
+
+.data {
+	margin-top: 5em;
+}
+
+.overlay-input-form {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: auto;
+	width: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(4px);
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.3s ease;
+}
+
+.overlay-input-form.show {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.input-form-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2.2em 1em;
+	height: auto;
+	width: 600px;
+	height: 400px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 10px;
+	transform: scale(0);
+	transition: all 0.3s ease;
+}
+
+.overlay-input-form.show .input-form-container {
+	transform: scale(1);
+}
+
+.input-form-container form {
+	margin: auto;
+	width: 100%;
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+}
+
+.input-form-container .input-group {
+	width: 80% !important;
+	margin: auto;
+}
+
+body.dark .input-form-container {
+	background-color: rgba(27, 39, 61, 0.8);
 }

@@ -169,4 +169,21 @@ class Student_Model
     $this->db->execute();
     return $this->db->resultSet();
   }
+
+  public function updatePassword($sin, $password)
+  {
+    $password = password_hash($password, PASSWORD_BCRYPT);
+
+    $query = "UPDATE " . $this->table . " SET password = :password WHERE sin = :sin";
+
+    $this->db->query($query);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
+    $this->db->bind(':password', $password, PDO::PARAM_STR);
+    $this->db->execute();
+
+    return [
+      'row_count' => $this->db->rowCount(),
+      'sin' => $sin,
+    ];
+  }
 }

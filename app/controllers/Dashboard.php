@@ -8,6 +8,12 @@ class Dashboard extends Controller
       exit;
     }
 
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['last_search']);
+
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $staff_name = $_SESSION['user']['staff_name'];
       $secondAndThirdOfStaffName = explode(' ', $staff_name)[0] . ' ' . explode(' ', $staff_name)[1];

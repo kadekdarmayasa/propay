@@ -104,7 +104,7 @@ class Class_Model
       $query = "SELECT * FROM " . $this->table . " WHERE class_name LIKE :keyword OR major_name LIKE :keyword LIMIT :start_data, :total_data_per_page";
 
       $this->db->query($query);
-      $this->db->bind(':keyword', "%$keyword%", PDO::PARAM_STR);
+      $this->db->bind(':keyword', "%$keyword%");
       $this->db->bind(':start_data', $start_data, PDO::PARAM_INT);
       $this->db->bind(':total_data_per_page', $total_data_per_page, PDO::PARAM_INT);
     } else {

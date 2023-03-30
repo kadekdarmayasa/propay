@@ -27,6 +27,10 @@ body.dark .input-group label {
 	background-color: transparent;
 }
 
+.input-group textarea {
+	resize: none;
+}
+
 body.dark .input-group :is(input, select, textarea) {
 	color: var(--white-color);
 	background-color: transparent;
@@ -41,7 +45,7 @@ body.dark .input-group select option {
 	border-bottom: 2px solid var(--primary-color);
 }
 
-.input-group button {
+.input-group :is(button, a) {
 	background-color: var(--primary-color);
 	border: 0;
 	outline: 0;
@@ -51,7 +55,7 @@ body.dark .input-group select option {
 	cursor: pointer;
 	height: 50px;
 	width: 100%;
-	border-radius: 6px;
+	border-radius: 30px;
 }
 
 .input-group:not(:last-child) :is(img, svg) {
@@ -97,26 +101,36 @@ body.dark .input-group select option {
 	display: inline-block;
 }
 
-.input-group button:is(:hover, :focus) {
+.input-group :is(button, a):is(:hover, :focus) {
 	border: 2px solid rgb(245, 245, 245);
 	outline: 3px solid rgba(var(--primary-color-opacity), 0.8);
 }
 
-body.dark .input-group button:is(:hover, :focus) {
+body.dark .input-group :is(button, a):is(:hover, :focus) {
 	border: 2px solid var(--black-color);
 	outline: 3px solid rgba(var(--primary-color-opacity), 0.8);
 }
 
-.input-group button svg :is(path, rect) {
+.input-group :is(button, a) svg :is(path, rect) {
 	stroke: var(--white-color);
 }
 
-.input-group button svg {
+.input-group :is(button, a) svg.pay :is(path, rect, line) {
+	fill: var(--primary-color);
+	stroke-width: 4px;
+}
+
+.input-group :is(button, a) svg.pay {
+	height: 24px;
+	height: 24px;
+}
+
+.input-group :is(button, a) svg {
 	height: 20px;
 	width: 20px;
 }
 
-.input-group button span {
+.input-group :is(button, a) span {
 	margin-right: 0.8em;
 	color: var(--white-color);
 	font-weight: 500;
@@ -126,7 +140,7 @@ body.dark .input-group button:is(:hover, :focus) {
 .input-group.prev-submit-btn {
 	display: flex;
 	flex-direction: row;
-	gap: 10px;
+	gap: 20px;
 }
 
 .input-group input[type='date']::-webkit-calendar-picker-indicator {
@@ -152,6 +166,33 @@ body.dark .input-group button:is(:hover, :focus) {
 }
 
 body.dark .input-group input[type='date'] ~ svg :is(rect, path) {
+	stroke: var(--white-color);
+}
+
+.input-group :is(button, a).prev-btn {
+	background-color: transparent;
+	border: 1px solid var(--primary-color);
+}
+
+.input-group :is(button, a).prev-btn:is(:hover, :focus) {
+	background-color: var(--primary-color);
+	border: 2px solid rgb(245, 245, 245);
+	outline: 3px solid rgba(var(--primary-color-opacity), 0.8);
+}
+
+.input-group :is(button, a).prev-btn span {
+	color: var(--primary-color);
+}
+
+.input-group :is(button, a).prev-btn:is(:hover, :focus) span {
+	color: var(--white-color);
+}
+
+.input-group :is(button, a).prev-btn svg :is(path, rect, line, rect) {
+	stroke: var(--primary-color);
+}
+
+.input-group :is(button, a).prev-btn:is(:hover, :focus) svg :is(path, rect, line, rect) {
 	stroke: var(--white-color);
 }
 

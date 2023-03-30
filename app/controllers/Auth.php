@@ -51,6 +51,53 @@ class Auth extends Controller
     $this->view('templates/footer', $data, 'login');
   }
 
+  public function reset_password()
+  {
+    if (isset($_POST['uniq-identity'])) {
+      $uniq_identity = $_POST['uniq-identity'];
+
+      $student = $this->model('Student_Model')->getStudentBySIN($uniq_identity);
+      $staff = $this->model('Staff_Model')->getStaffByUsername($uniq_identity);
+
+      if ($student) {
+        $data['student'] = $student;
+      } else if ($staff) {
+        $data['staff'] = $staff;
+      } else {
+        Flasher::setFlash('error', 'Your information does not match our records');
+      }
+    }
+
+    if (isset($_POST['save-password'])) {
+      if (isset($_POST['sin'])) {
+        $student_row_count = $this->model('Student_Model')->updatePassword($_POST['sin'], $_POST['password']);
+        if ($student_row_count > 0) {
+          $url = BASEURL . 'auth/login';
+          Flasher::setFlash(
+            'success',
+            "Password has been changed successfully. <br> You can now <a href='$url'>login</a> with your new password"
+          );
+          $data['password_changed'] = true;
+        }
+      } else if (isset($_POST['staff_id'])) {
+        $staff_row_count = $this->model('Staff_Model')->updatePassword($_POST['staff_id'], $_POST['password']);
+        if ($staff_row_count > 0) {
+          $url = BASEURL . 'auth/login';
+          Flasher::setFlash(
+            'success',
+            "Password has been changed successfully. <br> You can now <a href='$url'>login</a> with your new password"
+          );
+          $data['password_changed'] = true;
+        }
+      }
+    }
+
+    $data['title'] = 'Propay - Reset Password';
+    $this->view('templates/header', $data, 'login');
+    $this->view('auth/reset_password', $data);
+    $this->view('templates/footer', $data, 'auth/reset-password');
+  }
+
 
   public function logout()
   {

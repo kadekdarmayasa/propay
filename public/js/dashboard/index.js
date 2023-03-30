@@ -1,3 +1,5 @@
+localStorage.removeItem('selected');
+
 const timeContainer = document.getElementById('time');
 const hourContainer = document.getElementById('hour');
 const minuteContainer = document.getElementById('minute');

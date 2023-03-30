@@ -1,10 +1,12 @@
+import '../utils/row-selected.js';
+import './form-overlay.js';
 import { showIllustrationComp, prepIllustrationComp } from '../helpers/illustration.js';
-const baseUrl = window.location.href.split('edc_payment')[0];
+localStorage.removeItem('selected');
 
+const baseUrl = window.location.href.split('edc_payment')[0];
 const element = document.querySelector('.student-bills');
-if (element) {
-	element.scrollIntoView({ behavior: 'smooth' });
-}
+
+if (element) element.scrollIntoView({ behavior: 'smooth' });
 
 const illustration = {
 	waitingForSearch: document.getElementById('waiting-for-search-illustration'),

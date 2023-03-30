@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="detail-staff-container">
     <div class="left-content">
-      <h2 class="header">General Information</h2>
+      <h2 class="header">Personal Information</h2>
       <div class="field">
         <small class="name">Name</small>
         <p class="value"><?= $data['staff']['staff_name'] ?></p>

@@ -1,5 +1,6 @@
 import '../components/overlay.js';
 import '../utils/row-selected.js';
+localStorage.removeItem('selected');
 
 const deleteButtons = document.querySelectorAll('.delete-btn');
 const overlay = document.querySelector('.overlay');
@@ -9,8 +10,11 @@ const icon = document.querySelector('.icon');
 const overlayMetaTitle = document.querySelector('.overlay .title');
 const overlayMetaDescription = document.querySelector('.overlay .description');
 
-overlay.addEventListener('click', function () {
-	overlay.classList.remove('show');
+window.addEventListener('click', function (e) {
+	if (e.target == overlay) {
+		e.target.classList.remove('show');
+		location.reload();
+	}
 });
 
 deleteButtons.forEach((button) => {

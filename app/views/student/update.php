@@ -62,12 +62,15 @@
           </div>
 
           <div class="input-group prev-submit-btn">
+            <a href="<?= BASEURL . 'student'  ?>" class="prev-btn">
+              <span>Cancel</span>
+            </a>
             <button type="submit" name="submit-btn" class="submit-btn">
               <span>Update Student</span>
-              <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black" />
-                <path d="M16.3333 8V25" stroke="black" stroke-linecap="round" />
-                <path d="M7 16.5H26" stroke="black" stroke-linecap="round" />
+              <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
+                <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
+                <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
               </svg>
             </button>
           </div>

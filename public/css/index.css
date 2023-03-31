@@ -7,6 +7,7 @@
 	width: calc(100% - 280px);
 	padding: 2em 1.5em 1.2em;
 	transition: 0.3s all ease;
+	padding-bottom: 5em;
 }
 
 body.dark .main-content {
@@ -277,23 +278,30 @@ body.dark .data table td {
 .delete-btn,
 .detail-btn,
 .pay-btn,
-.no-action-btn {
+.no-action-btn,
+.disabled-btn {
 	display: inline-block;
 	height: 24px;
 	width: 24px;
 	position: relative;
 }
 
+.disabled-btn {
+	height: 28px;
+	width: 28px;
+}
+
 .pay-btn {
-	height: 30px;
-	width: 30px;
+	height: 32px;
+	width: 32px;
 }
 
 .update-btn svg,
 .delete-btn svg,
 .detail-btn svg,
 .pay-btn svg,
-.no-action-btn svg {
+.no-action-btn svg,
+.disabled-btn svg {
 	height: 100%;
 	width: 100%;
 }
@@ -304,15 +312,19 @@ body.dark .data table td {
 }
 
 .pay-btn svg :is(path, rect, line, circle) {
-	stroke-width: 2px !important;
+	stroke-width: 2.5px !important;
 	stroke: var(--black-color);
 	fill: var(--sidebar-bg);
 }
 
 .no-action-btn svg :is(path, rect, line, circle) {
 	stroke-width: 2px !important;
-	stroke: var(--black-color);
-	fill: var(--green-color);
+	stroke: var(--green-color) !important;
+}
+
+.disabled-btn svg :is(path, rect, line, circle) {
+	stroke-width: 2px !important;
+	stroke: var(--red-color) !important;
 }
 
 .detail-btn svg :is(path, rect, line, circle) {

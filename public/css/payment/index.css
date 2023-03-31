@@ -131,6 +131,7 @@ body.dark .student-bio-item p {
 
 table td {
 	font-size: 0.9rem !important;
+	height: 50px;
 }
 
 .unpaid,

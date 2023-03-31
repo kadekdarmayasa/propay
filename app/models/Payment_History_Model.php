@@ -23,4 +23,26 @@ class Payment_History_Model
 
     return $this->db->rowCount();
   }
+
+  public function getPaymentHistoryByPaymentID($payment_id)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE payment_id = :payment_id";
+
+    $this->db->query($query);
+    $this->db->bind(':payment_id', $payment_id, PDO::PARAM_INT);
+    $this->db->execute();
+
+    return $this->db->single();
+  }
+
+  function deletePaymentHistory($payment_id)
+  {
+    $query = "DELETE FROM " . $this->table . " WHERE payment_id = :payment_id";
+
+    $this->db->query($query);
+    $this->db->bind(':payment_id', $payment_id, PDO::PARAM_INT);
+    $this->db->execute();
+
+    return $this->db->rowCount();
+  }
 }

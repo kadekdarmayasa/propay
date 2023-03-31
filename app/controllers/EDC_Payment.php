@@ -152,6 +152,15 @@ class EDC_Payment extends Controller
       $data['payment'] = $this->model('Payment_Model')->getPaymentWithLimit($start_data, $total_data_per_page, $sin, null);
     }
 
+    $student = $this->model('Student_Model')->getStudentBySIN($sin);
+    $edc = $this->model("EDC_Model")->getEDCByTerm($student['term']);
+    $start_date_time = strtotime($edc['start_date']);
+    $enrollment_date_time = strtotime($student['enrollment_date']);
+
+    $data['student'] = $student;
+    $data['student']['class'] = $this->model("Class_Model")->getClassById($student['class_id']);
+    $data['student']['edc'] = $edc;
+
     for ($i = 0; $i < count($data['payment']); $i++) {
       $data['payment'][$i]['due_date'] = format_date($data['payment'][$i]['due_date']);
     }
@@ -170,9 +179,6 @@ class EDC_Payment extends Controller
     $data['title'] = 'Propay - EDC Payment';
     $data['breadcrumb'] = 'EDC Payment';
     $data['page'] = $page;
-    $data['student'] = $this->model('Student_Model')->getStudentBySIN($sin);
-    $data['student']['class'] = $this->model("Class_Model")->getClassById($data['student']['class_id']);
-    $data['student']['bills'] = $this->model("EDC_Model")->getEDCByTerm($data['student']['term']);
 
 
     $this->view('templates/header', $data, 'edc/payment/index');

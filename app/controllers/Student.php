@@ -10,6 +10,7 @@ class Student extends Controller implements Actions
       unset($_SESSION['search_edc_keyword']);
       unset($_SESSION['search_staff_keyword']);
       unset($_SESSION['last_search']);
+      unset($_SESSION['row_per_page']);
       header('Location: ' . BASEURL . 'student/page/1');
     }
 
@@ -28,6 +29,7 @@ class Student extends Controller implements Actions
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['last_search']);
+    unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -58,6 +60,7 @@ class Student extends Controller implements Actions
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['last_search']);
+    unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -202,6 +205,7 @@ class Student extends Controller implements Actions
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['last_search']);
+    unset($_SESSION['row_per_page']);
 
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
@@ -287,6 +291,14 @@ class Student extends Controller implements Actions
   public function delete_action($sin)
   {
     file_get_contents('php://input');
+    $payment = $this->model('Payment_Model')->getPaymentsBySIN($sin);
+    for ($i = 0; $i < count($payment); $i++) {
+      $payment_history  = $this->model('Payment_History_Model')->getPaymentHistoryByPaymentID($payment[$i]['payment_id']);
+
+      if ($payment_history) {
+        $this->model('Payment_History_Model')->deletePaymentHistory($payment[$i]['payment_id']);
+      }
+    }
     $this->model('Payment_Model')->deletePayment($sin);
     $student = $this->model("Student_Model")->deleteStudent($sin);
 

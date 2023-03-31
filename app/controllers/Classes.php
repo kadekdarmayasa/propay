@@ -12,6 +12,7 @@ class Classes extends Controller implements Actions
       unset($_SESSION['search_edc_keyword']);
       unset($_SESSION['search_staff_keyword']);
       unset($_SESSION['search_student_keyword']);
+      unset($_SESSION['row_per_page']);
       header('Location: ' . BASEURL . 'classes/page/1');
       exit;
     }
@@ -29,6 +30,7 @@ class Classes extends Controller implements Actions
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['last_search']);
+    unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];
@@ -58,6 +60,7 @@ class Classes extends Controller implements Actions
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['last_search']);
+    unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $data['name'] = $_SESSION['user']['staff_name'];

@@ -13,6 +13,7 @@ class Dashboard extends Controller
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['last_search']);
+    unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
       $staff_name = $_SESSION['user']['staff_name'];

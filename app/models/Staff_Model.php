@@ -80,20 +80,49 @@ class Staff_Model
     return $this->db->rowCount();
   }
 
+  public function updateProfile($data)
+  {
+    $staff_id = htmlspecialchars($data['staff_id']);
+    $username = htmlspecialchars($data['username']);
+    $staff_name = htmlspecialchars($data['staff-name']);
+    $date_of_birth = htmlspecialchars($data['date-of-birth']);
+    $religion = htmlspecialchars($data['religion']);
+    $address = htmlspecialchars($data['address']);
+
+    $query = "UPDATE " . $this->table . " SET username = :username, staff_name=:staff_name, date_of_birth=:date_of_birth, religion=:religion, address=:address WHERE
+    staff_id=:staff_id";
+
+    $this->db->query($query);
+    $this->db->bind(':staff_id', $staff_id, PDO::PARAM_INT);
+    $this->db->bind(':username', $username, PDO::PARAM_STR);
+    $this->db->bind(':staff_name', $staff_name, PDO::PARAM_STR);
+    $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);
+    $this->db->bind(':religion', $religion, PDO::PARAM_STR);
+    $this->db->bind(':address', $address, PDO::PARAM_STR);
+    $this->db->execute();
+
+    return [
+      'row_count' => $this->db->rowCount(),
+      'last_id' => $staff_id
+    ];
+  }
+
   public function updateStaff($data)
   {
     $staff_id = htmlspecialchars($data['staff_id']);
+    $username = htmlspecialchars($data['username']);
     $staff_level = htmlspecialchars($data['staff-level']);
     $staff_name = htmlspecialchars($data['staff-name']);
     $date_of_birth = htmlspecialchars($data['date-of-birth']);
     $religion = htmlspecialchars($data['religion']);
     $address = htmlspecialchars($data['address']);
 
-    $query = "UPDATE " . $this->table . " SET staff_level=:staff_level, staff_name=:staff_name, date_of_birth=:date_of_birth, religion=:religion, address=:address WHERE
+    $query = "UPDATE " . $this->table . " SET username=:username staff_level=:staff_level, staff_name=:staff_name, date_of_birth=:date_of_birth, religion=:religion, address=:address WHERE
     staff_id=:staff_id";
 
     $this->db->query($query);
     $this->db->bind(':staff_id', $staff_id, PDO::PARAM_INT);
+    $this->db->bind(':username', $username, PDO::PARAM_INT);
     $this->db->bind(':staff_level', $staff_level, PDO::PARAM_STR);
     $this->db->bind(':staff_name', $staff_name, PDO::PARAM_STR);
     $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);
@@ -151,5 +180,16 @@ class Staff_Model
     $this->db->execute();
 
     return $this->db->rowCount();
+  }
+
+  public function getStaffByName($name)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE staff_name=:staff_name";
+
+    $this->db->query($query);
+    $this->db->bind(':staff_name', $name, PDO::PARAM_STR);
+    $this->db->execute();
+
+    return $this->db->single();
   }
 }

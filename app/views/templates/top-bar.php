@@ -58,7 +58,11 @@
         </svg>
       </div>
       <div class="profile">
-        <h4 class="name"><?= $data['name'] ?></h4>
+        <?php if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') : ?>
+          <a href="<?= BASEURL . 'user/profile/' . $_SESSION['user']['staff_id'] ?>" class="name"><?= $data['name'] ?></a>
+        <?php else : ?>
+          <a href="<?= BASEURL . 'user/profile/' . $_SESSION['user']['sin'] ?>" class="name"><?= $data['name'] ?></a>
+        <?php endif; ?>
         <p class="role"><?= $data['role'] ?></p>
         <hr>
         <a href="<?= BASEURL . 'auth/logout' ?>">

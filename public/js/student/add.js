@@ -7,7 +7,6 @@ const secondForm = document.querySelector('.form.second');
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
 const submitBtn = document.querySelector('.submit-btn');
-const illustrationComponent = document.querySelector('illustration-element');
 const url = location.href.split('student', 1).toString();
 nextBtn.style.visibility = 'hidden';
 submitBtn.style.visibility = 'hidden';

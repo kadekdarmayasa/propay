@@ -115,4 +115,17 @@ class Payment_Model
     $this->db->execute();
     return $this->db->rowCount();
   }
+
+  public function getPaymentByDate($sin, $start_date, $end_date)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE sin = :sin AND due_date BETWEEN :start_date AND :end_date";
+
+    $this->db->query($query);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
+    $this->db->bind(':start_date', $start_date, PDO::PARAM_STR);
+    $this->db->bind(':end_date', $end_date, PDO::PARAM_STR);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
 }

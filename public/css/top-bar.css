@@ -192,6 +192,7 @@ body.dark .notification-profile .profile {
 }
 
 .profile .name {
+	font-size: var(--heading-5);
 	color: var(--black-color);
 	font-weight: 500;
 }

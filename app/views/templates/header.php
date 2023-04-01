@@ -69,6 +69,14 @@
       <?php endif; ?>
     <?php endif; ?>
 
+    <?php if ($tabs[0] == 'user') : ?>
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/user/index.css' ?>">
+    <?php endif; ?>
+
+    <?php if ($tabs[0] == 'user') : ?>
+      <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
+    <?php endif; ?>
+
     <?php if ($tabs[0] == 'edc') : ?>
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/overlay.css' ?>">
       <link rel="stylesheet" href="<?= BASEURL . 'public/css/input-group.css' ?>">
@@ -76,6 +84,18 @@
 
       <?php if ($tabs[1] == 'payment') : ?>
         <link rel="stylesheet" href="<?= BASEURL . 'public/css/payment/index.css' ?>">
+      <?php endif; ?>
+
+      <?php if ($tabs[1] == 'payment-history') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/payment-history/index.css' ?>">
+      <?php endif; ?>
+
+      <?php if ($tabs[1] == 'report') : ?>
+        <link rel="stylesheet" href="<?= BASEURL . 'public/css/report/index.css' ?>">
+
+        <?php if ($tabs[2] == 'generate') : ?>
+          <link rel="stylesheet" href="<?= BASEURL . 'public/css/report/generate.css' ?>">
+        <?php endif; ?>
       <?php endif; ?>
     <?php endif; ?>
   <?php endif; ?>

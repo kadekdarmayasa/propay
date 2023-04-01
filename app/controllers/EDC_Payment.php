@@ -7,11 +7,35 @@ class EDC_Payment extends Controller
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
       exit;
+    } else {
+      if ($_SESSION['user']['role'] == 'student') {
+        header('Location: ' . BASEURL);
+        exit;
+      }
     }
 
-    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $data['name'] = $_SESSION['user']['staff_name'];
+    if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
+      if (isset($_SESSION['profile_change'])) {
+        $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+        $staff_name = $staff['staff_name'];
+      } else {
+        $staff_name = $_SESSION['user']['staff_name'];
+      }
+
+      $data['name'] = $staff_name;
       $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
+    if ($_SESSION['user']['role'] == 'student') {
+      if (isset($_SESSION['profile_change'])) {
+        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+        $student_name = $student['student_name'];
+      } else {
+        $student_name = $_SESSION['user']['student_name'];
+      }
+
+      $data['name'] = $student_name;
+      $data['role'] = 'student';
     }
 
 
@@ -48,6 +72,11 @@ class EDC_Payment extends Controller
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
       exit;
+    } else {
+      if ($_SESSION['user']['role'] == 'student') {
+        header('Location: ' . BASEURL);
+        exit;
+      }
     }
 
 
@@ -72,9 +101,28 @@ class EDC_Payment extends Controller
       }
     }
 
-    if ($_SESSION['user']['staff_level'] == 'admin' || $_SESSION['user']['staff_level'] == 'staff') {
-      $data['name'] = $_SESSION['user']['staff_name'];
+    if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
+      if (isset($_SESSION['profile_change'])) {
+        $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+        $staff_name = $staff['staff_name'];
+      } else {
+        $staff_name = $_SESSION['user']['staff_name'];
+      }
+
+      $data['name'] = $staff_name;
       $data['role'] = $_SESSION['user']['staff_level'];
+    }
+
+    if ($_SESSION['user']['role'] == 'student') {
+      if (isset($_SESSION['profile_change'])) {
+        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+        $student_name = $student['student_name'];
+      } else {
+        $student_name = $_SESSION['user']['student_name'];
+      }
+
+      $data['name'] = $student_name;
+      $data['role'] = 'student';
     }
 
     if (isset($_SESSION['search-payment-keyword']) && $_SESSION['search-payment-keyword'] != '') {

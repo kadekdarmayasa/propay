@@ -1,4 +1,5 @@
 localStorage.removeItem('selected');
+localStorage.removeItem('activeForm');
 
 const timeContainer = document.getElementById('time');
 const hourContainer = document.getElementById('hour');

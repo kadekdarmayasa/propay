@@ -27,7 +27,7 @@ a {
 	box-sizing: border-box;
 
 	/* Color Variables */
-	--primary-color: rgb(82, 151, 255);
+	--primary-color: #5297ff;
 	--primary-color-opacity: 82, 151, 255;
 	--black-color: #09121f;
 	--sidebar-bg: #fff;
@@ -134,4 +134,16 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
 	appearance: textfield;
 	-moz-appearance: textfield;
+}
+
+.toggled-column {
+	overflow-x: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis !important;
+	max-width: 200px !important;
+	position: relative;
+}
+
+tr:hover .toggled-column {
+	white-space: normal;
 }

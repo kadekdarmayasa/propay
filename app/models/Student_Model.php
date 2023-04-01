@@ -170,6 +170,30 @@ class Student_Model
     return $this->db->resultSet();
   }
 
+  public function updateProfile($data)
+  {
+    $sin = htmlspecialchars($data['sin']);
+    $student_name = htmlspecialchars($data['student-name']);
+    $date_of_birth = htmlspecialchars($data['date-of-birth']);
+    $religion = htmlspecialchars($data['religion']);
+    $address = htmlspecialchars($data['address']);
+
+    $query = 'UPDATE ' . $this->table . ' SET student_name = :student_name, date_of_birth = :date_of_birth, religion = :religion, address = :address WHERE sin = :sin';
+
+    $this->db->query($query);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
+    $this->db->bind(':student_name', $student_name, PDO::PARAM_STR);
+    $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);
+    $this->db->bind(':religion', $religion, PDO::PARAM_STR);
+    $this->db->bind(':address', $address, PDO::PARAM_STR);
+    $this->db->execute();
+
+    return [
+      'row_count' => $this->db->rowCount(),
+      'sin' => $sin,
+    ];
+  }
+
   public function updatePassword($sin, $password)
   {
     $password = password_hash($password, PASSWORD_BCRYPT);

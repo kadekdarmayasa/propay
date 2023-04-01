@@ -259,6 +259,12 @@ function validateInputs(targetElement, view, currentElement) {
 
 		return isContainError;
 	}
+
+	if (view == 'payment') {
+		const dateInputs = Array.from(currentElement.querySelectorAll('.input'));
+		const isContainError = dateInputs.some((input) => input.classList.contains('error') || input.value == '');
+		return isContainError;
+	}
 }
 
 export default validateInputs;

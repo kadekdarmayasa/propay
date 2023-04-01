@@ -45,4 +45,54 @@ class Payment_History_Model
 
     return $this->db->rowCount();
   }
+
+  public function getPaymentHistoryWithLimit($start_data, $total_data_per_page,  $payment_id, $keyword)
+  {
+    if ($payment_id != null) {
+      $query = "SELECT * FROM " . $this->table . " WHERE payment_id LIKE :payment_id";
+      $this->db->query($query);
+      $this->db->bind(':payment_id', $payment_id, PDO::PARAM_INT);
+    } elseif ($keyword != null) {
+      $query = "SELECT * FROM " . $this->table . " WHERE payment_id LIKE :keyword OR staff_id LIKE :keyword OR payment_amount LIKE :keyword OR date_of_payment LIKE :keyword OR refund_total LIKE :keyword";
+
+      $this->db->query($query);
+      $this->db->bind(':keyword', "%$keyword%", PDO::PARAM_STR);
+      $this->db->bind(':start_data', $start_data, PDO::PARAM_INT);
+      $this->db->bind(':total_data_per_page', $total_data_per_page, PDO::PARAM_INT);
+    } else {
+      $query = "SELECT * FROM " . $this->table . " LIMIT :start_data, :total_data_per_page";
+
+      $this->db->query($query);
+      $this->db->bind(':start_data', $start_data, PDO::PARAM_INT);
+      $this->db->bind(':total_data_per_page', $total_data_per_page, PDO::PARAM_INT);
+    }
+
+    $this->db->execute();
+    return $this->db->resultSet();
+  }
+
+  function getPaymentHistoryByAny($keyword)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE staff_id LIKE :keyword OR payment_amount LIKE :keyword OR date_of_payment LIKE :keyword OR refund_total LIKE :keyword";
+
+    $this->db->query($query);
+    $this->db->bind(':keyword', "%$keyword%", PDO::PARAM_STR);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
+
+  public function getAllPaymentHistories($isOrdered = false)
+  {
+    if ($isOrdered == false) {
+      $query  = "SELECT * FROM " . $this->table;
+    } else {
+      $query =  "SELECT * FROM " . $this->table . " ORDER BY date_of_payment DESC";
+    }
+
+    $this->db->query($query);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
 }

@@ -23,12 +23,12 @@
 
         <div class="input-group">
           <button type="submit" name="add-class" id="submit-btn" class="submit-btn">
+            <span>Add EDC</span>
             <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black" />
               <path d="M16.3333 8V25" stroke="black" stroke-linecap="round" />
               <path d="M7 16.5H26" stroke="black" stroke-linecap="round" />
             </svg>
-            <span>Add EDC</span>
           </button>
         </div>
       </form>

@@ -129,7 +129,7 @@
                 <th>Due Date</th>
                 <th>Total Bills</th>
                 <th>Payment Amount</th>
-                <th>Description</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
               <?php

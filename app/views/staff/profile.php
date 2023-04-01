@@ -2,31 +2,20 @@
   <div class="main-container">
     <div class="first-content">
       <div class="meta">
-        <h2 class="meta-title">Update Staff</h2>
-        <p class="meta-description">Please kindly fill the fields below</p>
+        <h2 class="meta-title">Staff Profile</h2>
       </div>
+
+      <?php if (isset($_SESSION['flasher'])) : ?>
+        <?php Flasher::flash(); ?>
+      <?php endif; ?>
 
       <form action="" method="post">
         <input type="hidden" class="input staff_id" name="staff_id" id="staff_id" value="<?= $data['staff']['staff_id'] ?>">
 
         <div class="form">
           <div class="input-group">
-            <label for="staff-level">Staff Level</label>
-            <select name="staff-level" id="staff-level" class="input" required autofocus="off">
-              <option value="">-- Select Level Staff --</option>
-              <?php if ($data['staff']['staff_level'] == 'admin') : ?>
-                <option value="admin" selected>Admin</option>
-                <option value="staff">Staff</option>
-              <?php else : ?>
-                <option value="admin">Admin</option>
-                <option value="staff" selected>Staff</option>
-              <?php endif; ?>
-            </select>
-          </div>
-
-          <div class="input-group">
             <label for="username">Username</label>
-            <input type="text" name="username" class="input" id="username" placeholder="Enter username..." autocomplete="off" value="<?= $data['staff']['username'] ?>" required autofocus="off">
+            <input type="text" name="username" class="input" id="username" placeholder="Enter staff name..." autocomplete="off" value="<?= $data['staff']['username'] ?>" required autofocus="off">
           </div>
 
           <div class="input-group">
@@ -66,19 +55,21 @@
           </div>
 
           <div class="input-group prev-submit-btn">
-            <a href="<?= BASEURL . 'staff'  ?>" class="prev-btn">
-              <span>Cancel</span>
+            <a href="<?= BASEURL ?>" class="prev-btn">
+              <span>Back to Dashboard</span>
             </a>
-            <button type="submit" name="submit-btn" class="submit-btn">
-              <span>Update Staff</span>
-              <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.63638 12.7742L5.21649 10.4983C5.27328 10.2755 5.40513 10.0791 5.58984 9.94209L17.691 0.967977C18.415 0.431087 19.4359 0.57489 19.9834 1.29088C20.5424 2.02193 20.3949 3.06908 19.6557 3.61727L7.57334 12.5774C7.40103 12.7052 7.19219 12.7742 6.97767 12.7742H4.63638Z" stroke="#989898" stroke-linecap="round" />
-                <path d="M16.4545 2.03223L18.2727 4.35481" stroke="#989898" stroke-linecap="round" />
-                <path d="M13.5916 1.16113H3C1.89543 1.16113 1 2.05656 1 3.16113V15.9998C1 17.1044 1.89543 17.9998 3 17.9998H16.5758C17.6803 17.9998 18.5758 17.1044 18.5758 15.9998V6.32138" stroke="#989898" stroke-linecap="round" />
+            <button type="submit" name="save-profile" class="submit-btn">
+              <span>Save Profile</span>
+              <svg width="23" height="28" viewBox="0 0 23 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 6V25.5945C1 26.4842 2.07459 26.9309 2.70529 26.3034L10.6439 18.4053C11.0298 18.0214 11.6518 18.0166 12.0435 18.3945L20.3057 26.3654C20.9407 26.978 22 26.528 22 25.6457V6C22 3.23858 19.7614 1 17 1H6C3.23858 1 1 3.23858 1 6Z" stroke="black" stroke-width="2" />
               </svg>
             </button>
           </div>
         </div>
+
+        <small class="forgot-password-link">
+          Forgot your password? <a href="<?= BASEURL . 'staff/reset_password/' . $_SESSION['user']['staff_id'] ?>">Reset Here</a>
+        </small>
       </form>
     </div>
 

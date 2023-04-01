@@ -107,7 +107,7 @@
                 </td>
               <?php else : ?>
                 <td>
-                  <a href="" class="view-profile-btn">View Profile</a>
+                  <a href="<?= BASEURL . 'user/profile/' . $_SESSION['user']['staff_id'] ?>" class="view-profile-btn">View Profile</a>
                 </td>
               <?php endif; ?>
             </tr>

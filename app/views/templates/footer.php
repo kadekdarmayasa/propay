@@ -44,6 +44,18 @@
     <?php if ($tabs[1] == 'update') : ?>
       <script src="<?= BASEURL . 'public/js/staff/update.js' ?>" type="module"></script>
     <?php endif; ?>
+
+    <?php if ($tabs[1] == 'reset_password') : ?>
+      <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
+      <script src="<?= BASEURL . 'public/js/staff/reset_password.js' ?>" type="module"></script>
+    <?php endif; ?>
+  <?php endif; ?>
+
+  <?php if ($tabs[0] == 'user') : ?>
+    <?php if ($tabs[1] == 'reset_password') : ?>
+      <script src="<?= BASEURL . 'public/js/toggle_password.js' ?>"></script>
+      <script src="<?= BASEURL . 'public/js/user/index.js' ?>" type="module"></script>
+    <?php endif; ?>
   <?php endif; ?>
 
   <?php if ($tabs[0] == 'student') : ?>
@@ -80,6 +92,10 @@
       <?php if ($tabs[2] == 'index') : ?>
         <script src="<?= BASEURL . 'public/js/payment/index.js' ?>" type="module"></script>
       <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if ($tabs[1] == 'report') : ?>
+      <script src="<?= BASEURL . 'public/js/report/index.js' ?>" type="module"></script>
     <?php endif; ?>
   <?php endif; ?>
 <?php endif ?>

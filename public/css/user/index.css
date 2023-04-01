@@ -1,0 +1,25 @@
+.forgot-password-link {
+	text-align: center;
+	margin-top: -1.2em;
+	color: var(--black-color);
+	font-weight: 400;
+	font-size: 1rem;
+}
+
+body.dark .forgot-password-link {
+	color: var(--white-color);
+}
+
+.forgot-password-link a {
+	color: var(--primary-color);
+}
+
+.forgot-password-link a:hover {
+	text-decoration: underline;
+}
+
+.alert {
+	width: 100%;
+	margin-top: 1.6em;
+	margin-bottom: 1.4em;
+}

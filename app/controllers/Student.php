@@ -196,10 +196,12 @@ class Student extends Controller implements Actions
 
 
     if (isset($_POST['search-student'])) {
-      $total_data = count($this->model('Student_Model')->getStudentByAny($_POST['student-search-keyword']));
+      $search_student_keyword = $_POST['search-student-keyword'];
+
+      $total_data = count($this->model('Student_Model')->getStudentByAny($search_student_keyword));
 
       $data['student_count'] = $total_data;
-      $_SESSION['search_student_keyword'] = $_POST['student-search-keyword'];
+      $_SESSION['search_student_keyword'] = $search_student_keyword;
 
       if ($total_data < 6) {
         header('location: ' . BASEURL . 'student/page/1');

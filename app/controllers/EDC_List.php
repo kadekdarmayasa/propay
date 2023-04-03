@@ -11,12 +11,15 @@ class EDC_List extends Controller implements Actions
       unset($_SESSION['search_class_keyword']);
       unset($_SESSION['search_student_keyword']);
       unset($_SESSION['search_staff_keyword']);
+      unset($_SESSION['search_history_keyword']);
+
       if ($_SESSION['user']['role'] == 'student' || $_SESSION['user']['role'] == 'staff') {
         header('Location: ' . BASEURL);
+        exit;
       }
       header('Location: ' . BASEURL . 'edc_list/page/1');
+      exit;
     }
-    exit;
   }
 
   public function update($edc_id)
@@ -36,10 +39,12 @@ class EDC_List extends Controller implements Actions
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['row_per_page']);
+    unset($_SESSION['search_history_keyword']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -52,6 +57,7 @@ class EDC_List extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -65,6 +71,7 @@ class EDC_List extends Controller implements Actions
     $data['breadcrumb'] = 'EDC List/Update';
     $data['page'] = 1;
     $data['edc'] = $this->model('EDC_Model')->getEDCById($edc_id);
+
     $this->view('templates/header', $data, 'edc/list/update');
     $this->view('templates/sidebar', $data, 'edc/list/update');
     $this->view('templates/top-bar', $data, 'edc/list/update');
@@ -89,10 +96,12 @@ class EDC_List extends Controller implements Actions
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['row_per_page']);
     unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_history_keyword']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -105,6 +114,7 @@ class EDC_List extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -117,6 +127,7 @@ class EDC_List extends Controller implements Actions
     $data['title'] = 'Propay - EDC List';
     $data['breadcrumb'] = 'EDC List/Add';
     $data['page'] = 1;
+
     $this->view('templates/header', $data, 'edc/list/add');
     $this->view('templates/sidebar', $data, 'edc/list/add');
     $this->view('templates/top-bar', $data, 'edc/list/add');
@@ -144,6 +155,7 @@ class EDC_List extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -156,30 +168,7 @@ class EDC_List extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
-        $student_name = $student['student_name'];
-      } else {
-        $student_name = $_SESSION['user']['student_name'];
-      }
 
-      $data['name'] = $student_name;
-      $data['role'] = 'student';
-    }
-
-    if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
-      if (isset($_SESSION['profile_change'])) {
-        $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
-        $staff_name = $staff['staff_name'];
-      } else {
-        $staff_name = $_SESSION['user']['staff_name'];
-      }
-
-      $data['name'] = $staff_name;
-      $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
-    if ($_SESSION['user']['role'] == 'student') {
-      if (isset($_SESSION['profile_change'])) {
-        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -192,20 +181,21 @@ class EDC_List extends Controller implements Actions
     // Pagination
     if (isset($_SESSION['search_edc_keyword']) && $_SESSION['search_edc_keyword'] != '') {
       $total_data = count($this->model('EDC_Model')->getEDCByAny($_SESSION['search_edc_keyword']));
+      $data['edc_count'] = $total_data;
     } else {
       $total_data = count($this->model('EDC_Model')->getAllEDC());
+      $data['edc_count'] = $total_data;
     }
-    $data['edc_amount'] = $total_data;
 
 
     if (isset($_POST['search-edc'])) {
-      $edc = $this->model('EDC_Model')->getEDCByAny($_POST['edc-field']);
-      $total_data = count($edc);
-      $data['edc_amount'] = $total_data;
+      $total_data = $this->model('EDC_Model')->getEDCByAny($_POST['edc-field']);
+
+      $data['edc_count'] = $total_data;
       $_SESSION['search_edc_keyword'] = $_POST['edc-field'];
 
       if ($total_data < 6) {
-        header('location: ' . BASEURL . 'edc_list/index');
+        header('location: ' . BASEURL . 'edc_list/page/1');
         exit;
       }
     }
@@ -220,7 +210,7 @@ class EDC_List extends Controller implements Actions
     $total_page = ceil($total_data / $total_data_per_page);
 
     if ($total_page <= 1 && $page != 1) {
-      header('Location: ' . BASEURL . 'edc_list/index');
+      header('Location: ' . BASEURL . 'edc_list/page/1');
       exit;
     }
 
@@ -278,6 +268,7 @@ class EDC_List extends Controller implements Actions
     $data['title'] = 'Propay - EDC List';
     $data['breadcrumb'] = 'EDC List';
     $data['keyword'] = $_SESSION['search_edc_keyword'] ?? '';
+
     $this->view('templates/header', $data, 'edc/list/index');
     $this->view('templates/sidebar', $data, 'edc/list/index');
     $this->view('templates/top-bar', $data, 'edc/list/index');
@@ -287,23 +278,29 @@ class EDC_List extends Controller implements Actions
 
   public function delete_action($edc_id)
   {
-
     file_get_contents('php://input');
-    $result = $this->model("EDC_Model")->deleteEDC($edc_id);
 
-    if ($result['row_count']) {
-      file_put_contents('php://output', json_encode([
-        'status_message' => 'success',
-        'status_code' => 200,
-        'edc_id' => $result['edc_id']
-      ]));
+    $edc = $this->model("EDC_Model")->deleteEDC($edc_id);
+
+    if ($edc['row_count'] > 0) {
+      $response = [
+        'status' => 'success',
+        'edc_id' => $edc['edc_id']
+      ];
+    } else {
+      $response = [
+        'status' => 'error',
+      ];
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function insert_action()
   {
     $json  = file_get_contents('php://input');
     $data = json_decode($json, true);
+
     $start_date = explode('/', $data['term'])[0] . '-07-10';
     $edc_row_count = $this->model("EDC_Model")->addEDC($data, $start_date);
 
@@ -313,39 +310,39 @@ class EDC_List extends Controller implements Actions
         'message' => 'EDC has been successfully added',
         'url' => BASEURL . 'edc_list',
       ];
-
-      file_put_contents('php://output', json_encode($response));
+    } else {
+      $response = [
+        'status' => 'error',
+      ];
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function update_action()
   {
     $json = file_get_contents('php://input');
+
     $data = json_decode($json, true);
     $result = $this->model("EDC_Model")->updateEDC($data);
 
     if ($result['row_count'] > 0) {
       $response = [
         'status' => 'success',
-        'message' => 'EDC has been successfully update',
         'url' => BASEURL . 'edc_list/index'
       ];
-      file_put_contents('php://output', json_encode($response));
     } else if ($result['row_count'] == 0) {
       $response = [
         'status' => 'nothing-update',
-        'message' => 'No edc data update',
         'url' => BASEURL . 'edc_list/index'
       ];
-      file_put_contents('php://output', json_encode($response));
     } else {
       $response = [
         'status' => 'error',
-        'message' => 'Failed to update edc',
-        'url' => BASEURL . 'edc_list/index'
       ];
-      file_put_contents('php://output', json_encode($response));
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function check_action()
@@ -357,19 +354,17 @@ class EDC_List extends Controller implements Actions
     $edc = $this->model("EDC_Model")->getEDCByTerm($data['term']);
 
     if ($edc) {
-      $result = [
+      $response = [
         'status' => 'error',
         'message' => 'Term is already existed'
       ];
-
-      file_put_contents('php://output', json_encode($result));
     } else {
-      $result = [
+      $response = [
         'status' => 'success',
         'message' => 'Term is available'
       ];
-
-      file_put_contents('php://output', json_encode($result));
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 }

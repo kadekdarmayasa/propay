@@ -10,16 +10,19 @@ const url = location.href.split('classes', 1).toString();
 form.addEventListener('keyup', function (e) {
 	let isContainError = validateInputs(e.target, 'update-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 form.addEventListener('input', function (e) {
 	let isContainError = validateInputs(e.target, 'update-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 form.addEventListener('change', function (e) {
 	let isContainError = validateInputs(e.target, 'update-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 submitBtn.addEventListener('click', async (e) => {
@@ -82,10 +85,10 @@ submitBtn.addEventListener('click', async (e) => {
 			title: 'Oops!!!',
 			message: 'Something went wrong',
 			description: `
-					Failed to update class, please try again letter.
+					Failed to update class, please try again later.
 				`,
 			view: 'class',
-			redirectUrl: url + 'student/index',
+			redirectUrl: `${url}classes/index`,
 			illustrationImage: `${url}public/images/something-wrong.svg`,
 			state: 'error'
 		};

@@ -7,21 +7,26 @@ const form = document.querySelector('form');
 const firstContent = document.querySelector('.first-content');
 const submitBtn = document.getElementById('submit-btn');
 const url = location.href.split('classes', 1).toString();
+
 submitBtn.style.visibility = 'hidden';
+submitBtn.disabled = true;
 
 form.addEventListener('keyup', function (e) {
 	let isContainError = validateInputs(e.target, 'add-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 form.addEventListener('input', function (e) {
 	let isContainError = validateInputs(e.target, 'add-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 form.addEventListener('change', function (e) {
 	let isContainError = validateInputs(e.target, 'add-class');
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 submitBtn.addEventListener('click', async (e) => {
@@ -68,7 +73,7 @@ submitBtn.addEventListener('click', async (e) => {
 				Failure occurred when attempting to add a class.
 			`,
 			view: 'student',
-			redirectUrl: url + 'classes/index',
+			redirectUrl: `${url}classes/index`,
 			illustrationImage: `${url}public/images/something-wrong.svg`,
 			state: 'error'
 		};

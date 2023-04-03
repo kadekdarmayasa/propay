@@ -1,10 +1,12 @@
 import '../components/illustration.js';
+import Database from '../helpers/database.js';
 import validateInputs from '../helpers/validator/index.js';
 import { prepIllustrationComp, showIllustrationComp } from '../helpers/illustration.js';
 
+const form = document.querySelector('form');
+const firstContent = document.querySelector('.first-content');
 const submitBtn = document.getElementById('submit-btn');
 const url = location.href.split('classes', 1).toString();
-const form = document.querySelector('form');
 submitBtn.style.visibility = 'hidden';
 
 form.addEventListener('keyup', function (e) {
@@ -25,47 +27,54 @@ form.addEventListener('change', function (e) {
 submitBtn.addEventListener('click', async (e) => {
 	e.preventDefault();
 
-	const inputs = Array.from(document.querySelectorAll('.input'));
-
 	const data = {};
+
+	const inputs = document.querySelectorAll('.input');
+
 	inputs.forEach((input) => {
 		data[input.id] = input.value;
 	});
 
-	const response = await insertClassToDatabase(data);
+	try {
+		const database = new Database('http://localhost/propay/classes/insert_action');
+		const response = await database.insert(data);
 
-	if (response.status == 'success') {
+		if (response.status == 'success') {
+			form.reset();
+			document.querySelector('.first-content').style.display = 'none';
+
+			const illustrationProps = {
+				title: 'Congratulations',
+				message: 'Class has been successfully added',
+				description: `
+					Class ${response.class_name} has been successfully added,<br>lets see the list of class by clicking the button below
+				`,
+				view: 'class',
+				redirectUrl: response.url,
+				illustrationImage: `${url}public/images/completed.svg`,
+				state: 'success'
+			};
+
+			showIllustrationComp(prepIllustrationComp(illustrationProps));
+		}
+	} catch (e) {
 		form.reset();
-		document.querySelector('.first-content').style.display = 'none';
+		firstContent.style.display = 'none';
 
 		const illustrationProps = {
-			title: 'Congratulations',
-			message: response.message,
+			title: 'Oops!!!',
+			message: 'Something went wrong',
 			description: `
-			Class ${response.class_name} has been successfully added,<br>lets see the list of class by clicking the button below
-		`,
-			view: 'class',
-			redirectUrl: response.url,
-			illustrationImage: `${url}public/images/completed.svg`,
+				Failure occurred when attempting to add a class.
+			`,
+			view: 'student',
+			redirectUrl: url + 'classes/index',
+			illustrationImage: `${url}public/images/something-wrong.svg`,
+			state: 'error'
 		};
 
 		showIllustrationComp(prepIllustrationComp(illustrationProps));
 	}
+
 });
 
-async function insertClassToDatabase(class_data) {
-	const data = class_data;
-	const url = 'http://localhost/propay/classes/insert_action';
-
-	const response = await fetch(url, {
-		method: 'POST',
-		mode: 'no-cors',
-		credentials: 'same-origin',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-
-	return response.json();
-}

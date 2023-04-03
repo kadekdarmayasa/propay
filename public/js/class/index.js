@@ -1,5 +1,7 @@
 import '../components/overlay.js';
 import '../utils/row-selected.js';
+import Database from '../helpers/database.js';
+
 localStorage.removeItem('selected');
 
 const deleteButtons = document.querySelectorAll('.delete-btn');
@@ -20,7 +22,7 @@ window.addEventListener('click', function (e) {
 deleteButtons.forEach((button) => {
 	button.addEventListener('click', function (e) {
 		icon.innerHTML = /* html */ `
-			<svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg" class="question">
 				<circle cx="16" cy="23.5" r="1" fill="black" />
 				<path d="M12 13V13C12 10.7909 13.7909 9 16 9H17V9C19.4853 9 21.5 11.0147 21.5 13.5V13.5C21.5 15.9853 19.4853 18 17 18H16V21.5" stroke="black" />
 				<rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black" />
@@ -37,37 +39,54 @@ deleteButtons.forEach((button) => {
 	});
 });
 
-overlayDeleteBtn.addEventListener('click', function (e) {
+overlayDeleteBtn.addEventListener('click', async function (e) {
 	e.preventDefault();
 
 	const url = this.getAttribute('href');
-	fetch(url, {
-		mode: 'no-cors',
-		credentials: 'same-origin',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			icon.innerHTML = /* html */ `
-				<svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black"/>
-					<path d="M9.5 15L15.5 22.5L24 10.5" stroke="black" stroke-linecap="round"/>
-				</svg>
-`;
-			overlayMetaTitle.textContent = 'Congratulations';
-			overlayMetaDescription.textContent = ` Class ${data.class_name} has been successfully deleted`;
 
-			overlay.classList.add('show');
+	try {
+		const database = new Database(url);
+		const response = await database.delete();
 
-			overlayDeleteBtn.style.display = 'none';
-			overlayCancelBtn.textContent = 'Close';
+		icon.innerHTML = /* html */ `
+			<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" class="success">
+				<rect x="2.5" y="2.5" width="47" height="47" rx="23.5" stroke="black"/>
+				<path d="M15 23.5L24.5 34L39.5 18" stroke="black" stroke-linecap="round"/>
+			</svg>
+		`;
 
-			overlayCancelBtn.addEventListener('click', () => {
-				location.reload();
-			});
+		overlayMetaTitle.textContent = 'Congratulations';
+		overlayMetaDescription.textContent = ` Class ${response.class_name} has been successfully deleted`;
+
+		overlay.classList.add('show');
+
+		overlayDeleteBtn.style.display = 'none';
+		overlayCancelBtn.textContent = 'Close';
+
+		overlayCancelBtn.addEventListener('click', () => {
+			location.reload();
 		});
+	} catch (e) {
+		icon.innerHTML = /* html */ `
+			<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" class="error">
+					<rect x="2.5" y="2.5" width="47" height="47" rx="23.5" stroke="black"/>
+					<path d="M15 15.8505L37.5 36.3505" stroke="black" stroke-linecap="round"/>
+					<path d="M15.0585 36.4144L37.4415 15.7867" stroke="black" stroke-linecap="round"/>
+			</svg>
+		`;
+
+		overlayMetaTitle.textContent = 'Oops!!!';
+		overlayMetaDescription.innerHTML = `Class cannot be deleted`;
+
+		overlay.classList.add('show');
+
+		overlayDeleteBtn.style.display = 'none';
+		overlayCancelBtn.textContent = 'Close';
+
+		overlayCancelBtn.addEventListener('click', () => {
+			location.reload();
+		});
+	}
 });
 
 overlayCancelBtn.addEventListener('click', (e) => {

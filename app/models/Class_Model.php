@@ -73,7 +73,7 @@ class Class_Model
     $class_name = htmlspecialchars($data['class_name']);
     $major_name = htmlspecialchars($data['major_name']);
 
-    $query = "UPDATE " . $this->table . " SET class_name =: class_name, major_name =:major_name WHERE class_id=:class_id";
+    $query = "UPDATE " . $this->table . " SET class_name = :class_name, major_name = :major_name WHERE class_id = :class_id";
 
     $this->db->query($query);
     $this->db->bind(':class_id', $class_id, PDO::PARAM_INT);

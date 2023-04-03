@@ -6,19 +6,22 @@ class Staff extends Controller implements Actions
   {
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
+      exit;
     } else {
       unset($_SESSION['search_class_keyword']);
       unset($_SESSION['search_edc_keyword']);
       unset($_SESSION['search_student_keyword']);
       unset($_SESSION['last_search']);
       unset($_SESSION['row_per_page']);
+
       if ($_SESSION['user']['role'] == 'student' || $_SESSION['user']['role'] == 'staff') {
         header('Location: ' . BASEURL);
+        exit;
+      } else {
+        header('Location: ' . BASEURL . 'staff/page/1');
+        exit;
       }
-      header('Location: ' . BASEURL . 'staff/page/1');
     }
-
-    exit;
   }
 
   public function add()
@@ -43,6 +46,7 @@ class Staff extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -55,6 +59,7 @@ class Staff extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -67,6 +72,7 @@ class Staff extends Controller implements Actions
     $data['page'] = 1;
     $data['title'] = 'Propay - Staff';
     $data['breadcrumb'] = 'Staff/Add';
+
     $this->view('templates/header', $data, 'staff/add');
     $this->view('templates/sidebar', $data, 'staff/add');
     $this->view('templates/top-bar', $data, 'staff/add');
@@ -96,6 +102,7 @@ class Staff extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -108,6 +115,7 @@ class Staff extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -117,11 +125,12 @@ class Staff extends Controller implements Actions
       $data['role'] = 'student';
     }
 
-    $data['staff'] = $this->model('Staff_Model')->getStaffById($staff_id);
     $data['page'] = 1;
     $data['title'] = 'Propay - Staff';
     $data['breadcrumb'] = 'Staff/Update';
     $data['religions'] = ['Hindu', 'Islam', 'Christian', 'Buddha', 'Kong Hu Cu'];
+    $data['staff'] = $this->model('Staff_Model')->getStaffById($staff_id);
+
     $this->view('templates/header', $data, 'staff/update');
     $this->view('templates/sidebar', $data, 'staff/update');
     $this->view('templates/top-bar', $data, 'staff/update');
@@ -152,6 +161,7 @@ class Staff extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -164,6 +174,7 @@ class Staff extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -177,6 +188,7 @@ class Staff extends Controller implements Actions
     $data['title'] = 'Propay - Staff';
     $data['breadcrumb'] = 'Staff/Detail';
     $data['staff'] =  $this->model("Staff_Model")->getStaffById($staff_id);
+
     $this->view('templates/header', $data, 'staff/detail');
     $this->view('templates/sidebar', $data, 'staff/detail');
     $this->view('templates/top-bar', $data, 'staff/detail');
@@ -197,13 +209,14 @@ class Staff extends Controller implements Actions
     }
 
     if ($page < 1) {
-      header('Location: ' . BASEURL . 'staff/index');
+      header('Location: ' . BASEURL . 'staff/page/1');
       exit;
     }
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -216,6 +229,7 @@ class Staff extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -228,21 +242,25 @@ class Staff extends Controller implements Actions
     // Pagination
     if (isset($_SESSION['search_staff_keyword']) && $_SESSION['search_staff_keyword'] != '') {
       $total_data = count($this->model('Staff_Model')->getStaffByAny($_SESSION['search_staff_keyword']));
-      $data['staff_amount'] = $total_data;
+
+      $data['staff_count'] = $total_data;
     } else {
       $total_data = count($this->model('Staff_Model')->getAllStaff());
-      $data['staff_amount'] = $total_data;
+
+      $data['staff_count'] = $total_data;
     }
 
 
     if (isset($_POST['search-staff'])) {
-      $staff = $this->model('Staff_Model')->getStaffByAny($_POST['staff-field']);
-      $total_data = count($staff);
-      $data['staff_amount'] = $total_data;
-      $_SESSION['search_staff_keyword'] = $_POST['staff-field'];
+      $search_staff_keyword = $_POST['search-staff-keyword'];
+
+      $total_data = count($this->model('Staff_Model')->getStaffByAny($search_staff_keyword));
+
+      $data['staff_count'] = $total_data;
+      $_SESSION['search_staff_keyword'] = $search_staff_keyword;
 
       if ($total_data < 6) {
-        header('location: ' . BASEURL . 'staff/index');
+        header('location: ' . BASEURL . 'staff/page/1');
         exit;
       }
     }
@@ -257,7 +275,7 @@ class Staff extends Controller implements Actions
     $total_page = ceil($total_data / $total_data_per_page);
 
     if ($total_page <= 1 && $page != 1) {
-      header('Location: ' . BASEURL . 'staff/index');
+      header('Location: ' . BASEURL . 'staff/page/1');
     }
 
     if ($page > $total_page && $total_page > 1) {
@@ -306,10 +324,10 @@ class Staff extends Controller implements Actions
       'end_data' => $end_data,
     ];
 
-
     $data['title'] = 'Propay - Staff';
     $data['breadcrumb'] = 'Staff';
     $data['keyword'] = $_SESSION['search_staff_keyword'] ?? '';
+
     $this->view('templates/header', $data, 'staff/index');
     $this->view('templates/sidebar', $data, 'staff/index');
     $this->view('templates/top-bar', $data, 'staff' . $page . '/index');
@@ -317,98 +335,100 @@ class Staff extends Controller implements Actions
     $this->view('templates/footer', $data, 'staff/index');
   }
 
-
-
   public function check_action()
   {
     $json = file_get_contents('php://input');
 
     $data = json_decode($json, true);
+
     $staff = $this->model("Staff_Model")->getStaffByUsername($data['username']);
 
     if ($staff) {
-      $result = [
+      $response = [
         'status' => 'error',
         'message' => 'Username is already used'
       ];
-
-      file_put_contents('php://output', json_encode($result));
     } else {
-      $result = [
+      $response = [
         'status' => 'success',
         'message' => 'Username can be used'
       ];
-
-      file_put_contents('php://output', json_encode($result));
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function insert_action()
   {
     $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
-    $result = $this->model("Staff_Model")->addStaff($data);
 
-    if ($result['row_count'] > 0) {
+    $data = json_decode($json, true);
+
+    $staff = $this->model("Staff_Model")->addStaff($data);
+
+    if ($staff['row_count'] > 0) {
       $response = [
         'status' => 'success',
-        'message' => 'Staff has been successfully added',
-        'id_staff' =>  $result['last_id'],
+        'id_staff' =>  $staff['last_id'],
         'url' => BASEURL . 'staff/index'
       ];
-      file_put_contents('php://output', json_encode($response));
     } else {
       $response = [
         'status' => 'error',
-        'message' => 'Failed to add staff'
       ];
-      file_put_contents('php://output', json_encode($response));
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function delete_action($staff_id)
   {
     file_get_contents('php://input');
+
     $staff_row_count = $this->model("Staff_Model")->deleteStaff($staff_id);
 
     if ($staff_row_count) {
-      file_put_contents('php://output', json_encode([
-        'status_message' => 'success',
-        'status_code' => 200,
+      $response = [
+        'status' => 'success',
         'staff_id' => $staff_id
-      ]));
+      ];
+    } else {
+      $response = [
+        'status' => 'error',
+      ];
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function update_action()
   {
     $json = file_get_contents('php://input');
+
     $data = json_decode($json, true);
+
     $result = $this->model("Staff_Model")->updateStaff($data);
 
     if ($result['row_count'] > 0) {
       $response = [
         'status' => 'success',
-        'message' => 'Staff has been successfully update',
         'id_staff' =>  $result['last_id'],
         'url' => BASEURL . 'staff/index'
       ];
-      file_put_contents('php://output', json_encode($response));
     } else if ($result['row_count'] == 0) {
       $response = [
         'status' => 'nothing-update',
-        'message' => 'No staff data update',
         'id_staff' =>  $result['last_id'],
         'url' => BASEURL . 'staff/index'
       ];
-      file_put_contents('php://output', json_encode($response));
     } else {
       $response = [
         'status' => 'error',
         'message' => 'Failed to update staff',
         'url' => BASEURL . 'staff'
       ];
-      file_put_contents('php://output', json_encode($response));
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 }

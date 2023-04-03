@@ -11,16 +11,19 @@ const url = location.href.split('student', 1).toString();
 form.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'update-student', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 form.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'update-student', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 form.addEventListener('change', function (e) {
 	const isContainError = validateInputs(e.target, 'update-student', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 submitBtn.addEventListener('click', async (e) => {
@@ -86,7 +89,7 @@ submitBtn.addEventListener('click', async (e) => {
 					Failed to update student, please try again letter.
 				`,
 			view: 'student',
-			redirectUrl: url + 'student/index',
+			redirectUrl: `${url}student/index`,
 			illustrationImage: `${url}public/images/something-wrong.svg`,
 			state: 'error'
 		};

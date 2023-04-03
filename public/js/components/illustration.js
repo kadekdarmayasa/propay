@@ -9,6 +9,7 @@ class Illustration extends HTMLElement {
 		this._url = this.getAttribute('url') || '';
 		this._src = this.getAttribute('src') || '';
 		this._id = this.getAttribute('id') || '';
+		this._style = this.getAttribute('style') || '';
 	}
 
 	get title() {
@@ -67,6 +68,14 @@ class Illustration extends HTMLElement {
 		this._id = value;
 	}
 
+	get style() {
+		return this._style;
+	}
+
+	set style(value) {
+		this._style = value;
+	}
+
 	connectedCallback() {
 		this.render();
 	}
@@ -79,7 +88,7 @@ class Illustration extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ['title', 'message', 'description', 'view', 'url', 'src', 'id'];
+		return ['title', 'message', 'description', 'view', 'url', 'src', 'id', 'style'];
 	}
 
 	render() {
@@ -111,9 +120,9 @@ class Illustration extends HTMLElement {
 					<p>${this.message}</p>
 				</div>
 
-				<img src="${this.src}" alt="Illustration" class="illustration-image" />
+				<img src="${this.src}" alt="Illustration" class="illustration-image" style="${this.style}" />
 
-				<div class="illustration-footer">
+				<div class="illustration-footer" style="width: 700px">
 					<p>${this.description}</p>
 					<a href="${this.url}">See list of ${this.view}</a>
 				</div>

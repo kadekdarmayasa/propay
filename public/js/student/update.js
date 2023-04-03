@@ -1,9 +1,11 @@
 import '../components/illustration.js';
+import Database from '../helpers/database.js';
 import validateInputs from '../helpers/validator/index.js';
 import { showIllustrationComp, prepIllustrationComp } from '../helpers/illustration.js';
 
-const form = document.querySelector('.form');
+const form = document.forms[0];
 const submitBtn = document.querySelector('.submit-btn');
+const firstContent = document.querySelector('.first-content');
 const url = location.href.split('student', 1).toString();
 
 form.addEventListener('keyup', function (e) {
@@ -24,62 +26,71 @@ form.addEventListener('change', function (e) {
 submitBtn.addEventListener('click', async (e) => {
 	e.preventDefault();
 
+	const data = {};
+
 	const inputs = document.querySelectorAll('.input');
 
-	const data = {};
 	inputs.forEach((input) => {
 		data[input.id] = input.value;
 	});
 
-	const response = await updateStudentInDatabase(data);
-	if (response.status == 'success') {
-		document.querySelector('form').reset();
-		document.querySelector('.first-content').style.display = 'none';
+	try {
+		const database = new Database('http://localhost/propay/student/update_action');
+		const response = await database.update(data);
+
+		if (response.status == 'success') {
+			form.reset();
+			firstContent.style.display = 'none';
+
+			const illustrationProps = {
+				title: 'Congratulations',
+				message: 'Student has been successfully updated',
+				description: `
+					You just updated student with sin ${response.sin},<br>lets see the list of student by clicking the button below
+				`,
+				view: 'student',
+				redirectUrl: response.url,
+				illustrationImage: `${url}public/images/completed.svg`,
+				state: 'success'
+			};
+
+			showIllustrationComp(prepIllustrationComp(illustrationProps));
+		}
+
+		if (response.status == 'nothing-update') {
+			form.reset();
+			firstContent.style.display = 'none';
+
+			const illustrationProps = {
+				title: 'Nothing Update',
+				message: 'No student data update',
+				description: `
+					There is no student data change with sin ${response.sin},<br>lets see the list of student by clicking the button below
+				`,
+				view: 'student',
+				redirectUrl: response.url,
+				illustrationImage: `${url}public/images/no-data-update-illustration.svg`,
+				state: 'nothing-update'
+			};
+
+			showIllustrationComp(prepIllustrationComp(illustrationProps));
+		}
+	} catch (e) {
+		form.reset();
+		firstContent.style.display = 'none';
 
 		const illustrationProps = {
-			title: 'Congratulations',
-			message: response.message,
+			title: 'Oops!!!',
+			message: 'Something went wrong',
 			description: `
-				You just updated student with sin ${response.sin},<br>lets see the list of student by clicking the button below
-			`,
+					Failed to update student, please try again letter.
+				`,
 			view: 'student',
-			redirectUrl: response.url,
-			illustrationImage: `${url}public/images/completed.svg`,
+			redirectUrl: url + 'student/index',
+			illustrationImage: `${url}public/images/something-wrong.svg`,
+			state: 'error'
 		};
 
-		showIllustrationComp(prepIllustrationComp(illustrationProps), 'success');
-	} else if (response.status == 'nothing-update') {
-		document.querySelector('form').reset();
-		document.querySelector('.first-content').style.display = 'none';
-
-		const illustrationProps = {
-			title: 'No Data Change',
-			message: response.message,
-			description: `
-				There is no student data change with sin ${response.sin},<br>lets see the list of student by clicking the button below
-			`,
-			view: 'student',
-			redirectUrl: response.url,
-			illustrationImage: `${url}public/images/no-data-update-illustration.svg`,
-		};
-
-		showIllustrationComp(prepIllustrationComp(illustrationProps), 'nothing-update');
+		showIllustrationComp(prepIllustrationComp(illustrationProps));
 	}
 });
-
-async function updateStudentInDatabase(student_data) {
-	const data = student_data;
-	const url = 'http://localhost/propay/student/update_action';
-
-	const response = await fetch(url, {
-		method: 'POST',
-		mode: 'no-cors',
-		credentials: 'same-origin',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-
-	return response.json();
-}

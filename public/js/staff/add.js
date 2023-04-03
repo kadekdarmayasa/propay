@@ -15,6 +15,8 @@ const url = location.href.split('staff', 1).toString();
 
 nextBtn.style.visibility = 'hidden';
 submitBtn.style.visibility = 'hidden';
+nextBtn.disabled = true;
+submitBtn.disabled = true;
 
 nextBtn.addEventListener('click', (e) => {
 	firstForm.classList.add('hide');
@@ -28,31 +30,37 @@ prevBtn.addEventListener('click', () => {
 firstForm.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
 	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	nextBtn.disabled = isContainError ? true : false;
 });
 
 firstForm.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
 	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	nextBtn.disabled = isContainError ? true : false;
 });
 
 firstForm.addEventListener('change', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
 	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	nextBtn.disabled = isContainError ? true : false;
 });
 
 secondForm.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 secondForm.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 secondForm.addEventListener('change', function (e) {
 	const isContainError = validateInputs(e.target, 'add-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 submitBtn.addEventListener('click', async (e) => {

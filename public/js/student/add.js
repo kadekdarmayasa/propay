@@ -1,13 +1,17 @@
 import '../components/illustration.js';
+import Database from '../helpers/database.js';
 import validateInputs from '../helpers/validator/index.js';
 import { showIllustrationComp, prepIllustrationComp } from '../helpers/illustration.js';
 
+const form = document.forms[0];
+const firstContent = document.querySelector('.first-content');
 const firstForm = document.querySelector('.form.first');
 const secondForm = document.querySelector('.form.second');
 const nextBtn = document.querySelector('.next-btn');
 const prevBtn = document.querySelector('.prev-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const url = location.href.split('student', 1).toString();
+
 nextBtn.style.visibility = 'hidden';
 submitBtn.style.visibility = 'hidden';
 
@@ -50,47 +54,52 @@ nextBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', async (e) => {
 	e.preventDefault();
 
+	const data = {};
+
 	const inputs = document.querySelectorAll('.input');
 
-	const data = {};
 	inputs.forEach((input) => {
 		data[input.id] = input.value;
 	});
 
-	const response = await insertStudentToDatabase(data);
+	try {
+		const database = new Database('http://localhost/propay/student/insert_action');
+		const response = await database.insert(data);
 
-	if (response.status == 'success') {
-		document.querySelector('form').reset();
-		document.querySelector('.first-content').style.display = 'none';
+		if (response.status == 'success') {
+			form.reset();
+			firstContent.style.display = 'none';
 
-		const illustrationProps = {
-			title: 'Congratulations',
-			message: response.message,
-			description: `
+			const illustrationProps = {
+				title: 'Congratulations',
+				message: 'Student has been successfully added',
+				description: `
 				You just add new student with sin ${response.sin},<br>lets see the list of student by clicking the button below
 			`,
+				view: 'student',
+				redirectUrl: response.url,
+				illustrationImage: `${url}public/images/completed.svg`,
+				state: 'success'
+			};
+
+			showIllustrationComp(prepIllustrationComp(illustrationProps));
+		}
+	} catch (e) {
+		form.reset();
+		firstContent.style.display = 'none';
+
+		const illustrationProps = {
+			title: 'Oops!!!',
+			message: 'Something went wrong',
+			description: `
+				Failure occurred when attempting to add a student or place a payment. <br>Please check and try again.
+			`,
 			view: 'student',
-			redirectUrl: response.url,
-			illustrationImage: `${url}public/images/completed.svg`,
+			redirectUrl: url + 'student/index',
+			illustrationImage: `${url}public/images/something-wrong.svg`,
+			state: 'error'
 		};
 
-		showIllustrationComp(prepIllustrationComp(illustrationProps), 'success');
+		showIllustrationComp(prepIllustrationComp(illustrationProps));
 	}
 });
-
-async function insertStudentToDatabase(student_data) {
-	const data = student_data;
-	const url = 'http://localhost/propay/student/insert_action';
-
-	const response = await fetch(url, {
-		method: 'POST',
-		mode: 'no-cors',
-		credentials: 'same-origin',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-
-	return response.json();
-}

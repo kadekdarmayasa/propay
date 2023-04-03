@@ -103,7 +103,7 @@ submitBtn.addEventListener('click', async (e) => {
 			message: 'Something went wrong',
 			description: `Failure occurred when attempting to add a staff. <br>Please check and try again.`,
 			view: 'staff',
-			redirectUrl: url + 'staff/index',
+			redirectUrl: `${url}staff/index`,
 			illustrationImage: `${url}public/images/something-wrong.svg`,
 			state: 'error'
 		};

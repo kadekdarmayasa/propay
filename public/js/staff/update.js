@@ -87,7 +87,7 @@ submitBtn.addEventListener('click', async (e) => {
 			title: 'Oops!!!',
 			message: 'Something went wrong',
 			description: `
-					Failed to update student, please try again letter.
+					Failed to update student, please try again later.
 				`,
 			view: 'staff',
 			redirectUrl: `${url}staff/index`,

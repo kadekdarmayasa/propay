@@ -14,33 +14,37 @@ const url = location.href.split('student', 1).toString();
 
 nextBtn.style.visibility = 'hidden';
 submitBtn.style.visibility = 'hidden';
+nextBtn.disabled = true;
+submitBtn.disabled = true;
 
 secondForm.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'add-student', this);
-	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 secondForm.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'add-student', this);
-	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 secondForm.addEventListener('change', function (e) {
 	const isContainError = validateInputs(e.target, 'add-student', this);
-	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 firstForm.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'add-student', this);
 	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	nextBtn.disabled = isContainError ? true : false;
 });
 
 firstForm.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'add-student', this);
 	nextBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	nextBtn.disabled = isContainError ? true : false;
 });
 
 prevBtn.addEventListener('click', () => {
@@ -95,7 +99,7 @@ submitBtn.addEventListener('click', async (e) => {
 				Failure occurred when attempting to add a student or place a payment. <br>Please check and try again.
 			`,
 			view: 'student',
-			redirectUrl: url + 'student/index',
+			redirectUrl: `${url}student/index`,
 			illustrationImage: `${url}public/images/something-wrong.svg`,
 			state: 'error'
 		};

@@ -71,7 +71,7 @@
             <tr>
               <td><?= $number++ ?></td>
               <td><?= $data['edc'][$i]['term']; ?></td>
-              <td><?= $data['edc'][$i]['nominal']; ?></td>
+              <td>Rp. <?= number_format($data['edc'][$i]['nominal'], 0, ',', '.'); ?></td>
               <td><?= date('d F Y', strtotime($data['edc'][$i]['start_date'])); ?></td>
               <td><?= $data['edc'][$i]['edc_id']; ?></td>
               <td>
@@ -92,15 +92,13 @@
                   </svg>
                   <span class="tooltip">Update EDC</span>
                 </a>
-                <?php if ($data['edc'][$i]['total_students'] < 1) : ?>
-                  <a href="" class="delete-btn" data-edc-id="<?= $data['edc'][$i]['edc_id'] ?>">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
-                      <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
-                    </svg>
-                    <span class="tooltip">Delete EDC</span>
-                  </a>
-                <?php endif; ?>
+                <a href="" class="delete-btn" data-edc-id="<?= $data['edc'][$i]['edc_id'] ?>">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
+                    <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
+                  </svg>
+                  <span class="tooltip">Delete EDC</span>
+                </a>
               </td>
             </tr>
           <?php endfor; ?>
@@ -109,22 +107,22 @@
     </div>
     <!-- End of Classlist Data -->
 
-    <?php if ($data['edc_amount'] > 0) : ?>
+    <?php if ($data['edc_count'] > 0) : ?>
       <!-- Classlist Footer -->
       <div class="cls-footer">
         <div class="footer-left">
           <?= $data['pagination']['start_data'] + 1 ?>
-          <?php if ($data['pagination']['start_data'] + 1 != $data['edc_amount']) : ?>
+          <?php if ($data['pagination']['start_data'] + 1 != $data['edc_count']) : ?>
             -
-            <?php if ($data['edc_amount'] < $data['pagination']['end_data']) : ?>
-              <?= $data['edc_amount'] ?>
+            <?php if ($data['edc_count'] < $data['pagination']['end_data']) : ?>
+              <?= $data['edc_count'] ?>
             <?php else : ?>
               <?= $data['pagination']['end_data'] ?>
             <?php endif; ?>
           <?php endif; ?>
           of
-          <?= $data['edc_amount']; ?>
-          <?php if ($data['edc_amount'] < 2) : ?>
+          <?= $data['edc_count']; ?>
+          <?php if ($data['edc_count'] < 2) : ?>
             Item
           <?php else : ?>
             Items
@@ -137,7 +135,7 @@
                 <!-- Prev Btn -->
                 <?php if ($data['pagination']['current_page'] != 1) : ?>
                   <li class="prev-btn">
-                    <a class="page-link" href="<?= BASEURL . 'classes/page/' . $data['pagination']['current_page'] - 1 ?>" aria-label="Previous">
+                    <a class="page-link" href="<?= BASEURL . 'edc_list/page/' . $data['pagination']['current_page'] - 1 ?>" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span> Prev
                     </a>
                   </li>
@@ -153,7 +151,7 @@
                   if ($end_page_number >= $total_page) :
                   ?>
                     <li class="page-item">
-                      <a class="page-link" href="<?= BASEURL . 'classes/page/' . 1 ?>">1</a>
+                      <a class="page-link" href="<?= BASEURL . 'edc_list/page/' . 1 ?>">1</a>
                     </li>
                     <li class="page-item dots">
                       <a class="page-link">...</a>
@@ -164,13 +162,13 @@
                 <?php for ($page_number = $data['pagination']['start_number']; $page_number <= $data['pagination']['end_number']; $page_number++) : ?>
                   <?php if ($page_number == $data['pagination']['current_page']) : ?>
                     <li class="page-item active">
-                      <a class="page-link" href="<?= BASEURL . 'classes/page/' . $page_number ?>">
+                      <a class="page-link" href="<?= BASEURL . 'edc_list/page/' . $page_number ?>">
                         <?= $page_number; ?>
                       </a>
                     </li>
                   <?php else : ?>
                     <li class="page-item">
-                      <a class="page-link" href="<?= BASEURL . 'classes/page/' . $page_number  ?>">
+                      <a class="page-link" href="<?= BASEURL . 'edc_list/page/' . $page_number  ?>">
                         <?= $page_number; ?>
                       </a>
                     </li>
@@ -185,7 +183,7 @@
                     <a class="page-link">...</a>
                   </li>
                   <li class="page-item">
-                    <a class="page-link" href="<?= BASEURL . 'classes/page/' . $data['pagination']['total_page'] ?>">
+                    <a class="page-link" href="<?= BASEURL . 'edc_list/page/' . $data['pagination']['total_page'] ?>">
                       <?= $data['pagination']['total_page']; ?>
                     </a>
                   </li>
@@ -195,7 +193,7 @@
                 <!-- Next Btn -->
                 <?php if ($data['pagination']['current_page'] != $data['pagination']['total_page']) : ?>
                   <li class="next-btn">
-                    <a class="page-link" href="<?= BASEURL . 'classes/page/' . $data['pagination']['current_page'] + 1 ?>" aria-label="Next">
+                    <a class="page-link" href="<?= BASEURL . 'edc_list/page/' . $data['pagination']['current_page'] + 1 ?>" aria-label="Next">
                       Next <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>

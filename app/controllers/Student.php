@@ -5,6 +5,7 @@ class Student extends Controller implements Actions
   {
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
+      exit;
     } else {
       unset($_SESSION['search_class_keyword']);
       unset($_SESSION['search_edc_keyword']);
@@ -14,11 +15,12 @@ class Student extends Controller implements Actions
 
       if ($_SESSION['user']['role'] == 'student' || $_SESSION['user']['role'] == 'staff') {
         header('Location: ' . BASEURL);
+        exit;
+      } else {
+        header('Location: ' . BASEURL . 'student/page/1');
+        exit;
       }
-      header('Location: ' . BASEURL . 'student/page/1');
     }
-
-    exit;
   }
 
   public function add()
@@ -43,6 +45,7 @@ class Student extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -55,6 +58,7 @@ class Student extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -69,6 +73,7 @@ class Student extends Controller implements Actions
     $data['breadcrumb'] = 'Student/Add';
     $data['class'] = $this->model('Class_Model')->getAllClasses();
     $data['edc'] = $this->model('EDC_Model')->getAllEDC();
+
     $this->view('templates/header', $data, 'student/add');
     $this->view('templates/sidebar', $data, 'student/add');
     $this->view('templates/top-bar', $data, 'student/add');
@@ -98,6 +103,7 @@ class Student extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -110,6 +116,7 @@ class Student extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -122,10 +129,11 @@ class Student extends Controller implements Actions
     $data['page'] = 1;
     $data['title'] = 'Propay - Student';
     $data['breadcrumb'] = 'Student/Update';
+    $data['religions'] = ['Hindu', 'Islam', 'Christian', 'Buddha', 'Kong Hu Cu'];
     $data['student'] = $this->model("Student_Model")->getStudentBySIN($sin);
     $data['class'] = $this->model('Class_Model')->getAllClasses();
-    $data['religions'] = ['Hindu', 'Islam', 'Christian', 'Buddha', 'Kong Hu Cu'];
     $data['payment'] = $this->model('Payment_Model')->getPaymentsBySIN($sin);
+
     $this->view('templates/header', $data, 'student/update');
     $this->view('templates/sidebar', $data, 'student/update');
     $this->view('templates/top-bar', $data, 'student/update');
@@ -146,13 +154,13 @@ class Student extends Controller implements Actions
     }
 
     if ($page < 1) {
-      header('Location: ' . BASEURL . 'student/index');
-      exit;
+      header('Location: ' . BASEURL . 'student/page/1');
     }
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -165,6 +173,7 @@ class Student extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -177,21 +186,23 @@ class Student extends Controller implements Actions
     // Pagination
     if (isset($_SESSION['search_student_keyword']) && $_SESSION['search_student_keyword'] != '') {
       $total_data = count($this->model('Student_Model')->getStudentByAny($_SESSION['search_student_keyword']));
-      $data['student_amount'] = $total_data;
+
+      $data['student_count'] = $total_data;
     } else {
       $total_data = count($this->model('Student_Model')->getAllStudents());
-      $data['student_amount'] = $total_data;
+
+      $data['student_count'] = $total_data;
     }
 
 
     if (isset($_POST['search-student'])) {
-      $student = $this->model('Student_Model')->getStudentByAny($_POST['student-field']);
-      $total_data = count($student);
-      $data['student_amount'] = $total_data;
-      $_SESSION['search_student_keyword'] = $_POST['student-field'];
+      $total_data = count($this->model('Student_Model')->getStudentByAny($_POST['student-search-keyword']));
+
+      $data['student_count'] = $total_data;
+      $_SESSION['search_student_keyword'] = $_POST['student-search-keyword'];
 
       if ($total_data < 6) {
-        header('location: ' . BASEURL . 'student/index');
+        header('location: ' . BASEURL . 'student/page/1');
         exit;
       }
     }
@@ -206,7 +217,7 @@ class Student extends Controller implements Actions
     $total_page = ceil($total_data / $total_data_per_page);
 
     if ($total_page <= 1 && $page != 1) {
-      header('Location: ' . BASEURL . 'student/index');
+      header('Location: ' . BASEURL . 'student/page/1');
     }
 
     if ($page > $total_page && $total_page > 1) {
@@ -245,6 +256,10 @@ class Student extends Controller implements Actions
       $data['student'] = $this->model('Student_Model')->getStudentWithLimit($start_data, $total_data_per_page);
     }
 
+    for ($i = 0; $i < count($data['student']); $i++) {
+      $data['student'][$i]['class'] = $this->model('Class_Model')->getClassById($data['student'][$i]['class_id']);
+    }
+
     $data['pagination'] = [
       'total_page' => $total_page,
       'current_page' => $current_page,
@@ -255,16 +270,13 @@ class Student extends Controller implements Actions
       'end_data' => $end_data,
     ];
 
-
     $data['title'] = 'Propay - Student';
     $data['breadcrumb'] = 'Student';
     $data['keyword'] = $_SESSION['search_student_keyword'] ?? '';
-    for ($i = 0; $i < count($data['student']); $i++) {
-      $data['student'][$i]['class'] = $this->model('Class_Model')->getClassById($data['student'][$i]['class_id']);
-    }
+
     $this->view('templates/header', $data, 'student/index');
     $this->view('templates/sidebar', $data, 'student/index');
-    $this->view('templates/top-bar', $data, 'student' . $page . '/index');
+    $this->view('templates/top-bar', $data, 'student/index');
     $this->view('student/index', $data, 'student/index');
     $this->view('templates/footer', $data, 'student/index');
   }
@@ -292,6 +304,7 @@ class Student extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -304,6 +317,7 @@ class Student extends Controller implements Actions
     if ($_SESSION['user']['role'] == 'student') {
       if (isset($_SESSION['profile_change'])) {
         $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
+
         $student_name = $student['student_name'];
       } else {
         $student_name = $_SESSION['user']['student_name'];
@@ -318,6 +332,7 @@ class Student extends Controller implements Actions
     $data['page'] = 1;
     $data['student'] = $this->model('Student_Model')->getStudentBySIN($sin);
     $data['class'] = $this->model('Class_Model')->getClassById($data['student']['class_id']);
+
     $this->view('templates/header', $data, 'student/detail');
     $this->view('templates/sidebar', $data, 'student/detail');
     $this->view('templates/top-bar', $data, 'student/detail');
@@ -325,131 +340,153 @@ class Student extends Controller implements Actions
     $this->view('templates/footer', $data, 'student/detail');
   }
 
-
   public function check_action()
   {
     $json = file_get_contents('php://input');
+
     $data = json_decode($json, true);
 
     if (isset($data['sin'])) {
       $key = 'SIN';
+
       $student = $this->model("Student_Model")->getStudentBySIN($data['sin']);
     } else if (isset($data['nsn'])) {
       $key = 'NSN';
+
       $student = $this->model("Student_Model")->getStudentByNSN($data['nsn']);
     }
 
     if ($student) {
-      $result = [
+      $response = [
         'status' => 'error',
         'message' =>  "$key is already used"
       ];
-
-      file_put_contents('php://output', json_encode($result));
     } else {
-      $result = [
+      $response = [
         'status' => 'success',
         'message' => "$key can be used"
       ];
-
-      file_put_contents('php://output', json_encode($result));
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function update_action()
   {
     $json = file_get_contents('php://input');
+
     $data = json_decode($json, true);
+
     $result = $this->model("Student_Model")->updateStudent($data);
 
     if ($result['row_count']  > 0) {
       $response = [
         'status' => 'success',
-        'message' => 'Student has been successfully updated',
         'sin' =>  $result['sin'],
         'url' => BASEURL . 'student/index',
       ];
-      file_put_contents('php://output', json_encode($response));
     } else if ($result['row_count'] == 0) {
       $response = [
         'status' => 'nothing-update',
-        'message' => 'No student data update',
         'sin' =>  $result['sin'],
         'url' => BASEURL . 'student/index',
       ];
-      file_put_contents('php://output', json_encode($response));
     } else {
       $response = [
         'status' => 'error',
-        'message' => 'Failed to update student',
-        'url' => BASEURL . 'student/index',
       ];
-      file_put_contents('php://output', json_encode($response));
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function delete_action($sin)
   {
     file_get_contents('php://input');
-    $payment = $this->model('Payment_Model')->getPaymentsBySIN($sin);
-    for ($i = 0; $i < count($payment); $i++) {
-      $payment_history  = $this->model('Payment_History_Model')->getPaymentHistoryByPaymentID($payment[$i]['payment_id']);
+
+    $payments = $this->model('Payment_Model')->getPaymentsBySIN($sin);
+
+    for ($i = 0; $i < count($payments); $i++) {
+      $payment_history  = $this->model('Payment_History_Model')->getPaymentHistoryByPaymentID($payments[$i]['payment_id']);
 
       if ($payment_history) {
-        $this->model('Payment_History_Model')->deletePaymentHistory($payment[$i]['payment_id']);
+        $this->model('Payment_History_Model')->deletePaymentHistory($payments[$i]['payment_id']);
       }
     }
+
     $this->model('Payment_Model')->deletePayment($sin);
+
     $student = $this->model("Student_Model")->deleteStudent($sin);
 
     if ($student['row_count']) {
-      file_put_contents('php://output', json_encode([
-        'status_message' => 'success',
-        'status_code' => 200,
+      $response = [
+        'status' => 'success',
         'sin' => $student['sin']
-      ]));
+      ];
+    } else {
+      $response = [
+        'status' => 'error',
+      ];
     }
+
+    file_put_contents('php://output', json_encode($response));
   }
 
   public function insert_action()
   {
     $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
-    $start_tempo = date('Y-m-d', strtotime(explode('/', $data['term'])[0] . '-07-10'));
-    $result = $this->model("Student_Model")->addStudent($data);
 
-    if ($result['row_count'] > 0) {
+    $data = json_decode($json, true);
+
+    $student = $this->model("Student_Model")->addStudent($data);
+
+    if ($student['row_count'] > 0) {
+      $term = $data['term'];
+      $start_tempo = date('Y-m-d', strtotime(explode('/', $term)[0] . '-07-10'));
       $row_count_payment = 0;
-      $student = $this->model("Student_Model")->getStudentBySIN($data['sin']);
-      $term = $student['term'];
+      $term = $term;
+      $initial_id = 1;
+
       $edc = $this->model('EDC_Model')->getEDCByTerm($term);
       $edc_id = $edc['edc_id'];
-      $initial_id = 1;
 
       for ($i = 0; $i < 36; $i++) {
         $due_date = date("Y-m-d", strtotime("+$i month", strtotime($start_tempo)));
         $month = date('F', strtotime($due_date));
         $year = date('Y', strtotime($due_date));
 
-        $payment = $this->model('Payment_Model')->getAllPayments();
-        if (count($payment) < 1) {
+        $payments = $this->model('Payment_Model')->getAllPayments();
+
+        if (count($payments) < 1) {
           $row_count = $this->model('Payment_Model')->addPayment($edc_id, $data['sin'], $year, $month, $due_date, $initial_id);
         } else {
-          $row_count = $this->model('Payment_Model')->addPayment($edc_id, $data['sin'], $year, $month, $due_date, $payment[count($payment) - 1]['payment_id'] + 1);
+          $row_count = $this->model('Payment_Model')->addPayment($edc_id, $data['sin'], $year, $month, $due_date, $payments[count($payments) - 1]['payment_id'] + 1);
         }
 
-        if ($i == 35) $row_count_payment = $row_count;
+        if ($i == 35) {
+          $row_count_payment = $row_count;
+        }
       }
 
       if ($row_count_payment  > 0) {
         $response = [
           'status' => 'success',
-          'message' => 'Student has been successfully added',
           'sin' =>  $data['sin'],
           'url' => BASEURL . 'student/index',
         ];
-        file_put_contents('php://output', json_encode($response));
+      } else {
+        $response = [
+          'status' => 'payment-error',
+        ];
       }
+
+      file_put_contents('php://output', json_encode($response));
+    } else {
+      $response = [
+        'status' => 'student-error',
+      ];
+
+      file_put_contents('php://output', json_encode($response));
     }
   }
 }

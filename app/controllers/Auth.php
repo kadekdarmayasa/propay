@@ -5,20 +5,24 @@ class Auth extends Controller
   public function login()
   {
     if (isset($_SESSION['user'])) {
-      header('Location:' . BASEURL . 'dashboard/index');
+      header('Location:' . BASEURL . 'dashboard');
       exit;
     }
 
+    // Staff Login Process
     if (isset($_POST['username'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];
+      $staff = $this->model('Staff_Model')->getStaffByUsername($username);
 
-      if ($user = $this->model('Staff_Model')->getStaffByUsername($username)) {
-        if (password_verify($password, $user['password'])) {
-          $_SESSION['user'] = $user;
-          $_SESSION['user']['role'] = $user['staff_level'];
-          $_SESSION['user']['name'] = $user['staff_name'];
+      if (!is_null($staff)) {
+        if (password_verify($password, $staff['password'])) {
+          $_SESSION['user'] = $staff;
+          $_SESSION['user']['role'] = $staff['staff_level'];
+          $_SESSION['user']['name'] = $staff['staff_name'];
+
           header('Location: ' . BASEURL . 'dashboard');
+          exit;
         } else {
           Flasher::setFlash('warning', 'Your password is wrong');
         }
@@ -27,16 +31,20 @@ class Auth extends Controller
       }
     }
 
+    // Student Login Process
     if (isset($_POST['sin'])) {
       $sin = $_POST['sin'];
       $password = $_POST['password'];
+      $student = $this->model('Student_Model')->getStudentBySIN($sin);
 
-      if ($user = $this->model('Student_Model')->getStudentBySIN($sin)) {
-        if (password_verify($password, $user['password'])) {
-          $_SESSION['user'] = $user;
+      if (!is_null($student)) {
+        if (password_verify($password, $student['password'])) {
+          $_SESSION['user'] = $student;
           $_SESSION['user']['role'] = 'student';
-          $_SESSION['user']['name'] = $user['student_name'];
+          $_SESSION['user']['name'] = $student['student_name'];
+
           header('Location: ' . BASEURL . 'dashboard');
+          exit;
         } else {
           Flasher::setFlash('warning', 'Your password is wrong');
         }
@@ -57,11 +65,12 @@ class Auth extends Controller
       $uniq_identity = $_POST['uniq-identity'];
 
       $student = $this->model('Student_Model')->getStudentBySIN($uniq_identity);
+
       $staff = $this->model('Staff_Model')->getStaffByUsername($uniq_identity);
 
-      if ($student) {
+      if (!is_null($student)) {
         $data['student'] = $student;
-      } else if ($staff) {
+      } else if (!is_null($staff)) {
         $data['staff'] = $staff;
       } else {
         Flasher::setFlash('error', 'Your information does not match our records');
@@ -71,22 +80,30 @@ class Auth extends Controller
     if (isset($_POST['save-password'])) {
       if (isset($_POST['sin'])) {
         $student_row_count = $this->model('Student_Model')->updatePassword($_POST['sin'], $_POST['password']);
-        if ($student_row_count > 0) {
+
+        if ($student_row_count) {
           $url = BASEURL . 'auth/login';
+
           Flasher::setFlash(
             'success',
             "Password has been changed successfully. <br> You can now <a href='$url'>login</a> with your new password"
           );
+
           $data['password_changed'] = true;
         }
-      } else if (isset($_POST['staff_id'])) {
+      }
+
+      if (isset($_POST['staff_id'])) {
         $staff_row_count = $this->model('Staff_Model')->updatePassword($_POST['staff_id'], $_POST['password']);
-        if ($staff_row_count > 0) {
+
+        if ($staff_row_count) {
           $url = BASEURL . 'auth/login';
+
           Flasher::setFlash(
             'success',
             "Password has been changed successfully. <br> You can now <a href='$url'>login</a> with your new password"
           );
+
           $data['password_changed'] = true;
         }
       }

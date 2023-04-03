@@ -12,16 +12,19 @@ const url = location.href.split('staff', 1).toString();
 formClass.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'update-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 formClass.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'update-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 formClass.addEventListener('change', function (e) {
 	const isContainError = validateInputs(e.target, 'update-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
+	submitBtn.disabled = isContainError ? true : false;
 });
 
 submitBtn.addEventListener('click', async (e) => {
@@ -87,7 +90,7 @@ submitBtn.addEventListener('click', async (e) => {
 					Failed to update student, please try again letter.
 				`,
 			view: 'staff',
-			redirectUrl: url + 'staff/index',
+			redirectUrl: `${url}staff/index`,
 			illustrationImage: `${url}public/images/something-wrong.svg`,
 			state: 'error'
 		};

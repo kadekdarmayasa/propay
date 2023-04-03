@@ -117,12 +117,12 @@ class Staff_Model
     $religion = htmlspecialchars($data['religion']);
     $address = htmlspecialchars($data['address']);
 
-    $query = "UPDATE " . $this->table . " SET username=:username staff_level=:staff_level, staff_name=:staff_name, date_of_birth=:date_of_birth, religion=:religion, address=:address WHERE
+    $query = "UPDATE " . $this->table . " SET username=:username, staff_level=:staff_level, staff_name=:staff_name, date_of_birth=:date_of_birth, religion=:religion, address=:address WHERE
     staff_id=:staff_id";
 
     $this->db->query($query);
     $this->db->bind(':staff_id', $staff_id, PDO::PARAM_INT);
-    $this->db->bind(':username', $username, PDO::PARAM_INT);
+    $this->db->bind(':username', $username, PDO::PARAM_STR);
     $this->db->bind(':staff_level', $staff_level, PDO::PARAM_STR);
     $this->db->bind(':staff_name', $staff_name, PDO::PARAM_STR);
     $this->db->bind(':date_of_birth', $date_of_birth, PDO::PARAM_STR);

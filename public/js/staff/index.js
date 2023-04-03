@@ -50,11 +50,12 @@ overlayDeleteBtn.addEventListener('click', async function (e) {
 
 		if (response.status == 'success') {
 			icon.innerHTML = /* html */ `
-				<svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg" class="success">
-					<rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black"/>
-					<path d="M9.5 15L15.5 22.5L24 10.5" stroke="black" stroke-linecap="round"/>
+				<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" class="success">
+					<rect x="2.5" y="2.5" width="47" height="47" rx="23.5" stroke="black"/>
+					<path d="M15 23.5L24.5 34L39.5 18" stroke="black" stroke-linecap="round"/>
 				</svg>
-`;
+			`;
+
 			overlayMetaTitle.textContent = 'Congratulations';
 			overlayMetaDescription.innerHTML = `Staff with id ${response.staff_id} has been successfully deleted`;
 
@@ -70,12 +71,12 @@ overlayDeleteBtn.addEventListener('click', async function (e) {
 	} catch (e) {
 		console.log(e);
 		icon.innerHTML = /* html */ `
-				<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="error">
-					<rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="black"/>
-					<path d="M13 13.8505L35.5 34.3505" stroke="black" stroke-linecap="round"/>
-					<path d="M13.0585 34.4144L35.4415 13.7867" stroke="black" stroke-linecap="round"/>
-				</svg>
-			`;
+			<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" class="error">
+					<rect x="2.5" y="2.5" width="47" height="47" rx="23.5" stroke="black"/>
+					<path d="M15 15.8505L37.5 36.3505" stroke="black" stroke-linecap="round"/>
+					<path d="M15.0585 36.4144L37.4415 15.7867" stroke="black" stroke-linecap="round"/>
+			</svg>
+		`;
 
 		overlayMetaTitle.textContent = 'Oops!!!';
 		overlayMetaDescription.innerHTML = `Staff cannot be deleted`;

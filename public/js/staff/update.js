@@ -1,22 +1,25 @@
 import '../components/illustration.js';
+import Database from '../helpers/database.js';
 import validateInputs from '../helpers/validator/index.js';
 import { prepIllustrationComp, showIllustrationComp } from '../helpers/illustration.js';
 
-const form = document.querySelector('.form');
+const form = document.forms[0];
+const firstContent = document.querySelector('.first-content');
+const formClass = document.querySelector('.form');
 const submitBtn = document.querySelector('.submit-btn');
 const url = location.href.split('staff', 1).toString();
 
-form.addEventListener('keyup', function (e) {
+formClass.addEventListener('keyup', function (e) {
 	const isContainError = validateInputs(e.target, 'update-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
-form.addEventListener('input', function (e) {
+formClass.addEventListener('input', function (e) {
 	const isContainError = validateInputs(e.target, 'update-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
 
-form.addEventListener('change', function (e) {
+formClass.addEventListener('change', function (e) {
 	const isContainError = validateInputs(e.target, 'update-staff', this);
 	submitBtn.style.visibility = isContainError ? 'hidden' : 'visible';
 });
@@ -24,63 +27,72 @@ form.addEventListener('change', function (e) {
 submitBtn.addEventListener('click', async (e) => {
 	e.preventDefault();
 
-	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select'), document.querySelector('textarea')];
-
 	const data = {};
+
+	const inputs = document.querySelectorAll('.input');
+
 	inputs.forEach((input) => {
 		data[input.id] = input.value;
 	});
 
-	const response = await updateStaff(data);
+	try {
+		const database = new Database('http://localhost/propay/staff/update_action')
+		const response = await database.update(data);
 
-	if (response.status == 'success') {
-		document.querySelector('form').reset();
-		document.querySelector('.first-content').style.display = 'none';
+		if (response.status == 'success') {
+			form.reset();
+			firstContent.style.display = 'none';
 
-		const illustrationProps = {
-			title: 'Congratulations',
-			message: response.message,
-			description: `
+			const illustrationProps = {
+				title: 'Congratulations',
+				message: 'Staff has been successfully update',
+				description: `
 				Staff with id ${response.id_staff} has successfully updated,<br>lets see the list of staff by clicking the button below
 			`,
-			view: 'staff',
-			redirectUrl: response.url,
-			illustrationImage: `${url}public/images/completed.svg`,
-		};
+				view: 'staff',
+				redirectUrl: response.url,
+				illustrationImage: `${url}public/images/completed.svg`,
+				state: 'success'
+			};
 
-		showIllustrationComp(prepIllustrationComp(illustrationProps), 'success');
-	} else if (response.status == 'nothing-update') {
-		document.querySelector('form').reset();
-		document.querySelector('.first-content').style.display = 'none';
+			showIllustrationComp(prepIllustrationComp(illustrationProps));
+		}
 
-		const illustrationProps = {
-			title: 'No Data Change',
-			message: response.message,
-			description: `
+		if (response.status == 'nothing-update') {
+			form.reset();
+			firstContent.style.display = 'none';
+
+			const illustrationProps = {
+				title: 'No Data Update',
+				message: 'No staff data update',
+				description: `
 				There is no staff data change with id ${response.id_staff},<br>lets see the list of staff by clicking the button below
 			`,
+				view: 'staff',
+				redirectUrl: response.url,
+				illustrationImage: `${url}public/images/no-data-update-illustration.svg`,
+				state: 'nothing-update'
+			};
+
+			showIllustrationComp(prepIllustrationComp(illustrationProps));
+		}
+	} catch (e) {
+		form.reset();
+		firstContent.style.display = 'none';
+
+		const illustrationProps = {
+			title: 'Oops!!!',
+			message: 'Something went wrong',
+			description: `
+					Failed to update student, please try again letter.
+				`,
 			view: 'staff',
-			redirectUrl: response.url,
-			illustrationImage: `${url}public/images/no-data-update-illustration.svg`,
+			redirectUrl: url + 'staff/index',
+			illustrationImage: `${url}public/images/something-wrong.svg`,
+			state: 'error'
 		};
 
-		showIllustrationComp(prepIllustrationComp(illustrationProps), 'nothing-update');
+		showIllustrationComp(prepIllustrationComp(illustrationProps));
 	}
 });
 
-async function updateStaff(staff_data) {
-	const data = staff_data;
-	const url = 'http://localhost/propay/staff/update_action';
-
-	const response = await fetch(url, {
-		method: 'POST',
-		mode: 'no-cors',
-		credentials: 'same-origin',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-
-	return response.json();
-}

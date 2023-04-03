@@ -1,8 +1,11 @@
 import '../components/illustration.js';
 import '../helpers/illustration.js';
+import Database from '../helpers/database.js';
 import { prepIllustrationComp, showIllustrationComp } from '../helpers/illustration.js';
 import validateInputs from '../helpers/validator/index.js';
 
+const form = document.forms[0];
+const firstContent = document.querySelector('.first-content');
 const firstForm = document.querySelector('.form.first');
 const secondForm = document.querySelector('.form.second');
 const nextBtn = document.querySelector('.next-btn');
@@ -55,45 +58,50 @@ secondForm.addEventListener('change', function (e) {
 submitBtn.addEventListener('click', async (e) => {
 	e.preventDefault();
 
-	const inputs = [...document.querySelectorAll('input'), ...document.querySelectorAll('select'), document.querySelector('textarea')];
-
 	const data = {};
+
+	const inputs = document.querySelectorAll('.input');
+
 	inputs.forEach((input) => {
 		data[input.id] = input.value;
 	});
 
-	const response = await insertStaffToDatabase(data);
+	try {
+		const database = new Database('http://localhost/propay/staff/insert_action');
+		const response = await database.insert(data);
 
-	if (response.status == 'success') {
-		document.querySelector('form').reset();
-		document.querySelector('.first-content').style.display = 'none';
+		if (response.status == 'success') {
+			form.reset();
+			firstContent.style.display = 'none';
+
+			const illustrationProps = {
+				title: 'Congratulations',
+				message: 'Staff has been successfully added',
+				description: `You just add new staff with id ${response.id_staff},<br>lets see the list of staff by clicking the button below`,
+				view: 'staff',
+				redirectUrl: response.url,
+				illustrationImage: `${url}public/images/completed.svg`,
+				state: 'success'
+			};
+
+			showIllustrationComp(prepIllustrationComp(illustrationProps));
+		}
+	} catch (e) {
+		form.reset();
+		firstContent.style.display = 'none';
 
 		const illustrationProps = {
-			title: 'Congratulations',
-			message: response.message,
-			description: `You just add new staff with id ${response.id_staff},<br>lets see the list of staff by clicking the button below`,
+			title: 'Oops!!!',
+			message: 'Something went wrong',
+			description: `Failure occurred when attempting to add a staff. <br>Please check and try again.`,
 			view: 'staff',
-			redirectUrl: response.url,
-			illustrationImage: `${url}public/images/completed.svg`,
+			redirectUrl: url + 'staff/index',
+			illustrationImage: `${url}public/images/something-wrong.svg`,
+			state: 'error'
 		};
 
-		showIllustrationComp(prepIllustrationComp(illustrationProps), 'success');
+		showIllustrationComp(prepIllustrationComp(illustrationProps));
 	}
 });
 
-async function insertStaffToDatabase(staff_data) {
-	const data = staff_data;
-	const url = 'http://localhost/propay/staff/insert_action';
 
-	const response = await fetch(url, {
-		method: 'POST',
-		mode: 'no-cors',
-		credentials: 'same-origin',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-
-	return response.json();
-}

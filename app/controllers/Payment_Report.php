@@ -19,8 +19,8 @@ class Payment_Report extends Controller
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
-    unset($_SESSION['row_per_page']);
     unset($_SESSION['payment_data_per_student']);
     unset($_SESSION['payment_data_per_class']);
 
@@ -65,8 +65,8 @@ class Payment_Report extends Controller
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
-    unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
@@ -143,8 +143,8 @@ class Payment_Report extends Controller
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
-    unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {

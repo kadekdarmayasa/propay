@@ -4,7 +4,8 @@ const select = document.getElementById('select');
 
 if (rowSelectedContainer) {
 	rowSelectedContainer.tabIndex = 0;
-	if (location.href.split('/').includes('edc_payment')) {
+
+	if (location.href.split('/').includes('payment')) {
 		rowSelectedContainer.firstElementChild.textContent = 6;
 	} else {
 		rowSelectedContainer.firstElementChild.textContent = 5;

@@ -1,5 +1,3 @@
-/* Overlay Styling */
-
 .overlay {
 	position: fixed;
 	top: 0;
@@ -61,21 +59,21 @@ body.dark .overlay .container {
 	height: 100px;
 }
 
-.overlay .icon svg :is(path, rect) {
+.overlay .icon svg.question :is(path, rect) {
 	stroke-width: 1px;
-	stroke: var(--black-color);
+	stroke: var(--primary-color);
 }
 
-body.dark .overlay .icon svg :is(path, rect) {
-	stroke: var(--white-color);
+.overlay .icon svg.error :is(path, rect) {
+	stroke: var(--red-color);
 }
 
-.overlay .icon svg circle {
-	fill: var(--black-color);
+.overlay .icon svg.success :is(path, rect) {
+	stroke: var(--green-color);
 }
 
-body.dark .overlay .icon svg circle {
-	fill: var(--white-color);
+.overlay .icon svg.question circle {
+	fill: var(--primary-color);
 }
 
 .overlay .meta .title {

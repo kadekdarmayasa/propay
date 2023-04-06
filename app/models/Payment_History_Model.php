@@ -50,7 +50,7 @@ class Payment_History_Model
   public function getPaymentHistoryWithLimit($start_data, $total_data_per_page, $keyword = null, $staff_id = null)
   {
     if ($keyword != null) {
-      $query = "SELECT * FROM " . $this->table . " WHERE sin = :keyword OR payment_id LIKE :keyword OR payment_amount LIKE :keyword OR date_of_payment LIKE :keyword OR refund_total LIKE :keyword ORDER BY date_of_payment DESC LIMIT :start_data, :total_data_per_page";
+      $query = "SELECT * FROM " . $this->table . " WHERE sin LIKE :keyword OR payment_id LIKE :keyword OR payment_amount LIKE :keyword OR date_of_payment LIKE :keyword OR refund_total LIKE :keyword ORDER BY date_of_payment DESC LIMIT :start_data, :total_data_per_page";
 
       $this->db->query($query);
       $this->db->bind(':keyword', "%$keyword%");

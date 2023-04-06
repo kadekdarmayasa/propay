@@ -168,12 +168,12 @@ body.dark .notification-profile svg :is(path) {
 .notification-profile .profile {
 	background-color: rgba(255, 255, 255);
 	position: absolute;
-	width: 300px;
-	height: 140px;
+	width: 350px;
+	height: auto;
 	padding: 1em;
-	left: -220px;
+	left: -270px;
 	border-radius: 8px;
-	bottom: -160px;
+	bottom: (100% - auto + 12px);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 	transition: all 0.3s ease-in-out;
 	scale: 0;
@@ -195,6 +195,7 @@ body.dark .notification-profile .profile {
 	font-size: var(--heading-5);
 	color: var(--black-color);
 	font-weight: 500;
+	line-height: 1.5;
 }
 
 body.dark .profile .name {
@@ -203,7 +204,7 @@ body.dark .profile .name {
 
 .profile .role {
 	color: var(--gray-color-300);
-	margin-top: 0.2em;
+	margin-top: 0.3em;
 }
 
 .profile hr {

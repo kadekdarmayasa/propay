@@ -10,17 +10,36 @@ body {
 	margin-top: 3em;
 }
 
-.header .name {
-	color: var(--black-color);
-	font-size: 1.4rem;
+.header .meta-title{
+	color: var(--black-color) !important;
+	font-size: 1.5rem;
 	font-weight: 500;
 	margin-bottom: 0.3em;
 }
 
-.header .sin {
+.meta-description {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 1.4em;
+}
+
+.meta-description hr {
+	width: 1px;
+	height: 20px;
+	background-color: var(--black-color);
+}
+
+.meta-description .desc-1 {
 	color: var(--black-color) !important;
 	font-size: 1.2rem;
-	margin-bottom: 1.2em;
+	font-weight: 300;
+}
+
+.meta-description .desc-2 {
+	color: var(--black-color) !important;
+	font-size: 1.2rem;
+	font-weight: 300;
 }
 
 .brand .title-logo {
@@ -55,13 +74,13 @@ table {
 
 table,
 tr,
-td {
+td, th {
 	border-collapse: collapse;
 	border: 1px solid var(--gray-color-100);
 }
 
-td {
-	padding: 0.6em;
+td, th {
+	padding: 0.8em 1em;
 }
 
 table.class td {

@@ -30,10 +30,10 @@
       <div class="left-header">
         <h2>List of Student</h2>
         <form action="" method="post" id="search-form">
-          <?php if ($data['keyword'] != '') : ?>
-            <input type="text" name="student-search-keyword" id="student-search-keyword" placeholder="Search student..." value="<?= $data['keyword'] ?>" autocomplete="off">
+          <?php if (isset($data['keyword']) && $data['keyword'] != '') : ?>
+            <input type="text" name="search-student-keyword" id="search-student-keyword" placeholder="Search student..." value="<?= $data['keyword'] ?>" autocomplete="off">
           <?php else : ?>
-            <input type="text" name="student-search-keyword" id="student-search-keyword" placeholder="Search student..." autocomplete="off">
+            <input type="text" name="search-student-keyword" id="search-student-keyword" placeholder="Search student..." autocomplete="off">
           <?php endif; ?>
           <button type="submit" name="search-student"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13.7857 6.96721C13.7857 10.5273 10.8234 13.4344 7.14286 13.4344C3.4623 13.4344 0.5 10.5273 0.5 6.96721C0.5 3.40713 3.4623 0.5 7.14286 0.5C10.8234 0.5 13.7857 3.40713 13.7857 6.96721Z" stroke="#989898" />
@@ -226,7 +226,6 @@
                     </li>
                   <?php endif; ?>
                 <?php endfor; ?>
-
 
                 <?php
                 if ($data['pagination']['end_number'] != $data['pagination']['total_page']) :

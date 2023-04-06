@@ -1,6 +1,13 @@
 const rowSelectedContainer = document.querySelector('.row-selected');
-const listOfRows = document.querySelectorAll('.list-of-row li');
+const listOfRowContainer = document.querySelector('.list-of-row');
+const listOfRowLis = document.querySelectorAll('.list-of-row li');
 const select = document.getElementById('select');
+
+window.addEventListener('click', function (e) {
+	if (e.target != rowSelectedContainer) {
+		listOfRowContainer.classList.remove('show');
+	}
+})
 
 if (rowSelectedContainer) {
 	rowSelectedContainer.tabIndex = 0;
@@ -12,14 +19,44 @@ if (rowSelectedContainer) {
 	}
 
 	if (localStorage.getItem('selected')) {
-		rowSelectedContainer.firstElementChild.textContent = localStorage.getItem('selected');
+		if (localStorage.getItem('selected') == 5 && listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 6;
+		}
+
+		if (localStorage.getItem('selected') == 10 && listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 12;
+		}
+
+		if (localStorage.getItem('selected') == 5 && !listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 5;
+		}
+
+		if (localStorage.getItem('selected') == 10 && !listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 10;
+		}
+
+		if (localStorage.getItem('selected') == 12 && listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 12;
+		}
+
+		if (localStorage.getItem('selected') == 6 && listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 6;
+		}
+
+		if (localStorage.getItem('selected') == 12 && !listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 10;
+		}
+
+		if (localStorage.getItem('selected') == 6 && !listOfRowContainer.classList.contains('payment')) {
+			rowSelectedContainer.firstElementChild.textContent = 10;
+		}
 	}
 
 	rowSelectedContainer.addEventListener('click', (e) => {
 		e.preventDefault();
-		document.querySelector('.list-of-row').classList.toggle('show');
+		listOfRowContainer.classList.toggle('show');
 
-		listOfRows.forEach((row) => {
+		listOfRowLis.forEach((row) => {
 			if (row.textContent == rowSelectedContainer.firstElementChild.textContent) {
 				row.classList.add('selected');
 			} else {
@@ -37,3 +74,4 @@ if (rowSelectedContainer) {
 		});
 	});
 }
+

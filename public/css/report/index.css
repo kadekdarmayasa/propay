@@ -1,7 +1,8 @@
 .report-container {
 	display: flex;
 	justify-content: center;
-	gap: 20px;
+	gap: 40px;
+	margin-top: 3em;
 }
 
 .report-item {
@@ -13,11 +14,17 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	transition: 0.3s all ease;
+}
+
+.report-item:hover {
+	transform: scale(1.02)
 }
 
 .report-item .icon {
 	height: 100px;
 	width: 100px;
+	box-shadow: 0 0 6px var(--sidebar-bg), 0 0 12px var(--primary-color);
 	border-radius: 50%;
 	margin-bottom: 2em;
 	display: flex;
@@ -31,14 +38,12 @@
 
 .report-item .icon.student {
 	background-color: var(--primary-color);
+	box-shadow: 0 0 0 6px var(--sidebar-bg), 0 0 0 7px var(--primary-color);
 }
 
 .report-item .icon.class {
 	background-color: var(--green-color);
-}
-
-.report-item .icon.term {
-	background-color: var(--orange-color);
+	box-shadow: 0 0 0 6px var(--sidebar-bg), 0 0 0 7px var(--green-color);
 }
 
 .report-item small {
@@ -77,6 +82,7 @@ body.dark .report-item h2 {
 
 .report-item a.student:hover {
 	background-color: var(--primary-color);
+	filter: drop-shadow(0 10px 10px rgba(var(--primary-color-opacity), 0.2));
 	color: var(--white-color);
 }
 
@@ -88,14 +94,9 @@ body.dark .report-item h2 {
 .report-item a.class:hover {
 	background-color: var(--green-color);
 	color: var(--white-color);
+	filter: drop-shadow(0 10px 10px rgba(var(--green-color-opacity), 0.2));
 }
 
-.report-item a.term {
-	border: 1px solid var(--orange-color);
-	color: var(--orange-color);
-}
-
-.report-item a.term:hover {
-	background-color: var(--orange-color);
-	color: var(--white-color);
+form > .input-group:first-child {
+	margin-top: 2.5em !important;
 }

@@ -5,10 +5,10 @@
       <div class="left-header">
         <h2>List of Staff</h2>
         <form action="" method="post" id="search-form">
-          <?php if ($data['keyword'] != '') : ?>
-            <input type="text" name="staff-field" id="staff-field" placeholder="Search staff..." value="<?= $data['keyword'] ?>" autocomplete="off">
+          <?php if (isset($data['keyword']) && $data['keyword'] != '') : ?>
+            <input type="text" name="search-staff-keyword" id="search-staff-keyword" placeholder="Search staff..." value="<?= $data['keyword'] ?>" autocomplete="off">
           <?php else : ?>
-            <input type="text" name="staff-field" id="staff-field" placeholder="Search staff..." autocomplete="off">
+            <input type="text" name="search-staff-keyword" id="search-staff-keyword" placeholder="Search staff..." autocomplete="off">
           <?php endif; ?>
           <button type="submit" name="search-staff"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13.7857 6.96721C13.7857 10.5273 10.8234 13.4344 7.14286 13.4344C3.4623 13.4344 0.5 10.5273 0.5 6.96721C0.5 3.40713 3.4623 0.5 7.14286 0.5C10.8234 0.5 13.7857 3.40713 13.7857 6.96721Z" stroke="#989898" />
@@ -120,22 +120,22 @@
     <!-- End of Staff Data -->
 
 
-    <?php if ($data['staff_amount'] > 0) : ?>
+    <?php if ($data['staff_count'] > 0) : ?>
       <!-- Staff Footer -->
       <div class="cls-footer">
         <div class="footer-left">
           <?= $data['pagination']['start_data'] + 1 ?>
-          <?php if ($data['pagination']['start_data'] + 1 != $data['staff_amount']) : ?>
+          <?php if ($data['pagination']['start_data'] + 1 != $data['staff_count']) : ?>
             -
-            <?php if ($data['staff_amount'] < $data['pagination']['end_data']) : ?>
-              <?= $data['staff_amount'] ?>
+            <?php if ($data['staff_count'] < $data['pagination']['end_data']) : ?>
+              <?= $data['staff_count'] ?>
             <?php else : ?>
               <?= $data['pagination']['end_data'] ?>
             <?php endif; ?>
           <?php endif; ?>
           of
-          <?= $data['staff_amount']; ?>
-          <?php if ($data['staff_amount'] < 2) : ?>
+          <?= $data['staff_count']; ?>
+          <?php if ($data['staff_count'] < 2) : ?>
             Item
           <?php else : ?>
             Items
@@ -188,7 +188,6 @@
                     </li>
                   <?php endif; ?>
                 <?php endfor; ?>
-
 
                 <?php
                 if ($data['pagination']['end_number'] != $data['pagination']['total_page']) :

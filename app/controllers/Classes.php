@@ -8,11 +8,15 @@ class Classes extends Controller implements Actions
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     } else {
-      unset($_SESSION['last_search']);
-      unset($_SESSION['search_edc_keyword']);
-      unset($_SESSION['search_staff_keyword']);
+      unset($_SESSION['search_class_keyword']);
       unset($_SESSION['search_student_keyword']);
+      unset($_SESSION['search_staff_keyword']);
+      unset($_SESSION['search_edc_keyword']);
+      unset($_SESSION['search_payment_keyword']);
+      unset($_SESSION['search_history_keyword']);
       unset($_SESSION['row_per_page']);
+      unset($_SESSION['payment_data_per_student']);
+      unset($_SESSION['payment_data_per_class']);
 
       if ($_SESSION['user']['role'] == 'student' || $_SESSION['user']['role'] == 'staff') {
         header('Location: ' . BASEURL);
@@ -35,11 +39,14 @@ class Classes extends Controller implements Actions
     }
 
     unset($_SESSION['search_class_keyword']);
-    unset($_SESSION['search_edc_keyword']);
-    unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
-    unset($_SESSION['last_search']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_payment_keyword']);
+    unset($_SESSION['search_history_keyword']);
     unset($_SESSION['row_per_page']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
@@ -52,19 +59,6 @@ class Classes extends Controller implements Actions
 
       $data['name'] = $staff_name;
       $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
-    if ($_SESSION['user']['role'] == 'student') {
-      if (isset($_SESSION['profile_change'])) {
-        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
-
-        $student_name = $student['student_name'];
-      } else {
-        $student_name = $_SESSION['user']['student_name'];
-      }
-
-      $data['name'] = $student_name;
-      $data['role'] = 'student';
     }
 
     $data['title'] = 'Propay - Class';
@@ -92,11 +86,15 @@ class Classes extends Controller implements Actions
     }
 
     unset($_SESSION['search_class_keyword']);
-    unset($_SESSION['search_edc_keyword']);
-    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_student_keyword']);
-    unset($_SESSION['last_search']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_payment_keyword']);
+    unset($_SESSION['search_history_keyword']);
     unset($_SESSION['row_per_page']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
@@ -148,6 +146,14 @@ class Classes extends Controller implements Actions
         exit;
       }
     }
+
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_payment_keyword']);
+    unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($page < 1) {
       header('Location: ' . BASEURL . 'classes/page/1');
@@ -321,7 +327,8 @@ class Classes extends Controller implements Actions
     if ($class) {
       $result = [
         'status' => 'error',
-        'message' => 'Class is already existed'
+        'message' => 'Class is already existed',
+        'class' => $class
       ];
 
       file_put_contents('php://output', json_encode($result));
@@ -378,5 +385,32 @@ class Classes extends Controller implements Actions
     }
 
     file_put_contents('php://output', json_encode($response));
+  }
+
+  public function check_total_student()
+  {
+    $json = file_get_contents('php://input');
+
+    $data = json_decode($json, true);
+    $class = $this->model("Class_Model")->getClassByName($data['class-name']);
+
+    if ($class) {
+      $students = $this->model('Student_Model')->getStudentsByClassID($class['class_id']);
+
+      if ($students) {
+        $result = [
+          'status' => 'success',
+          'student' => $students
+        ];
+
+        file_put_contents('php://output', json_encode($result));
+      } else {
+        $result = [
+          'status' => 'error',
+        ];
+
+        file_put_contents('php://output', json_encode($result));
+      }
+    }
   }
 }

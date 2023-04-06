@@ -1,5 +1,5 @@
 .alert {
-	display: flex;
+	display: none !important;
 	align-items: center;
 	justify-content: space-between;
 	width: 70%;

@@ -2,8 +2,6 @@ import '../components/overlay.js';
 import '../utils/row-selected.js';
 import Database from '../helpers/database.js';
 
-localStorage.removeItem('selected');
-
 const deleteButtons = document.querySelectorAll('.delete-btn');
 const overlay = document.querySelector('.overlay');
 const overlayCancelBtn = document.getElementById('overlay-cancel-btn');

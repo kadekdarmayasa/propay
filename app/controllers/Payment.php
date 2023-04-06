@@ -14,6 +14,16 @@ class Payment extends Controller
       }
     }
 
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_payment_keyword']);
+    unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['row_per_page']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
+
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
@@ -27,16 +37,16 @@ class Payment extends Controller
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
-    if (isset($_POST['search']) || isset($_SESSION['last_search'])) {
-      $last_search_sin =  $_POST['sin'] ?? $_SESSION['last_search'];
+    if (isset($_POST['search']) || isset($_SESSION['search_payment_keyword'])) {
+      $last_search_sin =  $_POST['sin'] ?? $_SESSION['search_payment_keyword'];
       $data['keyword'] = $last_search_sin;
 
       if ($last_search_sin == '') {
         unset($data['isStudentFound']);
       } else {
         if ($student = $this->model('Student_Model')->getStudentBySIN($last_search_sin)) {
-          unset($_SESSION['last_search']);
-          $_SESSION['last_search'] = trim($last_search_sin);
+          unset($_SESSION['search_payment_keyword']);
+          $_SESSION['search_payment_keyword'] = trim($last_search_sin);
 
           header('Location: ' . BASEURL . 'payment/page/' . 1 . '/' . $student['sin']);
           exit;
@@ -69,22 +79,30 @@ class Payment extends Controller
       }
     }
 
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_staff_keyword']);
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
+
     $data['isStudentFound'] = true;
 
-    if (isset($_POST['search']) || isset($_SESSION['last_search'])) {
-      $last_search_sin = $_POST['sin'] ?? $_SESSION['last_search'];
+    if (isset($_POST['search']) || isset($_SESSION['search_payment_keyword'])) {
+      $last_search_sin = $_POST['sin'] ?? $_SESSION['search_payment_keyword'];
       $data['keyword'] = $last_search_sin;
 
       if ($last_search_sin == '') {
-        unset($_SESSION['last_search']);
-        $_SESSION['last_search'] = trim($last_search_sin);
+        unset($_SESSION['search_payment_keyword']);
+        $_SESSION['search_payment_keyword'] = trim($last_search_sin);
 
         header('Location: ' . BASEURL . 'payment');
         exit;
       } else {
         if ($last_search_sin != $sin) {
-          unset($_SESSION['last_search']);
-          $_SESSION['last_search'] = trim($last_search_sin);
+          unset($_SESSION['search_payment_keyword']);
+          $_SESSION['search_payment_keyword'] = trim($last_search_sin);
 
           header('Location: ' . BASEURL . 'payment');
           exit;
@@ -95,6 +113,7 @@ class Payment extends Controller
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
         $staff = $this->model('Staff_Model')->getStaffById($_SESSION['user']['staff_id']);
+
         $staff_name = $staff['staff_name'];
       } else {
         $staff_name = $_SESSION['user']['staff_name'];
@@ -104,8 +123,8 @@ class Payment extends Controller
       $data['role'] = $_SESSION['user']['staff_level'];
     }
 
-    if (isset($_SESSION['search-payment-keyword']) && $_SESSION['search-payment-keyword'] != '') {
-      $payment = $this->model('Payment_Model')->getPaymentByAny($sin, $_SESSION['search-payment-keyword']);
+    if (isset($_SESSION['search_payment_keyword']) && $_SESSION['search_payment_keyword'] != '') {
+      $payment = $this->model('Payment_Model')->getPaymentByAny($sin, $_SESSION['search_payment_keyword']);
       $total_data = count($payment);
 
       $data['payment_count'] = $total_data;
@@ -121,7 +140,7 @@ class Payment extends Controller
       $total_data = count($payment);
 
       $data['payment_count'] = $total_data;
-      $_SESSION['search-payment-keyword'] = $_POST['payment-field'];
+      $_SESSION['search_payment_keyword'] = $_POST['payment-field'];
 
       if ($total_data < 6) {
         header('Location: ' . BASEURL . 'payment/page/1/' .  $sin);
@@ -179,8 +198,8 @@ class Payment extends Controller
       }
     }
 
-    if (isset($_SESSION['search-payment-keyword'])) {
-      $data['payment'] = $this->model('Payment_Model')->getPaymentWithLimit($start_data, $total_data_per_page, $sin, $_SESSION['search-payment-keyword']);
+    if (isset($_SESSION['search_payment_keyword'])) {
+      $data['payment'] = $this->model('Payment_Model')->getPaymentWithLimit($start_data, $total_data_per_page, $sin, $_SESSION['search_payment_keyword']);
     } else {
       $data['payment'] = $this->model('Payment_Model')->getPaymentWithLimit($start_data, $total_data_per_page, $sin, null);
     }

@@ -23,13 +23,15 @@
               <?php else : ?>
                 <?php if ($breadcrumbs[$i] == 'EDC List') : ?>
                   <a href="<?= BASEURL . 'edc_list' . '/page/' . $data['page']  ?>" class="link">
-                  <?php else : ?>
-                    <a href="<?= BASEURL . strtolower($breadcrumbs[$i]) . '/page/' . $data['page']  ?>" class="link">
+                  <?php elseif ($breadcrumbs[$i] == 'Payment Report') : ?>
+                    <a href="<?= BASEURL . 'payment_report' ?>" class="link">
+                    <?php else : ?>
+                      <a href="<?= BASEURL . strtolower($breadcrumbs[$i]) . '/page/' . $data['page']  ?>" class="link">
+                      <?php endif; ?>
+                      <?= $breadcrumbs[$i]; ?>
+                      </a>
+                      <span>/</span>
                     <?php endif; ?>
-                    <?= $breadcrumbs[$i]; ?>
-                    </a>
-                    <span>/</span>
-                  <?php endif; ?>
             </li>
           <?php endfor; ?>
         <?php else : ?>

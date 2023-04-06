@@ -96,6 +96,7 @@
                 <?php else : ?>
                 <li>
                 <?php endif; ?>
+
                 <?php if ($_SESSION['user']['role'] == 'admin') : ?>
                   <a href="<?= BASEURL . 'edc' ?>">
                   <?php elseif ($_SESSION['user']['role'] == 'staff') : ?>
@@ -123,7 +124,7 @@
                             <?php else : ?>
                             <li>
                             <?php endif; ?>
-                            <a href="<?= BASEURL . 'edc/' ?>" class="link-name">List</a>
+                            <a href="<?= BASEURL . 'edc/list' ?>" class="link-name">List</a>
                             </li>
                           <?php endif; ?>
 

@@ -11,7 +11,7 @@
   <script src="<?= BASEURL . 'public/js/auth/reset-password.js' ?>" type="module"></script>
 <?php endif; ?>
 
-<?php if ($activeTab !== 'login') : ?>
+<?php if ($activeTab !== 'login' && $activeTab !== 'auth/reset-password') : ?>
   <script src="<?= BASEURL . 'public/js/core/index.js' ?>" type="module"></script>
 
   <?php if ($activeTab == 'dashboard') : ?>
@@ -95,7 +95,13 @@
     <?php endif; ?>
 
     <?php if ($tabs[1] == 'report') : ?>
-      <script src="<?= BASEURL . 'public/js/report/index.js' ?>" type="module"></script>
+      <?php if ($tabs[2] == 'student') : ?>
+        <script src="<?= BASEURL . 'public/js/report/student.js' ?>" type="module"></script>
+      <?php endif; ?>
+
+      <?php if ($tabs[2] == 'class') : ?>
+        <script src="<?= BASEURL . 'public/js/report/class.js' ?>" type="module"></script>
+      <?php endif; ?>
     <?php endif; ?>
   <?php endif; ?>
 <?php endif ?>

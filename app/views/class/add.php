@@ -24,7 +24,10 @@
           </select>
         </div>
 
-        <div class="input-group">
+        <div class="input-group prev-submit-btn">
+          <a href="<?= BASEURL . 'classes'  ?>" name="prev-btn" class="prev-btn">
+            <span>Cancel</span>
+          </a>
           <button type="submit" name="add-class" id="submit-btn" class="submit-btn">
             <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="32" height="32" rx="16" stroke="black" />

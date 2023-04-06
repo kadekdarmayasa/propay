@@ -8,7 +8,7 @@
 
       <form action="" method="post">
         <input type="hidden" class="input class_id" name="class_id" id="class_id" value="<?= $data['class']['class_id'] ?>">
-        <input type="hidden" class="input prev_class_name" name="prev_class_name" id="prev_class_name" value="<?= $data['class']['class_name'] ?>">
+        <input type="hidden" class="prev_class_name" name="prev_class_name" id="prev_class_name" value="<?= $data['class']['class_name'] ?>">
 
         <div class="input-group">
           <label for="class_name">Class Name</label>

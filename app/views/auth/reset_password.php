@@ -20,19 +20,15 @@
       <?php endif; ?>
       <!-- End of Flasher -->
 
-      <!-- Login Form -->
+      <!-- Reset Form -->
       <?php if (isset($data['staff']) || isset($data['student']) || isset($data['password_changed'])) : ?>
         <form action="" method="post" id="reset_password">
           <?php if (isset($data['staff'])) : ?>
-            <div class="form-group">
-              <input type="hidden" name="staff_id" value="<?= $data['staff']['staff_id'] ?>">
-            </div>
+            <input type="hidden" name="staff_id" value="<?= $data['staff']['staff_id'] ?>">
           <?php endif; ?>
 
           <?php if (isset($data['student'])) : ?>
-            <div class="form-group">
-              <input type="hidden" name="sin" value="<?= $data['student']['sin'] ?>">
-            </div>
+            <input type="hidden" name="sin" value="<?= $data['student']['sin'] ?>">
           <?php endif; ?>
 
           <div class="input-group">
@@ -42,6 +38,7 @@
             <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
             <small class="message new-password-message"></small>
           </div>
+
           <div class="input-group">
             <label for="confirm-password">Confirm Password</label>
             <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." class="input password confirm-password" required>
@@ -49,6 +46,7 @@
             <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
             <small class="message confirm-password-message"></small>
           </div>
+
           <div class="action-buttons">
             <a href="<?= BASEURL . 'auth/login' ?>" class="primary-btn">Cancel</a>
             <button type="submit" name="save-password" class="primary-btn save-changes">
@@ -69,6 +67,7 @@
               <input type="text" name="uniq-identity" id="uniq-identity" placeholder="Enter username or sin..." required>
             <?php endif; ?>
           </div>
+
           <div class="action-buttons">
             <a href="<?= BASEURL . 'auth/login' ?>" class="primary-btn">Cancel</a>
             <button type="submit" name="save-password" class="primary-btn save-changes">

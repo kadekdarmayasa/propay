@@ -5,10 +5,10 @@
       <div class="left-header">
         <h2>List of Class</h2>
         <form action="" method="post">
-          <?php if ($data['keyword'] != '') : ?>
-            <input type="text" name="class-field" id="class-field" placeholder="Search class..." value="<?= $data['keyword'] ?>" autocomplete="off">
+          <?php if (isset($data['keyword']) && $data['keyword'] != '') : ?>
+            <input type="text" name="search-class-keyword" id="search-class-keyword" placeholder="Search class..." value="<?= $data['keyword'] ?>" autocomplete="off">
           <?php else : ?>
-            <input type="text" name="class-field" id="class-field" placeholder="Search class..." autocomplete="off">
+            <input type="text" name="search-class-keyword" id="search-class-keyword" placeholder="Search class..." autocomplete="off">
           <?php endif; ?>
           <button type="submit" name="search-class"><svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13.7857 6.96721C13.7857 10.5273 10.8234 13.4344 7.14286 13.4344C3.4623 13.4344 0.5 10.5273 0.5 6.96721C0.5 3.40713 3.4623 0.5 7.14286 0.5C10.8234 0.5 13.7857 3.40713 13.7857 6.96721Z" stroke="#989898" />
@@ -90,15 +90,13 @@
                   </svg>
                   <span class="tooltip">Update Class</span>
                 </a>
-                <?php if ($data['class'][$i]['total_students'] < 1) : ?>
-                  <a href="" class="delete-btn" data-class-id="<?= $data['class'][$i]['class_id'] ?>">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
-                      <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
-                    </svg>
-                    <span class="tooltip">Delete Class</span>
-                  </a>
-                <?php endif; ?>
+                <a href="" class="delete-btn" data-class-id="<?= $data['class'][$i]['class_id'] ?>">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.76471 4.08571V2C5.76471 1.44771 6.21242 1 6.76471 1H10H13.2353C13.7876 1 14.2353 1.44772 14.2353 2V4.08571" stroke="#989898" />
+                    <path d="M3.8125 4.3291V17C3.8125 18.1046 4.70793 19 5.8125 19H14.1875C15.2921 19 16.1875 18.1046 16.1875 17V4.3291M3.8125 4.3291H16.1875M3.8125 4.3291H1M16.1875 4.3291H19" stroke="#989898" stroke-linecap="round" />
+                  </svg>
+                  <span class="tooltip">Delete Class</span>
+                </a>
               </td>
             </tr>
           <?php endfor; ?>
@@ -107,22 +105,22 @@
     </div>
     <!-- End of Classlist Data -->
 
-    <?php if ($data['class_amount'] > 0) : ?>
+    <?php if ($data['class_count'] > 0) : ?>
       <!-- Classlist Footer -->
       <div class="cls-footer">
         <div class="footer-left">
           <?= $data['pagination']['start_data'] + 1 ?>
-          <?php if ($data['pagination']['start_data'] + 1 != $data['class_amount']) : ?>
+          <?php if ($data['pagination']['start_data'] + 1 != $data['class_count']) : ?>
             -
-            <?php if ($data['class_amount'] < $data['pagination']['end_data']) : ?>
-              <?= $data['class_amount'] ?>
+            <?php if ($data['class_count'] < $data['pagination']['end_data']) : ?>
+              <?= $data['class_count'] ?>
             <?php else : ?>
               <?= $data['pagination']['end_data'] ?>
             <?php endif; ?>
           <?php endif; ?>
           of
-          <?= $data['class_amount']; ?>
-          <?php if ($data['class_amount'] < 2) : ?>
+          <?= $data['class_count']; ?>
+          <?php if ($data['class_count'] < 2) : ?>
             Item
           <?php else : ?>
             Items
@@ -175,7 +173,6 @@
                   <?php endif; ?>
                 <?php endfor; ?>
 
-
                 <?php
                 if ($data['pagination']['end_number'] != $data['pagination']['total_page']) :
                 ?>
@@ -208,3 +205,5 @@
     <?php endif; ?>
   </div>
 </div>
+
+<over-lay href="<?= BASEURL . 'classes/delete' ?>"></over-lay>

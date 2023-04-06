@@ -32,7 +32,10 @@
             <small class="message confirm-password-message"></small>
           </div>
 
-          <div class="input-group">
+          <div class="input-group prev-submit-btn">
+            <a href="<?= BASEURL . 'staff'  ?>" class="prev-btn">
+              <span>Cancel</span>
+            </a>
             <button type="button" name="next-btn" class="next-btn">
               <span>Next</span>
               <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">

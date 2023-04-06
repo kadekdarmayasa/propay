@@ -13,9 +13,10 @@ class Auth extends Controller
     if (isset($_POST['username'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];
+
       $staff = $this->model('Staff_Model')->getStaffByUsername($username);
 
-      if (!is_null($staff)) {
+      if ($staff) {
         if (password_verify($password, $staff['password'])) {
           $_SESSION['user'] = $staff;
           $_SESSION['user']['role'] = $staff['staff_level'];
@@ -35,9 +36,10 @@ class Auth extends Controller
     if (isset($_POST['sin'])) {
       $sin = $_POST['sin'];
       $password = $_POST['password'];
+
       $student = $this->model('Student_Model')->getStudentBySIN($sin);
 
-      if (!is_null($student)) {
+      if ($student) {
         if (password_verify($password, $student['password'])) {
           $_SESSION['user'] = $student;
           $_SESSION['user']['role'] = 'student';
@@ -54,6 +56,7 @@ class Auth extends Controller
     }
 
     $data['title'] = 'Propay - Login';
+
     $this->view('templates/header', $data, 'login');
     $this->view('auth/login');
     $this->view('templates/footer', $data, 'login');
@@ -68,9 +71,9 @@ class Auth extends Controller
 
       $staff = $this->model('Staff_Model')->getStaffByUsername($uniq_identity);
 
-      if (!is_null($student)) {
+      if ($student) {
         $data['student'] = $student;
-      } else if (!is_null($staff)) {
+      } else if ($staff) {
         $data['staff'] = $staff;
       } else {
         Flasher::setFlash('error', 'Your information does not match our records');
@@ -86,7 +89,7 @@ class Auth extends Controller
 
           Flasher::setFlash(
             'success',
-            "Password has been changed successfully. <br> You can now <a href='$url'>login</a> with your new password"
+            "Password has been changed successfully. You can now <a href='$url'>login</a> with your new password"
           );
 
           $data['password_changed'] = true;
@@ -111,7 +114,7 @@ class Auth extends Controller
 
     $data['title'] = 'Propay - Reset Password';
     $this->view('templates/header', $data, 'login');
-    $this->view('auth/reset_password', $data);
+    $this->view('auth/reset_password', $data, 'login');
     $this->view('templates/footer', $data, 'auth/reset-password');
   }
 

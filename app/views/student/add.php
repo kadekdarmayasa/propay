@@ -6,7 +6,7 @@
         <p class="meta-description">Please kindly fill the fields below</p>
       </div>
 
-      <form action="" method="post">
+      <form action="" method="post" autocomplete="off">
         <!-- First Form -->
         <div class="form first">
           <div class="input-group">
@@ -19,7 +19,7 @@
 
           <div class="input-group">
             <label for="student-password">Password</label>
-            <input type="password" name="password" id="student-password" placeholder="Enter Password..." class="input password" required>
+            <input type="password" name="password" id="student-password" placeholder="Enter Password..." class="input password" required autocomplete="off">
             <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
             <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
             <small class="message password-message"></small>
@@ -27,13 +27,17 @@
 
           <div class="input-group">
             <label for="confirm-password">Confirm Password</label>
-            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." class="input password confirm-password" required>
+            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password..." class="input password confirm-password" required autocomplete="off">
             <img src="<?= BASEURL . 'public/images/eye-slash-regular.svg' ?>" alt="eye" class="toggle-password">
             <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
             <small class="message confirm-password-message"></small>
           </div>
 
-          <div class="input-group">
+          <div class="input-group prev-submit-btn">
+            <a href="<?= BASEURL . 'student'  ?>" class="prev-btn">
+              <span>Cancel</span>
+            </a>
+
             <button type="button" name="next-btn" class="next-btn">
               <span>Next</span>
               <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -12,9 +12,9 @@ class Classes extends Controller implements Actions
       unset($_SESSION['search_student_keyword']);
       unset($_SESSION['search_staff_keyword']);
       unset($_SESSION['search_edc_keyword']);
+      unset($_SESSION['search_sin_keyword']);
       unset($_SESSION['search_payment_keyword']);
       unset($_SESSION['search_history_keyword']);
-      unset($_SESSION['row_per_page']);
       unset($_SESSION['payment_data_per_student']);
       unset($_SESSION['payment_data_per_class']);
 
@@ -42,9 +42,9 @@ class Classes extends Controller implements Actions
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
-    unset($_SESSION['row_per_page']);
     unset($_SESSION['payment_data_per_student']);
     unset($_SESSION['payment_data_per_class']);
 
@@ -90,9 +90,9 @@ class Classes extends Controller implements Actions
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
-    unset($_SESSION['row_per_page']);
     unset($_SESSION['payment_data_per_student']);
     unset($_SESSION['payment_data_per_class']);
 
@@ -150,6 +150,7 @@ class Classes extends Controller implements Actions
     unset($_SESSION['search_student_keyword']);
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
     unset($_SESSION['payment_data_per_student']);
@@ -226,7 +227,7 @@ class Classes extends Controller implements Actions
       exit;
     }
 
-    if ($page > $total_page && $total_page > 1) {
+    if ($page > $total_page && $page > 1 && $total_page > 1) {
       header('Location: ' .  BASEURL . 'classes/page/' . $total_page);
       exit;
     }

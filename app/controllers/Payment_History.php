@@ -12,9 +12,9 @@ class Payment_History extends Controller
       unset($_SESSION['search_staff_keyword']);
       unset($_SESSION['search_class_keyword']);
       unset($_SESSION['search_edc_keyword']);
+      unset($_SESSION['search_sin_keyword']);
       unset($_SESSION['search_payment_keyword']);
       unset($_SESSION['search_history_keyword']);
-      unset($_SESSION['row_per_page']);
       unset($_SESSION['payment_data_per_student']);
       unset($_SESSION['payment_data_per_class']);
 
@@ -34,6 +34,7 @@ class Payment_History extends Controller
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['payment_data_per_student']);
     unset($_SESSION['payment_data_per_class']);
@@ -143,7 +144,7 @@ class Payment_History extends Controller
       header('Location: ' . BASEURL . 'payment_history/page/1');
     }
 
-    if ($page > $total_page && $total_page > 1) {
+    if ($page > $total_page && $page > 1 && $total_page > 1) {
       header('Location: ' .  BASEURL . 'payment_history/page/' . $total_page);
       exit;
     }

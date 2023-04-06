@@ -2,8 +2,6 @@ import '../utils/row-selected.js';
 import './form-overlay.js';
 import { showIllustrationComp, prepIllustrationComp } from '../helpers/illustration.js';
 
-localStorage.removeItem('selected');
-
 const baseUrl = window.location.href.split('payment')[0];
 const element = document.querySelector('.student-bills');
 

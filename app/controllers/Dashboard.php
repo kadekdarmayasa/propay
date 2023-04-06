@@ -12,8 +12,11 @@ class Dashboard extends Controller
     unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_student_keyword']);
-    unset($_SESSION['last_search']);
+    unset($_SESSION['search_payment_keyword']);
+    unset($_SESSION['search_history_keyword']);
     unset($_SESSION['row_per_page']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
@@ -51,36 +54,20 @@ class Dashboard extends Controller
       $data['role'] = 'student';
     }
 
-    $payment_histories = $this->model('Payment_History_Model')->getPaymentHistoryWithLimit(0, 4,  null, null, true);
-
-    for ($i = 0; $i < count($payment_histories); $i++) {
-      $payment_histories[$i]['payment'] = $this->model('Payment_Model')->getPaymentById($payment_histories[$i]['payment_id']);
-
-      $payment_histories[$i]['staff'] = $this->model('Staff_Model')->getStaffById($payment_histories[$i]['staff_id']);
-
-      $payment_histories[$i]['student'] = $this->model('Student_Model')->getStudentBySIN($payment_histories[$i]['payment']['sin']);
-    }
-
-    $student_payment_histories = array();
 
     if ($_SESSION['user']['role'] == 'student') {
-      for ($i = 0; $i < count($payment_histories); $i++) {
-        if ($payment_histories[$i]['payment']['sin'] == $_SESSION['user']['sin']) {
-          array_push($student_payment_histories, $payment_histories[$i]);
-        }
-      }
+      $payment_histories = $this->model('Payment_History_Model')->getPaymentHistoryBySIN($_SESSION['user']['sin']);
+    } else {
+      $payment_histories = $this->model('Payment_History_Model')->getPaymentHistoryWithLimit(0, 4,  null, true);
     }
 
-    if (count($student_payment_histories) > 0) {
-      $data['payment_histories'] = $student_payment_histories;
-    }
-
-    if ($_SESSION['user']['role'] != 'student') {
-      $data['payment_histories'] = $payment_histories;
+    for ($i = 0; $i < count($payment_histories); $i++) {
+      $payment_histories[$i]['staff'] = $this->model('Staff_Model')->getStaffById($payment_histories[$i]['staff_id']);
     }
 
     $data['title'] = 'Propay - Dashboard';
     $data['breadcrumb'] = 'Dashboard';
+    $data['payment_histories'] = $payment_histories;
     $data['total_student'] = count($this->model('Student_model')->getAllStudents());
     $data['total_class'] = count($this->model('Class_model')->getAllClasses());
     $data['total_staff'] = count($this->model('Staff_Model')->getAllStaff());

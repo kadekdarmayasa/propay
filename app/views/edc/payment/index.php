@@ -112,7 +112,7 @@
                   <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1L3.55914 5L6 1" stroke="#152A4A" stroke-linecap="round" />
                   </svg>
-                  <ul class="list-of-row">
+                  <ul class="list-of-row payment">
                     <li><a href="" class="selected">6</a></li>
                     <li><a href="">12</a></li>
                   </ul>

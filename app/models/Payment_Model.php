@@ -70,6 +70,19 @@ class Payment_Model
     return $this->db->resultSet();
   }
 
+  public function getPaymentByMonth($month, $year, $sin)
+  {
+    $query = "SELECT * FROM " . $this->table . " WHERE month = :month AND year = :year AND sin = :sin";
+
+    $this->db->query($query);
+    $this->db->bind(':month', $month, PDO::PARAM_STR);
+    $this->db->bind(':year', $year, PDO::PARAM_STR);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
+    $this->db->execute();
+
+    return $this->db->single();
+  }
+
   public function getAllPayments()
   {
     $query = "SELECT * FROM " . $this->table;
@@ -124,6 +137,21 @@ class Payment_Model
     $this->db->bind(':sin', $sin, PDO::PARAM_INT);
     $this->db->bind(':start_date', $start_date, PDO::PARAM_STR);
     $this->db->bind(':end_date', $end_date, PDO::PARAM_STR);
+    $this->db->execute();
+
+    return $this->db->resultSet();
+  }
+
+  public function getYears($data)
+  {
+    $month = htmlspecialchars($data['month']);
+    $sin = htmlspecialchars($data['sin']);
+
+    $query = "SELECT year FROM " . $this->table . " WHERE sin = :sin AND month = :month";
+
+    $this->db->query($query);
+    $this->db->bind(':sin', $sin, PDO::PARAM_INT);
+    $this->db->bind(':month', $month, PDO::PARAM_STR);
     $this->db->execute();
 
     return $this->db->resultSet();

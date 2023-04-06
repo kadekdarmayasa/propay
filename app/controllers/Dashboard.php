@@ -58,7 +58,7 @@ class Dashboard extends Controller
     if ($_SESSION['user']['role'] == 'student') {
       $payment_histories = $this->model('Payment_History_Model')->getPaymentHistoryBySIN($_SESSION['user']['sin']);
     } else {
-      $payment_histories = $this->model('Payment_History_Model')->getPaymentHistoryWithLimit(0, 4,  null, true);
+      $payment_histories = $this->model('Payment_History_Model')->getPaymentHistoryWithLimit(0, 4);
     }
 
     for ($i = 0; $i < count($payment_histories); $i++) {

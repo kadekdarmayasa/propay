@@ -49,7 +49,7 @@
                 </div>
   </div>
 
-  <?php if (isset($data['payment_history'])) : ?>
+  <?php if (isset($data['payment_histories'])) : ?>
     <div class="newest-content">
       <div class="newest-payment">
         <!-- Payment Header -->
@@ -60,69 +60,43 @@
         <!-- Payment Content -->
         <div class="payment-content">
           <div class="columns">
+            <!-- Staff Name Column -->
             <div class="column-staff-name">
               <small>Staff Name</small>
-              <?php if (count($data['payment_history']) < 4) : ?>
-                <?php for ($i = 0; $i < count($data['payment_history']); $i++) : ?>
-                  <p><?= $data['payment_history'][$i]['staff']['staff_name']; ?></p>
-                <?php endfor; ?>
-              <?php else : ?>
-                <?php for ($i = 0; $i < 4; $i++) : ?>
-                  <p><?= $data['payment_history'][$i]['staff']['staff_name']; ?></p>
-                <?php endfor; ?>
-              <?php endif; ?>
+              <?php for ($i = 0; $i < count($data['payment_histories']); $i++) : ?>
+                <p><?= $data['payment_histories'][$i]['staff']['staff_name']; ?></p>
+              <?php endfor; ?>
             </div>
+            <!-- Student SIN column -->
             <div class="column-sin">
               <small>SIN</small>
-              <?php if (count($data['payment_history']) < 4) : ?>
-                <?php for ($i = 0; $i < count($data['payment_history']); $i++) : ?>
-                  <p><?= $data['payment_history'][$i]['student']['sin']; ?></p>
-                <?php endfor; ?>
-              <?php else : ?>
-                <?php for ($i = 0; $i < 4; $i++) : ?>
-                  <p><?= $data['payment_history'][$i]['student']['sin']; ?></p>
-                <?php endfor; ?>
-              <?php endif; ?>
+              <?php for ($i = 0; $i < count($data['payment_histories']); $i++) : ?>
+                <p><?= $data['payment_histories'][$i]['sin']; ?></p>
+              <?php endfor; ?>
             </div>
+            <!-- Date Of Payment Column -->
             <div class="column-dop">
               <small>Date Of Payment</small>
-              <?php if (count($data['payment_history']) < 4) : ?>
-                <?php for ($i = 0; $i < count($data['payment_history']); $i++) : ?>
-                  <p><?= date('d F Y', strtotime($data['payment_history'][$i]['date_of_payment'])); ?></p>
-                <?php endfor; ?>
-              <?php else : ?>
-                <?php for ($i = 0; $i < 4; $i++) : ?>
-                  <p><?= date('d F Y', strtotime($data['payment_history'][$i]['date_of_payment'])); ?></p>
-                <?php endfor; ?>
-              <?php endif; ?>
+              <?php for ($i = 0; $i < count($data['payment_histories']); $i++) : ?>
+                <p><?= date('d F Y', strtotime($data['payment_histories'][$i]['date_of_payment'])); ?></p>
+              <?php endfor; ?>
             </div>
+            <!-- Payment Amount Column -->
             <div class="column-payment-amount">
               <small>Payment Amount</small>
-              <?php if (count($data['payment_history']) < 4) : ?>
-                <?php for ($i = 0; $i < count($data['payment_history']); $i++) : ?>
-                  <p>Rp. <?= number_format($data['payment_history'][$i]['payment_amount'], 0, ',', '.'); ?></p>
-                <?php endfor; ?>
-              <?php else :  ?>
-                <?php for ($i = 0; $i < 4; $i++) : ?>
-                  <p>Rp. <?= number_format($data['payment_history'][$i]['payment_amount'], 0, ',', '.'); ?></p>
-                <?php endfor; ?>
-              <?php endif; ?>
+              <?php for ($i = 0; $i < count($data['payment_histories']); $i++) : ?>
+                <p>Rp. <?= number_format($data['payment_histories'][$i]['payment_amount'], 0, ',', '.'); ?></p>
+              <?php endfor; ?>
             </div>
+            <!-- Total Refund Column -->
             <div class="column-refund">
               <small>Refund</small>
-              <?php if (count($data['payment_history']) < 4) : ?>
-                <?php for ($i = 0; $i < count($data['payment_history']); $i++) : ?>
-                  <p>Rp. <?= number_format($data['payment_history'][$i]['refund_total'], 0, ',', '.'); ?></p>
-                <?php endfor; ?>
-              <?php else : ?>
-                <?php for ($i = 0; $i < 4; $i++) : ?>
-                  <p>Rp. <?= number_format($data['payment_history'][$i]['refund_total'], 0, ',', '.'); ?></p>
-                <?php endfor; ?>
-              <?php endif; ?>
+              <?php for ($i = 0; $i < count($data['payment_histories']); $i++) : ?>
+                <p>Rp. <?= number_format($data['payment_histories'][$i]['refund_total'], 0, ',', '.'); ?></p>
+              <?php endfor; ?>
             </div>
           </div>
-
-
+          <!-- See More Button -->
           <a href="<?= BASEURL . 'edc/payment_history'; ?>" class="see-more-btn">
             <span>See more</span>
             <svg width="7" height="9" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg">

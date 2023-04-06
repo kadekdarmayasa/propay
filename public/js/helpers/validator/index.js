@@ -260,9 +260,28 @@ function validateInputs(targetElement, view, currentElement) {
 		return isContainError;
 	}
 
+	if (view == 'report') {
+		const inputs = Array.from(currentElement.querySelectorAll('.input'));
+
+		const isContainError = inputs.some((input) => input.classList.contains('error') || input.value == '');
+
+		return isContainError;
+	}
+
 	if (view == 'payment') {
-		const dateInputs = Array.from(currentElement.querySelectorAll('.input'));
-		const isContainError = dateInputs.some((input) => input.classList.contains('error') || input.value == '');
+		const inputs = Array.from(currentElement.querySelectorAll('.input'));
+
+		if (targetElement.id == 'payment_amount') {
+			if (targetElement.value < 10000) {
+				targetElement.classList.add('error');
+				errorMessage('payment-amount-message', 'The amount of payment cannot be less than 10000');
+			} else {
+				targetElement.classList.remove('error');
+			}
+		}
+
+		const isContainError = inputs.some((input) => input.classList.contains('error') || input.value == '');
+
 		return isContainError;
 	}
 }

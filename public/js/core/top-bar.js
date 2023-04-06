@@ -2,6 +2,18 @@ const profileToggle = document.querySelector('.profile-toggle');
 const profileContent = document.querySelector('.notification-profile .profile');
 const modeToggleBtn = document.querySelector('.mode-toggle');
 
+window.addEventListener('click', function (e) {
+	if (e.target != profileToggle) {
+		profileContent.classList.remove('show');
+
+		if (document.body.classList.contains('dark')) {
+			profileToggle.firstElementChild.style.stroke = 'var(--white-color)';
+		} else {
+			profileToggle.firstElementChild.style.stroke = 'var(--black-color)';
+		}
+	}
+})
+
 modeToggleBtn.addEventListener('click', function () {
 	const switcher = window.getComputedStyle(document.querySelector('.mode-toggle .switch'), '::before');
 

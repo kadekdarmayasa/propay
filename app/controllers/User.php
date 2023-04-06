@@ -27,9 +27,9 @@ class User extends Controller
     unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_sin_keyword']);
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
-    unset($_SESSION['row_per_page']);
     unset($_SESSION['payment_data_per_student']);
     unset($_SESSION['payment_data_per_class']);
 
@@ -93,12 +93,32 @@ class User extends Controller
       exit;
     }
 
+    if ($_SESSION['user']['role'] == 'student' && $_SESSION['user']['sin'] != $id) {
+      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['sin']);
+      exit;
+    }
+
+    if ($_SESSION['user']['role'] == 'staff' && $_SESSION['user']['staff_id'] != $id) {
+      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
+      exit;
+    }
+
+    if ($_SESSION['user']['role'] == 'admin' && $_SESSION['user']['staff_id'] != $id) {
+      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
+      exit;
+    }
+
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
-    unset($_SESSION['search_staff_keyword']);
-    unset($_SESSION['last_search']);
-    unset($_SESSION['row_per_page']);
+    unset($_SESSION['search_sin_keyword']);
+    unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
+
+
 
     if (isset($_POST['save-staff-password'])) {
       $password  = $_POST['password'];

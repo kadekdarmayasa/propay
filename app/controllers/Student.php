@@ -14,6 +14,8 @@ class Student extends Controller implements Actions
       unset($_SESSION['search_payment_keyword']);
       unset($_SESSION['search_history_keyword']);
       unset($_SESSION['row_per_page']);
+      unset($_SESSION['payment_data_per_student']);
+      unset($_SESSION['payment_data_per_class']);
 
       if ($_SESSION['user']['role'] == 'student' || $_SESSION['user']['role'] == 'staff') {
         header('Location: ' . BASEURL);
@@ -44,6 +46,8 @@ class Student extends Controller implements Actions
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
     unset($_SESSION['row_per_page']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
@@ -56,19 +60,6 @@ class Student extends Controller implements Actions
 
       $data['name'] = $staff_name;
       $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
-    if ($_SESSION['user']['role'] == 'student') {
-      if (isset($_SESSION['profile_change'])) {
-        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
-
-        $student_name = $student['student_name'];
-      } else {
-        $student_name = $_SESSION['user']['student_name'];
-      }
-
-      $data['name'] = $student_name;
-      $data['role'] = 'student';
     }
 
     $data['page'] = 1;
@@ -103,6 +94,8 @@ class Student extends Controller implements Actions
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
     unset($_SESSION['row_per_page']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
@@ -115,19 +108,6 @@ class Student extends Controller implements Actions
 
       $data['name'] = $staff_name;
       $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
-    if ($_SESSION['user']['role'] == 'student') {
-      if (isset($_SESSION['profile_change'])) {
-        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
-
-        $student_name = $student['student_name'];
-      } else {
-        $student_name = $_SESSION['user']['student_name'];
-      }
-
-      $data['name'] = $student_name;
-      $data['role'] = 'student';
     }
 
     $data['page'] = 1;
@@ -162,6 +142,8 @@ class Student extends Controller implements Actions
     unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($page < 1) {
       header('Location: ' . BASEURL . 'student/page/1');
@@ -178,19 +160,6 @@ class Student extends Controller implements Actions
 
       $data['name'] = $staff_name;
       $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
-    if ($_SESSION['user']['role'] == 'student') {
-      if (isset($_SESSION['profile_change'])) {
-        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
-
-        $student_name = $student['student_name'];
-      } else {
-        $student_name = $_SESSION['user']['student_name'];
-      }
-
-      $data['name'] = $student_name;
-      $data['role'] = 'student';
     }
 
     // Pagination
@@ -312,6 +281,8 @@ class Student extends Controller implements Actions
     unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
     unset($_SESSION['row_per_page']);
+    unset($_SESSION['payment_data_per_student']);
+    unset($_SESSION['payment_data_per_class']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
       if (isset($_SESSION['profile_change'])) {
@@ -324,19 +295,6 @@ class Student extends Controller implements Actions
 
       $data['name'] = $staff_name;
       $data['role'] = $_SESSION['user']['staff_level'];
-    }
-
-    if ($_SESSION['user']['role'] == 'student') {
-      if (isset($_SESSION['profile_change'])) {
-        $student = $this->model('Student_Model')->getStudentBySIN($_SESSION['user']['sin']);
-
-        $student_name = $student['student_name'];
-      } else {
-        $student_name = $_SESSION['user']['student_name'];
-      }
-
-      $data['name'] = $student_name;
-      $data['role'] = 'student';
     }
 
     $data['title'] = 'Propay - Student';

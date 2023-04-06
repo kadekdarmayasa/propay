@@ -8,10 +8,12 @@ class Staff extends Controller implements Actions
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     } else {
+      unset($_SESSION['search_student_keyword']);
+      unset($_SESSION['search_staff_keyword']);
       unset($_SESSION['search_class_keyword']);
       unset($_SESSION['search_edc_keyword']);
-      unset($_SESSION['search_student_keyword']);
-      unset($_SESSION['last_search']);
+      unset($_SESSION['search_history_keyword']);
+      unset($_SESSION['search_payment_keyword']);
       unset($_SESSION['row_per_page']);
 
       if ($_SESSION['user']['role'] == 'student' || $_SESSION['user']['role'] == 'staff') {
@@ -36,11 +38,12 @@ class Staff extends Controller implements Actions
       }
     }
 
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
-    unset($_SESSION['search_staff_keyword']);
-    unset($_SESSION['search_student_keyword']);
-    unset($_SESSION['last_search']);
+    unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
@@ -92,11 +95,12 @@ class Staff extends Controller implements Actions
       }
     }
 
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
-    unset($_SESSION['search_staff_keyword']);
-    unset($_SESSION['search_student_keyword']);
-    unset($_SESSION['last_search']);
+    unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
@@ -151,11 +155,12 @@ class Staff extends Controller implements Actions
       }
     }
 
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_staff_keyword']);
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
-    unset($_SESSION['search_staff_keyword']);
-    unset($_SESSION['search_student_keyword']);
-    unset($_SESSION['last_search']);
+    unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['row_per_page']);
 
     if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
@@ -207,6 +212,12 @@ class Staff extends Controller implements Actions
         exit;
       }
     }
+
+    unset($_SESSION['search_student_keyword']);
+    unset($_SESSION['search_class_keyword']);
+    unset($_SESSION['search_edc_keyword']);
+    unset($_SESSION['search_history_keyword']);
+    unset($_SESSION['search_payment_keyword']);
 
     if ($page < 1) {
       header('Location: ' . BASEURL . 'staff/page/1');

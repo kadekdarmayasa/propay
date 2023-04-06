@@ -3,12 +3,6 @@ const listOfRowContainer = document.querySelector('.list-of-row');
 const listOfRowLis = document.querySelectorAll('.list-of-row li');
 const select = document.getElementById('select');
 
-window.addEventListener('click', function (e) {
-	if (e.target != rowSelectedContainer) {
-		listOfRowContainer.classList.remove('show');
-	}
-})
-
 if (rowSelectedContainer) {
 	rowSelectedContainer.tabIndex = 0;
 

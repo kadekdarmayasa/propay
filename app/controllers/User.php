@@ -1,25 +1,51 @@
 <?php
 class User extends Controller
 {
-  public function profile($id)
+  public function index()
+  {
+    if (!isset($_SESSION['user'])) {
+      header('Location: ' . BASEURL . 'auth/login');
+      exit;
+    } else {
+      if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
+        header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
+        exit;
+      } else {
+        header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['sin']);
+        exit;
+      }
+    }
+  }
+
+  public function profile($id = null)
   {
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     }
 
+    if ($id == null) {
+      if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
+        header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
+        exit;
+      } else {
+        header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['sin']);
+        exit;
+      }
+    }
+
     if ($_SESSION['user']['role'] == 'student' && $_SESSION['user']['sin'] != $id) {
-      header('Location: ' . BASEURL . 'dashboard');
+      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
       exit;
     }
 
     if ($_SESSION['user']['role'] == 'staff' && $_SESSION['user']['staff_id'] != $id) {
-      header('Location: ' . BASEURL . 'dashboard');
+      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
       exit;
     }
 
     if ($_SESSION['user']['role'] == 'admin' && $_SESSION['user']['staff_id'] != $id) {
-      header('Location: ' . BASEURL . 'dashboard');
+      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
       exit;
     }
 
@@ -86,25 +112,35 @@ class User extends Controller
     $this->view('templates/footer', $data, 'user/profile');
   }
 
-  public function reset_password($id)
+  public function reset_password($id = null)
   {
     if (!isset($_SESSION['user'])) {
       header('Location: ' . BASEURL . 'auth/login');
       exit;
     }
 
+    if ($id == null) {
+      if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'staff') {
+        header('Location: ' . BASEURL . 'user/reset_password/' . $_SESSION['user']['staff_id']);
+        exit;
+      } else {
+        header('Location: ' . BASEURL . 'user/reset_password/' . $_SESSION['user']['sin']);
+        exit;
+      }
+    }
+
     if ($_SESSION['user']['role'] == 'student' && $_SESSION['user']['sin'] != $id) {
-      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['sin']);
+      header('Location: ' . BASEURL . 'user/reset_password/' . $_SESSION['user']['sin']);
       exit;
     }
 
     if ($_SESSION['user']['role'] == 'staff' && $_SESSION['user']['staff_id'] != $id) {
-      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
+      header('Location: ' . BASEURL . 'user/reset_password/' . $_SESSION['user']['staff_id']);
       exit;
     }
 
     if ($_SESSION['user']['role'] == 'admin' && $_SESSION['user']['staff_id'] != $id) {
-      header('Location: ' . BASEURL . 'user/profile/' . $_SESSION['user']['staff_id']);
+      header('Location: ' . BASEURL . 'user/reset_password/' . $_SESSION['user']['staff_id']);
       exit;
     }
 

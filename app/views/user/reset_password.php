@@ -32,7 +32,7 @@
             </div>
 
             <div class="input-group prev-submit-btn">
-              <a href="<?= BASEURL . 'staff/profile/' . $data['staff']['staff_id'] ?>" class="prev-btn">
+              <a href="<?= BASEURL . 'user/profile/' . $data['staff']['staff_id'] ?>" class="prev-btn">
                 <span>Cancel</span>
               </a>
               <button type="submit" name="save-staff-password" class="submit-btn">

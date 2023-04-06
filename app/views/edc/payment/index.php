@@ -5,6 +5,7 @@
         <h2>EDC Payment</h2>
         <p>Find student who want to pay</p>
       </div>
+
       <div class="payment-search">
         <form action="" method="post">
           <?php if (isset($data['keyword']) && $data['keyword'] != '') : ?>
@@ -226,6 +227,7 @@
                                 <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M8.33333 10.3818L37.6667 36.9727M43 23.5V23.5C43 34.2696 34.2696 43 23.5 43H22.5C11.7304 43 3 34.2696 3 23.5V23.5C3 12.7304 11.7304 4 22.5 4H23.5C34.2696 4 43 12.7304 43 23.5Z" stroke="black" />
                                 </svg>
+                                <span class="tooltip">No Action</span>
                               </a>
                             </td>
                           <?php endif; ?>
@@ -304,7 +306,7 @@
                       <!-- Prev Btn -->
                       <?php if ($data['pagination']['current_page'] != 1) : ?>
                         <li class="prev-btn">
-                          <a class="page-link" href="<?= BASEURL . 'edc_payment/page/' . $data['pagination']['current_page'] - 1 . '/' . $data['student']['sin'] ?>" aria-label="Previous">
+                          <a class="page-link" href="<?= BASEURL . 'payment/page/' . $data['pagination']['current_page'] - 1 . '/' . $data['student']['sin'] ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span> Prev
                           </a>
                         </li>
@@ -320,7 +322,7 @@
                         if ($end_page_number >= $total_page) :
                         ?>
                           <li class="page-item">
-                            <a class="page-link" href="<?= BASEURL . 'edc_payment/page/' . 1 . '/' . $data['student']['sin'] ?>">1</a>
+                            <a class="page-link" href="<?= BASEURL . 'payment/page/' . 1 . '/' . $data['student']['sin'] ?>">1</a>
                           </li>
                           <li class="page-item dots">
                             <a class="page-link">...</a>
@@ -331,13 +333,13 @@
                       <?php for ($page_number = $data['pagination']['start_number']; $page_number <= $data['pagination']['end_number']; $page_number++) : ?>
                         <?php if ($page_number == $data['pagination']['current_page']) : ?>
                           <li class="page-item active">
-                            <a class="page-link" href="<?= BASEURL . 'edc_payment/page/' . $page_number . '/' . $data['student']['sin'] ?>">
+                            <a class="page-link" href="<?= BASEURL . 'payment/page/' . $page_number . '/' . $data['student']['sin'] ?>">
                               <?= $page_number; ?>
                             </a>
                           </li>
                         <?php else : ?>
                           <li class="page-item">
-                            <a class="page-link" href="<?= BASEURL . 'edc_payment/page/' . $page_number . '/' . $data['student']['sin']  ?>">
+                            <a class="page-link" href="<?= BASEURL . 'payment/page/' . $page_number . '/' . $data['student']['sin']  ?>">
                               <?= $page_number; ?>
                             </a>
                           </li>
@@ -352,7 +354,7 @@
                           <a class="page-link">...</a>
                         </li>
                         <li class="page-item">
-                          <a class="page-link" href="<?= BASEURL . 'edc_payment/page/' . $data['pagination']['total_page'] . '/' . $data['student']['sin'] ?> ">
+                          <a class="page-link" href="<?= BASEURL . 'payment/page/' . $data['pagination']['total_page'] . '/' . $data['student']['sin'] ?> ">
                             <?= $data['pagination']['total_page']; ?>
                           </a>
                         </li>
@@ -362,7 +364,7 @@
                       <!-- Next Btn -->
                       <?php if ($data['pagination']['current_page'] != $data['pagination']['total_page']) : ?>
                         <li class="next-btn">
-                          <a class="page-link" href="<?= BASEURL . 'edc_payment/page/' . $data['pagination']['current_page'] + 1 . '/' . $data['student']['sin'] ?>" aria-label="Next">
+                          <a class="page-link" href="<?= BASEURL . 'payment/page/' . $data['pagination']['current_page'] + 1 . '/' . $data['student']['sin'] ?>" aria-label="Next">
                             Next <span aria-hidden="true">&raquo;</span>
                           </a>
                         </li>
@@ -383,19 +385,18 @@
   </div>
 </div>
 
-
-
 <div class="overlay-input-form">
   <div class="input-form-container">
     <form action="" method="post" id="payment-form">
       <input type="hidden" name="payment_id" class="input" id="payment_id">
-      <input type="hidden" name="payment_id" class="input" id="staff_id" value="<?= $_SESSION['user']['staff_id']; ?>">
+      <input type="hidden" name="staff_id" class="input" id="staff_id" value="<?= $_SESSION['user']['staff_id']; ?>">
+      <input type="hidden" name="sin" class="input" id="sin" value="<?= $data['keyword'] ?>">
 
       <div class="input-group">
         <label for="payment_amount">Payment Amount</label>
-        <input type="number" name="payment_amount" id="payment_amount" class="input class-name" placeholder="Enter payment amount..." required autocomplete="off">
+        <input type="number" name="payment_amount" id="payment_amount" class="input payment-amount" placeholder="Enter payment amount..." required autocomplete="off">
         <img src=" <?= BASEURL . 'public/images/error.svg' ?>" alt="error-icon" class="error-icon">
-        <small class="message class-name-message"></small>
+        <small class="message payment-amount-message"></small>
       </div>
 
       <div class="input-group">

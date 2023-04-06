@@ -1,43 +1,96 @@
 <div class="container">
-  <div class="header">
-    <div class="brand">
-      <a class="title-logo">
-        <img src="<?= BASEURL . 'public/images/propay-logo.svg' ?>" alt="Propay Logo">
-        <span class="brand-name">Propay</span>
-      </a>
+  <?php if (isset($_SESSION['payment_data_per_student'])) : ?>
+    <div class="header">
+      <div class="brand">
+        <a class="title-logo">
+          <img src="<?= BASEURL . 'public/images/propay-logo.svg' ?>" alt="Propay Logo">
+          <span class="brand-name">Propay</span>
+        </a>
+      </div>
+      <h2 class="meta-title"><?= $_SESSION['student']['student_name']; ?></h2>
+      <div class="meta-description">
+        <p class="desc-1"><?= $_SESSION['student']['sin']; ?></p>
+        <hr>
+        <p class="desc-2"><?= $_SESSION['class']['class_name']; ?></p>
+      </div>
     </div>
-    <div class="name"><?= $data['payment']['student']['student_name']; ?></div>
-    <div class="sin"><?= $data['payment']['student']['sin']; ?></div>
-  </div>
 
-  <table>
-    <tr>
-      <td>#</td>
-      <td>Date</td>
-      <td>Bills</td>
-    </tr>
-    <?php
-    $number = 1;
-    $total_bills;
-    for ($i = 0; $i < count($data['payment']) - 1; $i++) :
-      global $total_bills;
-      $total_bills = $total_bills + $data['payment'][$i]['payment_amount'];
-    ?>
+    <table>
       <tr>
-        <td><?= $number++; ?></td>
-        <td><?= date('d F Y', strtotime($data['payment'][$i]['due_date'])) ?></td>
-        <td>Rp. <?= number_format($data['payment'][$i]['payment_amount'], 0, ',', '.'); ?></td>
+        <th>#</th>
+        <th>Date</th>
+        <th>Bills</th>
       </tr>
-    <?php endfor; ?>
-    <tr>
-      <td colspan='2' class="bills-total">Total Bills</td>
-      <?php if (isset($total_bills)) : ?>
-        <td class="bills-total">Rp. <?= number_format($total_bills, 0, ',', '.'); ?></td>
-      <?php endif; ?>
-    </tr>
-  </table>
+      <?php
+      $number = 1;
+      $total_bills;
+      for ($i = 0; $i < count($_SESSION['payment_data_per_student']); $i++) :
+        global $total_bills;
+        $total_bills = $total_bills + $_SESSION['payment_data_per_student'][$i]['payment_amount'];
+      ?>
+        <tr>
+          <td style="text-align: center"><?= $number++; ?></td>
+          <td><?= date('d F Y', strtotime($_SESSION['payment_data_per_student'][$i]['due_date'])) ?></td>
+          <td style="text-align: right;">Rp. <?= number_format($_SESSION['payment_data_per_student'][$i]['payment_amount'], 0, ',', '.'); ?></td>
+        </tr>
+      <?php endfor; ?>
+      <tr>
+        <td colspan='2' class="bills-total" style="text-align: right;">Total Bills</td>
+        <?php if (isset($total_bills)) : ?>
+          <td class="bills-total" style="text-align: right;">Rp. <?= number_format($total_bills, 0, ',', '.'); ?></td>
+        <?php endif; ?>
+      </tr>
+    </table>
+
+  <?php else : ?>
+    <div class="header">
+      <div class="brand">
+        <a class="title-logo">
+          <img src="<?= BASEURL . 'public/images/propay-logo.svg' ?>" alt="Propay Logo">
+          <span class="brand-name">Propay</span>
+        </a>
+      </div>
+      <h2 class="meta-title">Payment Report of <?= $_SESSION['payment_date']; ?></h2>
+      <div class="meta-description">
+        <p class="desc-1"><?= $_SESSION['class']['class_name']; ?></p>
+        <hr>
+        <p class="desc-2"><?= $_SESSION['class']['major_name']; ?></p>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>#</th>
+        <th>SIN</th>
+        <th>Student Name</th>
+        <th>Student Bill</th>
+      </tr>
+      <?php
+      $number = 1;
+      $total_bills;
+      for ($i = 0; $i < count($_SESSION['payment_data_per_class']); $i++) :
+        global $total_bills;
+        $total_bills = $total_bills + $_SESSION['payment_data_per_class'][$i]['payment']['payment_amount'];
+      ?>
+
+        <tr>
+          <td style="text-align: center"><?= $number++; ?></td>
+          <td><?= $_SESSION['payment_data_per_class'][$i]['sin']; ?></td>
+          <td><?= $_SESSION['payment_data_per_class'][$i]['student_name']; ?></td>
+          <td style="text-align: right;">Rp. <?= number_format($_SESSION['payment_data_per_class'][$i]['payment']['payment_amount'], 0, ',', '.'); ?></td>
+        </tr>
+      <?php endfor; ?>
+      <tr>
+        <td colspan='3' class="bills-total" style="text-align: right;">Total Bills</td>
+        <?php if (isset($total_bills)) : ?>
+          <td class="bills-total" style="text-align: right;">Rp. <?= number_format($total_bills, 0, ',', '.'); ?></td>
+        <?php endif; ?>
+      </tr>
+    </table>
+  <?php endif; ?>
+
   <div class="buttons">
-    <a href="<?= BASEURL . 'edc_report/student' ?>" class="back">Cancel</a>
+    <a href="<?= BASEURL . 'payment_report' ?>" class="back">Cancel</a>
     <button class="print" onclick="window.print()">
       Print
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

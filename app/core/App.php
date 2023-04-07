@@ -19,7 +19,7 @@ class App
     $this->controller = new $this->controller;
 
     if (isset($url[1])) {
-      if ($url[0] == 'auth' && $url[1] != 'logout') {
+      if ($url[0] == 'auth' && $url[1] != 'logout' && $url[1] != 'reset_password') {
         $this->method = 'login';
       } else {
         if (method_exists($this->controller, $url[1])) {

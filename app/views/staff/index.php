@@ -79,7 +79,7 @@
               </td>
               <td><?= $data['staff'][$i]['staff_id']; ?></td>
               <td><?= $data['staff'][$i]['staff_name']; ?></td>
-              <?php if ($_SESSION['user']['username'] != $data['staff'][$i]['username']) : ?>
+              <?php if ($_SESSION['user']['staff_id'] != $data['staff'][$i]['staff_id']) : ?>
                 <td>
                   <a href="<?= BASEURL . 'staff/update/' . $data['staff'][$i]['staff_id'] ?>" class="update-btn">
                     <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">

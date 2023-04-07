@@ -49,7 +49,7 @@
                 </div>
   </div>
 
-  <?php if (isset($data['payment_histories'])) : ?>
+  <?php if (isset($data['payment_histories']) && count($data['payment_histories']) > 0) : ?>
     <div class="newest-content">
       <div class="newest-payment">
         <!-- Payment Header -->

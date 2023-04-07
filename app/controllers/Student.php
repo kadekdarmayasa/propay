@@ -191,9 +191,18 @@ class Student extends Controller implements Actions
 
     if (isset($_POST['row_per_page'])) {
       $total_data_per_page = $_POST['row_per_page'];
+
       $_SESSION['row_per_page'] = $_POST['row_per_page'];
     } else {
-      $total_data_per_page = isset($_SESSION['row_per_page']) ? $_SESSION['row_per_page'] : 5;
+      if (isset($_SESSION['row_per_page']) && $_SESSION['row_per_page'] == 12) {
+        $total_data_per_page = 10;
+      } else {
+        if (isset($_SESSION['row_per_page']) && $_SESSION['row_per_page'] == 6) {
+          $total_data_per_page = 5;
+        } else {
+          $total_data_per_page = $_SESSION['row_per_page'] ?? 5;
+        }
+      }
     }
 
     $total_page = ceil($total_data / $total_data_per_page);
@@ -273,6 +282,11 @@ class Student extends Controller implements Actions
         header('Location: ' . BASEURL);
         exit;
       }
+    }
+
+    if (!$this->model('Student_Model')->getStudentBySIN($sin)) {
+      header('Location: ' . BASEURL . 'student/page/1');
+      exit;
     }
 
     unset($_SESSION['search_student_keyword']);

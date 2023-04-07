@@ -19,7 +19,6 @@ class Payment extends Controller
     unset($_SESSION['search_class_keyword']);
     unset($_SESSION['search_edc_keyword']);
     unset($_SESSION['search_sin_keyword']);
-    unset($_SESSION['search_payment_keyword']);
     unset($_SESSION['search_history_keyword']);
     unset($_SESSION['payment_data_per_student']);
     unset($_SESSION['payment_data_per_class']);
@@ -157,7 +156,11 @@ class Payment extends Controller
       if (isset($_SESSION['row_per_page']) && $_SESSION['row_per_page'] == 10) {
         $total_data_per_page = 12;
       } else {
-        $total_data_per_page = 6;
+        if (isset($_SESSION['row_per_page']) && $_SESSION['row_per_page'] == 5) {
+          $total_data_per_page = 6;
+        } else {
+          $total_data_per_page = $_SESSION['row_per_page'] ?? 6;
+        }
       }
     }
 

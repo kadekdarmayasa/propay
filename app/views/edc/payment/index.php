@@ -196,71 +196,31 @@
 
                   <?php
                   if ($i > 0) $prev_index  = $i - 1;
+                  $prev_payment;
                   $payment_status = $data['payment'][$i]['payment_status'];
+
                   if ($payment_status == 'Unpaid' || $payment_status == 'Paid Half') : ?>
-                    <?php if (isset($prev_index) && ($data['payment'][$prev_index]['payment_status'] == 'Unpaid' || $data['payment'][$prev_index]['payment_status'] == 'Paid Half')) : ?>
-
-                      <?php if ($due_date_time >= $enrollment_date_time) : ?>
-                        <?php if ($due_date_time == $enrollment_date_time) : ?>
-                          <td>
-                            <a href="" class="pay-btn" data-payment-date="<?= $data['payment'][$i]['due_date'] ?>" data-payment-id="<?= $data['payment'][$i]['payment_id'] ?>">
-                              <svg width="53" height="60" viewBox="0 0 53 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 2.37764 12.373)" fill="white" stroke="black" />
-                                <path d="M39.9519 33.5075V25.8859V7C39.9519 5.89543 39.0564 5 37.9519 5H13.5977C12.4932 5 11.5977 5.89543 11.5977 7V53C11.5977 54.1046 12.4932 55 13.5977 55H32.1419C32.6942 55 33.1419 54.5523 33.1419 54V45.7463V38.5075C33.1419 35.746 35.3805 33.5075 38.1419 33.5075H39.9519Z" fill="white" />
-                                <path d="M48 55V37.0896V20.5205C48 19.7796 47.3995 19.1791 46.6586 19.1791V19.1791C42.9546 19.1791 39.9519 22.1818 39.9519 25.8859V33.5075M39.9519 33.5075H38.1419C35.3805 33.5075 33.1419 35.746 33.1419 38.5075V45.7463V54C33.1419 54.5523 32.6942 55 32.1419 55H13.5977C12.4932 55 11.5977 54.1046 11.5977 53V7C11.5977 5.89543 12.4932 5 13.5977 5H37.9519C39.0564 5 39.9519 5.89543 39.9519 7V33.5075Z" stroke="black" stroke-linecap="round" />
-                                <path d="M11.5977 46.791H33.1419" stroke="black" />
-                                <path d="M21.2555 50.5224L29.4274 50.5224" stroke="black" stroke-linecap="round" />
-                                <path d="M12 11.7164H39.8281" stroke="black" />
-                                <rect x="17.2981" y="16.694" width="16.8297" height="16.9104" rx="8.41484" stroke="black" />
-                                <path d="M27.9416 22.7332V22.7332C27.9416 21.6564 27.0688 20.7835 25.992 20.7835H25.2647M22.7413 26.4645V26.8494C22.7413 28.2854 23.9054 29.4496 25.3415 29.4496V29.4496M25.2647 20.7835H24.8355C23.6789 20.7835 22.7413 21.7212 22.7413 22.8778V22.8778C22.7413 24.0344 23.6789 24.972 24.8355 24.972H25.7028C26.9393 24.972 27.9416 25.9743 27.9416 27.2108V27.2108C27.9416 28.4472 26.9393 29.4496 25.7028 29.4496H25.3415M25.2647 20.7835V19.1791M25.3415 29.4496V30.9421" stroke="black" stroke-linecap="round" />
-                                <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.21813 22.6697)" fill="white" stroke="black" />
-                                <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.28926 31.9428)" fill="white" stroke="black" />
-                                <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.28926 40.898)" fill="white" stroke="black" />
-                              </svg>
-                              <span class="tooltip">Pay Bill</span>
-                            </a>
-                          </td>
-                        <?php else : ?>
-                          <?php if ($data['payment'][$prev_index]['payment_status'] == 'Unpaid' || $data['payment'][$prev_index]['payment_status'] == 'Paid Half') : ?>
-                            <td>
-                              <a class="disabled-btn">
-                                <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M8.33333 10.3818L37.6667 36.9727M43 23.5V23.5C43 34.2696 34.2696 43 23.5 43H22.5C11.7304 43 3 34.2696 3 23.5V23.5C3 12.7304 11.7304 4 22.5 4H23.5C34.2696 4 43 12.7304 43 23.5Z" stroke="black" />
-                                </svg>
-                                <span class="tooltip">No Action</span>
-                              </a>
-                            </td>
-                          <?php endif; ?>
-                        <?php endif; ?>
-                      <?php else :  ?>
-                        <td>
-                          ------
-                        </td>
-                      <?php endif; ?>
-
+                    <?php if ($enrollment_date_time >= $due_date_time) : ?>
+                      <td>------</td>
                     <?php else : ?>
-                      <?php if ($enrollment_date_time >= $due_date_time) : ?>
-                        <td>------</td>
-                      <?php else : ?>
-                        <td>
-                          <a href="" class="pay-btn" data-payment-date="<?= $data['payment'][$i]['due_date'] ?>" data-payment-id="<?= $data['payment'][$i]['payment_id'] ?>">
-                            <svg width="53" height="60" viewBox="0 0 53 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 2.37764 12.373)" fill="white" stroke="black" />
-                              <path d="M39.9519 33.5075V25.8859V7C39.9519 5.89543 39.0564 5 37.9519 5H13.5977C12.4932 5 11.5977 5.89543 11.5977 7V53C11.5977 54.1046 12.4932 55 13.5977 55H32.1419C32.6942 55 33.1419 54.5523 33.1419 54V45.7463V38.5075C33.1419 35.746 35.3805 33.5075 38.1419 33.5075H39.9519Z" fill="white" />
-                              <path d="M48 55V37.0896V20.5205C48 19.7796 47.3995 19.1791 46.6586 19.1791V19.1791C42.9546 19.1791 39.9519 22.1818 39.9519 25.8859V33.5075M39.9519 33.5075H38.1419C35.3805 33.5075 33.1419 35.746 33.1419 38.5075V45.7463V54C33.1419 54.5523 32.6942 55 32.1419 55H13.5977C12.4932 55 11.5977 54.1046 11.5977 53V7C11.5977 5.89543 12.4932 5 13.5977 5H37.9519C39.0564 5 39.9519 5.89543 39.9519 7V33.5075Z" stroke="black" stroke-linecap="round" />
-                              <path d="M11.5977 46.791H33.1419" stroke="black" />
-                              <path d="M21.2555 50.5224L29.4274 50.5224" stroke="black" stroke-linecap="round" />
-                              <path d="M12 11.7164H39.8281" stroke="black" />
-                              <rect x="17.2981" y="16.694" width="16.8297" height="16.9104" rx="8.41484" stroke="black" />
-                              <path d="M27.9416 22.7332V22.7332C27.9416 21.6564 27.0688 20.7835 25.992 20.7835H25.2647M22.7413 26.4645V26.8494C22.7413 28.2854 23.9054 29.4496 25.3415 29.4496V29.4496M25.2647 20.7835H24.8355C23.6789 20.7835 22.7413 21.7212 22.7413 22.8778V22.8778C22.7413 24.0344 23.6789 24.972 24.8355 24.972H25.7028C26.9393 24.972 27.9416 25.9743 27.9416 27.2108V27.2108C27.9416 28.4472 26.9393 29.4496 25.7028 29.4496H25.3415M25.2647 20.7835V19.1791M25.3415 29.4496V30.9421" stroke="black" stroke-linecap="round" />
-                              <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.21813 22.6697)" fill="white" stroke="black" />
-                              <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.28926 31.9428)" fill="white" stroke="black" />
-                              <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.28926 40.898)" fill="white" stroke="black" />
-                            </svg>
-                            <span class="tooltip">Pay Bill</span>
-                          </a>
-                        </td>
-                      <?php endif; ?>
+                      <td>
+                        <a href="" class="pay-btn" data-payment-date="<?= $data['payment'][$i]['due_date'] ?>" data-payment-id="<?= $data['payment'][$i]['payment_id'] ?>">
+                          <svg width="53" height="60" viewBox="0 0 53 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 2.37764 12.373)" fill="white" stroke="black" />
+                            <path d="M39.9519 33.5075V25.8859V7C39.9519 5.89543 39.0564 5 37.9519 5H13.5977C12.4932 5 11.5977 5.89543 11.5977 7V53C11.5977 54.1046 12.4932 55 13.5977 55H32.1419C32.6942 55 33.1419 54.5523 33.1419 54V45.7463V38.5075C33.1419 35.746 35.3805 33.5075 38.1419 33.5075H39.9519Z" fill="white" />
+                            <path d="M48 55V37.0896V20.5205C48 19.7796 47.3995 19.1791 46.6586 19.1791V19.1791C42.9546 19.1791 39.9519 22.1818 39.9519 25.8859V33.5075M39.9519 33.5075H38.1419C35.3805 33.5075 33.1419 35.746 33.1419 38.5075V45.7463V54C33.1419 54.5523 32.6942 55 32.1419 55H13.5977C12.4932 55 11.5977 54.1046 11.5977 53V7C11.5977 5.89543 12.4932 5 13.5977 5H37.9519C39.0564 5 39.9519 5.89543 39.9519 7V33.5075Z" stroke="black" stroke-linecap="round" />
+                            <path d="M11.5977 46.791H33.1419" stroke="black" />
+                            <path d="M21.2555 50.5224L29.4274 50.5224" stroke="black" stroke-linecap="round" />
+                            <path d="M12 11.7164H39.8281" stroke="black" />
+                            <rect x="17.2981" y="16.694" width="16.8297" height="16.9104" rx="8.41484" stroke="black" />
+                            <path d="M27.9416 22.7332V22.7332C27.9416 21.6564 27.0688 20.7835 25.992 20.7835H25.2647M22.7413 26.4645V26.8494C22.7413 28.2854 23.9054 29.4496 25.3415 29.4496V29.4496M25.2647 20.7835H24.8355C23.6789 20.7835 22.7413 21.7212 22.7413 22.8778V22.8778C22.7413 24.0344 23.6789 24.972 24.8355 24.972H25.7028C26.9393 24.972 27.9416 25.9743 27.9416 27.2108V27.2108C27.9416 28.4472 26.9393 29.4496 25.7028 29.4496H25.3415M25.2647 20.7835V19.1791M25.3415 29.4496V30.9421" stroke="black" stroke-linecap="round" />
+                            <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.21813 22.6697)" fill="white" stroke="black" />
+                            <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.28926 31.9428)" fill="white" stroke="black" />
+                            <rect x="0.696898" y="-0.110377" width="6.74323" height="16.046" rx="3.37161" transform="matrix(0.586046 -0.810278 0.807751 0.589524 5.28926 40.898)" fill="white" stroke="black" />
+                          </svg>
+                          <span class="tooltip">Pay Bill</span>
+                        </a>
+                      </td>
                     <?php endif; ?>
                   <?php else : ?>
                     <td>

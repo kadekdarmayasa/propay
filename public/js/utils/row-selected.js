@@ -42,7 +42,7 @@ if (rowSelectedContainer) {
 		}
 
 		if (localStorage.getItem('selected') == 6 && !listOfRowContainer.classList.contains('payment')) {
-			rowSelectedContainer.firstElementChild.textContent = 10;
+			rowSelectedContainer.firstElementChild.textContent = 5;
 		}
 	}
 

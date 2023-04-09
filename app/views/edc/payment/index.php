@@ -48,7 +48,7 @@
               </div>
               <div class="student-bio-item">
                 <small>Enrollment Date</small>
-                <p><?= $data['student']['enrollment_date']; ?></p>
+                <p><?= date('d F Y', strtotime($data['student']['enrollment_date'])); ?></p>
               </div>
               <div class="student-bio-item">
                 <small><?= $data['student']['religion']; ?></small>
@@ -147,9 +147,9 @@
                   $start_date_time = strtotime($data['student']['edc']['start_date']);
                   $due_date_time = strtotime($data['payment'][$i]['due_date']);
 
-                  if ($enrollment_date_time > $due_date_time) : ?>
+                  if ($enrollment_date_time >= $due_date_time && $data['payment'][$i] != 'Paid') : ?>
                     <td>Rp. 0</td>
-                  <?php elseif ($enrollment_date_time < $start_date_time && $data['payment'][$i]['payment_status'] == 'Paid') : ?>
+                  <?php elseif (($enrollment_date_time <= $due_date_time || $enrollment_date_time <= $start_date_time) && $data['payment'][$i]['payment_status'] == 'Paid') : ?>
                     <td>Rp. <?= number_format($data['payment'][$i]['payment_amount'], 0, ',', '.'); ?></td>
                   <?php else : ?>
                     <td>Rp. <?= number_format($data['student']['edc']['nominal'], 0, ',', '.'); ?></td>
@@ -170,7 +170,7 @@
                   <?php endif; ?>
 
                   <?php if ($data['payment'][$i]['payment_status'] == 'Unpaid') : ?>
-                    <?php if ($due_date_time < $enrollment_date_time) : ?>
+                    <?php if ($enrollment_date_time >= $due_date_time && $data['payment'][$i] != 'Paid') : ?>
                       <td>------</td>
                     <?php else : ?>
                       <td class="unpaid">
@@ -200,7 +200,7 @@
                   $payment_status = $data['payment'][$i]['payment_status'];
 
                   if ($payment_status == 'Unpaid' || $payment_status == 'Paid Half') : ?>
-                    <?php if ($enrollment_date_time >= $due_date_time) : ?>
+                    <?php if ($enrollment_date_time >= $due_date_time && $data['payment'][$i] != 'Paid') : ?>
                       <td>------</td>
                     <?php else : ?>
                       <td>

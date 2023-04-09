@@ -95,19 +95,27 @@ class Payment_Report extends Controller
         if ($students[$i]['payment']['payment_amount'] == $edc['nominal']) {
           $students[$i]['payment']['payment_amount'] = 0;
         } else if ($students[$i]['payment']['payment_amount'] == NULL) {
-          if ($students[$i]['enrollment_date'] <= $students[$i]['payment']['due_date'] && $edc['start_date'] <= $students[$i]['payment']['due_date']) {
+          if ($students[$i]['enrollment_date'] <= $students[$i]['payment']['due_date']) {
             $students[$i]['payment']['payment_amount'] = $edc['nominal'];
           } else {
-            $students[$i]['payment']['payment_amount'] = 0;
+            if ($edc['start_date'] <= $students[$i]['payment']['due_date'] &&  $students[$i]['payment']['payment_status'] != 'Unpaid') {
+              $students[$i]['payment']['payment_amount'] = $edc['nominal'];
+            } else {
+              $students[$i]['payment']['payment_amount'] = 0;
+            }
           }
         } else if ($students[$i]['payment']['payment_amount'] < $edc['nominal'] && $students[$i]['payment']['payment_amount'] != NULL) {
           if ($students[$i]['payment']['payment_status'] == 'Paid') {
             $students[$i]['payment']['payment_amount'] = 0;
           } else {
-            if ($students[$i]['enrollment_date'] <= $students[$i]['payment']['due_date'] && $edc['start_date'] <= $students[$i]['payment']['due_date']) {
+            if ($students[$i]['enrollment_date'] <= $students[$i]['payment']['due_date']) {
               $students[$i]['payment']['payment_amount'] = $edc['nominal'] - $students[$i]['payment']['payment_amount'];
             } else {
-              $students[$i]['payment']['payment_amount'] = 0;
+              if ($edc['start_date'] <= $students[$i]['payment']['due_date']) {
+                $students[$i]['payment']['payment_amount'] = $edc['nominal'] - $students[$i]['payment']['payment_amount'];
+              } else {
+                $students[$i]['payment']['payment_amount'] = 0;
+              }
             }
           }
         }
@@ -184,19 +192,27 @@ class Payment_Report extends Controller
         if ($payments[$i]['payment_amount'] == $edc['nominal']) {
           $payments[$i]['payment_amount'] = 0;
         } else if ($payments[$i]['payment_amount'] == NULL) {
-          if ($payments[$i]['due_date'] >= $student['enrollment_date'] && $payments[$i]['due_date'] >= $edc['start_date']) {
+          if ($payments[$i]['due_date'] >= $student['enrollment_date']) {
             $payments[$i]['payment_amount'] = $edc['nominal'];
           } else {
-            $payments[$i]['payment_amount'] = 0;
+            if ($payments[$i]['due_date'] >= $edc['start_date'] && $payments[$i]['payment_status'] != 'Unpaid') {
+              $payments[$i]['payment_amount'] = $edc['nominal'];
+            } else {
+              $payments[$i]['payment_amount'] = 0;
+            }
           }
         } else if ($payments[$i]['payment_amount'] < $edc['nominal'] && $payments[$i]['payment_amount'] != NULL) {
           if ($payments[$i]['payment_status'] == 'Paid') {
             $payments[$i]['payment_amount'] = 0;
           } else {
-            if ($payments[$i]['due_date'] >= $student['enrollment_date'] && $payments[$i]['due_date'] >= $edc['start_date']) {
+            if ($payments[$i]['due_date'] >= $student['enrollment_date']) {
               $payments[$i]['payment_amount'] = $edc['nominal'] - $payments[$i]['payment_amount'];
             } else {
-              $payments[$i]['payment_amount'] = 0;
+              if ($payments[$i]['due_date'] >= $edc['start_date']) {
+                $payments[$i]['payment_amount'] = $edc['nominal'] - $payments[$i]['payment_amount'];
+              } else {
+                $payments[$i]['payment_amount'] = 0;
+              }
             }
           }
         }

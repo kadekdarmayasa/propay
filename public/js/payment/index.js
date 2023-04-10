@@ -20,7 +20,7 @@ const illustrationProps = {
 	},
 	notFound: {
 		view: 'not-found-payment',
-		description: 'Not Data Student Found',
+		description: 'No Data Student Found',
 		illustrationImage: `${baseUrl}public/images/not-found-illustration.svg`,
 	},
 };

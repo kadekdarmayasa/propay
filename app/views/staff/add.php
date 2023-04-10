@@ -93,7 +93,7 @@
           </div>
 
           <div class="input-group prev-submit-btn">
-            <button type="button" name="prev-btn" class="prev-btn">
+            <button type="button" name="prev-btn" class="prev-btn" id="prev-btn">
               <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M34.5 16L2.8551 31.3704C1.93495 31.8173 1.01674 30.7579 1.58991 29.9106L11 16M34.5 16L17 8L2.92694 1.5666C1.99415 1.14018 1.10057 2.22688 1.69917 3.05972L11 16M34.5 16H22.75H11" stroke="black" />
               </svg>

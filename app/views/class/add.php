@@ -25,7 +25,7 @@
         </div>
 
         <div class="input-group prev-submit-btn">
-          <a href="<?= BASEURL . 'classes'  ?>" name="prev-btn" class="prev-btn">
+          <a href="<?= BASEURL . 'classes'  ?>" name="prev-btn" class="prev-btn" id="prev-btn">
             <span>Cancel</span>
           </a>
           <button type="submit" name="add-class" id="submit-btn" class="submit-btn">

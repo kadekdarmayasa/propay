@@ -8,7 +8,7 @@ const firstContent = document.querySelector('.first-content');
 const firstForm = document.querySelector('.form.first');
 const secondForm = document.querySelector('.form.second');
 const nextBtn = document.querySelector('.next-btn');
-const prevBtn = document.querySelector('.prev-btn');
+const prevBtn = document.querySelector('#prev-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const url = location.href.split('student', 1).toString();
 
